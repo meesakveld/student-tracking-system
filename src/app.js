@@ -3,7 +3,11 @@
  *            IMPORTS
  * ------------------------------
  */
+import express from "express";
+import path from "path";
 import { create } from "express-handlebars";
+import { VIEWS_PATH, PORT } from "./consts.js";
+
 
 // middleware
 // controllers
@@ -13,6 +17,7 @@ import { create } from "express-handlebars";
  *       CONFIGURATION
  * ------------------------------
  */
+const app = express();
 
 const hbs = create({
     extname: "hbs",
@@ -20,7 +25,7 @@ const hbs = create({
 
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
-app.set("views", path.join(SOURCE_PATH, "views"));
+app.set("views", VIEWS_PATH);
 
 /**
  * ------------------------------
