@@ -15,9 +15,10 @@ import cookieParser from "cookie-parser";
 
 
 // Controllers
-
+import * as auth from "./controllers/AuthController.js";
 
 // Routes
+import apiRoutes from "./routes/api/index.js";
 
 /**
  * ------------------------------
@@ -52,13 +53,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 */
 
 // Auth routes
-app.get("/login", () => {});
-app.post("/login", () => {});
+app.get("/login", auth.login);
+app.post("/login", auth.postLogin, auth.login);
 
-app.get("/register", () => {});
-app.post("/register", () => {});
+app.get("/register", auth.register);
+app.post("/register", auth.postRegister, auth.register);
 
-app.get("/logout", () => {});
+app.get("/logout", auth.logout);
 
 
 // Page Routes
@@ -66,7 +67,7 @@ app.get("/", () => {});
 
 
 // API Routes
-app.get("/api", () => {});
+app.get("/api", apiRoutes);
 
 // 404 Route
 app.use('*', () => {});
