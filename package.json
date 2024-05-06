@@ -32,6 +32,7 @@
     "nodemailer-express-handlebars": "^6.1.2",
     "nodemon": "^3.1.0",
     "objection": "^3.1.4",
-    "pg": "^8.11.5"
+    "pg": "^8.11.5",
+    "sqlite3": "^5.1.7"
   }
 }
