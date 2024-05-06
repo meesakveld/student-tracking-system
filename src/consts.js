@@ -9,4 +9,16 @@ dotenv.config();
 
 export const SOURCE_PATH = path.resolve("src");
 export const VIEWS_PATH = path.resolve(SOURCE_PATH, "views");
-export const PORT = process.env.PORT || 3000;
+
+export const {
+    PORT, 
+    NODE_ENV,
+
+    DB_URL, 
+    DB_HOST, 
+    DB_PORT, 
+    DB_USER, 
+    DB_NAME, 
+    DB_PASSWORD,
+    DB_SSL
+} = process.env;
