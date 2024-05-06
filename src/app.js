@@ -63,14 +63,14 @@ app.get("/logout", auth.logout);
 
 
 // Page Routes
-app.get("/", () => {});
+app.get("/", (req, res) => { res.json({ message: "Welcome on the home page!" })});
 
 
 // API Routes
 app.get("/api", apiRoutes);
 
 // 404 Route
-app.use('*', () => {});
+app.use('*', (req, res) => { res.redirect("/"); });
 
 
 /**
