@@ -1,0 +1,55 @@
+:root {
+    --blue: hsl(196, 100%, 42%);
+    --lightblue: hsl(196, 33%, 77%);
+    --grey: hsl(0, 0%, 85%);
+    --light: hsl(0, 0%, 96%);
+    --dark: hsl(0, 0%, 12%);
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/*
+ * ------------------------------
+ *       General Styles
+ * ------------------------------
+ */
+
+body {
+    font-family: 'Source-Sans-3', sans-serif;
+    font-size: .875rem;
+    font-weight: normal;
+    color: var(--dark);
+    background-color: var(--light);
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.625rem;
+    font-weight: 600;
+}
