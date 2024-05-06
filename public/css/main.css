@@ -53,3 +53,131 @@ h2 {
     font-size: 1.625rem;
     font-weight: 600;
 }
+
+/*
+ * ------------------------------
+ *       Button Styles
+ * ------------------------------
+ */
+
+.button {
+    font-weight: 630;
+    padding: .5rem;
+    width: 5.6rem;
+    height: 2.6rem;
+    background-color: var(--blue);
+    border: none;
+    color: var(--light);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button--save {
+    background-color: var(--blue);
+    color: var(--light);
+    width: 10rem;
+    height: 2.2rem;
+}
+
+.button--return {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+
+/*
+ * ------------------------------
+ *       Form Styles
+ * ------------------------------
+ */
+
+form {
+    margin: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid var(--grey);
+    font-size: 16px;
+    width: 13.5rem;
+    height: 2.1rem;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--blue);
+}
+
+/*
+ * ------------------------------
+ *       Labels Styles
+ * ------------------------------
+ */
+
+ .labels-list {
+    background-color: var(--grey);
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+}
+
+.label {
+    position: relative;
+    padding: 0 1rem;
+    font-size: 1.37rem;
+    display: flex;
+    align-items: center;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.class__title {
+    padding-left: 1rem;
+}
+
+/*
+ * ------------------------------
+ *       Classes Styles
+ * ------------------------------
+ */
+
+.classes-list .class {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.labels-list .label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+.labels-list .label input[type="radio"]:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.labels-list .label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.labels-list .label input[type="radio"]:checked ~ .checkmark:after {
+    display: block;
+}
+
+.labels-list .label .label__title {
+    padding-right: 1rem;
+}
