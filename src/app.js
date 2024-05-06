@@ -4,7 +4,6 @@
  * ------------------------------
  */
 import express from "express";
-import path from "path";
 import { create } from "express-handlebars";
 import { VIEWS_PATH, PORT } from "./consts.js";
 
