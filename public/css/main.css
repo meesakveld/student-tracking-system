@@ -38,6 +38,10 @@
 
 body {
     font-family: 'Source-Sans-3', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
     font-size: .875rem;
     font-weight: normal;
     color: var(--dark);
@@ -93,21 +97,24 @@ h2 {
  * ------------------------------
  */
 
-form {
-    margin: 20px;
-}
-
-input[type="text"] {
-    padding: 10px;
+.input-field__input {
+    padding: 0.6rem;
     border: 1px solid var(--grey);
-    font-size: 16px;
+    vertical-align: top;
+    font-size: 1rem;
     width: 13.5rem;
     height: 2.1rem;
 }
 
-input[type="text"]:focus {
+.input-field__input:focus {
     outline: none;
     border-color: var(--blue);
+}
+
+.input-field--large .input-field__input {
+    width: 20rem;
+    height: 20rem;
+    vertical-align: top;
 }
 
 /*
@@ -116,27 +123,25 @@ input[type="text"]:focus {
  * ------------------------------
  */
 
- .labels-list {
+.labels-list {
     background-color: var(--grey);
-    display: flex;
-    flex-direction: column;
-    width: 20rem;
+    border-radius: 10px;
+    width: 22.5rem;
+    padding: 1rem;
 }
 
 .label {
     position: relative;
-    padding: 0 1rem;
+    margin-bottom: 0.5rem;
     font-size: 1.37rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
 }
 
 input:hover {
     cursor: pointer;
-}
-
-.class__title {
-    padding-left: 1rem;
 }
 
 /*
@@ -144,6 +149,17 @@ input:hover {
  *       Classes Styles
  * ------------------------------
  */
+
+.class__title {
+    padding-left: 1rem;
+}
+
+
+.classes-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 .classes-list .class {
     position: relative;
@@ -164,7 +180,7 @@ input:hover {
 }
 
 
-.labels-list .label input[type="radio"]:checked ~ .checkmark {
+.labels-list .label input[type="radio"]:checked~.checkmark {
     background-color: #2196F3;
 }
 
@@ -174,10 +190,25 @@ input:hover {
     display: none;
 }
 
-.labels-list .label input[type="radio"]:checked ~ .checkmark:after {
+.labels-list .label input[type="radio"]:checked~.checkmark:after {
     display: block;
 }
 
 .labels-list .label .label__title {
     padding-right: 1rem;
+}
+
+/*
+     * ------------------------------
+     *       Dropdown Styles
+     * ------------------------------
+     */
+
+.dropdown-content__box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dropdown-btn {
+    margin-bottom: 0.4rem;
 }
