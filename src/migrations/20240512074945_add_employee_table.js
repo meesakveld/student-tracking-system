@@ -4,9 +4,11 @@ const tableName = "employees"; //! Change TABLENAME to the name of the table you
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("user_id").notNullable().references("id").inTable("users");
+        table.integer("user_id").notNullable()
         table.integer("role_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("user_id").references("users.id");
     });
 }
  

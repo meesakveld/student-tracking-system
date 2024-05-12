@@ -4,12 +4,12 @@ const tableName = "students"; //! Change TABLENAME to the name of the table you 
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("user_id").notNullable().references("id").inTable("users");
+        table.integer("user_id").notNullable()
         table.integer("class_id").notNullable();
         table.integer("role_id").notNullable();
-        table.integer("trajectory_coach_id").references("id").inTable("employees");
-        table.integer("learning_coach_id").references("id").inTable("employees");
-        table.integer("diversity_coach_id").references("id").inTable("employees");
+        table.integer("trajectory_coach_id")
+        table.integer("learning_coach_id")
+        table.integer("diversity_coach_id")
         table.integer("status_id");
         table.integer("deregister_id");
         table.timestamps(true, true);
