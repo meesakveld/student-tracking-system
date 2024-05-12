@@ -8,6 +8,9 @@ export function up(knex) {
         table.string("website").notNullable();
         table.string("linkedin").notNullable();
         table.string("facebook").notNullable();
+        table.timestamps(true, true);
+
+        table.foreign("user_id").references("users.id");
     });
 }
  

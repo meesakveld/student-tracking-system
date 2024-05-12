@@ -13,20 +13,17 @@ export function up(knex) {
         table.integer("status_id");
         table.integer("deregister_id");
         table.timestamps(true, true);
+
+        table.foreign("user_id").references("users.id");
+        table.foreign("class_id").references("classes.id");
+        table.foreign("role_id").references("roles.id");
+        table.foreign("trajectory_coach_id").references("employees.id");
+        table.foreign("learning_coach_id").references("employees.id");
+        table.foreign("diversity_coach_id").references("employees.id");
+        table.foreign("status_id").references("statuses.id");
+        table.foreign("deregister_id").references("deregisters.id");
     });
 }
-
-// id integer[primary key]
-//   user_id integer[ref: - "users"."id", not null]
-//   class_id integer[not null]
-//   role_id integer[not null]
-//   trajectory_coach_id integer[ref: - "employees"."id"]
-//   learning_coach_id integer[ref: - "employees"."id"]
-//   diversity_coach_id integer[ref: - "employees"."id"]
-//   status_id integer
-//   deregister_id integer
-//   created_at timestamp
-//   updated_at timestamp
  
 // Drop the table (this is for in case of reverting the migration)
 export function down(knex) {

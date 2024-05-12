@@ -7,6 +7,9 @@ export function up(knex) {
         table.integer("student_id").notNullable();
         table.integer("label_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("student_id").references("students.id");
+        table.foreign("label_id").references("labels.id");
     });
 }
  

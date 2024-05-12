@@ -10,6 +10,8 @@ export function up(knex) {
         table.integer("study_points");
         table.integer("education_programme_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("education_programme_id").references("education_programmes.id");
     });
 }
  

@@ -4,9 +4,12 @@ const tableName = "course_registrations"; //! Change TABLENAME to the name of th
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("account_id").notNullable();
+        table.integer("student_id").notNullable();
         table.integer("course_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("student_id").references("students.id");
+        table.foreign("course_id").references("courses.id");
     });
 }
  

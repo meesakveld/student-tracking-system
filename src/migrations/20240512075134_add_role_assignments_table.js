@@ -8,6 +8,7 @@ export function up(knex) {
         table.integer("role_id").notNullable();
         table.timestamps(true, true);
 
+        table.foreign("role_id").references("roles.id");
     });
 }
  

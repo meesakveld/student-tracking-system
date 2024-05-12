@@ -8,6 +8,10 @@ export function up(knex) {
         table.integer("course_id").notNullable();
         table.integer("employee_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("student_id").references("students.id");
+        table.foreign("course_id").references("courses.id");
+        table.foreign("employee_id").references("employees.id");
     });
 }
  
