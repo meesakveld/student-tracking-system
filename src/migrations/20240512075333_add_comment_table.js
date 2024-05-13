@@ -10,11 +10,6 @@ export function up(knex) {
         table.integer("education_programme_id").notNullable();
         table.text("comment").notNullable();
         table.timestamps(true, true);
-
-        table.foreign("course_id").references("courses.id");
-        table.foreign("student_id").references("students.id");
-        table.foreign("employee_id").references("employees.id");
-        table.foreign("education_programme_id").references("education_programmes.id");
     });
 }
  

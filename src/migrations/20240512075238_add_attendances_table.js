@@ -7,12 +7,8 @@ export function up(knex) {
         table.integer("student_id").notNullable();
         table.integer("course_id").notNullable();
         table.date("date").notNullable();
-        table.integer("attendances_type_id").notNullable();
+        table.integer("attendance_type_id").notNullable();
         table.timestamps(true, true);
-
-        table.foreign("student_id").references("students.id");
-        table.foreign("course_id").references("courses.id");
-        table.foreign("attendances_type_id").references("attendances_types.id");
     });
 }
 

@@ -13,15 +13,6 @@ export function up(knex) {
         table.integer("status_id");
         table.integer("deregister_id");
         table.timestamps(true, true);
-
-        table.foreign("user_id").references("users.id");
-        table.foreign("class_id").references("classes.id");
-        table.foreign("role_id").references("roles.id");
-        table.foreign("trajectory_coach_id").references("employees.id");
-        table.foreign("learning_coach_id").references("employees.id");
-        table.foreign("diversity_coach_id").references("employees.id");
-        table.foreign("status_id").references("statuses.id");
-        table.foreign("deregister_id").references("deregisters.id");
     });
 }
  
