@@ -24,9 +24,9 @@ class Contact extends Model {
             properties: {
                 id: { type: "integer" },
                 user_id: { type: "integer" },
-                website: { type: "string"},
-                linkedin: { type: "string"},
-                facebook: { type: "string"}
+                website: { type: "string", maxLength: 255 },
+                linkedin: { type: "string", maxLength: 255 },
+                facebook: { type: "string", maxLength: 255 }
             },
         };
     }

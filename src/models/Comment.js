@@ -20,7 +20,7 @@ class Comment extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["course_id", "student_id", "employee_id", "education_programme_id", "comment"],
+            required: ["student_id", "employee_id", "education_programme_id", "comment"],
             properties: {
                 id: { type: "integer" },
                 course_id: { type: "integer" },

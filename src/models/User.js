@@ -23,12 +23,12 @@ class User extends Model {
             required: ["firstname", "lastname", "email", "password", "username"],
             properties: {
                 id: { type: "integer" },
-                firstname: { type: "string" },
-                lastname: { type: "string" },
+                firstname: { type: "string", maxLength: 255 },
+                lastname: { type: "string", maxLength: 255 },
                 is_active: { type: "boolean" },
                 email: { type: "string" },
-                password: { type: "string" },
-                username: { type: "string" },
+                password: { type: "string", maxLength: 255 },
+                username: { type: "string", maxLength: 255 },
             },
         };
     }

@@ -23,12 +23,12 @@ class Course extends Model {
             required: ["name", "education_programme_id", "programme_line_id"],
             properties: {
                 id: { type: "integer" },
-                name: { type: "string" },
-                description: { type: "text", minLength: 1, maxLength: 255 },
+                name: { type: "string", maxLength: 255 },
+                description: { type: "text"},
                 study_points: { type: "integer" },
                 contact_hours: { type: "integer" },
-                period: { type: "string" },
-                semester: { type: "string" },
+                period: { type: "string", maxLength: 255 },
+                semester: { type: "string", maxLength: 255 },
                 education_programme_id: { type: "integer" },
                 programme_line_id: { type: "integer"}
             },

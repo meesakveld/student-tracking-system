@@ -24,8 +24,8 @@ class ProgrammeLine extends Model {
             required: ["name", "slug", "education_programme_id"],
             properties: {
                 id: { type: "integer" },
-                name: { type: "string" },
-                slug: { type: "string" },
+                name: { type: "string", maxLength: 255 },
+                slug: { type: "string", maxLength: 255 },
                 description: { type: "text", minLength: 1, maxLength: 255 },
                 study_points: { type: "integer" },
                 education_programme_id: { type: "integer" },

@@ -4,7 +4,7 @@ const tableName = "comments"; //! Change TABLENAME to the name of the table you 
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("course_id").notNullable();
+        table.integer("course_id");
         table.integer("student_id").notNullable();
         table.integer("employee_id").notNullable();
         table.integer("education_programme_id").notNullable();

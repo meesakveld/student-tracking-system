@@ -23,10 +23,10 @@ class EducationProgramme extends Model {
             required: ["title", "slug", "academic_year", "code"],
             properties: {
                 id: { type: "integer" },
-                title: { type: "string" },
-                slug: { type: "string" },
-                academic_year: { type: "string" },
-                code: { type: "string"}
+                title: { type: "string", maxLength: 255 },
+                slug: { type: "string", maxLength: 255 },
+                academic_year: { type: "string", maxLength: 255 },
+                code: { type: "string", maxLength: 255 }
             },
         };
     }

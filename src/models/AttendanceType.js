@@ -23,7 +23,7 @@ class AttendanceType extends Model {
             required: ["title"],
             properties: {
                 id: { type: "integer" },
-                title : { type: "string"}
+                title: { type: "string", maxLength: 255 }
             },
         };
     }

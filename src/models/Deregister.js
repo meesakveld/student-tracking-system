@@ -23,7 +23,7 @@ class Deregister extends Model {
             required: ["reason", "deregisters_date"],
             properties: {
                 id: { type: "integer" },
-                reason: { type: "text", minLength: 1, maxLength: 255 },
+                reason: { type: "text"},
                 deregisters_date: { type: "date" },
             },
         };

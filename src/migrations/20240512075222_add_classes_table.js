@@ -5,7 +5,7 @@ export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
         table.string("name").notNullable();
-        table.integer("education_programme").notNullable();
+        table.integer("education_programme_id").notNullable();
         table.timestamps(true, true);
 
     });

@@ -23,7 +23,7 @@ class Class extends Model {
             required: ["name", "education_programme_id"],
             properties: {
                 id: { type: "integer" },
-                name: { type: "string"},
+                name: { type: "string", maxLength: 255 },
                 education_programme_id: { type: "integer" },
             },
         };
