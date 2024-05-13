@@ -4,7 +4,7 @@ const tableName = "contacts"; //! Change TABLENAME to the name of the table you 
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("user_id").Notnullable();
+        table.integer("user_id").NotNullable();
         table.string("website");
         table.string("linkedin");
         table.string("facebook");
