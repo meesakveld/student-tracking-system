@@ -26,7 +26,7 @@ class User extends Model {
                 firstname: { type: "string", maxLength: 255 },
                 lastname: { type: "string", maxLength: 255 },
                 is_active: { type: "boolean" },
-                email: { type: "string" },
+                email: { type: "string", maxLength: 255 },
                 password: { type: "string", maxLength: 255 },
                 username: { type: "string", maxLength: 255 },
             },

@@ -27,7 +27,7 @@ class Comment extends Model {
                 student_id: { type: "integer" },
                 employee_id: { type: "integer" },
                 education_programme_id: { type: "integer" },
-                comment: { type: "string"},
+                comment: { type: "text"},
             },
         };
     }

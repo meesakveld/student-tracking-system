@@ -26,7 +26,7 @@ class ProgrammeLine extends Model {
                 id: { type: "integer" },
                 name: { type: "string", maxLength: 255 },
                 slug: { type: "string", maxLength: 255 },
-                description: { type: "text", minLength: 1, maxLength: 255 },
+                description: { type: "text" },
                 study_points: { type: "integer" },
                 education_programme_id: { type: "integer" },
             },
