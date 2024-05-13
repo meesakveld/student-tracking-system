@@ -4,10 +4,11 @@ const tableName = "users"; //! Change TABLENAME to the name of the table you wan
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.string("email").notNullable().unique();
-        table.string("password").notNullable();
         table.string("firstname").notNullable();
         table.string("lastname").notNullable();
+        table.boolean("is_active").defaultTo(true);
+        table.string("email").notNullable().unique();
+        table.string("password").notNullable();
         table.string("username").notNullable().unique();
         table.timestamps(true, true);
     });
