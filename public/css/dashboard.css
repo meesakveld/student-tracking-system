@@ -1,0 +1,40 @@
+/* 
+ * ==============================
+ *       DASHBOARD PAGE
+ * ==============================
+ * This is css to make the dashboard page after the login page.
+ */
+
+.dashboard {
+    padding: 0;
+}
+
+.dashboard__title {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.dashboard__links {
+    background-color: var(--lightblue);
+    padding: 2.5rem 8rem;
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+}
+
+.dashboard__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--dark);
+    background-color: white;
+    padding: 10rem 0;
+    max-width: 25rem;
+    width: 100%;
+}

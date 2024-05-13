@@ -6,104 +6,24 @@
         <title>Student Volgsysteem</title>
         <link rel="stylesheet" href="../../public/css/reset.css">
         <link rel="stylesheet" href="../../public/css/main.css">
+        <!-- CSS for the section in the middle of the page -->
+        <link rel="stylesheet" href="../../public/css/centered-section.css">
         <link rel="shortcut icon" href="../../public/assets/images/favicon.svg" type="image/x-icon">
     </head>
-    <body>
-        <button class="button">Gereed</button>
-        <button class="button button--save">Wijzigingen opslaan</button>
-        <button class="button button--return">Terug</button>
-
-        <div class="input-field">
-            <input type="text" class="input-field__input" placeholder="Type hier">
+    <body class="body--gradient">
+        <div class="body__inner">
+            <main>
+                <div class="main__inner main__inner--centered">
+                    <section class="centered">
+                        <img class="logo-sv--big" src="../../public/assets/images/logo-big.svg" alt="logo_sv">
+                        <p class="text">Welkom bij het student volgsysteem. Hier kunt u de voortgang van studenten bijhouden als medewerker/coach. Studenten kunnen alles omtrent werkplekleren hier opvolgen.</p>
+                        <div class="actions">
+                            <p>Nog geen login/login vergeten? Neem <a href="">contact</a> op met de administrator.</p>
+                            <a href="login.html" class="button">Starten</a>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
-
-        <div class="labels-list">
-            <div class="label">
-                <p class="label__title">Label</p>
-                <div>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </div>
-            </div>
-            <div class="label">
-                <p class="label__title">Label</p>
-                <div>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </div>
-            </div>
-            <div class="label">
-                <p class="label__title">Label</p>
-                <div>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </div>
-            </div>
-            <div class="label">
-                <p class="label__title">Label</p>
-                <div>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </div>
-            </div>
-            <div class="label">
-                <p class="label__title">Label</p>
-                <div>
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="classes-list">
-            <label class="label--radio">
-                <input type="radio" name="class" value="class1">
-                <span class="class__title">Class 1</span>
-                <span class="checkmark"></span>
-            </label>
-            <label class="label--radio">
-                <input type="radio" name="class" value="class2">
-                <span class="class__title">Class 2</span>
-                <span class="checkmark"></span>
-            </label>
-            <label class="label--radio">
-                <input type="radio" name="class" value="class3">
-                <span class="class__title">Class 3</span>
-                <span class="checkmark"></span>
-            </label>
-        </div>
-
-        <div class="input-field input-field--large">
-            <input type="text" class="input-field__input" placeholder="Type hier">
-        </div>
-
-        <div class="dropdown">
-            <div class="dropdown-content">
-                <select>
-                    <option value="vak1">Programmalijn-1</option>
-                    <option value="vak2">Programmalijn-2</option>
-                    <option value="vak3">Programmalijn-3</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="dropdown--multi">
-            <button class="dropdown-btn">Vakken</button>
-            <div class="dropdown-content">
-                <div class="dropdown-content__box">
-                    <input type="checkbox" value="optionA">
-                    <label for="optionA">Vak</label><br>
-                </div>
-                <div class="dropdown-content__box">
-                    <input type="checkbox" value="optionB">
-                    <label for="optionB">Vak</label><br>
-                </div>
-                <div class="dropdown-content__box">
-                    <input type="checkbox" value="optionC">
-                    <label for="optionC">Vak</label><br>
-                </div>
-            </div>
-        </div>
-
     </body>
 </html>
