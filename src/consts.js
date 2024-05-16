@@ -23,4 +23,6 @@ export const {
     DB_SSL,
 
     DB_DEV_NAME,
+
+    TOKEN_SALT,
 } = process.env;
