@@ -45,6 +45,18 @@ class Student extends Model {
                     to: "students.id",
                 },
             },
+            labels: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Label,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "students_labels.student_id",
+                        to: "students_labels.label_id",
+                    },
+                    to: "labels.id",
+                },
+            }
         };
     }
 }

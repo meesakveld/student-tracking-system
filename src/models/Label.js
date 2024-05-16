@@ -5,7 +5,7 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Student from "./Student.js";
 
 // define the NavigationItem model
 class Label extends Model {
@@ -25,6 +25,18 @@ class Label extends Model {
                 id: { type: "integer" },
                 title: { type: "string", maxLength: 255 }
             },
+                users: {
+                    relation: Model.ManyToManyRelation,
+                    modelClass: User,
+                    join: {
+                        from: "labels.id",
+                        through: {
+                            from: "students_labels.label_id",
+                            to: "students_labels.student_id",
+                        },
+                        to: "students.id",
+                    },
+                },
         };
     }
 
