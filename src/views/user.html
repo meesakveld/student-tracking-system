@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Informatie Mees Akveld | Student Volgsysteem</title>
+        <link rel="stylesheet" href="../../public/css/reset.css">
+        <link rel="stylesheet" href="../../public/css/main.css">
+        <link rel="shortcut icon" href="../../public/assets/images/favicon.svg" type="image/x-icon">
+    </head>
+    <body>
+        <div class="body__inner">
+            <header>
+                <div class="header__inner">
+                    <a class="logo-sv--small" href=""><img src="../../public/assets/images/logo.svg" alt="logo_sv"></a>
+                    <!-- Expression of the logged in user -->
+                    <a href="" class="user">Philippe De Pauw - Admin</a>
+                </div>
+            </header>
+            <main>
+                <div class="main__inner user">
+                    <div class="title-section title-section--bg">
+                        <a href="results.html" class="button button--dark"><</a>
+                        <!-- Expression of the searched user -->
+                        <h1>Informatie over: Mees Akveld - PGM1-C</h1>
+                    </div>
+                    <section class="lightgrey-bg">
+                        <div class="user-info">
+                            <!-- The fields are readonly till the edit button is clicked on to prevent unintentional change -->
+                            <div class="user-info__left">
+                                <h3>Persoonlijke informatie</h3>
+                                <div class="user-info__item">
+                                    <p class="semibold">Familienaam</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Akveld">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Voornaam</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Mees">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">E-mailadres</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="mees.ak@student.arteveldehs.be">
+                                    </div>
+                                </div>
+                                <h3>Labels</h3>
+                                <div class="user-info__item">
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--label input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Ambassadeur">
+                                        <input readonly type="text" class="input-field__input" value="Stuver">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-info__right">
+                                <h3>School gerelateerde informatie</h3>
+                                <div class="user-info__item">
+                                    <p class="semibold">Klas</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="mees.ak@student.arteveldehs.be">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Studiejaar</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="2023-2024">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Statuut</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input type="text" class="input-field__input" value="Werkstudent">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Status</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Ambassadeur">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Trajectcoach</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Isabelle Volckaert">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Werkplekcoach</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Viktor Verhaeghe">
+                                    </div>
+                                </div>
+                                <div class="user-info__item">
+                                    <p class="semibold">Werkplekmentor</p>
+                                    <!-- Expression of the searched user -->
+                                    <div class="input-field input-field--view">
+                                        <input readonly type="text" class="input-field__input" value="Lander De Vos">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button to remove the readonly attribute and allow those with permission to edit user -->
+                        <!-- in the case of a teacher -> edit an student -->
+                        <!-- in the case of the admin -> edit any user -->
+                        <div class="user-info__button">
+                            <button class="button">Wijzigen</button>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

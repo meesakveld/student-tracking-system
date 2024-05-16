@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #000;
+        fill-rule: evenodd;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="Page-1">
+    <g id="Dribbble-Light-Preview">
+      <g id="icons">
+        <path id="profile_image-_1349_" data-name="profile_image-[#1349]" class="cls-1" d="M20.5,20.5h0c.2-3.1-1.8-6.6-5.3-8.1.6-.7,1-1.7,1-2.8,0-2.4-1.9-4.3-4.3-4.3s-4.3,1.9-4.3,4.3.4,2,1,2.8c-3,1.2-5.3,4.1-5.3,7.5V3.5h17.1v17.1ZM9.8,9.7c0-1.2,1-2.1,2.1-2.1s2.1,1,2.1,2.1-.9,2.1-2.1,2.1c0,0,0,0,0,0s0,0,0,0c-1.2,0-2.1-1-2.1-2.1h0ZM18.4,20.5H5.6s0-.1,0-.2c0-3.4,2.7-6.4,6.4-6.4,3.5,0,6.4,2.9,6.4,6.4s0,.2,0,.2h0ZM1.3,22.7h21.3V1.3H1.3v21.3Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

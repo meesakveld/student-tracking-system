@@ -1,0 +1,43 @@
+/* 
+ * ==============================
+ *       CENTERED SECTION
+ * ==============================
+ * This is css to get a section centered in the middle of the page.
+ * Add the class="body--gradient" to the body tag in the html file to get the gradient background.
+ */
+
+.main__inner--centered {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+section.centered {
+    background-color: white;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 40rem;
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.actions p {
+    font-size: 0.9rem;
+}
+
+.temp-link {
+    /* display: none; */
+    margin: 2rem;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zoeken | Student Volgsysteem</title>
+        <link rel="stylesheet" href="../../public/css/reset.css">
+        <link rel="stylesheet" href="../../public/css/main.css">
+        <link rel="shortcut icon" href="../../public/assets/images/favicon.svg" type="image/x-icon">
+    </head>
+    <body>
+        <div class="body__inner">
+            <header>
+                <div class="header__inner">
+                    <a class="logo-sv--small" href=""><img src="../../public/assets/images/logo.svg" alt="logo_sv"></a>
+                    <!-- Expression of the logged in user -->
+                    <a href="" class="user">Philippe De Pauw - Admin</a>
+                </div>
+            </header>
+            <main>
+                <div class="main__inner search-student">
+                    <div class="title-section">
+                        <a href="dashboard.html" class="button button--dark"><</a>
+                        <h1>Zoek studenten</h1>
+                    </div>
+                    <div class="choices">
+                        <div class="choice-list">
+                            <h2 class="choice-list__title">Kies een schooljaar:</h2>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice1">
+                                <span class="choice__title">2021-2022</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice2">
+                                <span class="choice__title">2022-2023</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice3">
+                                <span class="choice__title">2023-2024</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="choice-list">
+                            <h2 class="choice-list__title">Kies een klas:</h2>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice1">
+                                <span class="choice__title">PGM1-A</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice2">
+                                <span class="choice__title">PGM1-B</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice3">
+                                <span class="choice__title">PGM1-C</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="choice-list">
+                            <!-- Admin should see all the courses, but a teacher for example only the ones they are assigned to -->
+                            <h2 class="choice-list__title">Kies een vak:</h2>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice1">
+                                <span class="choice__title">IT Business</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice2">
+                                <span class="choice__title">IT Communication</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="choice-list">
+                            <!-- Admin should see all the teachers, but a teacher for example only himself or just remove this option -->
+                            <h2 class="choice-list__title">Kies een docent:</h2>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice1">
+                                <span class="choice__title">Isabelle Volckaert</span>
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="label--radio">
+                                <input type="radio" name="choice" value="choice2">
+                                <span class="choice__title">Philippe De Pauw</span>
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <a class="button" href="results.html">Zoeken</a>
+                    <button class="button button--dark">Reset</button>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>

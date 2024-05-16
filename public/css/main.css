@@ -1,0 +1,521 @@
+:root {
+    --blue: hsl(196, 100%, 42%);
+    --lightblue: hsl(196, 70%, 89%);
+    --grey: hsl(0, 0%, 85%);
+    --light: hsl(0, 0%, 96%);
+    --dark: hsl(0, 0%, 12%);
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source-Sans-3';
+    src: url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff2') format('woff2'),
+        url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* 
+ * ==============================
+ *       GENERAL STYLES
+ * ==============================
+ */
+
+/* ------ For the body ------ */
+
+body {
+    font-family: 'Source-Sans-3', sans-serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: var(--dark);
+    background-color: white;
+}
+
+*::selection {
+    background-color: hsla(196, 100%, 42%, 0.3);
+}
+
+.body--gradient {
+    background-image: url('../assets/images/login-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: hidden;
+}
+
+/* ------ For the header ------ */
+
+header {
+    background-color: var(--light);
+    padding: 2rem;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__inner .user {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--dark);
+}
+
+.header__inner .user::after {
+    content: "";
+    background-image: url('../assets/images/profile.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+}
+
+/* ------ For the main section ------ */
+
+.main__inner {
+    padding: 5rem;
+}
+
+/* ------ For the lightgrey bg section ------ */
+
+.lightgrey-bg {
+    background-color: var(--light);
+    padding: 2rem;
+}
+
+/* ------ Font styles ------ */
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 1.625rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: underline;
+    padding-bottom: 1rem;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.semibold {
+    font-weight: 600;
+}
+
+/* 
+ * ==============================
+ *       COMPONENT STYLES
+ * ==============================
+ */
+
+ /* ------ Logo (big) ------ */
+
+.logo-sv--big {
+    max-width: 14rem;
+    width: 100%;
+}
+
+/* ------ Logo (small) ------ */
+
+.logo-sv--small {
+    max-width: 3rem;
+    width: 100%;
+}
+
+/* ------ Title section ------ */
+
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 4rem;
+    line-height: 2.6rem;
+}
+
+.title-section--bg {
+    background-color: var(--lightblue);
+    padding: 0;
+    margin-bottom: 4rem;
+}
+
+.title-section h1 {
+    margin: 0;
+}
+
+/* ------ Button styles ------ */
+
+.button {
+    font-weight: bold;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--blue);
+    border: none;
+    color: var(--light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.button--dark {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.button--margin {
+    margin-bottom: 2rem;
+}
+
+.button--icon {
+    padding: 0;
+    background: none;
+}
+
+.button--icon:hover {
+    opacity: 0.5;
+}
+
+.button--icon svg {
+    width: 2rem;
+}
+
+/* ------ Input fields ------ */
+
+.input-field__input {
+    padding: 0.8rem;
+    border: 1px solid var(--grey);
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.input-field__input:hover {
+    border-color: var(--lightblue);
+    cursor: text;
+}
+
+.input-field__input:focus {
+    outline: none;
+    border-color: var(--blue);
+}
+
+.input-field--label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-field--label .input-field__input {
+    border-color: var(--blue);
+    max-width: 10rem;
+    text-align: center;
+}
+
+.input-field--view .input-field__input {
+    background-color: var(--light);
+}
+
+/* ------ Textarea ------ */
+
+textarea {
+    padding: 0.8rem;
+    border: 1px solid var(--grey);
+    width: 100%;
+    min-height: 30vh;
+    margin-bottom: 1rem;
+}
+
+textarea:hover {
+    border-color: var(--lightblue);
+    cursor: text;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+}
+
+/* ------ Labels ------ */
+
+.labels-list {
+    width: 100%;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+/* ------ Choice ------ */
+
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.choice-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--grey);
+    padding: 2rem;
+    flex: 1;
+    min-width: 20rem;
+}
+
+.choice-list__title {
+    padding-bottom: 1rem;
+}
+
+.label--radio {
+    padding-bottom: 1rem;
+}
+
+.choice__title {
+    padding-left: 0.4rem;
+}
+
+.labels-list .label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.labels-list .label input[type="radio"]:checked~.checkmark {
+    background-color: var(--blue);
+}
+
+.labels-list .label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.labels-list .label input[type="radio"]:checked~.checkmark:after {
+    display: block;
+}
+
+.labels-list .label .label__title {
+    padding-right: 1rem;
+}
+
+/* ------ Dropdown ------ */
+
+.dropdown-content__box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dropdown-btn {
+    margin-bottom: 0.4rem;
+}
+
+/* ------ Filters ------ */
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ------ Table ------ */
+
+table {
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+th, td {
+    padding: 1rem 0;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+td.actions {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+td.active,
+td.inactive {
+    position: relative;
+    padding-left: 2rem;
+}
+
+td.active::before,
+td.inactive::before {
+    content: '';
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background-color: hsl(129, 84%, 40%);
+    position: absolute;
+    left: 0;
+    top: 1.55rem;
+}
+
+td.inactive::before {
+    background-color: hsl(0, 86%, 47%);
+}
+
+tr.inactive {
+    opacity: 0.5;
+}
+
+.small-column {
+    max-width: 10%;
+    width: 100%;
+}
+
+/* ------ User-info ------ */
+
+.user-info {
+    display: flex;
+    width: 100%;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.user-info__left,
+.user-info__right {
+    flex: 1;
+    min-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.user-info__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.user-info__button {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2rem;
+}
+
+/* ------ Cards ------ */
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+}
+
+.card {
+    flex: 1;
+    min-width: 32rem;
+    color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: var(--light);
+}
+
+.card:hover {
+    text-decoration: none;
+    outline: 1px solid var(--blue);
+}
+
+.card--locked {
+    opacity: 0.5;
+}
+
+.card--locked:hover {
+    cursor: not-allowed;
+    outline: none;
+}
+
+/* ------ Date ------ */
+
+.date p {
+    padding-bottom: 1rem;
+}
+
+input[type="date"] {
+    padding: 0.8rem;
+    border: 1px solid var(--grey);
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+/* ------ Stars ------ */
+
+.stars {
+    display: flex;
+    padding: 1rem 0;
+}
+
+.star {
+    fill: var(--grey);
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.star--blue {
+    fill: var(--blue);
+}
