@@ -16,7 +16,9 @@ import cookieParser from "cookie-parser";
 
 // Controllers
 import * as auth from "./controllers/AuthController.js";
-import * as page from './controllers/pages/HomeController.js';
+// Page controllers
+import homePage from './controllers/pages/HomeController.js';
+import dashboardPage from "./controllers/pages/DashboardController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -64,8 +66,8 @@ app.get("/logout", auth.logout);
 
 
 // Page Routes
-// Define the route for the home page
-app.get('/', page.homePage);
+app.get('/', homePage);
+app.get('/dashboard', dashboardPage);
 
 // API Routes
 app.get("/api", apiRoutes);

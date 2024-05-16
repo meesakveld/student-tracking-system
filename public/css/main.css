@@ -8,24 +8,24 @@
 
 @font-face {
     font-family: 'Source-Sans-3';
-    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff2') format('woff2'),
-        url('../assets/fonts/Source-Sans-3/SourceSans3-Regular.woff') format('woff');
+    src: url('/assets/fonts/Source-Sans-3/SourceSans3-Regular.woff2') format('woff2'),
+        url('/assets/fonts/Source-Sans-3/SourceSans3-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Source-Sans-3';
-    src: url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff2') format('woff2'),
-        url('../assets/fonts/Source-Sans-3/SourceSans3-Bold.woff') format('woff');
+    src: url('/assets/fonts/Source-Sans-3/SourceSans3-Bold.woff2') format('woff2'),
+        url('/assets/fonts/Source-Sans-3/SourceSans3-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Source-Sans-3';
-    src: url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff2') format('woff2'),
-        url('../assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff') format('woff');
+    src: url('/assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff2') format('woff2'),
+        url('/assets/fonts/Source-Sans-3/SourceSans3-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
 }
@@ -51,7 +51,7 @@ body {
 }
 
 .body--gradient {
-    background-image: url('../assets/images/login-background.png');
+    background-image: url('/assets/images/login-background.png');
     background-repeat: no-repeat;
     background-size: cover;
     overflow-y: hidden;
@@ -80,7 +80,7 @@ header {
 
 .header__inner .user::after {
     content: "";
-    background-image: url('../assets/images/profile.svg');
+    background-image: url('/assets/images/profile.svg');
     background-repeat: no-repeat;
     background-size: contain;
     width: 2rem;

@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 /**
  * ------------------------------
  *          HOME PAGE
@@ -10,3 +7,5 @@ dotenv.config();
 export const homePage = (req, res) => {
     res.render("home");
 };
+
+export default homePage;
