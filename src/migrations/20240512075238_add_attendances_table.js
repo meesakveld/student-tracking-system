@@ -9,6 +9,10 @@ export function up(knex) {
         table.date("date").notNullable();
         table.integer("attendance_type_id").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("student_id").references("students.id");
+        table.foreign("course_id").references("courses.id");
+        table.foreign("attendance_type_id").references("attendance_types.id");
     });
 }
 

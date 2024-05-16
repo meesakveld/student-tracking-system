@@ -35,7 +35,18 @@ class Course extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            attendances: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "attendances.course_id",
+                    to: "courses.id",
+                },
+            },
+        };
+    }
 }
 
 export default Course;

@@ -35,7 +35,18 @@ class Student extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            attendances: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "attendances.student_id",
+                    to: "students.id",
+                },
+            },
+        };
+    }
 }
 
 export default Student;

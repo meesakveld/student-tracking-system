@@ -28,7 +28,18 @@ class AttendanceType extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            attendances: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "attendances.attendance_type_id",
+                    to: "attendance_types.id",
+                },
+            },
+        };
+    }
 }
 
 export default AttendanceType;
