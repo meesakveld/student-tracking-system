@@ -16,6 +16,7 @@ import cookieParser from "cookie-parser";
 
 // Controllers
 import * as auth from "./controllers/AuthController.js";
+import * as page from './controllers/pages/HomeController.js';
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -63,8 +64,8 @@ app.get("/logout", auth.logout);
 
 
 // Page Routes
-app.get("/", (req, res) => { res.json({ message: "Welcome on the home page!" })});
-
+// Define the route for the home page
+app.get('/', page.homePage);
 
 // API Routes
 app.get("/api", apiRoutes);
