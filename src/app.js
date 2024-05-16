@@ -19,6 +19,7 @@ import * as auth from "./controllers/AuthController.js";
 // Page controllers
 import homePage from './controllers/pages/HomeController.js';
 import dashboardPage from "./controllers/pages/DashboardController.js";
+import componentsPage from "./controllers/pages/ComponentsControllers.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -68,6 +69,7 @@ app.get("/logout", auth.logout);
 // Page Routes
 app.get('/', homePage);
 app.get('/dashboard', dashboardPage);
+app.get('/components', componentsPage);
 
 // API Routes
 app.get("/api", apiRoutes);

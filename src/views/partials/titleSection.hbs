@@ -1,0 +1,10 @@
+{{!-- Title section --}}
+{{#if blueBg }}
+    <div class="title-section title-section--bg">
+{{else}}
+    <div class="title-section">
+{{/if}}
+    {{!-- !! Link must be to the previous page !! --}}
+    {{> button label="<" dark=true link="/dashboard" }}
+    <h1>{{ title }}</h1>
+</div>
