@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
  * ------------------------------
 */
 export const login = async (req, res, next) => {
-    res.render("login");
+    res.render("login", { layout: "base" });
 }
 
 export const postLogin = async (req, res, next) => {

@@ -1,0 +1,202 @@
+<main>
+    <div class="main__inner overview">
+        <div class="title-section">
+            <a href="dashboard.html" class="button button--dark">
+                << /a>
+                    <h1>Overzicht van alle gebruikers</h1>
+        </div>
+        <a class="button" href="">Voeg een gebruiker toe</a>
+        <form class="filters">
+            <div class="filter">
+                <label for="filter">Filter op rol:</label>
+                <select name="filter" id="filter">
+                    <option value="all">Alle rollen</option>
+                    <option value="teachers">Docenten</option>
+                    <option value="coaches">Leercoaches</option>
+                    <option value="teamleaders">Teamleiders</option>
+                </select>
+            </div>
+            <div class="filter">
+                <label for="filter">Filter op opleiding:</label>
+                <select name="filter" id="filter">
+                    <option value="all">Alle opleidingen</option>
+                    <option value="programming">Programmeren</option>
+                    <option value="design">DVG</option>
+                </select>
+            </div>
+            <div class="filter">
+                <label for="filter">Filter op status:</label>
+                <select name="filter" id="filter">
+                    <option value="all">Alle status</option>
+                    <option value="active">Actief</option>
+                    <option value="inactive">Inactief</option>
+                </select>
+            </div>
+            <div>
+                <button class="button">Filteren</button>
+                <button class="button button--dark">Reset</button>
+            </div>
+        </form>
+        <div class="input-field">
+            <input type="text" class="input-field__input" placeholder="Zoek op naam">
+        </div>
+        <table class="users">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Rol</th>
+                    <th>Opleiding</th>
+                    <th>Status</th>
+                    <th>Vervaldatum</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Expression of the users (name, rol, course, status and login exp) -->
+                <tr>
+                    <td>Philippe De Pauw</td>
+                    <td>Admin</td>
+                    <td>Programmeren</td>
+                    <td class="active">Actief</td>
+                    <td>-</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adriaan Glibert</td>
+                    <td>Docent</td>
+                    <td>Programmeren</td>
+                    <td class="active">Actief</td>
+                    <td>-</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+                <tr class="inactive">
+                    <td>Lisa De Backer</td>
+                    <td>Werkplekbegeleider</td>
+                    <td>Programmeren</td>
+                    <td class="inactive">Inactief</td>
+                    <td>30/04/2024</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Philippe De Pauw</td>
+                    <td>Admin</td>
+                    <td>Programmeren</td>
+                    <td class="active">Actief</td>
+                    <td>-</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adriaan Glibert</td>
+                    <td>Docent</td>
+                    <td>Programmeren</td>
+                    <td class="active">Actief</td>
+                    <td>-</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+                <tr class="inactive">
+                    <td>Lisa De Backer</td>
+                    <td>Werkplekbegeleider</td>
+                    <td>Programmeren</td>
+                    <td class="inactive">Inactief</td>
+                    <td>30/04/2024</td>
+                    <td class="actions">
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" version="1.1" viewBox="0 0 1024 1024">
+                                <defs />
+                                <path
+                                    d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                                    class="cls-1" />
+                                <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z"
+                                    class="cls-1" />
+                            </svg></button>
+                        <button class="button button--icon"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg></button>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</main>

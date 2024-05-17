@@ -1,10 +1,10 @@
 /**
  * ------------------------------
- *        DASHBOARD PAGE
+ *         OVERVIEW PAGE
  * ------------------------------
 */
 
-export const dashboardPage = (req, res) => {
+export const overviewPage = (req, res) => {
     const firstname = "Philippe";
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
@@ -17,7 +17,7 @@ export const dashboardPage = (req, res) => {
         },
     };
 
-    res.render("dashboard", data);
+    res.render("overview", data);
 };
 
-export default dashboardPage;
+export default overviewPage;

@@ -17,9 +17,10 @@ import cookieParser from "cookie-parser";
 // Controllers
 import * as auth from "./controllers/AuthController.js";
 // Page controllers
-import homePage from './controllers/pages/HomeController.js';
+import welcomePage from './controllers/pages/WelcomeController.js';
 import dashboardPage from "./controllers/pages/DashboardController.js";
-import componentsPage from "./controllers/pages/ComponentsControllers.js";
+import componentsPage from "./controllers/pages/ComponentsController.js";
+import overviewPage from "./controllers/pages/OverviewController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -56,20 +57,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * ------------------------------
 */
 
-// Auth routes
+// —— Public routes | Auth routes ——
+app.get('/welcome', welcomePage);
+
 app.get("/login", auth.login);
 app.post("/login", auth.postLogin, auth.login);
-
-app.get("/register", auth.register);
-app.post("/register", auth.postRegister, auth.register);
 
 app.get("/logout", auth.logout);
 
 
-// Page Routes
-app.get('/', homePage);
-app.get('/dashboard', dashboardPage);
-app.get('/components', componentsPage);
+// —— Private routes ——
+app.get('/', dashboardPage);
+app.get('/overview', overviewPage);
 
 // API Routes
 app.get("/api", apiRoutes);
@@ -77,6 +76,7 @@ app.get("/api", apiRoutes);
 // 404 Route
 app.use('*', (req, res) => { res.redirect("/"); });
 
+app.get('/components', componentsPage);
 
 /**
  * ------------------------------
