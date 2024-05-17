@@ -6,7 +6,7 @@ export function up(knex) {
         table.increments("id").primary();
         table.string("firstname").notNullable();
         table.string("lastname").notNullable();
-        table.boolean("is_active").defaultTo(true);
+        table.boolean("is_active").notNullable().defaultTo(true);
         table.string("email").notNullable().unique();
         table.string("password").notNullable();
         table.integer("role_id").notNullable();
