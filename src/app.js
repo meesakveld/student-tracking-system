@@ -20,7 +20,7 @@ import * as auth from "./controllers/AuthController.js";
 import welcomePage from './controllers/pages/WelcomeController.js';
 import dashboardPage from "./controllers/pages/DashboardController.js";
 import componentsPage from "./controllers/pages/ComponentsController.js";
-import overviewPage from "./controllers/pages/OverviewController.js";
+import usersPage from "./controllers/pages/UsersController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -68,7 +68,7 @@ app.get("/logout", auth.logout);
 
 // —— Private routes ——
 app.get('/', dashboardPage);
-app.get('/overview', overviewPage);
+app.get('/users', usersPage);
 
 // API Routes
 app.get("/api", apiRoutes);

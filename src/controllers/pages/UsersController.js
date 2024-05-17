@@ -1,10 +1,10 @@
 /**
  * ------------------------------
- *         OVERVIEW PAGE
+ *          USERS PAGE
  * ------------------------------
 */
 
-export const overviewPage = (req, res) => {
+export const usersPage = (req, res) => {
     const firstname = "Philippe";
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
@@ -17,7 +17,7 @@ export const overviewPage = (req, res) => {
         },
     };
 
-    res.render("overview", data);
+    res.render("users", data);
 };
 
-export default overviewPage;
+export default usersPage;
