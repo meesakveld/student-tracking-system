@@ -1,6 +1,7 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
 import Course from "./Course.js";
+import Student from "./Student.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -38,16 +39,16 @@ class CourseRegistration extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: Course,
                 join: {
-                    from: "education_programmes.id",
-                    to: "courses.education_programme_id",
+                    from: "workplace_mentor.course_id",
+                    to: "courses.id",
                 },
             },
-            courses_workplace: {
+            student: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Course,
+                modelClass: Student,
                 join: {
-                    from: "course_registrations.course_id",
-                    to: "courses.id",
+                    from: "workplace_mentor.student_id",
+                    to: "students.id",
                 },
             },
         }

@@ -79,11 +79,11 @@ class Course extends Model {
                 },
             },
             workplace_mentor: {
-                relation: Model.HasManyRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: WorkplaceMentor,
                 join: {
                     from: "courses.id",
-                    to: "workplace_mentors.course_id",
+                    to: "workplace_mentor.course_id",
                 },
             },
         };
