@@ -21,6 +21,8 @@ import welcomePage from './controllers/pages/WelcomeController.js';
 import dashboardPage from "./controllers/pages/DashboardController.js";
 import componentsPage from "./controllers/pages/ComponentsController.js";
 import usersPage from "./controllers/pages/UsersController.js";
+import studentPage from "./controllers/pages/StudentController.js";
+import studentDetailPage from "./controllers/pages/StudentDetailController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -69,6 +71,8 @@ app.get("/logout", auth.logout);
 // —— Private routes ——
 app.get('/', dashboardPage);
 app.get('/users', usersPage);
+app.get('/student', studentPage);
+app.get('/student/:id', studentDetailPage);
 
 // API Routes
 app.get("/api", apiRoutes);
