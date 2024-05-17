@@ -1,15 +1,16 @@
-const tableName = "students"; //! Change TABLENAME to the name of the table you want to create
+const tableName = "statuses_registrations"; //! Change TABLENAME to the name of the table you want to create
  
 // Create the table (this is for creating the migration)
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("user_id").notNullable()
-        table.integer("class_id").notNullable();
-        table.integer("trajectory_coach_id")
-        table.integer("learning_coach_id")
-        table.integer("diversity_coach_id")
+        table.string("status_id").notNullable();
+        table.integer("student_id").notNullable();
+        table.date("date").notNullable();
         table.timestamps(true, true);
+
+        table.foreign("status_id").references("statuses.id");
+        table.foreign("student_id").references("students.id");
     });
 }
  

@@ -1,13 +1,10 @@
-const tableName = "deregisters"; //! Change TABLENAME to the name of the table you want to create
+const tableName = "functions"; //! Change TABLENAME to the name of the table you want to create
  
 // Create the table (this is for creating the migration)
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("student_id").notNullable();
-        table.string("reason").notNullable();
-        table.date("deregisters_date").notNullable();
-        table.timestamps(true, true);       
+        table.string("title");
     });
 }
  

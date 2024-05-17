@@ -1,5 +1,10 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
+import EducationProgramme from "./EducationProgramme.js";
+import ProgrammeLine from "./ProgrammeLine.js";
+import Attendance from "./Attendance.js";
+import User from "./User.js";
+import WorkplaceMentor from "./WorkplaceMentor.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -43,6 +48,42 @@ class Course extends Model {
                 join: {
                     from: "attendances.course_id",
                     to: "courses.id",
+                },
+            },
+            users: {
+                relation: Model.ManyToManyRelation,
+                modelClass: User,
+                join: {
+                    from: "courses.id",
+                    through: {
+                        from: "course_registration.courses_id",
+                        to: "course_registration.account_id",
+                    },
+                    to: "employees.id",
+                },
+            },
+            education_programme: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "courses.education_programme_id",
+                    to: "education_programmes.id",
+                },
+            },
+            programme_lines: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: ProgrammeLine,
+                join: {
+                    from: "courses.programme_line_id",
+                    to: "programme_lines.id",
+                },
+            },
+            workplace_mentor: {
+                relation: Model.HasManyRelation,
+                modelClass: WorkplaceMentor,
+                join: {
+                    from: "courses.id",
+                    to: "workplace_mentors.course_id",
                 },
             },
         };

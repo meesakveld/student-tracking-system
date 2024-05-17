@@ -1,13 +1,10 @@
-const tableName = "employees"; //! Change TABLENAME to the name of the table you want to create
+const tableName = "employee_functions"; //! Change TABLENAME to the name of the table you want to create
  
 // Create the table (this is for creating the migration)
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
-        table.increments("id").primary();
-        table.integer("user_id").notNullable()
-        table.timestamps(true, true);
-
-        table.foreign("user_id").references("users.id");
+        table.foreign("employee_id").references("id");
+        table.foreign("function_id").references("id");
     });
 }
  

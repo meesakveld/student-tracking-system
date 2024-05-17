@@ -1,5 +1,6 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
+import Status from "./Status.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -8,9 +9,9 @@ Model.knex(knex);
 // import ... from "./...js";
 
 // define the NavigationItem model
-class WorkplaceCoach extends Model {
+class StatusRegistration extends Model {
     static get tableName() {
-        return "workplace_coaches";
+        return "statuses_registrations";
     }
 
     static get idColumn() {
@@ -20,28 +21,28 @@ class WorkplaceCoach extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["student_id", "course_id", "employee_id"],
+            required: ["status_id", "student_id", "date"],
             properties: {
                 id: { type: "integer" },
+                status_id: { type: "integer" },
                 student_id: { type: "integer" },
-                course_id: { type: "integer" },
-                employee_id: { type: "integer"}
+                date: { type: "date"}
             },
         };
     }
 
     static get relationMappings() {
-        return {
-            employees: {
-                relation: Model.BelongsToOneRelation,
+        return{
+            statuses_registrations: {
+                relation: Model.HasManyRelation,
                 modelClass: Employee,
                 join: {
-                    from: "workplace_coaches.employee_id",
-                    to: "employee.id",
+                    from: "statuses.id",
+                    to: "statuses_registrations.status_id",
                 },
             },
         }
     }
-}
+    }
 
-export default WorkplaceCoach;
+export default StatusRegistration;

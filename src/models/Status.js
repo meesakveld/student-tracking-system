@@ -28,7 +28,18 @@ class Status extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            status: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Status,
+                join: {
+                    from: "statuses_registrations.status_id",
+                    to: "statuses.id",
+                },
+            },
+        }
+    }
 }
 
 export default Status;

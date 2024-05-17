@@ -1,6 +1,8 @@
 
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
+import EducationProgramme from "./EducationProgramme.js";
+import Course from "./Course.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -33,7 +35,26 @@ class ProgrammeLine extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            education_programmes: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "education_programmes.id",
+                    to: "programme_lines.education_programme_id",
+                },
+            },
+            courses: {
+                relation: Model.HasManyRelation,
+                modelClass: Course,
+                join: {
+                    from: "programme_lines.id",
+                    to: "courses.programme_line_id",
+                },
+            },
+        }
+    }
 }
 
 export default ProgrammeLine;

@@ -26,8 +26,8 @@ class CourseRegistration extends Model {
                 id: { type: "integer" },
                 student_id: { type: "integer" },
                 course_id: { type: "integer" },
-                mentor_id: { type: "integer"},
-                
+                mentor_id: { type: "integer" },
+
             },
         };
     }

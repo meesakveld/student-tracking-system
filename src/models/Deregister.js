@@ -1,5 +1,6 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
+import Student from "./Student.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -20,16 +21,28 @@ class Deregister extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["reason", "deregisters_date"],
+            required: ["reason", "deregisters_date", "student_id"],
             properties: {
                 id: { type: "integer" },
-                reason: { type: "text"},
+                reason: { type: "text" },
                 deregisters_date: { type: "date" },
+                student_id: { type: "integer"},
             },
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "deregisters.student_id",
+                    to: "students.id",
+                },
+            }
+        }
+    }
 }
 
-export default Deregister;
+export default Deregister

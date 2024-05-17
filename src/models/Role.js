@@ -1,5 +1,6 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
+import Employee from "./Employee.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -28,7 +29,18 @@ class Role extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            roles: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Role,
+                join: {
+                    from: "roles.id",
+                    to: "users.role_id",
+                },
+            },
+        }
+    }
 }
 
 export default Role;

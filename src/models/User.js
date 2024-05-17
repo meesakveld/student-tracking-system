@@ -6,6 +6,9 @@ Model.knex(knex);
 
 // related models
 import Contact from "./Contact.js";
+import Student from "./Student.js";
+import Employee from "./Employee.js";
+import Role from "./Role.js";
 
 // define the NavigationItem model
 class User extends Model {
@@ -41,6 +44,30 @@ class User extends Model {
                 join: {
                     from: "users.id",
                     to: "contacts.user_id",
+                },
+            },
+            students: {
+                relation: Model.HasOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "users.id",
+                    to: "students.user_id",
+                },
+            },
+            employees: {
+                relation: Model.HasOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "users.id",
+                    to: "employees.user_id",
+                },
+            },
+            role: {
+                relation: Model.HasOneRelation,
+                modelClass: Role,
+                join: {
+                    from: "users.role_id",
+                    to: "roles.id",
                 },
             }
         };
