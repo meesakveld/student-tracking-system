@@ -7,7 +7,7 @@
 import Express from "express";
 
 // Controllers
-import { getAllUsers } from "../../services/User/getAllUsers.js";
+import { getAllUsers } from "../../services/User.js";
 
 
 // Middleware
