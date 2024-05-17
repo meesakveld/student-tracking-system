@@ -8,7 +8,6 @@ export function up(knex) {
         table.foreign("trajectory_coach_id").references("employees.id");
         table.foreign("learning_coach_id").references("employees.id");
         table.foreign("diversity_coach_id").references("employees.id");
-        table.foreign("deregister_id").references("deregisters.id");
     });
 }
 
@@ -20,6 +19,5 @@ export function down(knex) {
         table.dropForeign("trajectory_coach_id");
         table.dropForeign("learning_coach_id");
         table.dropForeign("diversity_coach_id");
-        table.dropForeign("deregister_id");
     });
 }

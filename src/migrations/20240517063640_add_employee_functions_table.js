@@ -3,8 +3,11 @@ const tableName = "employee_functions"; //! Change TABLENAME to the name of the 
 // Create the table (this is for creating the migration)
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
-        table.foreign("employee_id").references("id");
-        table.foreign("function_id").references("id");
+        table.integer("employee_id").notNullable();
+        table.integer("function_id").notNullable();
+
+        table.foreign("employee_id").references("employees.id");
+        table.foreign("function_id").references("functions.id");
     });
 }
  

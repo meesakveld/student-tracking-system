@@ -3,8 +3,11 @@ const tableName = "education_programmes_employees"; //! Change TABLENAME to the 
 // Create the table (this is for creating the migration)
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
-        table.foreign("education_programme_id").references("id");
-        table.foreign("employee_id").references("id");
+        table.integer("education_programme_id").notNullable();
+        table.integer("employee_id").notNullable();
+
+        table.foreign("education_programme_id").references("education_programmes.id");
+        table.foreign("employee_id").references("employees.id");
     });
 }
  

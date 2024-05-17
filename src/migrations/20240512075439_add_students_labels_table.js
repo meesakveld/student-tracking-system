@@ -6,7 +6,6 @@ export function up(knex) {
         table.increments("id").primary();
         table.integer("student_id").notNullable();
         table.integer("label_id").notNullable();
-        table.timestamps(true, true);
     });
 }
  
