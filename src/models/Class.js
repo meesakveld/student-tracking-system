@@ -1,13 +1,12 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import EducationProgramme from "./EducationProgramme.js";
-import Student from "./Student.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import EducationProgramme from "./EducationProgramme.js";
+import Student from "./Student.js";
 
 // define the NavigationItem model
 class Class extends Model {

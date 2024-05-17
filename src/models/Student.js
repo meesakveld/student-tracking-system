@@ -1,6 +1,5 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import Employee from "./Employee.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -13,6 +12,7 @@ import Employee from "./Employee.js";
 import WorkplaceMentor from "./WorkplaceMentor.js";
 import Deregister from "./Deregister.js";
 import Course from "./Course.js";
+import StatusRegistration from "./StatusesRegistration.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -115,7 +115,7 @@ class Student extends Model {
             },
             status_registration: {
                 relation: Model.HasManyRelation,
-                modelClass: User,
+                modelClass: StatusRegistration,
                 join: {
                     from: "students.id",
                     to: "statuses_registrations.student_id",

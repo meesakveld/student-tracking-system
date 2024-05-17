@@ -1,6 +1,5 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import Student from "./Student.js";
 
 // instantiate the model
 Model.knex(knex);

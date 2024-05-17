@@ -1,17 +1,15 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import EducationProgramme from "./EducationProgramme.js";
-import ProgrammeLine from "./ProgrammeLine.js";
-import Attendance from "./Attendance.js";
-import User from "./User.js";
-import WorkplaceMentor from "./WorkplaceMentor.js";
-import WorkplaceCoach from "./WorkplaceCoach.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import EducationProgramme from "./EducationProgramme.js";
+import ProgrammeLine from "./ProgrammeLine.js";
+import Attendance from "./Attendance.js";
+import WorkplaceMentor from "./WorkplaceMentor.js";
+import WorkplaceCoach from "./WorkplaceCoach.js";
 
 // define the NavigationItem model
 class Course extends Model {

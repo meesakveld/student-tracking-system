@@ -9,7 +9,6 @@ import User from "./User.js";
 import Student from "./Student.js";
 import Comment from "./Comment.js";
 import WorkplaceCoach from "./WorkplaceCoach.js";
-import Label from "./Label.js";
 import Course from "./Course.js";
 import EducationProgramme from "./EducationProgramme.js";
 import Function from "./Function.js";

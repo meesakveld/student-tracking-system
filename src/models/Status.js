@@ -1,12 +1,12 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import User from "./User.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import StatusesRegistration from "./StatusesRegistration.js";
+import StatusRegistration from "./StatusesRegistration.js";
 
 // define the NavigationItem model
 class Status extends Model {
@@ -31,9 +31,9 @@ class Status extends Model {
 
     static get relationMappings() {
         return {
-            status: {
+            statusRegistrations: {
                 relation: Model.HasManyRelation,
-                modelClass: Status,
+                modelClass: StatusesRegistration,
                 join: {
                     from: "statuses.id",
                     to: "statuses_registrations.status_id",

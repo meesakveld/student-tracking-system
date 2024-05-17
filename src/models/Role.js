@@ -1,12 +1,12 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import Employee from "./Employee.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import User from "./User.js";
+
 
 // define the NavigationItem model
 class Role extends Model {
@@ -31,9 +31,9 @@ class Role extends Model {
 
     static get relationMappings() {
         return {
-            roles: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Role,
+            user: {
+                relation: Model.HasOneRelation,
+                modelClass: User,
                 join: {
                     from: "roles.id",
                     to: "users.role_id",

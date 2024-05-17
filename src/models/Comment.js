@@ -1,15 +1,14 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import Employee from "./Employee.js";
-import EducationProgramme from "./EducationProgramme.js";
-import Student from "./Student.js";
-import Course from "./Course.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Employee from "./Employee.js";
+import EducationProgramme from "./EducationProgramme.js";
+import Student from "./Student.js";
+import Course from "./Course.js";
 
 // define the NavigationItem model
 class Comment extends Model {
@@ -38,7 +37,7 @@ class Comment extends Model {
 
     static get relationMappings() {
         return {
-            employees: {
+            employee: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Employee,
                 join: {
@@ -54,7 +53,7 @@ class Comment extends Model {
                     to: "education_programme.id",
                 },
             },
-            students: {
+            student: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Student,
                 join: {

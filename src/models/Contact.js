@@ -33,7 +33,7 @@ class Contact extends Model {
 
     static get relationMappings() {
         return {
-            users: {
+            user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {

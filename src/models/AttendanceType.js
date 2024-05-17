@@ -5,7 +5,7 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Attendance from "./Attendance.js";
 
 // define the NavigationItem model
 class AttendanceType extends Model {

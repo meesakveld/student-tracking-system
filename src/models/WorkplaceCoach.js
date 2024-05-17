@@ -1,14 +1,13 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
-import Employee from "./Employee.js";
-import Student from "./Student.js";
-import Course from "./Course.js";
 
 // instantiate the model
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Employee from "./Employee.js";
+import Student from "./Student.js";
+import Course from "./Course.js";
 
 // define the NavigationItem model
 class WorkplaceCoach extends Model {
