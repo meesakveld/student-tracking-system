@@ -5,7 +5,9 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Student from "./Student.js";
+import Course from "./Course.js";
+import AttendanceType from "./AttendanceType.js";
 
 // define the NavigationItem model
 class Attendance extends Model {
@@ -31,7 +33,34 @@ class Attendance extends Model {
         };
     }
 
-    static get relationMappings() {}
+    static get relationMappings() {
+        return {
+            students: {
+                relation: Model.HasManyRelation,
+                modelClass: Student,
+                join: {
+                    from: "attendances.student_id",
+                    to: "students.id",
+                },
+            },
+            courses: {
+                relation: Model.HasManyRelation,
+                modelClass: Course,
+                join: {
+                    from: "attendances.course_idcourses.id",
+                    to: "courses.id",
+                },
+            },
+            attendance_types: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: AttendanceType,
+                join: {
+                    from: "attendances.attendance_type_id",
+                    to: "attendance_types.id",
+                },
+            },
+        };
+    }
 }
 
 export default Attendance;

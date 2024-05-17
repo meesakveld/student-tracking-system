@@ -9,6 +9,8 @@ export function up(knex) {
         table.date("date").notNullable();
         table.integer("attendance_type_id").notNullable();
         table.timestamps(true, true);
+
+    
     });
 }
 

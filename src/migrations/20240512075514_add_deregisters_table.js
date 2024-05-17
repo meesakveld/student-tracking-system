@@ -4,6 +4,7 @@ const tableName = "deregisters"; //! Change TABLENAME to the name of the table y
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
+        table.integer("student_id").notNullable();
         table.string("reason").notNullable();
         table.date("deregisters_date").notNullable();
         table.timestamps(true, true);       

@@ -5,7 +5,6 @@ export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
         table.integer("user_id").notNullable()
-        table.integer("role_id").notNullable();
         table.timestamps(true, true);
 
         table.foreign("user_id").references("users.id");

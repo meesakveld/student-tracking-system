@@ -5,7 +5,8 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import StatusesRegistration from "./StatusesRegistration.js";
+import StatusRegistration from "./StatusesRegistration.js";
 
 // define the NavigationItem model
 class Status extends Model {
@@ -28,7 +29,18 @@ class Status extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            statusRegistrations: {
+                relation: Model.HasManyRelation,
+                modelClass: StatusesRegistration,
+                join: {
+                    from: "statuses.id",
+                    to: "statuses_registrations.status_id",
+                },
+            },
+        }
+    }
 }
 
 export default Status;

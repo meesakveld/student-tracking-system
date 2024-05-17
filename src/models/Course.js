@@ -5,7 +5,11 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import EducationProgramme from "./EducationProgramme.js";
+import ProgrammeLine from "./ProgrammeLine.js";
+import Attendance from "./Attendance.js";
+import WorkplaceMentor from "./WorkplaceMentor.js";
+import WorkplaceCoach from "./WorkplaceCoach.js";
 
 // define the NavigationItem model
 class Course extends Model {
@@ -35,7 +39,58 @@ class Course extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            education_programme: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "courses.education_programme_id",
+                    to: "education_programmes.id",
+                },
+            },
+            programme_lines: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: ProgrammeLine,
+                join: {
+                    from: "courses.programme_line_id",
+                    to: "programme_lines.id",
+                },
+            },
+            attendances: {
+                relation: Model.HasManyRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "courses.id",
+                    to: "attendances.course_id",
+                },
+            },
+            workplace_mentor: {
+                relation: Model.HasManyRelation,
+                modelClass: WorkplaceMentor,
+                join: {
+                    from: "courses.id",
+                    to: "workplace_mentor.course_id",
+                },
+            },
+            workplace_coach: {
+                relation: Model.HasManyRelation,
+                modelClass: WorkplaceCoach,
+                join: {
+                    from: "courses.id",
+                    to: "workplace_coach.course_id",
+                },
+            },
+            comment: {
+                relation: Model.HasManyRelation,
+                modelClass: Comment,
+                join: {
+                    from: "courses.id",
+                    to: "comments.course_id",
+                },
+            },
+        };
+    }
 }
 
 export default Course;

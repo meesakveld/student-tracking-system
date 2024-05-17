@@ -5,7 +5,14 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Attendance from "./Attendance.js";
+import Label from "./Label.js";
+import User from "./User.js";
+import Employee from "./Employee.js";
+import WorkplaceMentor from "./WorkplaceMentor.js";
+import Deregister from "./Deregister.js";
+import Course from "./Course.js";
+import StatusRegistration from "./StatusesRegistration.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -25,17 +32,121 @@ class Student extends Model {
                 id: { type: "integer" },
                 user_id: { type: "integer" },
                 class_id: { type: "integer" },
-                role_id: { type: "integer" },
                 trajectory_coach_id : { type: "integer" },
                 learning_coach_id: { type: "integer" },
                 diversity_coach_id: { type: "integer" },
-                status_id: { type: "integer" },
-                deregister_id: { type: "integer" },
             },
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            attendances: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "students.id",
+                    to: "attendances.student_id",
+                },
+            },
+            users: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: "students.user_id",
+                    to: "users.id",
+                },
+            },
+            trajectory_coach: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "students.trajectory_coach_id",
+                    to: "employees.id",
+                },
+            },
+            learning_coach: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "students.learning_coach_id",
+                    to: "employees.id",
+                },
+            },
+            diversity_coach: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "students.diversity_coach_id",
+                    to: "employees.id",
+                },
+            },
+            workplace_mentor: {
+                relation: Model.HasOneRelation,
+                modelClass: WorkplaceMentor,
+                join: {
+                    from: "students.id",
+                    to: "workplace_mentors.student_id",
+                },
+            },
+            workplace_coach: {
+                relation: Model.HasOneRelation,
+                modelClass: WorkplaceMentor,
+                join: {
+                    from: "students.id",
+                    to: "workplace_coach.student_id",
+                },
+            },
+            deregistrer: {
+                relation: Model.HasManyRelation,
+                modelClass: Deregister,
+                join: {
+                    from: "students.id",
+                    to: "deregisters.student_id",
+                },
+            },
+            comments: {
+                relation: Model.HasManyRelation,
+                modelClass: Comment,
+                join: {
+                    from: "students.id",
+                    to: "comments.student_id",
+                },
+            },
+            status_registration: {
+                relation: Model.HasManyRelation,
+                modelClass: StatusRegistration,
+                join: {
+                    from: "students.id",
+                    to: "statuses_registrations.student_id",
+                },
+            }, 
+            labels: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Label,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "students_labels.student_id",
+                        to: "students_labels.label_id",
+                    },
+                    to: "labels.id",
+                },
+            },
+            courses: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Course,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "course_registration.student_id",
+                        to: "course_registration.course_id",
+                    },
+                    to: "courses.id",
+                },
+            },
+        }
+    }
 }
 
 export default Student;

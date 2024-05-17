@@ -5,7 +5,7 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Student from "./Student.js";
 
 // define the NavigationItem model
 class Deregister extends Model {
@@ -20,16 +20,28 @@ class Deregister extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["reason", "deregisters_date"],
+            required: ["reason", "deregisters_date", "student_id"],
             properties: {
                 id: { type: "integer" },
-                reason: { type: "text"},
+                reason: { type: "text" },
                 deregisters_date: { type: "date" },
+                student_id: { type: "integer"},
             },
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "deregisters.student_id",
+                    to: "students.id",
+                },
+            }
+        }
+    }
 }
 
-export default Deregister;
+export default Deregister
