@@ -252,6 +252,12 @@ a:hover {
     background-color: var(--light);
 }
 
+.input-field__error {
+    color: hsl(0, 86%, 47%);
+    font-size: 0.9rem;
+    padding-top: 0.5rem;
+}
+
 /* ------ Textarea ------ */
 
 textarea {

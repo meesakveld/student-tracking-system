@@ -3,16 +3,16 @@ import { body } from "express-validator";
 export default [
     body("email")
         .notEmpty()
-        .withMessage("E-mail is verplicht")
+        .withMessage("E-mail is verplicht.")
         .bail()
         .isLength({ max: 255 })
-        .withMessage("E-mail mag maximaal 255 tekens bevatten")
+        .withMessage("E-mail mag maximaal 255 tekens bevatten.")
         .bail()
         .isEmail()
-        .withMessage("Vul een geldig e-mail adres in"),
+        .withMessage("Vul een geldig e-mail adres in."),
     body("password")
         .notEmpty()
-        .withMessage("Wachtwoord is verplicht")
+        .withMessage("Wachtwoord is verplicht.")
         .isLength({ min: 5 })
-        .withMessage("Wachtwoord moet minimaal 5 tekens bevatten")
+        .withMessage("Wachtwoord moet minimaal 5 tekens bevatten.")
 ]

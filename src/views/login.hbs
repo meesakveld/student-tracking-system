@@ -4,18 +4,22 @@
         <div class="main__inner main__inner--centered">
             <section class="centered">
                 <img class="logo-sv--big" src="/assets/images/logo-big.svg" alt="logo_sv">
-                <form class="login-form" action="">
+                <form class="login-form" action="/login" method="POST">
                     <h1>Login</h1>
-                    <div class="input-field">
-                        <input type="text" class="input-field__input" placeholder="Gebruikersnaam">
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="input-field__input" placeholder="Wachtwoord">
-                    </div>
+                    <p class="input-field__error">{{flash}}</p>
+
+                    {{#each inputs}}
+                        <div class="input-field">
+                            <p class="input-field__error">{{err}}</p>
+                            <input type="{{type}}" name="{{name}}" class="input-field__input" placeholder="{{label}}" value="{{value}}">
+                        </div>
+                    {{/each}}
+
                     <div class="actions">
                         <a href="/" class="button button--dark">Terug</a>
                         <button type="submit" class="button">Inloggen</button>
                     </div>
+
                 </form>
             </section>
             <!-- To be deleted when login is created, these are just links to view the progress -->

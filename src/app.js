@@ -12,7 +12,8 @@ import cookieParser from "cookie-parser";
 
 
 // Middleware
-
+import jwtAuth from "./middleware/jwtAuth.js";
+import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
 
 // Controllers
 import * as auth from "./controllers/AuthController.js";
@@ -60,15 +61,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // —— Public routes | Auth routes ——
 app.get('/welcome', welcomePage);
 
-app.get("/login", auth.login);
-app.post("/login", auth.postLogin, auth.login);
+app.get("/login", jwtAuth, auth.login);
+app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
 
 // —— Private routes ——
-app.get('/', dashboardPage);
-app.get('/users', usersPage);
+app.get('/', jwtAuth ,dashboardPage);
+app.get('/users', jwtAuth, usersPage);
 
 // API Routes
 app.get("/api", apiRoutes);

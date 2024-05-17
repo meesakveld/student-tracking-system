@@ -8,6 +8,9 @@ export default async (req, res, next) => {
         const userToken = req.cookies.user;
 
         if (!userToken) {
+            if (req.path === '/welcome' || req.path === '/login') {
+                return next();
+            }
             return res.redirect('/welcome');   
         }
         const userData = jwt.verify(userToken, TOKEN_SALT);
