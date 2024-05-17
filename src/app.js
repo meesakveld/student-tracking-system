@@ -70,6 +70,7 @@ app.get("/logout", auth.logout);
 
 // —— Private routes ——
 app.get('/', dashboardPage);
+app.get('/components', componentsPage) // temporary page to show all components
 app.get('/users', usersPage);
 app.get('/student', studentPage);
 app.get('/student/:id', studentDetailPage);
