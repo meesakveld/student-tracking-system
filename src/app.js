@@ -72,10 +72,10 @@ app.get('/', jwtAuth ,dashboardPage);
 app.get('/users', jwtAuth, usersPage);
 
 // API Routes
-app.get("/api", apiRoutes);
+app.use("/api", apiRoutes);
 
 // 404 Route
-app.use('*', (req, res) => { res.redirect("/"); });
+// app.use('*', (req, res) => { res.redirect("/"); });
 
 app.get('/components', componentsPage);
 

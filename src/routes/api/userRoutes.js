@@ -7,7 +7,8 @@
 import Express from "express";
 
 // Controllers
-import userRoutes from "./userRoutes.js";
+import { getAllUsers } from "../../services/User/getAllUsers.js";
+
 
 // Middleware
 
@@ -27,6 +28,7 @@ const router = Express.Router();
  * ------------------------------
 */
 
-router.use('/user', userRoutes)
+// API Todos routes
+router.get('/', getAllUsers);
 
 export default router;
