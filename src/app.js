@@ -12,10 +12,16 @@ import cookieParser from "cookie-parser";
 
 
 // Middleware
-
+import jwtAuth from "./middleware/jwtAuth.js";
+import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
 
 // Controllers
 import * as auth from "./controllers/AuthController.js";
+// Page controllers
+import welcomePage from './controllers/pages/WelcomeController.js';
+import dashboardPage from "./controllers/pages/DashboardController.js";
+import componentsPage from "./controllers/pages/ComponentsController.js";
+import usersPage from "./controllers/pages/UsersController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -52,19 +58,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
  * ------------------------------
 */
 
-// Auth routes
-app.get("/login", auth.login);
-app.post("/login", auth.postLogin, auth.login);
+// —— Public routes | Auth routes ——
+app.get('/welcome', welcomePage);
 
-app.get("/register", auth.register);
-app.post("/register", auth.postRegister, auth.register);
+app.get("/login", jwtAuth, auth.login);
+app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
 
-// Page Routes
-app.get("/", (req, res) => { res.json({ message: "Welcome on the home page!" })});
-
+// —— Private routes ——
+app.get('/', jwtAuth ,dashboardPage);
+app.get('/users', jwtAuth, usersPage);
 
 // API Routes
 app.get("/api", apiRoutes);
@@ -72,6 +77,7 @@ app.get("/api", apiRoutes);
 // 404 Route
 app.use('*', (req, res) => { res.redirect("/"); });
 
+app.get('/components', componentsPage);
 
 /**
  * ------------------------------
