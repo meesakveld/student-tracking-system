@@ -5,7 +5,8 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import User from "./User.js";
+
 
 // define the NavigationItem model
 class Role extends Model {
@@ -28,7 +29,18 @@ class Role extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            user: {
+                relation: Model.HasOneRelation,
+                modelClass: User,
+                join: {
+                    from: "roles.id",
+                    to: "users.role_id",
+                },
+            },
+        }
+    }
 }
 
 export default Role;

@@ -5,7 +5,9 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Employee from "./Employee.js";
+import Student from "./Student.js";
+import Course from "./Course.js";
 
 // define the NavigationItem model
 class WorkplaceCoach extends Model {
@@ -30,7 +32,34 @@ class WorkplaceCoach extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            employees: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "workplace_coach.employee_id",
+                    to: "employees.id",
+                },
+            },
+            courses: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Course,
+                join: {
+                    from: "workplace_coach.course_id",
+                    to: "courses.id",
+                },
+            },
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "workplace_coach.student_id",
+                    to: "students.id",
+                },
+            },
+        }
+    }
 }
 
 export default WorkplaceCoach;

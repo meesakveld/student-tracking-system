@@ -5,7 +5,8 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import EducationProgramme from "./EducationProgramme.js";
+import Student from "./Student.js";
 
 // define the NavigationItem model
 class Class extends Model {
@@ -29,7 +30,26 @@ class Class extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return{
+            education_programmes: {
+                relation: Model.HasManyRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "classes.education_programme_id",
+                    to: "education_programmes.id",
+                },
+            },
+            students: {
+                relation: Model.HasOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "classes.id",
+                    to: "students.class_id",
+                },
+            }
+        }
+    }
 }
 
 export default Class;

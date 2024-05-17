@@ -5,7 +5,7 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Attendance from "./Attendance.js";
 
 // define the NavigationItem model
 class AttendanceType extends Model {
@@ -28,7 +28,18 @@ class AttendanceType extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            attendances: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Attendance,
+                join: {
+                    from: "attendance_types.id",
+                    to: "attendances.attendance_type_id",
+                },
+            },
+        };
+    }
 }
 
 export default AttendanceType;

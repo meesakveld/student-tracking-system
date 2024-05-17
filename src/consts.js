@@ -25,4 +25,7 @@ export const {
     DB_DEV_NAME,
 
     TOKEN_SALT,
+
+    MAIL_USER,
+    MAIL_PASS,
 } = process.env;

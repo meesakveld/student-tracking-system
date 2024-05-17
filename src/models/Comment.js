@@ -5,7 +5,10 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Employee from "./Employee.js";
+import EducationProgramme from "./EducationProgramme.js";
+import Student from "./Student.js";
+import Course from "./Course.js";
 
 // define the NavigationItem model
 class Comment extends Model {
@@ -32,7 +35,43 @@ class Comment extends Model {
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            employee: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "comments.employee_id",
+                    to: "employee.id",
+                },
+            },
+            education_programme: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "comments.education_programme_id",
+                    to: "education_programme.id",
+                },
+            },
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "comments.education_programme_id",
+                    to: "education_programme.id",
+                },
+            },
+            course: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Course,
+                join: {
+                    from: "comments.course_id",
+                    to: "course.id",
+                },
+            },
+
+        }
+    }
 }
 
 export default Comment;

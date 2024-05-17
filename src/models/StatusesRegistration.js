@@ -5,13 +5,13 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-import Course from "./Course.js";
+import Status from "./Status.js";
 import Student from "./Student.js";
 
 // define the NavigationItem model
-class WorkplaceMentor extends Model {
+class StatusRegistration extends Model {
     static get tableName() {
-        return "workplace_mentors";
+        return "statuses_registrations";
     }
 
     static get idColumn() {
@@ -21,37 +21,36 @@ class WorkplaceMentor extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["student_id", "course_id", "mentor_id"],
+            required: ["status_id", "student_id", "date"],
             properties: {
                 id: { type: "integer" },
+                status_id: { type: "integer" },
                 student_id: { type: "integer" },
-                course_id: { type: "integer" },
-                mentor_id: { type: "integer"},
-                
+                date: { type: "date"}
             },
         };
     }
 
     static get relationMappings() {
-        return {
-            courses: {
+        return{
+            status: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Course,
+                modelClass: Status,
                 join: {
-                    from: "workplace_mentors.course_id",
-                    to: "courses.id",
+                    from: "statuses_registrations.status_id",
+                    to: "statuses.id",
                 },
             },
             student: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Student,
                 join: {
-                    from: "workplace_mentors.student_id",
+                    from: "statuses_registrations.student_id",
                     to: "students.id",
                 },
             },
         }
     }
-}
+    }
 
-export default WorkplaceMentor;
+export default StatusRegistration;

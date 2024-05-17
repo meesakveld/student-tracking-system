@@ -5,13 +5,12 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-import Course from "./Course.js";
-import Student from "./Student.js";
+import Employee from "./Employee.js";
 
 // define the NavigationItem model
-class WorkplaceMentor extends Model {
+class Function extends Model {
     static get tableName() {
-        return "workplace_mentors";
+        return "functions";
     }
 
     static get idColumn() {
@@ -26,32 +25,28 @@ class WorkplaceMentor extends Model {
                 id: { type: "integer" },
                 student_id: { type: "integer" },
                 course_id: { type: "integer" },
-                mentor_id: { type: "integer"},
-                
+                mentor_id: { type: "integer" },
+
             },
         };
     }
 
     static get relationMappings() {
         return {
-            courses: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Course,
+            employee: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Employee,
                 join: {
-                    from: "workplace_mentors.course_id",
-                    to: "courses.id",
-                },
-            },
-            student: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Student,
-                join: {
-                    from: "workplace_mentors.student_id",
-                    to: "students.id",
+                    from: "function.id",
+                    through: {
+                        from: "employee_function.function_id",
+                        to: "employee_function.employee_id",
+                    },
+                    to: "employee.id",
                 },
             },
         }
     }
 }
 
-export default WorkplaceMentor;
+export default Function;

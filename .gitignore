@@ -1,6 +1,7 @@
 # General
 .cache
 package-lock.json
+local
 
 # OS specific
 .DS_Store
@@ -13,3 +14,4 @@ node_modules
 
 # Database
 *.sqlite3
+

@@ -5,7 +5,10 @@ import { Model } from "objection";
 Model.knex(knex);
 
 // related models
-// import ... from "./...js";
+import Contact from "./Contact.js";
+import Student from "./Student.js";
+import Employee from "./Employee.js";
+import Role from "./Role.js";
 
 // define the NavigationItem model
 class User extends Model {
@@ -29,11 +32,47 @@ class User extends Model {
                 email: { type: "string", maxLength: 255 },
                 password: { type: "string", maxLength: 255 },
                 username: { type: "string", maxLength: 255 },
+                role_id: { type: "integer" },
             },
         };
     }
 
-    static get relationMappings() { }
+    static get relationMappings() {
+        return {
+            contacts: {
+                relation: Model.HasOneRelation,
+                modelClass: Contact,
+                join: {
+                    from: "users.id",
+                    to: "contacts.user_id",
+                },
+            },
+            students: {
+                relation: Model.HasOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "users.id",
+                    to: "students.user_id",
+                },
+            },
+            employees: {
+                relation: Model.HasOneRelation,
+                modelClass: Employee,
+                join: {
+                    from: "users.id",
+                    to: "employees.user_id",
+                },
+            },
+            roles: {
+                relation: Model.HasOneRelation,
+                modelClass: Role,
+                join: {
+                    from: "users.role_id",
+                    to: "roles.id",
+                },
+            },
+        };
+    }
 }
 
 export default User;
