@@ -10,7 +10,7 @@ Model.knex(knex);
 // import ... from "./...js";
 
 // define the NavigationItem model
-class CourseRegistration extends Model {
+class Function extends Model {
     static get tableName() {
         return "functions";
     }
@@ -51,4 +51,4 @@ class CourseRegistration extends Model {
     }
 }
 
-export default CourseRegistration;
+export default Function;

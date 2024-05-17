@@ -10,9 +10,9 @@ Model.knex(knex);
 // import ... from "./...js";
 
 // define the NavigationItem model
-class CourseRegistration extends Model {
+class WorkplaceMentor extends Model {
     static get tableName() {
-        return "course_registrations";
+        return "workplace_mentors";
     }
 
     static get idColumn() {
@@ -39,7 +39,7 @@ class CourseRegistration extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Course,
                 join: {
-                    from: "workplace_coach.course_id",
+                    from: "workplace_mentors.course_id",
                     to: "courses.id",
                 },
             },
@@ -47,7 +47,7 @@ class CourseRegistration extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Student,
                 join: {
-                    from: "workplace_coach.student_id",
+                    from: "workplace_mentors.student_id",
                     to: "students.id",
                 },
             },
@@ -55,4 +55,4 @@ class CourseRegistration extends Model {
     }
 }
 
-export default CourseRegistration;
+export default WorkplaceMentor;
