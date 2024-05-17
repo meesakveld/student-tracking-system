@@ -32,6 +32,7 @@ class User extends Model {
                 email: { type: "string", maxLength: 255 },
                 password: { type: "string", maxLength: 255 },
                 username: { type: "string", maxLength: 255 },
+                role_id: { type: "integer" },
             },
         };
     }
@@ -62,14 +63,14 @@ class User extends Model {
                     to: "employees.user_id",
                 },
             },
-            role: {
+            roles: {
                 relation: Model.HasOneRelation,
                 modelClass: Role,
                 join: {
                     from: "users.role_id",
                     to: "roles.id",
                 },
-            }
+            },
         };
     }
 }
