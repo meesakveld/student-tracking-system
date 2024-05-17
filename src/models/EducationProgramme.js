@@ -37,7 +37,7 @@ class EducationProgramme extends Model {
     static get relationMappings() {
         return {
             class: {
-                relation: Model.BelongsToOneRelation,
+                relation: Model.HasManyRelation,
                 modelClass: Class,
                 join: {
                     from: "education_programmes.id",

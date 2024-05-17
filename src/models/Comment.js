@@ -2,6 +2,8 @@ import knex from "../lib/Knex.js";
 import { Model } from "objection";
 import Employee from "./Employee.js";
 import EducationProgramme from "./EducationProgramme.js";
+import Student from "./Student.js";
+import Course from "./Course.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -50,6 +52,22 @@ class Comment extends Model {
                 join: {
                     from: "comments.education_programme_id",
                     to: "education_programme.id",
+                },
+            },
+            students: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "comments.education_programme_id",
+                    to: "education_programme.id",
+                },
+            },
+            course: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Course,
+                join: {
+                    from: "comments.course_id",
+                    to: "course.id",
                 },
             },
 

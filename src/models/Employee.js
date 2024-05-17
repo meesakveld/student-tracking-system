@@ -11,6 +11,8 @@ import Comment from "./Comment.js";
 import WorkplaceCoach from "./WorkplaceCoach.js";
 import Label from "./Label.js";
 import Course from "./Course.js";
+import EducationProgramme from "./EducationProgramme.js";
+import Function from "./Function.js";
 
 // define the NavigationItem model
 class Employee extends Model {
@@ -75,6 +77,7 @@ class Employee extends Model {
                     to: "comments.employee_id",
                 },
             },
+
             workplace_coaches: {
                 relation: Model.HasManyRelation,
                 modelClass: WorkplaceCoach,
@@ -83,7 +86,7 @@ class Employee extends Model {
                     to: "workplace_coach.employee_id",
                 },
             },
-            labels: {
+            courses: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Course,
                 join: {
@@ -93,6 +96,30 @@ class Employee extends Model {
                         to: "course_registration.course_id",
                     },
                     to: "course.id",
+                },
+            },
+            education_programmes: {
+                relation: Model.ManyToManyRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "employees.id",
+                    through: {
+                        from: "education_programme_employee.employee_id",
+                        to: "education_programme_employee.education_programme_id",
+                    },
+                    to: "education_programme.id",
+                },
+            },
+            function: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Function,
+                join: {
+                    from: "employees.id",
+                    through: {
+                        from: "employee_function.employee_id",
+                        to: "employee_function.function_id",
+                    },
+                    to: "function.id",
                 },
             },
         }

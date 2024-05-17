@@ -53,7 +53,7 @@ class Attendance extends Model {
                 },
             },
             attendance_types: {
-                relation: Model.HasManyRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: AttendanceType,
                 join: {
                     from: "attendances.attendance_type_id",

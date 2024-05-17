@@ -12,6 +12,7 @@ import User from "./User.js";
 import Employee from "./Employee.js";
 import WorkplaceMentor from "./WorkplaceMentor.js";
 import Deregister from "./Deregister.js";
+import Course from "./Course.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -48,18 +49,6 @@ class Student extends Model {
                     to: "attendances.student_id",
                 },
             },
-            // labels: {
-            //     relation: Model.ManyToManyRelation,
-            //     modelClass: Label,
-            //     join: {
-            //         from: "employees.id",
-            //         through: {
-            //             from: "course_registration.account_id",
-            //             to: "course_registration.course_id",
-            //         },
-            //         to: "courses.id",
-            //     },
-            // },
             users: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
@@ -116,6 +105,14 @@ class Student extends Model {
                     to: "deregisters.student_id",
                 },
             },
+            comments: {
+                relation: Model.HasManyRelation,
+                modelClass: Comment,
+                join: {
+                    from: "students.id",
+                    to: "comments.student_id",
+                },
+            },
             status_registration: {
                 relation: Model.HasManyRelation,
                 modelClass: User,
@@ -124,6 +121,30 @@ class Student extends Model {
                     to: "statuses_registrations.student_id",
                 },
             }, 
+            labels: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Label,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "students_labels.student_id",
+                        to: "students_labels.label_id",
+                    },
+                    to: "labels.id",
+                },
+            },
+            courses: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Course,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "course_registration.student_id",
+                        to: "course_registration.course_id",
+                    },
+                    to: "courses.id",
+                },
+            },
         }
     }
 }

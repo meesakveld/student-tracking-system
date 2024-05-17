@@ -35,19 +35,19 @@ class StatusRegistration extends Model {
     static get relationMappings() {
         return{
             statuses_registrations: {
-                relation: Model.HasManyRelation,
-                modelClass: Employee,
+                relation: Model.BelongsToOneRelation,
+                modelClass: Status,
                 join: {
-                    from: "statuses_registrations.status_id",
-                    to: "statuses.id",
+                    from: "statuses.id",
+                    to: "statuses_registrations.status_id",
                 },
             },
             student: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Student,
                 join: {
-                    from: "statuses_registrations.student_id",
-                    to: "students.id",
+                    from: "students.id",
+                    to: "statuses_registrations.student_id",
                 },
             },
         }

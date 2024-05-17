@@ -35,22 +35,22 @@ class CourseRegistration extends Model {
 
     static get relationMappings() {
         return {
-            // courses: {
-            //     relation: Model.HasManyRelation,
-            //     modelClass: Course,
-            //     join: {
-            //         from: "education_programmes.id",
-            //         to: "courses.education_programme_id",
-            //     },
-            // },
-            // courses_workplace: {
-            //     relation: Model.BelongsToOneRelation,
-            //     modelClass: Course,
-            //     join: {
-            //         from: "course_registrations.course_id",
-            //         to: "courses.id",
-            //     },
-            // },
+            courses: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Course,
+                join: {
+                    from: "workplace_coach.course_id",
+                    to: "courses.id",
+                },
+            },
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "workplace_coach.student_id",
+                    to: "students.id",
+                },
+            },
         }
     }
 }

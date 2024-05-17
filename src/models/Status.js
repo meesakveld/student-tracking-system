@@ -32,7 +32,7 @@ class Status extends Model {
     static get relationMappings() {
         return {
             status: {
-                relation: Model.BelongsToOneRelation,
+                relation: Model.HasManyRelation,
                 modelClass: Status,
                 join: {
                     from: "statuses.id",
