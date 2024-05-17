@@ -41,8 +41,8 @@ class ProgrammeLine extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: EducationProgramme,
                 join: {
-                    from: "education_programmes.id",
-                    to: "programme_lines.education_programme_id",
+                    from: "programme_lines.education_programme_id",
+                    to: "education_programmes.id",
                 },
             },
             courses: {

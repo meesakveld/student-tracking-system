@@ -11,7 +11,7 @@ Model.knex(knex);
 // define the NavigationItem model
 class CourseRegistration extends Model {
     static get tableName() {
-        return "course_registrations";
+        return "functions";
     }
 
     static get idColumn() {
@@ -34,22 +34,7 @@ class CourseRegistration extends Model {
 
     static get relationMappings() {
         return {
-            courses: {
-                relation: Model.HasManyRelation,
-                modelClass: Course,
-                join: {
-                    from: "education_programmes.id",
-                    to: "courses.education_programme_id",
-                },
-            },
-            courses_workplace: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Course,
-                join: {
-                    from: "course_registrations.course_id",
-                    to: "courses.id",
-                },
-            },
+            
         }
     }
 }

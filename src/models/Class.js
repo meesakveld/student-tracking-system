@@ -36,8 +36,8 @@ class Class extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: EducationProgramme,
                 join: {
-                    from: "education_programmes.id",
-                    to: "classes.education_programme_id",
+                    from: "classes.education_programme_id",
+                    to: "education_programmes.id",
                 },
             },
         }

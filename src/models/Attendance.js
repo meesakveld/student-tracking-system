@@ -40,24 +40,24 @@ class Attendance extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: Student,
                 join: {
-                    from: "students.id",
-                    to: "attendances.student_id",
+                    from: "attendances.student_id",
+                    to: "students.id",
                 },
             },
             courses: {
                 relation: Model.HasManyRelation,
                 modelClass: Course,
                 join: {
-                    from: "courses.id",
-                    to: "attendances.course_id",
+                    from: "attendances.course_idcourses.id",
+                    to: "courses.id",
                 },
             },
             attendance_types: {
                 relation: Model.HasManyRelation,
                 modelClass: AttendanceType,
                 join: {
-                    from: "attendance_types.id",
-                    to: "attendances.attendance_type_id",
+                    from: "attendances.attendance_type_id",
+                    to: "attendance_types.id",
                 },
             },
         };

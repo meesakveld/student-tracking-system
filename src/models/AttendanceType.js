@@ -34,8 +34,8 @@ class AttendanceType extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Attendance,
                 join: {
-                    from: "attendances.attendance_type_id",
-                    to: "attendance_types.id",
+                    from: "attendance_types.id",
+                    to: "attendances.attendance_type_id",
                 },
             },
         };

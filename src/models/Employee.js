@@ -71,7 +71,7 @@ class Employee extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: Comment,
                 join: {
-                    from: "employee.id",
+                    from: "employees.id",
                     to: "comments.employee_id",
                 },
             },
@@ -79,7 +79,7 @@ class Employee extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: WorkplaceCoach,
                 join: {
-                    from: "employee.id",
+                    from: "employees.id",
                     to: "workplace_coach.employee_id",
                 },
             },
@@ -87,7 +87,7 @@ class Employee extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Course,
                 join: {
-                    from: "user.id",
+                    from: "employees.id",
                     through: {
                         from: "course_registration.account_id",
                         to: "course_registration.course_id",

@@ -34,8 +34,8 @@ class Status extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Status,
                 join: {
-                    from: "statuses_registrations.status_id",
-                    to: "statuses.id",
+                    from: "statuses.id",
+                    to: "statuses_registrations.status_id",
                 },
             },
         }

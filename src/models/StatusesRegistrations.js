@@ -37,8 +37,8 @@ class StatusRegistration extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: Employee,
                 join: {
-                    from: "statuses.id",
-                    to: "statuses_registrations.status_id",
+                    from: "statuses_registrations.status_id",
+                    to: "statuses.id",
                 },
             },
         }

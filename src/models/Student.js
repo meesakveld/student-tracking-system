@@ -44,22 +44,22 @@ class Student extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Attendance,
                 join: {
-                    from: "attendances.student_id",
-                    to: "students.id",
+                    from: "students.id",
+                    to: "attendances.student_id",
                 },
             },
-            labels: {
-                relation: Model.ManyToManyRelation,
-                modelClass: Label,
-                join: {
-                    from: "employees.id",
-                    through: {
-                        from: "course_registration.account_id",
-                        to: "course_registration.course_id",
-                    },
-                    to: "courses.id",
-                },
-            },
+            // labels: {
+            //     relation: Model.ManyToManyRelation,
+            //     modelClass: Label,
+            //     join: {
+            //         from: "employees.id",
+            //         through: {
+            //             from: "course_registration.account_id",
+            //             to: "course_registration.course_id",
+            //         },
+            //         to: "courses.id",
+            //     },
+            // },
             users: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
