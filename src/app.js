@@ -23,6 +23,12 @@ import componentsPage from "./controllers/pages/ComponentsController.js";
 import usersPage from "./controllers/pages/UsersController.js";
 import studentPage from "./controllers/pages/StudentController.js";
 import studentDetailPage from "./controllers/pages/StudentDetailController.js";
+import searchStudentPage from "./controllers/pages/SearchStudentController.js";
+import userPage from "./controllers/pages/UserController.js";
+import resultsPage from "./controllers/pages/ResultsController.js";
+import presencesPage from "./controllers/pages/PresencesController.js";
+
+
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -74,6 +80,10 @@ app.get('/components', componentsPage) // temporary page to show all components
 app.get('/users', usersPage);
 app.get('/student', studentPage);
 app.get('/student/:id', studentDetailPage);
+app.get('/zoek-student', searchStudentPage);
+app.get('/gebruiker', userPage);
+app.get('/resultaten', resultsPage);
+app.get('/aanwezigheden', presencesPage);
 
 // API Routes
 app.get("/api", apiRoutes);

@@ -1,2 +1,24 @@
-
-<div class="body__inner"></div>
+<div class="body__inner">
+    <main>
+        <div class="main__inner search-student">
+            {{> titleSection title="Zoek studenten" }}
+            {{> inputField placeholder="Geef hier een naam in" }}
+            <div class="choices">
+                {{#each choices}}
+                <div class="choice-list">
+                    <h2 class="choice-list__title">{{this.title}}</h2>
+                    {{#each this.options}}
+                    <label class="label--radio">
+                        <input type="radio" name="{{../name}}" value="{{this.value}}">
+                        <span class="choice__title">{{this.label}}</span>
+                        <span class="checkmark"></span>
+                    </label>
+                    {{/each}}
+                </div>
+                {{/each}}
+            </div>
+            <a class="button" href="results.html">Zoeken</a>
+            <button class="button button--dark">Reset</button>
+        </div>
+    </main>
+</div>
