@@ -1,6 +1,7 @@
 import knex from "../lib/Knex.js";
 import { Model } from "objection";
 import Status from "./Status.js";
+import Student from "./Student.js";
 
 // instantiate the model
 Model.knex(knex);
@@ -39,6 +40,14 @@ class StatusRegistration extends Model {
                 join: {
                     from: "statuses_registrations.status_id",
                     to: "statuses.id",
+                },
+            },
+            student: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Student,
+                join: {
+                    from: "statuses_registrations.student_id",
+                    to: "students.id",
                 },
             },
         }

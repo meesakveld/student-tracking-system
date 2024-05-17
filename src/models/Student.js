@@ -93,11 +93,19 @@ class Student extends Model {
                 },
             },
             workplace_mentor: {
-                relation: Model.BelongsToOneRelation,
+                relation: Model.HasOneRelation,
                 modelClass: WorkplaceMentor,
                 join: {
-                    from: "students.diversity_coach_id",
-                    to: "employees.id",
+                    from: "students.id",
+                    to: "workplace_mentors.student_id",
+                },
+            },
+            workplace_coach: {
+                relation: Model.HasOneRelation,
+                modelClass: WorkplaceMentor,
+                join: {
+                    from: "students.id",
+                    to: "workplace_coach.student_id",
                 },
             },
             deregistrer: {
@@ -107,7 +115,15 @@ class Student extends Model {
                     from: "students.id",
                     to: "deregisters.student_id",
                 },
-            }   
+            },
+            status_registration: {
+                relation: Model.HasManyRelation,
+                modelClass: User,
+                join: {
+                    from: "students.id",
+                    to: "statuses_registrations.student_id",
+                },
+            }, 
         }
     }
 }
