@@ -2,7 +2,7 @@
 <div class="body__inner">
     <main>
         <div class="main__inner">
-            {{> titleSection title="Alle componenten" blueBg=true }}
+            {{> titleSection title="Alle componenten" blueBg=true userInfo=true }}
             {{> titleSection title="Alle componenten" }}
 
             {{> button label="Gereed" }}
@@ -15,114 +15,13 @@
 
             <textarea name="" id="" placeholder="Hier kan je een commentaar achterlaten..."></textarea>
 
+            {{> labelList labels=labels }}
+
+            {{> choicesLists choiceLists=choiceLists }}
+
+            {{> dropdown dropdown }}
+
             {{!-- WORK IN PROGRESS --}}
-            <div class="labels-list">
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-            </div>
-
-            <div class="choices">
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <div class="dropdown-content">
-                    <select>
-                        <option value="vak1">Programmalijn-1</option>
-                        <option value="vak2">Programmalijn-2</option>
-                        <option value="vak3">Programmalijn-3</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="dropdown--multi">
-                <button class="dropdown-btn">Vakken</button>
-                <div class="dropdown-content">
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionA">
-                        <label for="optionA">Vak</label><br>
-                    </div>
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionB">
-                        <label for="optionB">Vak</label><br>
-                    </div>
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionC">
-                        <label for="optionC">Vak</label><br>
-                    </div>
-                </div>
-            </div>
 
             <form class="filters">
                 <div class="filter">

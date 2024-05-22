@@ -1,14 +1,15 @@
+/**
+ * ------------------------------
+ *        PRESENCES PAGE
+ * ------------------------------
+*/
+
 export const presencesPage = (req, res) => {
-    const user = {
-        name: "Philippe De Pauw",
-        role: "Admin"
-    };
+    const firstname = "Philippe";
+    const lastname = "De Pauw - Waterschoot";
+    const role = "Admin";
 
-    const year = "2023-2024";
-    const classGroup = "PGM1-C";
-    const course = "IT Business";
-    const teacher = "Isabelle Volckaert";
-
+    // From the selected class group, we have the following students:
     const students = [
         { name: "Mees Akveld", present: true, inactive: false },
         { name: "Benoît Biraguma", present: false, inactive: true },
@@ -16,7 +17,16 @@ export const presencesPage = (req, res) => {
         { name: "Tristan De Ridder", present: true, inactive: false }
     ];
 
-    res.render('presences', { user, year, class: classGroup, course, teacher, students });
+    const data = {
+        user: {
+            firstname,
+            lastname,
+            role,
+        },
+        students,
+    };
+
+    res.render('presences', data);
 };
 
 export default presencesPage;

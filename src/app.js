@@ -76,22 +76,22 @@ app.get("/logout", auth.logout);
 
 // —— Private routes ——
 app.get('/', dashboardPage);
-app.get('/components', componentsPage) // temporary page to show all components
 app.get('/users', usersPage);
-app.get('/student', studentPage);
-app.get('/student/:id', studentDetailPage);
-app.get('/zoek-student', searchStudentPage);
-app.get('/gebruiker', userPage);
-app.get('/resultaten', resultsPage);
-app.get('/aanwezigheden', presencesPage);
+app.get('/users/:id', userPage);
+// to be checked because a user can be a student/teacher/admin but the studentPage only exists for students so what should be the route
+app.get('/student/:id', studentPage);
+app.get('/student/:id/:detail', studentDetailPage);
+app.get('/search-student', searchStudentPage);
+app.get('/results', resultsPage);
+app.get('/presences', presencesPage);
+// temporary page to show all components leave it here for now
+app.get('/components', componentsPage);
 
 // API Routes
 app.get("/api", apiRoutes);
 
 // 404 Route
 app.use('*', (req, res) => { res.redirect("/"); });
-
-app.get('/components', componentsPage);
 
 /**
  * ------------------------------

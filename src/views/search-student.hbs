@@ -1,8 +1,8 @@
+{{!-- Search student --}}
 <div class="body__inner">
     <main>
         <div class="main__inner search-student">
             {{> titleSection title="Zoek studenten" }}
-            {{> inputField placeholder="Geef hier een naam in" }}
             <div class="choices">
                 {{#each choices}}
                 <div class="choice-list">
@@ -17,7 +17,7 @@
                 </div>
                 {{/each}}
             </div>
-            <a class="button" href="results.html">Zoeken</a>
+            <a class="button" href="/results">Zoeken</a>
             <button class="button button--dark">Reset</button>
         </div>
     </main>

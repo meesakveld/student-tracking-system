@@ -5,10 +5,9 @@
  */
 
 export const userPage = (req, res) => {
-    const user = {
-        name: "Philippe De Pauw",
-        role: "Admin"
-    };
+    const firstname = "Philippe";
+    const lastname = "De Pauw - Waterschoot";
+    const role = "Admin";
 
     const student = {
         firstName: "Mees",
@@ -24,7 +23,16 @@ export const userPage = (req, res) => {
         labels: ["Ambassadeur", "Stuver"]
     };
 
-    res.render('user', { user, student });
+    const data = {
+        user: {
+            firstname,
+            lastname,
+            role,
+        },
+        student,
+    };
+
+    res.render('user', data);
 };
 
 export default userPage;

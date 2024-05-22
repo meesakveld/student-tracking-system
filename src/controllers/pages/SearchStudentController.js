@@ -5,10 +5,9 @@
 */
 
 export const searchStudentPage = (req, res) => {
-    const user = {
-        name: "Philippe De Pauw",
-        role: "Admin"
-    };
+    const firstname = "Philippe";
+    const lastname = "De Pauw - Waterschoot";
+    const role = "Admin";
 
     const choices = [
         {
@@ -47,7 +46,16 @@ export const searchStudentPage = (req, res) => {
         }
     ];
 
-    res.render('search-student', { user, choices });
+    const data = {
+        user: {
+            firstname,
+            lastname,
+            role,
+        },
+        choices,
+    };
+
+    res.render('search-student', data);
 };
 
 export default searchStudentPage;

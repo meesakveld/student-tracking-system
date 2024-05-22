@@ -1,10 +1,8 @@
+{{!-- User --}}
 <div class="body__inner">
     <main>
         <div class="main__inner user">
-            <div class="title-section title-section--bg">
-                {{> button link="results.html" label="<" dark=true}} <h1>Informatie over: {{student.firstName}}
-                    {{student.lastName}} - {{student.class}}</h1>
-            </div>
+            {{> titleSection title='Informatie over: ' student=student blueBg=true }}
             <section class="lightgrey-bg">
                 <div class="user-info">
                     <div class="user-info__left">

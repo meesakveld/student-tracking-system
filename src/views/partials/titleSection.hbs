@@ -6,7 +6,7 @@
 {{/if}}
     {{!-- !! Link must be to the previous page !! --}}
     {{> button label="<" dark=true link="/" }}
-    <h1>{{ title }}</h1>
+    <h1>{{ title }} {{#if student }} {{student.firstName}} {{student.lastName}} - {{student.class}} {{/if}}</h1>
     {{#if userInfo }}
     <a class="button button--icon" href="/user">
         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1"

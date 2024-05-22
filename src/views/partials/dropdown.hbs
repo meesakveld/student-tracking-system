@@ -1,0 +1,9 @@
+{{!-- Dropdown partials --}}
+<div class="dropdown">
+    <label class="dropdown__label" for="dropdown">{{labelText}}</label>
+    <select class="dropdown__options" id="dropdown">
+        {{#each options}}
+            <option value="{{value}}">{{label}}</option>
+        {{/each}}
+    </select>
+</div>

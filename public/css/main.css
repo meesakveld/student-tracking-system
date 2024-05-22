@@ -346,17 +346,6 @@ input:hover {
     padding-right: 1rem;
 }
 
-/* ------ Dropdown ------ */
-
-.dropdown-content__box {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.dropdown-btn {
-    margin-bottom: 0.4rem;
-}
-
 /* ------ Filters ------ */
 
 .filters {
