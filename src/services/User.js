@@ -36,8 +36,6 @@ export const getUserById = async (id, withGraphFetched = '[]') => {
     // Get the user by id
     const user = await User.query().findById(id).withGraphFetched(withGraphFetched);
 
-    console.log(user);
-
     if (!user) {
         throw new Error('User not found');
     }
