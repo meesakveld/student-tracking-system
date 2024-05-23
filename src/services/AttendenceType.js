@@ -66,7 +66,7 @@ export const createAttendanceType = async (attendanceType) => {
     }
 
     // Check if the attendance type already exists
-    const existingAttendanceType = await AttendanceType.query().findOne({ name: attendanceType.name });
+    const existingAttendanceType = await AttendanceType.query().findOne({ title: attendanceType.title });
 
     if (existingAttendanceType) {
         throw new Error('Attendance type already exists');
