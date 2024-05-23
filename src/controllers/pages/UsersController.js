@@ -55,41 +55,41 @@ export const usersPage = (req, res) => {
     ];
 
     const usersTable = {
-        headers: ["Naam", "Rol", "Opleiding", "Status", "Vervaldatum"],
+        headers: ["Naam", "Functies", "Opleiding", "Status"],
         rows: [
             {
                 statusClass: "active",
-                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief", "-"],
+                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief"],
                 deleteButton: true,
                 editButton: true
             },
             {
                 statusClass: "active",
-                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief", "-"],
+                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief"],
                 deleteButton: true,
                 editButton: true
             },
             {
                 statusClass: "inactive",
-                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief", "30/04/2024"],
+                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief"],
                 deleteButton: true,
                 editButton: true
             },
             {
                 statusClass: "active",
-                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief", "-"],
+                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief"],
                 deleteButton: true,
                 editButton: true
             },
             {
                 statusClass: "active",
-                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief", "-"],
+                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief"],
                 deleteButton: true,
                 editButton: true
             },
             {
                 statusClass: "inactive",
-                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief", "30/04/2024"],
+                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief"],
                 deleteButton: true,
                 editButton: true
             }

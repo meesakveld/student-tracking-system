@@ -6,7 +6,10 @@
             {{> button label="Voeg een gebruiker toe" link="#" }}
             {{> filters filters=userFilters }}
             {{> inputField placeholder="Zoek op naam" }}
-            {{> table headers=usersTable.headers rows=usersTable.rows }}
+            <div class="table-container">
+                {{> table headers=usersTable.headers rows=usersTable.rows }}
+            </div>
+
         </div>
     </main>
 </div>

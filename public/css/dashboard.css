@@ -15,6 +15,12 @@
     padding: 5rem 0;
 }
 
+@media (max-width:  29.063rem) {
+    .dashboard__title {
+        padding: 5rem 5rem;
+    }
+}
+
 .dashboard__links {
     background-color: var(--lightblue);
     padding: 2.5rem 4rem;

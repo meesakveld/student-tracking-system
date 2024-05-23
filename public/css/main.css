@@ -44,6 +44,7 @@ body {
     font-weight: normal;
     color: var(--dark);
     background-color: white;
+    overflow-x: hidden;
 }
 
 *::selection {
@@ -80,7 +81,7 @@ header {
 
 @media (max-width: 41.25rem) {
     .header__inner .user {
-        display: none;
+        font-size: 0;
     }
 
     .user::after {
@@ -102,6 +103,20 @@ header {
 
 .main__inner {
     padding: 5rem;
+}
+
+@media (max-width: 42.5rem) {
+    .main__inner {
+        padding: 3.8rem;
+    }
+
+}
+
+@media (max-width: 37.5rem) {
+    .main__inner {
+        padding: 2rem;
+    }
+
 }
 
 /* ------ For the lightgrey bg section ------ */
@@ -150,7 +165,7 @@ a:hover {
  * ==============================
  */
 
- /* ------ Logo (big) ------ */
+/* ------ Logo (big) ------ */
 
 .logo-sv--big {
     max-width: 14rem;
@@ -370,6 +385,13 @@ input:hover {
     border: 1px solid var(--grey);
 }
 
+@media (max-width: 49.375rem) {
+    .filters {
+        flex-direction: column;
+        padding: 2rem;
+    }
+}
+
 .filter {
     display: flex;
     align-items: center;
@@ -378,12 +400,26 @@ input:hover {
 
 /* ------ Table ------ */
 
+
+.table-container {
+    width: 100%;
+    overflow-x: scroll;
+}
+
 table {
     width: 100%;
     padding-bottom: 2rem;
 }
 
-th, td {
+@media (max-width: 76.25rem) {
+    table {
+        width: 70rem;
+    }
+
+}
+
+th,
+td {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px solid var(--grey);
