@@ -19,7 +19,7 @@ export default async (req, res, next) => {
         }
 
         const user = await User.query().findById(userData.id);
-        if (!user) {
+        if (!user && req.path !== '/login') {
             return res.redirect('/login');
         }
 
