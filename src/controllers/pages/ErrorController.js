@@ -5,12 +5,21 @@
 */
 
 export const errorPage = (req, res) => {
+    const firstname = "Philippe";
+    const lastname = "De Pauw - Waterschoot";
+    const role = "Admin";
+
     const data = {
-        error: 'Not Found',
-        errorCode: 404,
-        message: 'De pagina die je zoekt bestaat niet.',
-        layout: 'base',
+        user: {
+            firstname,
+            lastname,
+            role,
+        },
+        error: {
+            code: 404,
+            message: 'Pagina niet gevonden.',
+        },
     };
 
-    res.status(data.errorCode).render('error', data);
+    res.status(data.error.code).render('error', data);
 };

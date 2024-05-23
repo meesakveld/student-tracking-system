@@ -1,21 +1,22 @@
 {{!-- Page not found --}}
-<div class="body__inner body--gradient">
-    <main>
-        <div class="main__inner main__inner--centered">
-            <div class="error">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <g stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".408">
-                        <path
-                            d="M12 23.25c6.213 0 11.25-5.037 11.25-11.25S18.213.75 12 .75.75 5.787.75 12 5.787 23.25 12 23.25Z" />
-                        <path
-                            d="M14.518 9.029a2.25 2.25 0 0 0 4.222 0M5.261 9.031a2.25 2.25 0 0 0 4.22 0M5.988 17.676a6.752 6.752 0 0 1 12.021 0" />
-                    </g>
-                </svg>
-                <div class="error__right">
-                    <h1>401</h1>
-                    <h2>Authorisatie vereist. <br> Gelieve in te loggen.</h2>
-                </div>
+<main>
+    <div class="main__inner">
+        <section class="error">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <g stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.7">
+                    <path
+                        d="M12 23.25c6.213 0 11.25-5.037 11.25-11.25S18.213.75 12 .75.75 5.787.75 12 5.787 23.25 12 23.25Z" />
+                    <path
+                        d="M14.518 9.029a2.25 2.25 0 0 0 4.222 0M5.261 9.031a2.25 2.25 0 0 0 4.22 0M5.988 17.676a6.752 6.752 0 0 1 12.021 0" />
+                </g>
+            </svg>
+            <div class="error__right">
+                <h1>{{error.code}}</h1>
+                <h2>{{error.message}}</h2>
+                {{#if user}}
+                    {{> button label="Terug naar home" link="/"}}
+                {{/if}}
             </div>
-        </div>
-    </main>
-</div>
+        </section>
+    </div>
+</main>
