@@ -1,4 +1,4 @@
-import Class  from '../models/Class.js';
+import Class from '../models/Class.js';
 
 
 /**
@@ -33,34 +33,34 @@ export const getClassById = async (id, withGraphFetched = '[]') => {
     }
 
     // get the class by id
-    const clas = await Class.query().findById(id).withGraphFetched(withGraphFetched);
+    const classItem = await Class.query().findById(id).withGraphFetched(withGraphFetched);
 
     // check if class is found
-    if (!clas) {
+    if (!classItem) {
         throw new Error('Class not found');
     }
 
-    return clas;
+    return classItem;
 }
 
 
 /**
  * Creates a new class.
- * @param {Object} clas - The class object to be created.
- * @param {string} clas.name - The name of the class.
- * @param {string} clas.education_programme_id - The ID of the education programme associated with the class.
+ * @param {Object} classItem - The class object to be created.
+ * @param {string} classItem.name - The name of the class.
+ * @param {string} classItem.education_programme_id - The ID of the education programme associated with the class.
  * @returns {Promise<Object>} - A promise that resolves to the newly created class object.
  * @throws {Error} - If the class object is not provided, or if it is missing required fields, or if the class already exists.
  */
-export const createClass = async (clas) => {
+export const createClass = async (classItem) => {
 
     // check if class is provided
-    if (!clas) {
+    if (!classItem) {
         throw new Error('Class is required');
     }
 
     // check if class is missing required fields
-    if (!clas.name || !clas.education_programme_id) {
+    if (!classItem.name || !classItem.education_programme_id) {
         throw new Error('Class is missing required fields');
     }
 
@@ -79,14 +79,14 @@ export const createClass = async (clas) => {
 /**
  * Updates a class with the provided id.
  * @param {string} id - The id of the class to update.
- * @param {object} clas - The updated class object.
+ * @param {object} classItem - The updated class object.
  * @returns {Promise<object>} - A promise that resolves to the updated class object.
  * @throws {Error} - If id is not provided or if the class is not found.
  */
-export const updateClass = async (id, clas) => {
+export const updateClass = async (id, classItem) => {
 
     // check if id and clas are provided
-    if (!id || !clas) {
+    if (!id || !classItem) {
         throw new Error('Id and class is required');
     }
 
