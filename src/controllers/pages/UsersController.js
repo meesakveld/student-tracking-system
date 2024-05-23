@@ -15,18 +15,18 @@ export const usersPage = (req, res) => {
             name: "filterRole",
             labelText: "Filter op rol:",
             options: [
-                { value: "all", label: "Alle rollen" },
-                { value: "teachers", label: "Docenten" },
-                { value: "coaches", label: "Leercoaches" },
-                { value: "teamleaders", label: "Teamleiders" }
+                { value: "employee", label: "Alle rollen" },
+                { value: "employee", label: "Medewerker" },
+                { value: "student", label: "Student" },
+                { value: "outsider", label: "Externe" },
             ]
         },
         {
             id: "filter2",
-            name: "filterRole",
-            labelText: "Filter op rol:",
+            name: "filterFunction",
+            labelText: "Filter op functie:",
             options: [
-                { value: "all", label: "Alle rollen" },
+                { value: "all", label: "Alle functies" },
                 { value: "teachers", label: "Docenten" },
                 { value: "coaches", label: "Leercoaches" },
                 { value: "teamleaders", label: "Teamleiders" }
@@ -47,7 +47,7 @@ export const usersPage = (req, res) => {
             name: "filterStatus",
             labelText: "Filter op status:",
             options: [
-                { value: "all", label: "Alle status" },
+                { value: "all", label: "Alle statussen" },
                 { value: "active", label: "Actief" },
                 { value: "inactive", label: "Inactief" }
             ]

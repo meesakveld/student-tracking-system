@@ -10,7 +10,7 @@ export const teachersPage = (req, res) => {
     const role = "Admin";
 
     const teachersTable = {
-        headers: ["Naam", "Rol", "Opleiding", "Status"],
+        headers: ["Naam", "Rollen", "Opleiding", "Status"],
         rows: [
             {
                 statusClass: "active",
