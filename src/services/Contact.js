@@ -75,7 +75,7 @@ export const createContact = async (contact) => {
         throw new Error('Contact already exists');
     }
 
-    return await Contact.query().insertGraph(contact);
+    return await Contact.query().insert(contact);
 }
 
 
