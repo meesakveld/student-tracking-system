@@ -155,5 +155,3 @@ export const componentsPage = (req, res) => {
 
     res.render("components", data);
 };
-
-export default componentsPage;

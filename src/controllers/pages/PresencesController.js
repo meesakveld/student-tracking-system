@@ -54,5 +54,3 @@ export const presencesPage = (req, res) => {
 
     res.render('presences', data);
 };
-
-export default presencesPage;

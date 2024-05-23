@@ -50,5 +50,3 @@ export const resultsPage = (req, res) => {
 
     res.render('results', data);
 };
-
-export default resultsPage;

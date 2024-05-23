@@ -57,5 +57,3 @@ export const searchStudentPage = (req, res) => {
 
     res.render('search-student', data);
 };
-
-export default searchStudentPage;
