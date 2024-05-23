@@ -93,11 +93,6 @@ export const updateAttendanceType = async (id, attendanceType) => {
         throw new Error('Id and attendance type are required');
     }
 
-    // Check if attendance type is provided
-    if (!attendanceType) {
-        throw new Error('Attendance type is required');
-    }
-
     // Check if the attendance type exists
     const existingAttendanceType = await AttendanceType.query().findById(id);
 
