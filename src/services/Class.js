@@ -64,14 +64,8 @@ export const createClass = async (classItem) => {
         throw new Error('Class is missing required fields');
     }
 
-    const existingClass = await Class.query().findOne({ name: clas.name });
-
-    if (existingClass) {
-        throw new Error('Class already exists');
-    }
-
     // create the class
-    const newClass = await Class.query().insert(clas);
+    const newClass = await Class.query().insert(classItem);
 
     return newClass;
 }
@@ -98,7 +92,7 @@ export const updateClass = async (id, classItem) => {
     }
 
     // Update the user
-    const updatedClass = Class.query().findById(id).patch(user);
+    const updatedClass = Class.query().findById(id).patch(classItem);
 
     return updatedClass;
 
