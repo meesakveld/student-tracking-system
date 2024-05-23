@@ -89,13 +89,8 @@ export const createStatusRegistration = async (statusRegistration) => {
 export const updateStatusRegistration = async (id, statusRegistration) => {
 
     // Check if id is provided
-    if (!id) {
-        throw new Error('Id is required');
-    }
-
-    // Check if status registration is provided
-    if (!statusRegistration) {
-        throw new Error('Status registration is required');
+    if (!id || !statusRegistration) {
+        throw new Error('Id and status registration are required');
     }
 
     // Check if status registration has required fields
