@@ -69,8 +69,9 @@ export const createUser = async (user) => {
 
     // Check if the user already exists
     const existingUser = User.query().findOne({ email: user.email });
+    const existingUsername = User.query().findOne({ username: user.username });
 
-    if (existingUser) {
+    if (existingUser || existingUsername) {
         throw new Error('User already exists');
     }
     
