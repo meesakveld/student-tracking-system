@@ -96,8 +96,8 @@ export const updateContact = async (id, contact) => {
     // Check if contact exists
     const existingContact = await Contact.query().findById(id);
 
-    if (existingContact) {
-        throw new Error('Contact already exists');
+    if (!existingContact) {
+        throw new Error('Contact not found');
     }
 
     // Update the contact
@@ -128,7 +128,7 @@ export const deleteContact = async (id) => {
     }
 
     // Delete the contact
-    await Contact.query().deleteById(id);
+    const deletedContact = await Contact.query().deleteById(id);
 
-    return existingContact;
+    return deletedContact;
 }
