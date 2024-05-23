@@ -78,6 +78,16 @@ header {
     color: var(--dark);
 }
 
+@media (max-width: 41.25rem) {
+    .header__inner .user {
+        display: none;
+    }
+
+    .user::after {
+        display: inline-block;
+    }
+}
+
 .header__inner .user::after {
     content: "";
     background-image: url('/assets/images/profile.svg');
@@ -508,4 +518,29 @@ input[type="date"] {
 
 .star--blue {
     fill: var(--blue);
+}
+
+/* ------ Error ------ */
+
+.error {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.error svg {
+    width: 10rem;
+}
+
+.error__right {
+    display: flex;
+    flex-direction: column;
+}
+
+.error__right h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
 }
