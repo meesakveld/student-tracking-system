@@ -29,8 +29,7 @@ import resultsPage from "./controllers/pages/ResultsController.js";
 import presencesPage from "./controllers/pages/PresencesController.js";
 import pageNotFound from "./controllers/pages/PageNotFoundController.js";
 import unauthorizedPage from "./controllers/pages/UnauthorizedController.js";
-
-
+import teachersPage from "./controllers/pages/TeachersController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -89,6 +88,7 @@ app.get('/student/:id/:detail', studentDetailPage);
 app.get('/search-student', searchStudentPage);
 app.get('/results', resultsPage);
 app.get('/presences', presencesPage);
+app.get('/teachers', teachersPage);
 // temporary page to show all components leave it here for now
 app.get('/components', componentsPage);
 
