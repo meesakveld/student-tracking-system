@@ -63,20 +63,14 @@ app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
-// —— Public routes | Error routes ——
-app.get("/not-found", ctr.errorPage);
-app.get("/unauthorized", ctr.errorPage);
-
 // —— Private routes ——
 app.use("/", privateRoutes)
-
-// temporary page to show all components leave it here for now
-app.get('/components', ctr.componentsPage);
+app.get('/components', ctr.componentsPage); // temporary page to show all components leave it here for now
 
 // —— API Routes ——
 app.use("/api", apiRoutes);
 
-// —— Error routes ——
+// —— Error route ——
 app.use(ctr.errorPage);
 
 /**
