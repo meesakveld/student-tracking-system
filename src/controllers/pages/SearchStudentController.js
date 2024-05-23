@@ -20,6 +20,14 @@ export const searchStudentPage = (req, res) => {
             ]
         },
         {
+            name: "programme",
+            title: "Kies een opleiding:",
+            choices: [
+                { value: "Graduaat Programmeren", label: "Graduaat Programmeren" },
+                { value: "Digitale Vormgeving", label: "Digitale Vormgeviing" },
+            ]
+        },
+        {
             name: "class",
             title: "Kies een klas:",
             choices: [

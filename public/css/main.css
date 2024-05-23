@@ -333,6 +333,11 @@ input:hover {
     min-width: 20rem;
 }
 
+.choice-list--locked {
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
 .choice-list__title {
     padding-bottom: 1rem;
 }
