@@ -36,14 +36,6 @@ export const searchStudentPage = (req, res) => {
                 { value: "IT Communication", label: "IT Communication" }
             ]
         },
-        {
-            name: "teacher",
-            title: "Kies een docent:",
-            choices: [
-                { value: "Isabelle Volckaert", label: "Isabelle Volckaert" },
-                { value: "Philippe De Pauw", label: "Philippe De Pauw" }
-            ]
-        }
     ];
 
     const data = {
