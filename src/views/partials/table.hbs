@@ -1,0 +1,68 @@
+{{!-- Table --}}
+<table class="users">
+    <thead>
+        <tr>
+            {{#each headers}}
+            <th>{{this}}</th>
+            {{/each}}
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each rows}}
+        <tr class="{{statusClass}}">
+            {{#if checkbox }}
+            <td class="small-column"><input type="checkbox" checked></td>
+            {{/if}}
+            {{#each cols}}
+            <td>{{this}}</td>
+            {{/each}}
+            <td class="actions">
+                {{#if infoButton }}
+                <a class="button button--icon" href="/users/1">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                        <defs />
+                        <path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z"
+                            style="stroke-width:0;fill:none" />
+                        <path d="M11 11h2v6.1h-2zM11 6.8h2v2h-2z" class="cls-2" />
+                        <path d="M1.4 22.6h21.2V1.4H1.4v21.2ZM3.3 3.3h17.3v17.3H3.3V3.3Z" class="cls-2" />
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if studentButton }}
+                <a class="button button--icon" href="/student/1">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                        <defs />
+                        <path
+                            d="M23.2 2.3H.8v16.8H5v3.5h2.7l5.6-3.5h9.9V2.3ZM2.9 16.9V4.4h18.2V17h-8.6l-5.3 3.3V17H2.9Z"
+                            style="fill-rule:evenodd;fill:#000;stroke-width:0" />
+                        <path d="M5.6 12h7.7v2H5.6zM5.6 6.9h12.8v2H5.6z" class="cls-1" />
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if editButton}}
+                <a class="button button--icon" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
+                        <path
+                            d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                            style="fill:#000;stroke-width:0" />
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if deleteButton}}
+                <button class="button button--icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1"
+                        viewBox="0 0 1024 1024">
+                        <defs />
+                        <path
+                            d="M716.1 206.6V89.1H324.4v117.5H128.5V285H912v-78.4H716.1Zm-313.4 0v-39.1h235v39.1h-235Zm354.9 660.3H282.9l-36.9-590-78.3 4.8 41.5 663.5h622l41.5-663.5-78.3-4.8-36.9 590Z"
+                            class="cls-1" />
+                        <path d="M402.7 357.6h78.4v470.1h-78.4V357.6Zm156.7 0h78.4v470.1h-78.4V357.6Z" class="cls-1" />
+                    </svg>
+                </button>
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

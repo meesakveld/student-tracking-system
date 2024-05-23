@@ -22,6 +22,15 @@ import welcomePage from './controllers/pages/WelcomeController.js';
 import dashboardPage from "./controllers/pages/DashboardController.js";
 import componentsPage from "./controllers/pages/ComponentsController.js";
 import usersPage from "./controllers/pages/UsersController.js";
+import studentPage from "./controllers/pages/StudentController.js";
+import studentDetailPage from "./controllers/pages/StudentDetailController.js";
+import searchStudentPage from "./controllers/pages/SearchStudentController.js";
+import userPage from "./controllers/pages/UserController.js";
+import resultsPage from "./controllers/pages/ResultsController.js";
+import presencesPage from "./controllers/pages/PresencesController.js";
+import pageNotFound from "./controllers/pages/PageNotFoundController.js";
+import unauthorizedPage from "./controllers/pages/UnauthorizedController.js";
+import teachersPage from "./controllers/pages/TeachersController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
@@ -66,18 +75,29 @@ app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
+// —— Public routes | Error routes ——
+app.get(pageNotFound);
+app.get(unauthorizedPage);
 
 // —— Private routes ——
-app.get('/', jwtAuth ,dashboardPage);
-app.get('/users', jwtAuth, usersPage);
+app.get('/', dashboardPage);
+app.get('/users', usersPage);
+app.get('/users/:id', userPage);
+// to be checked because a user can be a student/teacher/admin but the studentPage only exists for students so what should be the route
+app.get('/student/:id', studentPage);
+app.get('/student/:id/:detail', studentDetailPage);
+app.get('/search-student', searchStudentPage);
+app.get('/results', resultsPage);
+app.get('/presences', presencesPage);
+app.get('/teachers', teachersPage);
+// temporary page to show all components leave it here for now
+app.get('/components', componentsPage);
 
 // API Routes
 app.use("/api", apiRoutes);
 
 // 404 Route
-// app.use('*', (req, res) => { res.redirect("/"); });
-
-app.get('/components', componentsPage);
+app.use('*', pageNotFound);
 
 /**
  * ------------------------------

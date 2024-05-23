@@ -15,14 +15,27 @@
     padding: 5rem 0;
 }
 
+@media (max-width:  29.063rem) {
+    .dashboard__title {
+        padding: 5rem 5rem;
+    }
+}
+
 .dashboard__links {
     background-color: var(--lightblue);
-    padding: 2.5rem 8rem;
+    padding: 2.5rem 4rem;
     display: flex;
     gap: 3rem;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 5rem;
+    flex-direction: row;
+}
+
+@media (max-width: 76.188rem) {
+    .dashboard__links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 .dashboard__link {
@@ -37,4 +50,20 @@
     padding: 10rem 0;
     max-width: 25rem;
     width: 100%;
+}
+
+@media (max-width: 33.063rem) {
+    .dashboard__link {
+        padding: 8rem 0;
+        max-width: 21rem;
+    }
+
+}
+
+@media (max-width: 29.063rem) {
+    .dashboard__link {
+        padding: 4.7rem 32px;
+        max-width: 14.5rem;
+    }
+
 }

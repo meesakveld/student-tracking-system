@@ -1,12 +1,11 @@
 {{!-- Components --}}
 <div class="body__inner">
-    {{> header }}
     <main>
         <div class="main__inner">
-            {{> titleSection title="Alle componenten" blueBg=true }}
+            {{> titleSection title="Alle componenten" blueBg=true userInfo=true }}
             {{> titleSection title="Alle componenten" }}
 
-            {{> button label="Gereed" }}
+            {{> button label="Gereed" link="#" }}
             {{> button label="Terug" dark=true }}
 
             {{> inputField viewOnly=true value="Mees Akveld" }}
@@ -15,205 +14,19 @@
             {{> schoolLabel value="Stuver"}}
 
             <textarea name="" id="" placeholder="Hier kan je een commentaar achterlaten..."></textarea>
+            {{> textareaSection label=section.title value=section.content }}
 
-            {{!-- WORK IN PROGRESS --}}
-            <div class="labels-list">
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-                <div class="label">
-                    <input type="checkbox">
-                    <p class="label__title">Label</p>
-                </div>
-            </div>
+            {{> labelList labels=labels }}
 
-            <div class="choices">
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div class="choice-list">
-                    <h2 class="choice-list__title">Kies een klas:</h2>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice1">
-                        <span class="choice__title">Class 1</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice2">
-                        <span class="choice__title">Class 2</span>
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="label--radio">
-                        <input type="radio" name="choice" value="choice3">
-                        <span class="choice__title">Class 3</span>
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            </div>
+            {{> choicesLists choiceLists=choiceLists }}
 
-            <div class="dropdown">
-                <div class="dropdown-content">
-                    <select>
-                        <option value="vak1">Programmalijn-1</option>
-                        <option value="vak2">Programmalijn-2</option>
-                        <option value="vak3">Programmalijn-3</option>
-                    </select>
-                </div>
-            </div>
+            {{> dropdown dropdown }}
 
-            <div class="dropdown--multi">
-                <button class="dropdown-btn">Vakken</button>
-                <div class="dropdown-content">
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionA">
-                        <label for="optionA">Vak</label><br>
-                    </div>
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionB">
-                        <label for="optionB">Vak</label><br>
-                    </div>
-                    <div class="dropdown-content__box">
-                        <input type="checkbox" value="optionC">
-                        <label for="optionC">Vak</label><br>
-                    </div>
-                </div>
-            </div>
+            {{> filters filters=filters }}
 
-            <form class="filters">
-                <div class="filter">
-                    <label for="filter">Filter op rol:</label>
-                    <select name="filter" id="filter">
-                        <option value="all">Alle rollen</option>
-                        <option value="teachers">Docenten</option>
-                        <option value="coaches">Leercoaches</option>
-                        <option value="teamleaders">Teamleiders</option>
-                    </select>
-                </div>
-                <div class="filter">
-                    <label for="filter">Filter op rol:</label>
-                    <select name="filter" id="filter">
-                        <option value="all">Alle rollen</option>
-                        <option value="teachers">Docenten</option>
-                        <option value="coaches">Leercoaches</option>
-                        <option value="teamleaders">Teamleiders</option>
-                    </select>
-                </div>
-                <div class="filter">
-                    <label for="filter">Filter op opleiding:</label>
-                    <select name="filter" id="filter">
-                        <option value="all">Alle opleidingen</option>
-                        <option value="programming">Programmeren</option>
-                        <option value="design">DVG</option>
-                    </select>
-                </div>
-                <div class="filter">
-                    <label for="filter">Filter op status:</label>
-                    <select name="filter" id="filter">
-                        <option value="all">Alle status</option>
-                        <option value="active">Actief</option>
-                        <option value="inactive">Inactief</option>
-                    </select>
-                </div>
-                <div>
-                    <button class="button">Filteren</button>
-                    <button class="button button--dark">Reset</button>
-                </div>
-            </form>
+            {{> table headers=usersTable.headers rows=usersTable.rows }}
 
-            <table class="users">
-                <thead>
-                    <tr>
-                        <th>Naam</th>
-                        <th>Opleiding</th>
-                        <th>Status</th>
-                        <th>Acties</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Expression of the students (name, course, status and link to student page) -->
-                    <tr>
-                        <td>Mees Akveld</td>
-                        <td>Programmeren</td>
-                        <td class="active">Actief</td>
-                        <td class="actions">
-                            <a class="button button--icon" href="user.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z" style="stroke-width:0;fill:none"/><path d="M11 11h2v6.1h-2zM11 6.8h2v2h-2z" class="cls-2"/><path d="M1.4 22.6h21.2V1.4H1.4v21.2ZM3.3 3.3h17.3v17.3H3.3V3.3Z" class="cls-2"/></svg></a>
-                            <a class="button button--icon" href="student.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M23.2 2.3H.8v16.8H5v3.5h2.7l5.6-3.5h9.9V2.3ZM2.9 16.9V4.4h18.2V17h-8.6l-5.3 3.3V17H2.9Z" style="fill-rule:evenodd;fill:#000;stroke-width:0"/><path d="M5.6 12h7.7v2H5.6zM5.6 6.9h12.8v2H5.6z" class="cls-1"/></svg></a>
-                        </td>
-                    </tr>
-                    <tr class="inactive">
-                        <td>Benoît Biraguma</td>
-                        <td>Programmeren</td>
-                        <td class="inactive">Inactief</td>
-                        <td class="actions">
-                            <a class="button button--icon" href="user.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z" style="stroke-width:0;fill:none"/><path d="M11 11h2v6.1h-2zM11 6.8h2v2h-2z" class="cls-2"/><path d="M1.4 22.6h21.2V1.4H1.4v21.2ZM3.3 3.3h17.3v17.3H3.3V3.3Z" class="cls-2"/></svg></a>
-                            <a class="button button--icon" href="student.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M23.2 2.3H.8v16.8H5v3.5h2.7l5.6-3.5h9.9V2.3ZM2.9 16.9V4.4h18.2V17h-8.6l-5.3 3.3V17H2.9Z" style="fill-rule:evenodd;fill:#000;stroke-width:0"/><path d="M5.6 12h7.7v2H5.6zM5.6 6.9h12.8v2H5.6z" class="cls-1"/></svg></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ella Jekale</td>
-                        <td>Programmeren</td>
-                        <td class="active">Actief</td>
-                        <td class="actions">
-                            <a class="button button--icon" href="user.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z" style="stroke-width:0;fill:none"/><path d="M11 11h2v6.1h-2zM11 6.8h2v2h-2z" class="cls-2"/><path d="M1.4 22.6h21.2V1.4H1.4v21.2ZM3.3 3.3h17.3v17.3H3.3V3.3Z" class="cls-2"/></svg></a>
-                            <a class="button button--icon" href="student.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M23.2 2.3H.8v16.8H5v3.5h2.7l5.6-3.5h9.9V2.3ZM2.9 16.9V4.4h18.2V17h-8.6l-5.3 3.3V17H2.9Z" style="fill-rule:evenodd;fill:#000;stroke-width:0"/><path d="M5.6 12h7.7v2H5.6zM5.6 6.9h12.8v2H5.6z" class="cls-1"/></svg></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tristan De Ridder</td>
-                        <td>Programmeren</td>
-                        <td class="active">Actief</td>
-                        <td class="actions">
-                            <a class="button button--icon" href="user.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z" style="stroke-width:0;fill:none"/><path d="M11 11h2v6.1h-2zM11 6.8h2v2h-2z" class="cls-2"/><path d="M1.4 22.6h21.2V1.4H1.4v21.2ZM3.3 3.3h17.3v17.3H3.3V3.3Z" class="cls-2"/></svg></a>
-                            <a class="button button--icon" href="student.html"><svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 24 24"><defs/><path d="M23.2 2.3H.8v16.8H5v3.5h2.7l5.6-3.5h9.9V2.3ZM2.9 16.9V4.4h18.2V17h-8.6l-5.3 3.3V17H2.9Z" style="fill-rule:evenodd;fill:#000;stroke-width:0"/><path d="M5.6 12h7.7v2H5.6zM5.6 6.9h12.8v2H5.6z" class="cls-1"/></svg></a>
-                        </td>
-                    </tr>
-            </table>
+            {{> userInfoSection }}
         </div>
     </main>
 </div>

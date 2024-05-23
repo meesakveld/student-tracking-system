@@ -1,0 +1,15 @@
+{{!-- Presences --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner presences">
+            {{> titleSection title='Aanwezigheden voor: 2023-2024 | PGM1-C | IT Business | Isabelle Volckaert' }}
+            <div class="date">
+                <p>Selecteer een datum</p>
+                <input type="date">
+            </div>
+            {{> button label="Opslaan" }}
+            {{> inputField placeholder="Zoek op naam" }}
+            {{> table headers=usersTable.headers rows=usersTable.rows }}
+        </div>
+    </main>
+</div>
