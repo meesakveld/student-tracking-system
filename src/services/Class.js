@@ -85,9 +85,9 @@ export const createClass = async (clas) => {
  */
 export const updateClass = async (id, clas) => {
 
-    // check if id is provided
-    if (!id) {
-        throw new Error('Id is required');
+    // check if id and clas are provided
+    if (!id || !clas) {
+        throw new Error('Id and class is required');
     }
 
     // Check if the user exists
