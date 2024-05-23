@@ -68,7 +68,7 @@ export const createRole = async (role) => {
     }
 
     // create a new role
-    const newRole = await Role.query().insertGraph(role);
+    const newRole = await Role.query().insert(role);
 
     return newRole;
 
