@@ -2,38 +2,8 @@
 <div class="body__inner">
     <main>
         <div class="main__inner user">
-            {{> titleSection title='Informatie over: ' student=student blueBg=true }}
-            <section class="lightgrey-bg">
-                <div class="user-info">
-                    <div class="user-info__left">
-                        <h3>Persoonlijke informatie</h3>
-                        {{> inputField viewOnly=true value="Voornaam" }}
-                        {{> inputField viewOnly=true value="Achternaam" }}
-                        {{> inputField viewOnly=true value="E-mailadres" }}
-                        <h3>Labels</h3>
-                        <div class="user-info__item">
-                            <div class="input-field input-field--label input-field--view">
-                                {{#each student.labels}}
-                                <input readonly type="text" class="input-field__input" value="{{this}}">
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-info__right">
-                        <h3>School gerelateerde informatie</h3>
-                        {{> inputField viewOnly=true value="Klas" }}
-                        {{> inputField viewOnly=true value="Studiejaar" }}
-                        {{> inputField viewOnly=true value="Statuut" }}
-                        {{> inputField viewOnly=true value="Status" }}
-                        {{> inputField viewOnly=true value="Trajectcoach" }}
-                        {{> inputField viewOnly=true value="Werkplekcoach" }}
-                        {{> inputField viewOnly=true value="Werkplekmentor" }}
-                    </div>
-                </div>
-                <div class="user-info__button">
-                    <button class="button">Wijzigen</button>
-                </div>
-            </section>
+            {{> titleSection title='Informatie over: ' student=userInfo blueBg=true userInfo=false }}
+            {{> userInfoSection }}
         </div>
     </main>
 </div>

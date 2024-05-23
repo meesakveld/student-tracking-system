@@ -9,7 +9,7 @@ export const userPage = (req, res) => {
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
 
-    const student = {
+    const userInfo = {
         firstName: "Mees",
         lastName: "Akveld",
         email: "mees.ak@student.arteveldehs.be",
@@ -29,7 +29,7 @@ export const userPage = (req, res) => {
             lastname,
             role,
         },
-        student,
+        userInfo,
     };
 
     res.render('user', data);
