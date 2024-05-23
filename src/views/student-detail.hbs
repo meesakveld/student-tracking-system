@@ -3,13 +3,7 @@
     <main>
         <div class="main__inner student-detail">
             {{> titleSection title='Studentenfiche van: ' student=student blueBg=true userInfo=true }}
-            <section class="lightgrey-bg">
-                <div>
-                    <h3>{{section.title}}</h3>
-                    <textarea name="" id="">{{section.content}}</textarea>
-                    <button class="button">Opslaan</button>
-                </div>
-            </section>
+            {{> textareaSection label=section.title value=section.content }}
         </div>
     </main>
 </div>

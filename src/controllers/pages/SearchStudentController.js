@@ -9,11 +9,11 @@ export const searchStudentPage = (req, res) => {
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
 
-    const choices = [
+    const searchStudentChoices = [
         {
             name: "schoolyear",
             title: "Kies een schooljaar:",
-            options: [
+            choices: [
                 { value: "2021-2022", label: "2021-2022" },
                 { value: "2022-2023", label: "2022-2023" },
                 { value: "2023-2024", label: "2023-2024" }
@@ -22,7 +22,7 @@ export const searchStudentPage = (req, res) => {
         {
             name: "class",
             title: "Kies een klas:",
-            options: [
+            choices: [
                 { value: "PGM1-A", label: "PGM1-A" },
                 { value: "PGM1-B", label: "PGM1-B" },
                 { value: "PGM1-C", label: "PGM1-C" }
@@ -31,7 +31,7 @@ export const searchStudentPage = (req, res) => {
         {
             name: "course",
             title: "Kies een vak:",
-            options: [
+            choices: [
                 { value: "IT Business", label: "IT Business" },
                 { value: "IT Communication", label: "IT Communication" }
             ]
@@ -39,7 +39,7 @@ export const searchStudentPage = (req, res) => {
         {
             name: "teacher",
             title: "Kies een docent:",
-            options: [
+            choices: [
                 { value: "Isabelle Volckaert", label: "Isabelle Volckaert" },
                 { value: "Philippe De Pauw", label: "Philippe De Pauw" }
             ]
@@ -52,7 +52,7 @@ export const searchStudentPage = (req, res) => {
             lastname,
             role,
         },
-        choices,
+        searchStudentChoices,
     };
 
     res.render('search-student', data);

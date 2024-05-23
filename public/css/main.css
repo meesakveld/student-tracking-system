@@ -222,7 +222,7 @@ a:hover {
     border: 1px solid var(--grey);
     font-size: 1rem;
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 .input-field__input:hover {
@@ -354,7 +354,8 @@ input:hover {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
-    margin: 2rem 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     padding: 1rem;
     border: 1px solid var(--grey);
 }

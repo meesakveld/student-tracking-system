@@ -9,13 +9,39 @@ export const presencesPage = (req, res) => {
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
 
-    // From the selected class group, we have the following students:
-    const students = [
-        { name: "Mees Akveld", present: true, inactive: false },
-        { name: "Benoît Biraguma", present: false, inactive: true },
-        { name: "Ella Jekale", present: true, inactive: false },
-        { name: "Tristan De Ridder", present: true, inactive: false }
-    ];
+    const usersTable = {
+        headers: ["Aanwezig", "Naam", "Status"],
+        rows: [
+            {
+                checkbox: true,
+                statusClass: "active",
+                cols: ["Mees Akveld", "Actief"],
+                infoButton: true,
+                studentButton: true,
+            },
+            {
+                checkbox: true,
+                statusClass: "inactive",
+                cols: ["Benoît Biraguma", "Inactief"],
+                infoButton: true,
+                studentButton: true,
+            },
+            {
+                checkbox: true,
+                statusClass: "active",
+                cols: ["Ella Jekale", "Actief"],
+                infoButton: true,
+                studentButton: true,
+            },
+            {
+                checkbox: true,
+                statusClass: "active",
+                cols: ["Tristan De Ridder", "Actief"],
+                infoButton: true,
+                studentButton: true,
+            },
+        ],
+    }
 
     const data = {
         user: {
@@ -23,7 +49,7 @@ export const presencesPage = (req, res) => {
             lastname,
             role,
         },
-        students,
+        usersTable,
     };
 
     res.render('presences', data);

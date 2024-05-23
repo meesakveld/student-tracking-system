@@ -1,0 +1,10 @@
+{{!-- Filters --}}
+<form class="filters">
+    {{#each filters}}
+        {{> dropdown }}
+    {{/each}}
+    <div>
+        <button class="button">Filteren</button>
+        <button type="reset" class="button button--dark">Reset</button>
+    </div>
+</form>
