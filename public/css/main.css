@@ -79,7 +79,7 @@ header {
     flex-direction: column;
 }
 
-.user {
+.user-container .user {
     padding: 10px;
     text-decoration: none;
     color: var(--dark);

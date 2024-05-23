@@ -25,7 +25,6 @@ import studentPage from "./controllers/pages/StudentController.js";
 import studentDetailPage from "./controllers/pages/StudentDetailController.js";
 import searchStudentPage from "./controllers/pages/SearchStudentController.js";
 import userPage from "./controllers/pages/UserController.js";
-import resultsPage from "./controllers/pages/ResultsController.js";
 import presencesPage from "./controllers/pages/PresencesController.js";
 import pageNotFound from "./controllers/pages/PageNotFoundController.js";
 import unauthorizedPage from "./controllers/pages/UnauthorizedController.js";
@@ -86,7 +85,6 @@ app.get('/users/:id', userPage);
 app.get('/student/:id', studentPage);
 app.get('/student/:id/:detail', studentDetailPage);
 app.get('/search-student', searchStudentPage);
-app.get('/results', resultsPage);
 app.get('/presences', presencesPage);
 app.get('/teachers', teachersPage);
 // temporary page to show all components leave it here for now
