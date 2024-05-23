@@ -1,4 +1,4 @@
-import Comment from '../models/Comment.js';
+import Comment from '../../models/Comment.js';
 
 /**
  * Retrieves all comments with optional graph fetching.

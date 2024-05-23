@@ -1,4 +1,4 @@
-import ProgrammeLine from "../models/ProgrammeLine";
+import ProgrammeLine from "../../models/ProgrammeLine";
 
 /**
  * Retrieves all programme lines with optional graph fetching.

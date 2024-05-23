@@ -1,4 +1,4 @@
-import Status from "../models/Status";
+import Status from "../../models/Status";
 
 /**
  * Retrieves all statuses.

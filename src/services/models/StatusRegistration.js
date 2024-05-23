@@ -1,4 +1,4 @@
-import StatusRegistration from "../models/StatusesRegistration";
+import StatusRegistration from "../../models/StatusesRegistration";
 
 /**
  * Retrieves all status registrations.

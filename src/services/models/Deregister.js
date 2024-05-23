@@ -1,4 +1,4 @@
-import Deregister from "../models/Deregister";
+import Deregister from "../../models/Deregister";
 
 
 /**

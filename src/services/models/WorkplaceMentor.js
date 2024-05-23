@@ -1,4 +1,4 @@
-import WorkplaceMentor from "../models/WorkplaceMentor";
+import WorkplaceMentor from "../../models/WorkplaceMentor";
 
 /**
  * Retrieves all workplace mentors.

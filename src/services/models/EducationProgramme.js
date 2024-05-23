@@ -1,4 +1,4 @@
-import EducationProgramme from "../models/EducationProgramme";
+import EducationProgramme from "../../models/EducationProgramme";
 
 /**
  * Retrieves all education programmes.

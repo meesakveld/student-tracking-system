@@ -1,4 +1,4 @@
-import WorkplaceCoach from "../models/WorkplaceCoach";
+import WorkplaceCoach from "../../models/WorkplaceCoach";
 
 /**
  * Retrieves all workplace coaches.

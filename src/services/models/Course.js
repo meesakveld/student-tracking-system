@@ -1,4 +1,4 @@
-import Course from "../models/Course";
+import Course from "../../models/Course";
 
 /**
  * Retrieves all courses with optional graph fetching.

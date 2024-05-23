@@ -1,5 +1,5 @@
 import e from 'express';
-import Function from '../models/Function';
+import Function from '../../models/Function';
 
 /**
  * Retrieves all functions with optional graph fetching.

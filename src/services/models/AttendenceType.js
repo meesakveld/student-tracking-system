@@ -1,4 +1,4 @@
-import AttendanceType from "../models/AttendanceType";
+import AttendanceType from "../../models/AttendanceType";
 
 
 /**
