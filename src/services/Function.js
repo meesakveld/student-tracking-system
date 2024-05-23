@@ -71,7 +71,7 @@ export const createFunction = async (functionItem) => {
     }
 
     // Create the function
-    const newFunction = await Function.query().insertGraph(functionItem);
+    const newFunction = await Function.query().insert(functionItem);
 
     return newFunction;
 };
@@ -99,7 +99,7 @@ export const updateFunction = async (id, functionItem) => {
     }
 
     // Update the function
-    const updatedFunction = await Function.query().upsertGraph({ id, ...functionItem });
+    const updatedFunction = await Function.query().findById(id).patch(functionItem);
 
     return updatedFunction;
 
