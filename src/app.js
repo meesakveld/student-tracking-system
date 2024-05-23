@@ -27,6 +27,8 @@ import searchStudentPage from "./controllers/pages/SearchStudentController.js";
 import userPage from "./controllers/pages/UserController.js";
 import resultsPage from "./controllers/pages/ResultsController.js";
 import presencesPage from "./controllers/pages/PresencesController.js";
+import pageNotFound from "./controllers/pages/PageNotFoundController.js";
+import unauthorizedPage from "./controllers/pages/UnauthorizedController.js";
 
 
 
@@ -73,6 +75,9 @@ app.post("/login", auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
+// —— Public routes | Error routes ——
+app.get(pageNotFound);
+app.get(unauthorizedPage);
 
 // —— Private routes ——
 app.get('/', dashboardPage);
@@ -91,7 +96,7 @@ app.get('/components', componentsPage);
 app.get("/api", apiRoutes);
 
 // 404 Route
-app.use('*', (req, res) => { res.redirect("/"); });
+app.use('*', pageNotFound);
 
 /**
  * ------------------------------

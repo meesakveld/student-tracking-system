@@ -56,8 +56,8 @@
 
 @media (max-width: 29.063rem) {
     .dashboard__link {
-        padding: 8rem 0;
-        max-width: 21rem;
+        padding: 4.7rem 32px;
+        max-width: 14.5rem;
     }
 
 }
