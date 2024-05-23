@@ -4,7 +4,9 @@
         <div class="main__inner results">
             {{> titleSection title='Alle docenten' }}
             {{> inputField placeholder="Zoek op naam" }}
-            {{> table headers=teachersTable.headers rows=teachersTable.rows }}
+            <div class="table-container">
+                {{> table headers=teachersTable.headers rows=teachersTable.rows }}
+            </div>
         </div>
     </main>
 </div>
