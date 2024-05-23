@@ -47,7 +47,7 @@ class User extends Model {
                     to: "contacts.user_id",
                 },
             },
-            students: {
+            student: {
                 relation: Model.HasOneRelation,
                 modelClass: Student,
                 join: {
@@ -55,7 +55,7 @@ class User extends Model {
                     to: "students.user_id",
                 },
             },
-            employees: {
+            employee: {
                 relation: Model.HasOneRelation,
                 modelClass: Employee,
                 join: {
@@ -63,7 +63,7 @@ class User extends Model {
                     to: "employees.user_id",
                 },
             },
-            roles: {
+            role: {
                 relation: Model.HasOneRelation,
                 modelClass: Role,
                 join: {

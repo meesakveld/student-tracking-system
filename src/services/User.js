@@ -1,13 +1,15 @@
 import User from '../models/User.js';
 
+
 /**
- * Retrieves all users from the database.
- * @returns {Promise<Array>} A promise that resolves to an array of users.
- * @throws {Error} If no users are found.
+ * Retrieves all users with optional graph fetching.
+ * @param {string} withGraphFetched - The graph to fetch along with the users. Default is an empty array.
+ * @returns {Promise<Array>} - A promise that resolves to an array of users.
+ * @throws {Error} - If no users are found.
  */
-export const getAllUsers = async () => {
+export const getAllUsers = async (withGraphFetched = '[]') => {
     // Get all users
-    const users = await User.query();
+    const users = await User.query().withGraphFetched(withGraphFetched);
 
     if (!users) {
         throw new Error('No users found');
@@ -16,14 +18,15 @@ export const getAllUsers = async () => {
     return users;
 }  
 
+
 /**
  * Retrieves a user by their ID.
- *
- * @param {string} id - The ID of the user to retrieve.
+ * @param {number} id - The ID of the user to retrieve.
+ * @param {string} [withGraphFetched='[]'] - The graph to fetch along with the user.
  * @returns {Promise<Object>} - A promise that resolves to the user object.
  * @throws {Error} - If the ID is not provided or if the user is not found.
  */
-export const getUserById = async (id) => {
+export const getUserById = async (id, withGraphFetched = '[]') => {
 
     // Check if id is provided
     if (!id) {
@@ -31,7 +34,9 @@ export const getUserById = async (id) => {
     }
 
     // Get the user by id
-    const user = User.query().findById(id);
+    const user = await User.query().findById(id).withGraphFetched(withGraphFetched);
+
+    console.log(user);
 
     if (!user) {
         throw new Error('User not found');

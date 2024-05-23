@@ -7,7 +7,7 @@
 import Express from "express";
 
 // Controllers
-import { getAllUsers } from "../../services/User.js";
+import { getAllUsers, getUserById } from "../../services/User.js";
 
 
 // Middleware
@@ -29,6 +29,10 @@ const router = Express.Router();
 */
 
 // API Todos routes
-router.get('/', getAllUsers);
+router.get('/', async (req, res) => {
+    const users = await getUserById(5 ,'[role]');
+
+    res.json(users);
+});
 
 export default router;
