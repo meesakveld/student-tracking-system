@@ -5,11 +5,17 @@ const seed = async function (knex) {
     await knex(tableName).del();
     await knex(tableName).insert([
         {
-            title: "Present"
+            title: "Stipt aanwezig"
         },
         {
-            title: "Absent"
+            title: "Later aanwezig"
         },
+        {
+            title: "Afwezig met geldige reden"
+        },
+        {
+            title: "Afwezig zonder geldige reden"
+        }
     ]);
 };
 

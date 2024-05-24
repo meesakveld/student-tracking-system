@@ -5,19 +5,19 @@ const seed = async function (knex) {
     await knex(tableName).del();
     await knex(tableName).insert([
         {
-            title: "Inactive"
+            title: "Inactief"
         },
         {
-            title: "Largely Inactive"
+            title: "Grotendeels inactief"
         },
         {
-            title: "Moderlaty Active"
+            title: "Middelmachtig actief"
         },
         {
-            title: "Sick"
+            title: "Ziek"
         },
         {
-            title: "Deregistered"
+            title: "Uitgeschreven"
         },
     ]);
 };
