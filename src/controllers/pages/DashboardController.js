@@ -9,6 +9,8 @@ export const dashboardPage = (req, res) => {
     const lastname = "De Pauw - Waterschoot";
     const role = "Admin";
 
+    console.log("User data: ", req.user);
+
     const data = {
         user: {
             firstname,

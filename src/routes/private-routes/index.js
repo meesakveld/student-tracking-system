@@ -22,6 +22,8 @@ import jwtAuth from "../../middleware/jwtAuth.js";
 const router = Express.Router();
 
 router.use(jwtAuth);
+// TODO: Make function to check what role and optionally function to check permissions
+
 
 /**
  * ------------------------------

@@ -109,7 +109,7 @@ class Employee extends Model {
                     to: "education_programme.id",
                 },
             },
-            function: {
+            functions: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Function,
                 join: {
