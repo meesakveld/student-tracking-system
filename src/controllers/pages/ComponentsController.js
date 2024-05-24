@@ -5,11 +5,7 @@
 */
 
 export const componentsPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
-    const section = {
+const section = {
         title: "Aanwezigheid hoor- en werkcolleges",
         content: "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
     };
@@ -140,11 +136,7 @@ export const componentsPage = (req, res) => {
     }
 
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
         section,
         labels,
         choiceLists,

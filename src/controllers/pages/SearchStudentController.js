@@ -5,10 +5,6 @@
 */
 
 export const searchStudentPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
     const userFilters = [
         {
             id: "filter1",
@@ -81,11 +77,7 @@ export const searchStudentPage = (req, res) => {
     }
 
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
         userFilters,
         usersTable,
     };
