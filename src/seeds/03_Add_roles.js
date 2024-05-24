@@ -8,7 +8,7 @@ const seed = async function (knex) {
             title: "student"
         },
         {
-            title: "teacher"
+            title: "employee"
         },
         {
             title: "admin"
