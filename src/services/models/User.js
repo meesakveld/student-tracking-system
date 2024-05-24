@@ -15,6 +15,8 @@ export const getAllUsers = async (withGraphFetched = '[]') => {
         throw new Error('No users found');
     }
 
+    users.map(user => delete user.password)
+
     return users;
 }  
 
@@ -39,6 +41,8 @@ export const getUserById = async (id, withGraphFetched = '[]') => {
     if (!user) {
         throw new Error('User not found');
     }
+
+    delete user.password;
 
     return user;
 }
@@ -78,6 +82,8 @@ export const createUser = async (user) => {
     // Create a new user
     const newUser = User.query().insert(user);
 
+    delete newUser.password;
+
     return newUser;
 }
 
@@ -104,6 +110,8 @@ export const updateUser = async (id, user) => {
 
     // Update the user
     const updatedUser = User.query().findById(id).patch(user);
+
+    delete updatedUser.password;
 
     return updatedUser;
 }
@@ -132,6 +140,8 @@ export const deleteUser = async (id) => {
 
     // Delete the user
     const deletedUser = User.query().deleteById(id);
+
+    delete deletedUser.password;
 
     return deletedUser;
 }
