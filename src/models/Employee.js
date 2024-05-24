@@ -36,7 +36,7 @@ class Employee extends Model {
 
     static get relationMappings() {
         return {
-            users: {
+            user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
@@ -103,10 +103,10 @@ class Employee extends Model {
                 join: {
                     from: "employees.id",
                     through: {
-                        from: "education_programme_employee.employee_id",
-                        to: "education_programme_employee.education_programme_id",
+                        from: "education_programmes_employees.employee_id",
+                        to: "education_programmes_employees.education_programme_id",
                     },
-                    to: "education_programme.id",
+                    to: "education_programmes.id",
                 },
             },
             functions: {

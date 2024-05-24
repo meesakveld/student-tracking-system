@@ -1,11 +1,11 @@
-import Student from "../../models/Student";
+import Student from "../../models/Student.js";
 
 
 export const getAllStudents = async (withGraphFetched = '[]') => {
 
     // Get all students
     const students = await Student.query().withGraphFetched(withGraphFetched);
-
+    
     // Check if students are found
     if (!students) {
         throw new Error('No students found');
@@ -56,9 +56,9 @@ export const createStudent = async (student) => {
     }
 
     // Create the student
-    const student = await Student.query().insert(student);
+    const returnedStudent = await Student.query().insert(student);
 
-    return student;
+    return returnedStudent;
 }
 
 

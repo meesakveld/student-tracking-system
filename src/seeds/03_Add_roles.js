@@ -11,7 +11,7 @@ const seed = async function (knex) {
             title: "employee"
         },
         {
-            title: "admin"
+            title: "external"
         }
     ]);
 };
