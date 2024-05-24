@@ -7,11 +7,10 @@
 import Express from "express";
 
 // Controllers
-import userRoutes from "./userRoutes.js";
-import authRoutes from "./authRoutes.js";
+import { getUserToken } from "../../controllers/api/AuthController.js";
 
 // Middleware
-import { checkUserToken } from "../../controllers/api/AuthController.js";
+import AuthLoginValidation from "../../middleware/validation/AuthLoginValidation.js";
 
 /**
  * ------------------------------
@@ -28,12 +27,7 @@ const router = Express.Router();
  * ------------------------------
 */
 
-// —— Public routes | Auth routes ——
-router.use('/auth', authRoutes)
-
-// —— Private routes ——
-router.use(checkUserToken)
-router.use('/user', userRoutes)
+router.get('/login', AuthLoginValidation, getUserToken)
 
 
 export default router;
