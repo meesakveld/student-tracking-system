@@ -1,5 +1,12 @@
 import { getEmployeeById } from '../services/models/Employee.js';
 
+/**
+ * Middleware function for role-based authentication.
+ * 
+ * @param {string[]} roles - An array of roles allowed to access the route. Options: 'admin', 'employee', 'student'.
+ * @param {string[]} functions - An array of functions allowed for employees.
+ * @returns {Function} - The middleware function.
+ */
 export default (roles = [], functions = []) => async (req, res, next) => {
 
     if (!req.user) {
