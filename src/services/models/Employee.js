@@ -1,4 +1,4 @@
-import Employee from "../../models/Employee";
+import Employee from "../../models/Employee.js";
 
 /**
  * Retrieves all employees with optional graph fetching.
@@ -29,7 +29,6 @@ export const getAllEmployee = async (withGraphFetched = '[]') => {
  * @throws {Error} - If the ID is not provided or if the employee is not found.
  */
 export const getEmployeeById = async (id, withGraphFetched = '[]') => {
-        
         // Check if id is provided
         if (!id) {
             throw new Error('Id is required');

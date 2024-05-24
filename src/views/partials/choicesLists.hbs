@@ -1,0 +1,16 @@
+{{!-- Lists of choices to search a student --}}
+<!-- if choice cant be clicked add class choice-list--locked and disabled attribute to input -->
+<div class="choices">
+    {{#each choiceLists}}
+    <div class="choice-list">
+        <h2 class="choice-list__title">{{title}}</h2>
+        {{#each choices}}
+        <label class="label--radio">
+            <input type="radio" name="{{../name}}" value="{{value}}">
+            <span class="choice__title">{{label}}</span>
+            <span class="checkmark"></span>
+        </label>
+        {{/each}}
+    </div>
+    {{/each}}
+</div>

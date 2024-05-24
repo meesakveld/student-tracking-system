@@ -109,16 +109,16 @@ class Employee extends Model {
                     to: "education_programme.id",
                 },
             },
-            function: {
+            functions: {
                 relation: Model.ManyToManyRelation,
                 modelClass: Function,
                 join: {
                     from: "employees.id",
                     through: {
-                        from: "employee_function.employee_id",
-                        to: "employee_function.function_id",
+                        from: "employee_functions.employee_id",
+                        to: "employee_functions.function_id",
                     },
-                    to: "function.id",
+                    to: "functions.id",
                 },
             },
         }

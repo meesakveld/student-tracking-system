@@ -16,15 +16,12 @@ import jwtAuth from "./middleware/jwtAuth.js";
 import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
 
 // Controllers
+import * as ctr from "./controllers/pages/index.js";
 import * as auth from "./controllers/AuthController.js";
-// Page controllers
-import welcomePage from './controllers/pages/WelcomeController.js';
-import dashboardPage from "./controllers/pages/DashboardController.js";
-import componentsPage from "./controllers/pages/ComponentsController.js";
-import usersPage from "./controllers/pages/UsersController.js";
 
 // Routes
 import apiRoutes from "./routes/api/index.js";
+import privateRoutes from "./routes/private-routes/index.js";
 
 /**
  * ------------------------------
@@ -59,25 +56,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 */
 
 // —— Public routes | Auth routes ——
-app.get('/welcome', welcomePage);
+app.get('/welcome', ctr.welcomePage);
 
 app.get("/login", jwtAuth, auth.login);
 app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
-
 // —— Private routes ——
-app.get('/', jwtAuth ,dashboardPage);
-app.get('/users', jwtAuth, usersPage);
+app.use("/", privateRoutes)
+app.get('/components', ctr.componentsPage); // temporary page to show all components leave it here for now
 
-// API Routes
+// —— API Routes ——
 app.use("/api", apiRoutes);
 
-// 404 Route
-// app.use('*', (req, res) => { res.redirect("/"); });
-
-app.get('/components', componentsPage);
+// —— Error route ——
+app.use(ctr.errorPage);
 
 /**
  * ------------------------------

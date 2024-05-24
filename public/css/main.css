@@ -44,6 +44,7 @@ body {
     font-weight: normal;
     color: var(--dark);
     background-color: white;
+    overflow-x: hidden;
 }
 
 *::selection {
@@ -68,6 +69,40 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.user-container {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.user-container .user {
+    padding: 10px;
+    text-decoration: none;
+    color: var(--dark);
+    position: relative;
+    font-weight: bold;
+}
+
+.logout {
+    display: none;
+    text-decoration: none;
+    padding-right: 0.6rem;
+    position: absolute;
+}
+
+.user-container:hover .logout {
+    display: inline-block;
+    bottom: -1.06rem;
+}
+
+.logout svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 .header__inner .user {
@@ -76,6 +111,16 @@ header {
     align-items: center;
     gap: 1rem;
     color: var(--dark);
+}
+
+@media (max-width: 41.25rem) {
+    .header__inner .user {
+        font-size: 0;
+    }
+
+    .user::after {
+        display: inline-block;
+    }
 }
 
 .header__inner .user::after {
@@ -92,6 +137,20 @@ header {
 
 .main__inner {
     padding: 5rem;
+}
+
+@media (max-width: 42.5rem) {
+    .main__inner {
+        padding: 3.8rem;
+    }
+
+}
+
+@media (max-width: 37.5rem) {
+    .main__inner {
+        padding: 2rem;
+    }
+
 }
 
 /* ------ For the lightgrey bg section ------ */
@@ -140,7 +199,7 @@ a:hover {
  * ==============================
  */
 
- /* ------ Logo (big) ------ */
+/* ------ Logo (big) ------ */
 
 .logo-sv--big {
     max-width: 14rem;
@@ -222,7 +281,7 @@ a:hover {
     border: 1px solid var(--grey);
     font-size: 1rem;
     width: 100%;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 .input-field__input:hover {
@@ -314,6 +373,11 @@ input:hover {
     min-width: 20rem;
 }
 
+.choice-list--locked {
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
 .choice-list__title {
     padding-bottom: 1rem;
 }
@@ -352,17 +416,6 @@ input:hover {
     padding-right: 1rem;
 }
 
-/* ------ Dropdown ------ */
-
-.dropdown-content__box {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.dropdown-btn {
-    margin-bottom: 0.4rem;
-}
-
 /* ------ Filters ------ */
 
 .filters {
@@ -371,9 +424,17 @@ input:hover {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
-    margin: 2rem 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     padding: 1rem;
     border: 1px solid var(--grey);
+}
+
+@media (max-width: 49.375rem) {
+    .filters {
+        flex-direction: column;
+        padding: 2rem;
+    }
 }
 
 .filter {
@@ -384,12 +445,26 @@ input:hover {
 
 /* ------ Table ------ */
 
+
+.table-container {
+    width: 100%;
+    overflow-x: scroll;
+}
+
 table {
     width: 100%;
     padding-bottom: 2rem;
 }
 
-th, td {
+@media (max-width: 76.25rem) {
+    table {
+        width: 70rem;
+    }
+
+}
+
+th,
+td {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px solid var(--grey);
@@ -524,4 +599,30 @@ input[type="date"] {
 
 .star--blue {
     fill: var(--blue);
+}
+
+/* ------ Error ------ */
+
+.error {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.error svg {
+    width: 10rem;
+}
+
+.error__right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+
+.error__right h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
 }

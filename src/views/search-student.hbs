@@ -1,9 +1,8 @@
-{{!-- Users --}}
+{{!-- Search student --}}
 <div class="body__inner">
     <main>
-        <div class="main__inner overview">
-            {{> titleSection title='Overzicht van alle gebruikers' }}
-            {{> button label="Voeg een gebruiker toe" link="#" }}
+        <div class="main__inner search-student">
+            {{> titleSection title="Zoek studenten" }}
             {{> filters filters=userFilters }}
             {{> inputField placeholder="Zoek op naam" }}
             {{> table headers=usersTable.headers rows=usersTable.rows }}

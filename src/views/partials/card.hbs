@@ -1,0 +1,17 @@
+{{!-- Card --}}
+{{#each cards}}
+<a href="{{this.link}}" class="card {{#if this.locked}}card--locked{{/if}}">
+    <h3>{{this.title}}</h3>
+    <p>{{this.description}}</p>
+    {{#if this.stars}}
+    <div class="stars">
+        {{#each this.stars}}
+        <svg class="star {{#if this.filled}}star--blue{{/if}}" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+            viewBox="0 0 24 24">
+            <path d="m12 18.1-6.6 4 1.8-7.5-5.8-5L9 9l3-7.1L15 9l7.6.6-5.8 5 1.8 7.5-6.6-4z" />
+        </svg>
+        {{/each}}
+    </div>
+    {{/if}}
+</a>
+{{/each}}

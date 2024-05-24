@@ -1,0 +1,62 @@
+{{!-- User Section --}}
+<section class="lightgrey-bg">
+    <div class="user-info">
+        <div class="user-info__left">
+            <h3>Persoonlijke informatie</h3>
+            <div class="user-info__item">
+                <p class="semibold">Voornaam</p>
+                {{> inputField viewOnly=true value=userInfo.firstName }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Achternaam</p>
+                {{> inputField viewOnly=true value=userInfo.lastName }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">E-mailadres</p>
+                {{> inputField viewOnly=true value=userInfo.email }}
+            </div>
+            <h3>Labels</h3>
+            <div class="user-info__item">
+                <div class="input-field input-field--label input-field--view">
+                    {{#each userInfo.labels}}
+                    <input readonly type="text" class="input-field__input" value="{{this}}">
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="user-info__right">
+            <h3>School gerelateerde informatie</h3>
+            <div class="user-info__item">
+                <p class="semibold">Klas</p>
+                {{> inputField viewOnly=true value=userInfo.class }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Studiejaar</p>
+                {{> inputField viewOnly=true value=userInfo.studyYear }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Statuut</p>
+                {{> inputField viewOnly=true value=userInfo.status }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Rol</p>
+                {{> inputField viewOnly=true value=userInfo.role }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Trajectcoach</p>
+                {{> inputField viewOnly=true value=userInfo.coach }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Werkplekcoach</p>
+                {{> inputField viewOnly=true value=userInfo.workCoach }}
+            </div>
+            <div class="user-info__item">
+                <p class="semibold">Werkplekmentor</p>
+                {{> inputField viewOnly=true value=userInfo.workMentor }}
+            </div>
+        </div>
+    </div>
+    <div class="user-info__button">
+        <button class="button">Wijzigen</button>
+    </div>
+</section>
