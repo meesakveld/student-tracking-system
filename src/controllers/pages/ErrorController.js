@@ -10,11 +10,7 @@ export const errorPage = (req, res) => {
     const role = "Admin";
 
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
         error: {
             code: 404,
             message: 'Pagina niet gevonden.',
