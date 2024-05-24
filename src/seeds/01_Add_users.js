@@ -7,7 +7,6 @@ const seed = async function (knex) {
         {
             firstname: "John",
             lastname: "Doe",
-            is_active: true,
             email: "john.doe@arteveldehs.be",
             password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
             username: "johndoe",
@@ -16,7 +15,6 @@ const seed = async function (knex) {
         {
             firstname: "Tristan",
             lastname: "De Ridder",
-            is_active: true,
             email: "tristan.deridder@arteveldehs.be",
             password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
             username: "tristanderidder",
@@ -25,7 +23,6 @@ const seed = async function (knex) {
         {
             firstname: "Mees",
             lastname: "Akveld",
-            is_active: true,
             email: "mees.akveld@arteveldehs.be",
             password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
             username: "meesakveld",  
