@@ -31,7 +31,7 @@ router.use(jwtAuth);
 */
 
 router.get('/', ctr.dashboardPage);
-router.get('/users', roleAuth(["employee", "student"], ["teacher"]), ctr.usersPage);
+router.get('/users', roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/:id', ctr.userPage);
 router.get('/student/:id', ctr.studentPage);
 router.get('/student/:id/:detail', ctr.studentDetailPage);
