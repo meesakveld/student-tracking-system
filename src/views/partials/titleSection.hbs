@@ -5,7 +5,7 @@
     <div class="title-section">
 {{/if}}
     {{!-- !! Link must be to the previous page !! --}}
-    {{> button label="<" dark=true link="/" }}
+    {{> button label="<" dark=true link=returnUrl }}
     <h1>{{ title }} {{#if student }} {{student.firstName}} {{student.lastName}} - {{student.class}} {{/if}}</h1>
     {{#if userInfo }}
     <a class="button button--icon" href="/users/1">
