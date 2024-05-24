@@ -115,10 +115,10 @@ class Employee extends Model {
                 join: {
                     from: "employees.id",
                     through: {
-                        from: "employee_function.employee_id",
-                        to: "employee_function.function_id",
+                        from: "employee_functions.employee_id",
+                        to: "employee_functions.function_id",
                     },
-                    to: "function.id",
+                    to: "functions.id",
                 },
             },
         }
