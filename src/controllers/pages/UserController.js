@@ -19,9 +19,15 @@ export const userPage = (req, res) => {
         labels: ["Ambassadeur", "Stuver"]
     };
 
+    const labels = ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'];
+
+    const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
+
     const data = {
         user: req.user,
+        pageTitle,
         userInfo,
+        labels
     };
 
     res.render('user', data);
