@@ -5,10 +5,6 @@
 */
 
 export const errorPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
     const data = {
         user: req.user,
         error: {

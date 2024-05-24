@@ -5,10 +5,6 @@
 */
 
 export const teachersPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
     const teachersTable = {
         headers: ["Naam", "Rollen", "Opleiding", "Status"],
         rows: [
@@ -41,11 +37,7 @@ export const teachersPage = (req, res) => {
     }
 
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
         teachersTable
     };
 
