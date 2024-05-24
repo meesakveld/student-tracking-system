@@ -6,7 +6,7 @@ import Employee from "../../models/Employee.js";
  * @returns {Promise<Array>} - A promise that resolves to an array of employees.
  * @throws {Error} - If no employees are found.
  */
-export const getAllEmployee = async (withGraphFetched = '[]') => {
+export const getAllEmployees = async (withGraphFetched = '[]') => {
     
     // Get all employees
     const employees = await Employee.query().withGraphFetched(withGraphFetched);
