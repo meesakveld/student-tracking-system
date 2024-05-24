@@ -9,6 +9,7 @@ export function up(knex) {
         table.integer("employee_id").notNullable();
         table.integer("education_programme_id").notNullable();
         table.text("comment").notNullable();
+        table.boolean("visible_to_student").notNullable().defaultTo(false);
         table.timestamps(true, true);
     });
 }

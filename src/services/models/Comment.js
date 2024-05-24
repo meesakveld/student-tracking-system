@@ -63,7 +63,7 @@ export const createComment = async (comment) => {
 
     // check if comment is missing required fields
     if (!comment.student_id || !comment.employee_id || !comment.education_programme_id || !comment.comment) {
-        throw new Error('Student ID is required');
+        throw new Error('Comment is missing required fields');
     }
 
     // create a new comment
@@ -85,7 +85,7 @@ export const updateComment = async (id, comment) => {
 
     // check if id and comment are provided
     if (!id || !comment) {
-        throw new Error('Id is required');
+        throw new Error('Id and comment are required');
     }
 
     // check if comment exists

@@ -31,6 +31,7 @@ class Comment extends Model {
                 employee_id: { type: "integer" },
                 education_programme_id: { type: "integer" },
                 comment: { type: "text"},
+                visible_to_student: { type: "boolean" },
             },
         };
     }
