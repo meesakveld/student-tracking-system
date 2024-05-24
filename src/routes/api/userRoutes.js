@@ -30,7 +30,7 @@ const router = Express.Router();
 
 // API Todos routes
 router.get('/', async (req, res) => {
-    const users = await getUserById(5 ,'[role]');
+    const users = await getUserById(1 ,'[role]');
 
     res.json(users);
 });

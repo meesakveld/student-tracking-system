@@ -63,12 +63,12 @@ app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
+// —— API Routes ——
+app.use("/api", apiRoutes);
+
 // —— Private routes ——
 app.use("/", privateRoutes)
 app.get('/components', ctr.componentsPage); // temporary page to show all components leave it here for now
-
-// —— API Routes ——
-app.use("/api", apiRoutes);
 
 // —— Error route ——
 app.use(ctr.errorPage);
