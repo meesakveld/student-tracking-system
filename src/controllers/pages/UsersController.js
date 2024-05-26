@@ -8,14 +8,20 @@ import Student from "../../models/Student.js";
 import Employee from "../../models/Employee.js";
 import EducationProgramme from "../../models/EducationProgramme.js";
 
+/**
+ * Controller function for the users page.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the rendering is complete.
+ */
 export const usersPage = async (req, res) => {
-
-    
+    // ——— FILTERS DATA ———
     const filterRole = req.query.filterRole;
     const filterProgram = req.query.filterProgram;
     const filterStatus = req.query.filterStatus === "active" ? true : req.query.filterStatus === "inactive" ? false : null;
     const filterAcademicYear = req.query.filterAcademicYear;
 
+    // ——— FILTERS OPTIONS ———
     const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
     const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
     const academicYearsOptions = academicYears.map(academicYear => ({ value: academicYear, label: academicYear, selected: academicYear === filterAcademicYear}));
@@ -142,7 +148,6 @@ export const usersPage = async (req, res) => {
         headers: ["Naam", "Rol", "Opleiding", "Status"],
         rows: rows
     };
-
 
     // ——— RENDER DATA ———
     const data = {
