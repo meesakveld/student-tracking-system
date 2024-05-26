@@ -15,6 +15,7 @@
                 <p class="semibold">E-mailadres</p>
                 {{> inputField viewOnly=true value=userInfo.email }}
             </div>
+            {{#if userInfo.labels}}
             <h3>Labels</h3>
             <div class="user-info__item">
                 <div class="input-field input-field--label input-field--view">
@@ -23,6 +24,7 @@
                     {{/each}}
                 </div>
             </div>
+            {{/if}}
         </div>
         <div class="user-info__right">
             <h3>School gerelateerde informatie</h3>
@@ -31,11 +33,7 @@
                 {{> inputField viewOnly=true value=userInfo.class }}
             </div>
             <div class="user-info__item">
-                <p class="semibold">Studiejaar</p>
-                {{> inputField viewOnly=true value=userInfo.studyYear }}
-            </div>
-            <div class="user-info__item">
-                <p class="semibold">Statuut</p>
+                <p class="semibold">Status</p>
                 {{> inputField viewOnly=true value=userInfo.status }}
             </div>
             <div class="user-info__item">

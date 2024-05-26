@@ -15,6 +15,8 @@ import Course from "./Course.js";
 import StatusRegistration from "./StatusesRegistration.js";
 import Comment from "./Comment.js";
 import EducationProgramme from "./EducationProgramme.js";
+import Class from "./Class.js";
+import WorkplaceCoach from "./WorkplaceCoach.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -49,6 +51,14 @@ class Student extends Model {
                 join: {
                     from: "students.id",
                     to: "attendances.student_id",
+                },
+            },
+            class: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Class,
+                join: {
+                    from: "students.class_id",
+                    to: "classes.id",
                 },
             },
             user: {
@@ -93,10 +103,10 @@ class Student extends Model {
             },
             workplace_coach: {
                 relation: Model.HasOneRelation,
-                modelClass: WorkplaceMentor,
+                modelClass: WorkplaceCoach,
                 join: {
                     from: "students.id",
-                    to: "workplace_coach.student_id",
+                    to: "workplace_coaches.student_id",
                 },
             },
             deregistrer: {
@@ -129,8 +139,8 @@ class Student extends Model {
                 join: {
                     from: "students.id",
                     through: {
-                        from: "students_labels.student_id",
-                        to: "students_labels.label_id",
+                        from: "student_labels.student_id",
+                        to: "student_labels.label_id",
                     },
                     to: "labels.id",
                 },
