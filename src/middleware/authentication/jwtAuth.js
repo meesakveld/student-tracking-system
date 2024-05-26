@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
-import { TOKEN_SALT } from '../consts.js';
-import { getUserById } from '../services/models/User.js';
+import { TOKEN_SALT } from '../../consts.js';
+import { getUserById } from '../../services/models/User.js';
 
 export default async (req, res, next) => {
 

@@ -12,7 +12,7 @@ import cookieParser from "cookie-parser";
 
 
 // Middleware
-import jwtAuth from "./middleware/jwtAuth.js";
+import jwtAuth from "./middleware/authentication/jwtAuth.js";
 import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
 
 // Controllers
