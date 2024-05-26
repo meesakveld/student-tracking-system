@@ -2,6 +2,7 @@ const tableName = "attendances"; //! Change TABLENAME to the name of the table y
 
 const seed = async function (knex) {
     // Deletes ALL existing entries
+    // await knex.raw('SET session_replication_role = replica;');
     await knex(tableName).del();
     await knex(tableName).insert([
         {
@@ -11,6 +12,7 @@ const seed = async function (knex) {
             attendance_type_id: 1,
         }
     ]);
+    // await knex.raw('SET session_replication_role = DEFAULT;');
 };
 
 export { seed };
