@@ -18,7 +18,7 @@ export default async (req, res, next) => {
             return res.redirect('/welcome');
         }
 
-        const user = await getUserById(userData.id, '[role]');
+        const user = await getUserById(userData.id, '[role, employee.functions, student]');
         if (!user && req.path !== '/login') {
             return res.redirect('/login');
         }
