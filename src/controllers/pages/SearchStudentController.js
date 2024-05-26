@@ -4,17 +4,18 @@
  * ------------------------------
 */
 
+import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
+
 export const searchStudentPage = (req, res) => {
+
+    employeeFunctionAuth(req.user.employee.functions, ["admin"]);
+    
+    const filterRole = req.query.filterRole;
+    const filterProgramme = req.query.filterProgramme;
+    const filterClass = req.query.filterClass;
+    const filterCourse = req.query.filterCourse;
+
     const userFilters = [
-        {
-            id: "filter1",
-            name: "filterProgramme",
-            labelText: "Kies een opleiding:",
-            options: [
-                { value: "graduaat-programmeren", label: "Graduaat Programmeren" },
-                { value: "digitale-vormgeving", label: "Digitale Vormgeving" },
-            ]
-        },
         {
             id: "filter2",
             name: "filterRole",
@@ -26,8 +27,17 @@ export const searchStudentPage = (req, res) => {
             ]
         },
         {
+            id: "filter1",
+            name: "filterProgramme",
+            labelText: "Kies een opleiding:",
+            options: [
+                { value: "graduaat-programmeren", label: "Graduaat Programmeren" },
+                { value: "digitale-vormgeving", label: "Digitale Vormgeving" },
+            ]
+        },
+        {
             id: "filter3",
-            name: "filterProgram",
+            name: "filterClass",
             labelText: "Kies een klas:",
             options: [
                 { value: "PGM1-A", label: "PGM1-A" },
