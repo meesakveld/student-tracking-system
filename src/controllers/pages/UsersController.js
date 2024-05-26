@@ -10,6 +10,7 @@ import EducationProgramme from "../../models/EducationProgramme.js";
 
 export const usersPage = async (req, res) => {
 
+    
     const filterRole = req.query.filterRole;
     const filterProgram = req.query.filterProgram;
     const filterStatus = req.query.filterStatus === "active" ? true : req.query.filterStatus === "inactive" ? false : null;
@@ -75,7 +76,6 @@ export const usersPage = async (req, res) => {
     let students = [];
     let employees = [];
 
-    // Sla een parameter over als deze niet is ingevuld
     students = await Student.query()
         .withGraphFetched('[user.role, education_programmes]')
         .joinRelated('user')
