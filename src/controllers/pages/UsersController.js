@@ -4,94 +4,152 @@
  * ------------------------------
 */
 
-export const usersPage = (req, res) => {
+import Student from "../../models/Student.js";
+import Employee from "../../models/Employee.js";
+import EducationProgramme from "../../models/EducationProgramme.js";
+
+/**
+ * Controller function for the users page.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the rendering is complete.
+ */
+export const usersPage = async (req, res) => {
+    // ——— FILTERS DATA ———
+    const filterRole = req.query.filterRole;
+    const filterProgram = req.query.filterProgram;
+    const filterStatus = req.query.filterStatus === "active" ? true : req.query.filterStatus === "inactive" ? false : null;
+    const filterAcademicYear = req.query.filterAcademicYear;
+
+    // ——— FILTERS OPTIONS ———
+    const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
+    const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
+    const academicYearsOptions = academicYears.map(academicYear => ({ value: academicYear, label: academicYear, selected: academicYear === filterAcademicYear}));
+
+    const programmes = !filterAcademicYear ? [] : await EducationProgramme.query()
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('academic_year', filterAcademicYear);
+            }
+        });
+    const programmesOptions = programmes.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgram }));
+
+    // ——— FILTERS ———
     const userFilters = [
         {
             id: "filter1",
             name: "filterRole",
             labelText: "Filter op rol:",
             options: [
-                { value: "employee", label: "Alle rollen" },
-                { value: "employee", label: "Medewerker" },
-                { value: "student", label: "Student" },
-                { value: "outsider", label: "Externe" },
+                { value: "", label: "Alle rollen" },
+                { value: "student", label: "Student", selected: filterRole === "student" },
+                { value: "employee", label: "Medewerker", selected: filterRole === "employee" },
+                { value: "external", label: "Extern", selected: filterRole === "external" }
             ]
         },
         {
-            id: "filter2",
-            name: "filterFunction",
-            labelText: "Filter op functie:",
+            id: "filterAcademicYear",
+            name: "filterAcademicYear",
+            labelText: "Filter op academisch jaar:",
             options: [
-                { value: "all", label: "Alle functies" },
-                { value: "teachers", label: "Docenten" },
-                { value: "coaches", label: "Leercoaches" },
-                { value: "teamleaders", label: "Teamleiders" }
+                { value: "", label: "Selecteer academisch jaar" },
+                ...academicYearsOptions
             ]
         },
         {
-            id: "filter3",
+            id: "filterProgram",
             name: "filterProgram",
             labelText: "Filter op opleiding:",
             options: [
-                { value: "all", label: "Alle opleidingen" },
-                { value: "programming", label: "Programmeren" },
-                { value: "design", label: "DVG" }
-            ]
+                { value: "", label: "Alle opleidingen" },
+                ...programmesOptions
+            ],
+            disabled: !filterAcademicYear
         },
         {
             id: "filter4",
             name: "filterStatus",
             labelText: "Filter op status:",
             options: [
-                { value: "all", label: "Alle statussen" },
-                { value: "active", label: "Actief" },
-                { value: "inactive", label: "Inactief" }
+                { value: "", label: "Alle statussen" },
+                { value: "active", label: "Actief", selected: filterStatus === true },
+                { value: "inactive", label: "Inactief", selected: filterStatus === false }
             ]
         }
     ];
 
-    const usersTable = {
-        headers: ["Naam", "Functies", "Opleiding", "Status"],
-        rows: [
-            {
-                statusClass: "active",
-                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief"],
-                deleteButton: true,
-                editButton: true
-            },
-            {
-                statusClass: "active",
-                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief"],
-                deleteButton: true,
-                editButton: true
-            },
-            {
-                statusClass: "inactive",
-                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief"],
-                deleteButton: true,
-                editButton: true
-            },
-            {
-                statusClass: "active",
-                cols: ["Philippe De Pauw", "Admin", "Programmeren", "Actief"],
-                deleteButton: true,
-                editButton: true
-            },
-            {
-                statusClass: "active",
-                cols: ["Adriaan Glibert", "Docent", "Programmeren", "Actief"],
-                deleteButton: true,
-                editButton: true
-            },
-            {
-                statusClass: "inactive",
-                cols: ["Lisa De Backer", "Werkplekbegeleider", "Programmeren", "Inactief"],
-                deleteButton: true,
-                editButton: true
+    // ——— TABLE DATA ———
+    let students = [];
+    let employees = [];
+
+    students = await Student.query()
+        .withGraphFetched('[user.role, education_programmes]')
+        .joinRelated('user')
+        .where(builder => {
+            if (filterStatus !== null) {
+                builder.where('user.is_active', filterStatus);
             }
-        ]
+        })
+        .joinRelated(filterProgram || filterAcademicYear ? 'education_programmes' : '')
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('education_programmes.academic_year', filterAcademicYear);
+            }
+        })
+        .where(builder => {
+            if (filterProgram) {
+                builder.where('education_programmes.code', filterProgram);
+            }
+        })
+
+    employees = await Employee.query()
+        .withGraphFetched('[user.role, education_programmes]')
+        .joinRelated('user')
+        .where(builder => {
+            if (filterStatus !== null) {
+                builder.where('user.is_active', filterStatus);
+            }
+        })
+        .joinRelated(filterProgram || filterAcademicYear ? 'education_programmes' : '')
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('education_programmes.academic_year', filterAcademicYear);
+            }
+        })
+        .where(builder => {
+            if (filterProgram) {
+                builder.where('education_programmes.code', filterProgram);
+            }
+        })
+
+    if (filterRole === "student") employees = [];
+    if (filterRole === "employee") students = [];
+
+    let users = [...students, ...employees];
+    users.sort((a, b) => a.user.lastname < b.user.lastname ? -1 : 1);
+
+    const rows = users.map(user => {
+        const isActive = user.user.is_active;
+        return {
+            isActive,
+            cols: [
+                `${user.user.firstname} ${user.user.lastname}`,
+                user.user.role.title,
+                user.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-",
+                isActive ? "Actief" : "Inactief"
+            ],
+            user_id: user.user_id,
+            deleteButton: true,
+            infoButton: true
+        };
+    })
+
+    const usersTable = {
+        headers: ["Naam", "Rol", "Opleiding", "Status"],
+        rows: rows
     };
 
+    // ——— RENDER DATA ———
     const data = {
         user: req.user,
         userFilters,

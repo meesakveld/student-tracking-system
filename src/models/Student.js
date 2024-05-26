@@ -13,6 +13,8 @@ import WorkplaceMentor from "./WorkplaceMentor.js";
 import Deregister from "./Deregister.js";
 import Course from "./Course.js";
 import StatusRegistration from "./StatusesRegistration.js";
+import Comment from "./Comment.js";
+import EducationProgramme from "./EducationProgramme.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -49,7 +51,7 @@ class Student extends Model {
                     to: "attendances.student_id",
                 },
             },
-            users: {
+            user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
@@ -143,6 +145,18 @@ class Student extends Model {
                         to: "course_registration.course_id",
                     },
                     to: "courses.id",
+                },
+            },
+            education_programmes: {
+                relation: Model.ManyToManyRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "education_programmes_students.student_id",
+                        to: "education_programmes_students.education_programme_id",
+                    },
+                    to: "education_programmes.id",
                 },
             },
         }
