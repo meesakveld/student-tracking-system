@@ -9,6 +9,7 @@ import { create } from "express-handlebars";
 import bodyParser from "body-parser";
 import { VIEWS_PATH, PORT } from "./consts.js";
 import cookieParser from "cookie-parser";
+import handlebarsHelpers from "./lib/HandlebarsHelpers.js";
 
 
 // Middleware
@@ -35,6 +36,7 @@ app.use(cookieParser());
 
 const hbs = create({
     extname: "hbs",
+    helpers: handlebarsHelpers
 });
 
 app.engine("hbs", hbs.engine);
