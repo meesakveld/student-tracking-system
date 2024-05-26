@@ -29,6 +29,7 @@ export default async (req, res, next) => {
 
         return next()
     } catch (error) {
+        res.clearCookie("user");
         res.redirect('/login');
     }
 
