@@ -465,6 +465,630 @@ const seed = async function (knex) {
             "slug": "postgraduaat-zorgleraar",
             "academic_year": "2023-24",
             "code": "PGRZGL"
+        },
+        {
+            "title": "Bachelor in het onderwijs : buitengewoon onderwijs",
+            "slug": "bachelor-in-het-onderwijs-buitengewoon-onderwijs",
+            "academic_year": "2023-24",
+            "code": "BNBBUO"
+        },
+        {
+            "title": "Bachelor in de creatieve therapie",
+            "slug": "bachelor-in-de-creatieve-therapie",
+            "academic_year": "2023-24",
+            "code": "BNBCRT"
+        },
+        {
+            "title": "Bachelor in het onderwijs : schoolontwikkeling",
+            "slug": "bachelor-in-het-onderwijs-schoolontwikkeling",
+            "academic_year": "2023-24",
+            "code": "BNBSON"
+        },
+        {
+            "title": "Bachelor in het onderwijs : zorgverbreding en remediërend leren",
+            "slug": "bachelor-in-het-onderwijs-zorgverbreding-en-remedierend-leren",
+            "academic_year": "2023-24",
+            "code": "BNBZRL"
+        },
+        {
+            "title": "Graduaat in de accounting administration",
+            "slug": "graduaat-in-de-accounting-administration",
+            "academic_year": "2023-24",
+            "code": "GRAAADG"
+        },
+        {
+            "title": "Graduaat in de accounting administration",
+            "slug": "graduaat-in-de-accounting-administration",
+            "academic_year": "2023-24",
+            "code": "GRAAADO"
+        },
+        {
+            "title": "Educatieve graduaatsopleiding in het secundair onderwijs",
+            "slug": "educatieve-graduaatsopleiding-in-het-secundair-onderwijs",
+            "academic_year": "2023-24",
+            "code": "GRAEGO"
+        },
+        {
+            "title": "Graduaat in het informatiebeheer",
+            "slug": "graduaat-in-het-informatiebeheer",
+            "academic_year": "2023-24",
+            "code": "GRAIBA"
+        },
+        {
+            "title": "Graduaat in het maatschappelijk werk",
+            "slug": "graduaat-in-het-maatschappelijk-werk",
+            "academic_year": "2023-24",
+            "code": "GRAMAW"
+        },
+        {
+            "title": "Graduaat in de marketing- en communicatiesupport",
+            "slug": "graduaat-in-de-marketing-en-communicatiesupport",
+            "academic_year": "2023-24",
+            "code": "GRAMCS"
+        },
+        {
+            "title": "Graduaat in de orthopedagogische begeleiding",
+            "slug": "graduaat-in-de-orthopedagogische-begeleiding",
+            "academic_year": "2023-24",
+            "code": "GRAOTB"
+        },
+        {
+            "title": "Graduaat in de orthopedagogie",
+            "slug": "graduaat-in-de-orthopedagogie",
+            "academic_year": "2023-24",
+            "code": "GRAOTP"
+        },
+        {
+            "title": "Graduaat in het programmeren",
+            "slug": "graduaat-in-het-programmeren",
+            "academic_year": "2023-24",
+            "code": "GRAPGMG"
+        },
+        {
+            "title": "Graduaat in het programmeren",
+            "slug": "graduaat-in-het-programmeren",
+            "academic_year": "2023-24",
+            "code": "GRAPGMO"
+        },
+        {
+            "title": "Graduaat in het sociaal-cultureel werk",
+            "slug": "graduaat-in-het-sociaal-cultureel-werk",
+            "academic_year": "2023-24",
+            "code": "GRASCW"
+        },
+        {
+            "title": "Graduaat in het transport en de logistiek",
+            "slug": "graduaat-in-het-transport-en-de-logistiek",
+            "academic_year": "2023-24",
+            "code": "GRATRLO"
+        },
+        {
+            "title": "Graduaat in het transport en de logistiek",
+            "slug": "graduaat-in-het-transport-en-de-logistiek",
+            "academic_year": "2023-24",
+            "code": "GRATRLG"
+        },
+        {
+            "title": "Graduaat in de tolk Vlaamse Gebarentaal",
+            "slug": "graduaat-in-de-tolk-vlaamse-gebarentaal",
+            "academic_year": "2023-24",
+            "code": "GRATVG"
+        },
+        {
+            "title": "Bachelor in het bedrijfsmanagement",
+            "slug": "bachelor-in-het-bedrijfsmanagement",
+            "academic_year": "2023-24",
+            "code": "PBABEM"
+        },
+        {
+            "title": "Bachelor in de communicatie",
+            "slug": "bachelor-in-de-communicatie",
+            "academic_year": "2023-24",
+            "code": "PBACOM"
+        },
+        {
+            "title": "Bachelor in de ergotherapie",
+            "slug": "bachelor-in-de-ergotherapie",
+            "academic_year": "2023-24",
+            "code": "PBAERG"
+        },
+        {
+            "title": "Bachelor in de grafische en digitale media",
+            "slug": "bachelor-in-de-grafische-en-digitale-media",
+            "academic_year": "2023-24",
+            "code": "PBAGDM"
+        },
+        {
+            "title": "Bachelor of International Business Management",
+            "slug": "bachelor-of-international-business-management",
+            "academic_year": "2023-24",
+            "code": "PBAIBM"
+        },
+        {
+            "title": "Bachelor of International Communication Management",
+            "slug": "bachelor-of-international-communication-management",
+            "academic_year": "2023-24",
+            "code": "PBAICM"
+        },
+        {
+            "title": "Bachelor of International Graphic and Digital Media",
+            "slug": "bachelor-of-international-graphic-and-digital-media",
+            "academic_year": "2023-24",
+            "code": "PBAIGM"
+        },
+        {
+            "title": "Bachelor of International Journalism",
+            "slug": "bachelor-of-international-journalism",
+            "academic_year": "2023-24",
+            "code": "PBAIJO"
+        },
+        {
+            "title": "Bachelor of International Organisation & Management",
+            "slug": "bachelor-of-international-organisation-and-management",
+            "academic_year": "2023-24",
+            "code": "PBAIOM"
+        },
+        {
+            "title": "Bachelor in de journalistiek",
+            "slug": "bachelor-in-de-journalistiek",
+            "academic_year": "2023-24",
+            "code": "PBAJOU"
+        },
+        {
+            "title": "Bachelor in de logopedie en de audiologie",
+            "slug": "bachelor-in-de-logopedie-en-de-audiologie",
+            "academic_year": "2023-24",
+            "code": "PBALOA"
+        },
+        {
+            "title": "Bachelor in de mondzorg",
+            "slug": "bachelor-in-de-mondzorg",
+            "academic_year": "2023-24",
+            "code": "PBAMOZ"
+        },
+        {
+            "title": "Bachelor in organisatie & management",
+            "slug": "bachelor-in-organisatie-en-management",
+            "academic_year": "2023-24",
+            "code": "PBAORM"
+        },
+        {
+            "title": "Educatieve bachelor (Ba) in het kleuteronderwijs",
+            "slug": "educatieve-bachelor-in-het-kleuteronderwijs",
+            "academic_year": "2023-24",
+            "code": "PBAOKO"
+        },
+        {
+            "title": "Educatieve bachelor (Ba) in het kleuteronderwijs",
+            "slug": "educatieve-bachelor-in-het-kleuteronderwijs",
+            "academic_year": "2023-24",
+            "code": "PBAOKON"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: lager onderwijs",
+            "slug": "educatieve-bachelor-in-het-onderwijs-lager-onderwijs",
+            "academic_year": "2023-24",
+            "code": "PBAOLO"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: lager onderwijs",
+            "slug": "educatieve-bachelor-in-het-onderwijs-lager-onderwijs",
+            "academic_year": "2023-24",
+            "code": "PBAOLON"
+        },
+        {
+            "title": "Educatieve bachelor in het secundair onderwijs",
+            "slug": "educatieve-bachelor-in-het-secundair-onderwijs",
+            "academic_year": "2023-24",
+            "code": "PBAOSO"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: secundair onderwijs (verkort)",
+            "slug": "educatieve-bachelor-in-het-onderwijs-secundair-onderwijs-verkort",
+            "academic_year": "2023-24",
+            "code": "PBAOSOV"
+        },
+        {
+            "title": "Bachelor in de toegepaste psychologie",
+            "slug": "bachelor-in-de-toegepaste-psychologie",
+            "academic_year": "2023-24",
+            "code": "PBATOP"
+        },
+        {
+            "title": "Bachelor in het vastgoed",
+            "slug": "bachelor-in-het-vastgoed",
+            "academic_year": "2023-24",
+            "code": "PBAVAS"
+        },
+        {
+            "title": "Bachelor in de verpleegkunde",
+            "slug": "bachelor-in-de-verpleegkunde",
+            "academic_year": "2023-24",
+            "code": "PBAVER"
+        },
+        {
+            "title": "Bachelor in de vroedkunde",
+            "slug": "bachelor-in-de-vroedkunde",
+            "academic_year": "2023-24",
+            "code": "PBAVRO"
+        },
+        {
+            "title": "Bachelor in het onderwijs : buitengewoon onderwijs",
+            "slug": "bachelor-in-het-onderwijs-buitengewoon-onderwijs",
+            "academic_year": "2022-23",
+            "code": "BNBBUO"
+        },
+        {
+            "title": "Bachelor in de creatieve therapie",
+            "slug": "bachelor-in-de-creatieve-therapie",
+            "academic_year": "2022-23",
+            "code": "BNBCRT"
+        },
+        {
+            "title": "Bachelor in het onderwijs : schoolontwikkeling",
+            "slug": "bachelor-in-het-onderwijs-schoolontwikkeling",
+            "academic_year": "2022-23",
+            "code": "BNBSON"
+        },
+        {
+            "title": "Bachelor in het onderwijs  : zorgverbreding en remediërend leren",
+            "slug": "bachelor-in-het-onderwijs-zorgverbreding-en-remedierend-leren",
+            "academic_year": "2022-23",
+            "code": "BNBZRL"
+        },
+        {
+            "title": "Graduaat in de accounting administration",
+            "slug": "graduaat-in-de-accounting-administration",
+            "academic_year": "2022-23",
+            "code": "GRAAADG"
+        },
+        {
+            "title": "Graduaat in de accounting administration",
+            "slug": "graduaat-in-de-accounting-administration",
+            "academic_year": "2022-23",
+            "code": "GRAAADO"
+        },
+        {
+            "title": "Educatieve graduaatsopleiding in het secundair onderwijs",
+            "slug": "educatieve-graduaatsopleiding-in-het-secundair-onderwijs",
+            "academic_year": "2022-23",
+            "code": "GRAEGO"
+        },
+        {
+            "title": "Graduaat in het informatiebeheer",
+            "slug": "graduaat-in-het-informatiebeheer",
+            "academic_year": "2022-23",
+            "code": "GRAIBA"
+        },
+        {
+            "title": "Graduaat in het maatschappelijk werk",
+            "slug": "graduaat-in-het-maatschappelijk-werk",
+            "academic_year": "2022-23",
+            "code": "GRAMAW"
+        },
+        {
+            "title": "Graduaat in de marketing- en communicatiesupport",
+            "slug": "graduaat-in-de-marketing-en-communicatiesupport",
+            "academic_year": "2022-23",
+            "code": "GRAMCS"
+        },
+        {
+            "title": "Graduaat in de orthopedagogische begeleiding",
+            "slug": "graduaat-in-de-orthopedagogische-begeleiding",
+            "academic_year": "2022-23",
+            "code": "GRAOTB"
+        },
+        {
+            "title": "Graduaat in de orthopedagogie",
+            "slug": "graduaat-in-de-orthopedagogie",
+            "academic_year": "2022-23",
+            "code": "GRAOTP"
+        },
+        {
+            "title": "Graduaat in het programmeren",
+            "slug": "graduaat-in-het-programmeren",
+            "academic_year": "2022-23",
+            "code": "GRAPGMG"
+        },
+        {
+            "title": "Graduaat in het programmeren",
+            "slug": "graduaat-in-het-programmeren",
+            "academic_year": "2022-23",
+            "code": "GRAPGMO"
+        },
+        {
+            "title": "Graduaat in het sociaal-cultureel werk",
+            "slug": "graduaat-in-het-sociaal-cultureel-werk",
+            "academic_year": "2022-23",
+            "code": "GRASCW"
+        },
+        {
+            "title": "Graduaat in het transport en de logistiek",
+            "slug": "graduaat-in-het-transport-en-de-logistiek",
+            "academic_year": "2022-23",
+            "code": "GRATRLO"
+        },
+        {
+            "title": "Graduaat in het transport en de logistiek",
+            "slug": "graduaat-in-het-transport-en-de-logistiek",
+            "academic_year": "2022-23",
+            "code": "GRATRLG"
+        },
+        {
+            "title": "Graduaat in de tolk Vlaamse Gebarentaal",
+            "slug": "graduaat-in-de-tolk-vlaamse-gebarentaal",
+            "academic_year": "2022-23",
+            "code": "GRATVG"
+        },
+        {
+            "title": "Bachelor in het bedrijfsmanagement",
+            "slug": "bachelor-in-het-bedrijfsmanagement",
+            "academic_year": "2022-23",
+            "code": "PBABEM"
+        },
+        {
+            "title": "Bachelor in de communicatie",
+            "slug": "bachelor-in-de-communicatie",
+            "academic_year": "2022-23",
+            "code": "PBACOM"
+        },
+        {
+            "title": "Bachelor in de ergotherapie",
+            "slug": "bachelor-in-de-ergotherapie",
+            "academic_year": "2022-23",
+            "code": "PBAERG"
+        },
+        {
+            "title": "Bachelor in de grafische en digitale media",
+            "slug": "bachelor-in-de-grafische-en-digitale-media",
+            "academic_year": "2022-23",
+            "code": "PBAGDM"
+        },
+        {
+            "title": "Bachelor of International Business Management",
+            "slug": "bachelor-of-international-business-management",
+            "academic_year": "2022-23",
+            "code": "PBAIBM"
+        },
+        {
+            "title": "Bachelor of International Communication Management",
+            "slug": "bachelor-of-international-communication-management",
+            "academic_year": "2022-23",
+            "code": "PBAICM"
+        },
+        {
+            "title": "Bachelor of International Graphic and Digital Media",
+            "slug": "bachelor-of-international-graphic-and-digital-media",
+            "academic_year": "2022-23",
+            "code": "PBAIGM"
+        },
+        {
+            "title": "Bachelor of International Journalism",
+            "slug": "bachelor-of-international-journalism",
+            "academic_year": "2022-23",
+            "code": "PBAIJO"
+        },
+        {
+            "title": "Bachelor of International Organisation & Management",
+            "slug": "bachelor-of-international-organisation-and-management",
+            "academic_year": "2022-23",
+            "code": "PBAIOM"
+        },
+        {
+            "title": "Bachelor in de journalistiek",
+            "slug": "bachelor-in-de-journalistiek",
+            "academic_year": "2022-23",
+            "code": "PBAJOU"
+        },
+        {
+            "title": "Bachelor in de logopedie en de audiologie",
+            "slug": "bachelor-in-de-logopedie-en-de-audiologie",
+            "academic_year": "2022-23",
+            "code": "PBALOA"
+        },
+        {
+            "title": "Bachelor in de mondzorg",
+            "slug": "bachelor-in-de-mondzorg",
+            "academic_year": "2022-23",
+            "code": "PBAMOZ"
+        },
+        {
+            "title": "Bachelor in organisatie & management",
+            "slug": "bachelor-in-organisatie-en-management",
+            "academic_year": "2022-23",
+            "code": "PBAORM"
+        },
+        {
+            "title": "Educatieve bachelor (Ba) in het kleuteronderwijs",
+            "slug": "educatieve-bachelor-ba-in-het-kleuteronderwijs",
+            "academic_year": "2022-23",
+            "code": "PBAOKO"
+        },
+        {
+            "title": "Educatieve bachelor (Ba) in het kleuteronderwijs",
+            "slug": "educatieve-bachelor-ba-in-het-kleuteronderwijs",
+            "academic_year": "2022-23",
+            "code": "PBAOKON"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: lager onderwijs",
+            "slug": "educatieve-bachelor-in-het-onderwijs-lager-onderwijs",
+            "academic_year": "2022-23",
+            "code": "PBAOLO"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: lager onderwijs",
+            "slug": "educatieve-bachelor-in-het-onderwijs-lager-onderwijs",
+            "academic_year": "2022-23",
+            "code": "PBAOLON"
+        },
+        {
+            "title": "Educatieve bachelor in het secundair onderwijs",
+            "slug": "educatieve-bachelor-in-het-secundair-onderwijs",
+            "academic_year": "2022-23",
+            "code": "PBAOSO"
+        },
+        {
+            "title": "Educatieve bachelor in het onderwijs: secundair onderwijs (verkort)",
+            "slug": "educatieve-bachelor-in-het-onderwijs-secundair-onderwijs-verkort",
+            "academic_year": "2022-23",
+            "code": "PBAOSOV"
+        },
+        {
+            "title": "Bachelor in de verpleegkunde",
+            "slug": "bachelor-in-de-verpleegkunde",
+            "academic_year": "2022-23",
+            "code": "PBAVER"
+        },
+        {
+            "title": "Bachelor in de verpleegkunde (verkort)",
+            "slug": "bachelor-in-de-verpleegkunde-verkort",
+            "academic_year": "2022-23",
+            "code": "PBAVERK"
+        },
+        {
+            "title": "Bachelor na bachelor buitengewoon onderwijs",
+            "slug": "bachelor-na-bachelor-buitengewoon-onderwijs",
+            "academic_year": "2022-23",
+            "code": "PBVBUO"
+        },
+        {
+            "title": "Bachelor na bachelor creatief therapie",
+            "slug": "bachelor-na-bachelor-creatief-therapie",
+            "academic_year": "2022-23",
+            "code": "PBVCRT"
+        },
+        {
+            "title": "Bachelor na bachelor schoolontwikkeling",
+            "slug": "bachelor-na-bachelor-schoolontwikkeling",
+            "academic_year": "2022-23",
+            "code": "PBVSON"
+        },
+        {
+            "title": "Bachelor na bachelor zorgverbreding en remediërend leren",
+            "slug": "bachelor-na-bachelor-zorgverbreding-en-remedierend-leren",
+            "academic_year": "2022-23",
+            "code": "PBVZRL"
+        },
+        {
+            "title": "Bachelor in de biomedische laboratoriumtechnologie",
+            "slug": "bachelor-in-de-biomedische-laboratoriumtechnologie",
+            "academic_year": "2022-23",
+            "code": "PBBBLT"
+        },
+        {
+            "title": "Bachelor in de chemie",
+            "slug": "bachelor-in-de-chemie",
+            "academic_year": "2022-23",
+            "code": "PBBCHG"
+        },
+        {
+            "title": "Bachelor in de chemie",
+            "slug": "bachelor-in-de-chemie",
+            "academic_year": "2022-23",
+            "code": "PBBCHO"
+        },
+        {
+            "title": "Bachelor in de elektromechanica",
+            "slug": "bachelor-in-de-elektromechanica",
+            "academic_year": "2022-23",
+            "code": "PBBELG"
+        },
+        {
+            "title": "Bachelor in de elektromechanica",
+            "slug": "bachelor-in-de-elektromechanica",
+            "academic_year": "2022-23",
+            "code": "PBBELO"
+        },
+        {
+            "title": "Bachelor in de elektronica-ICT",
+            "slug": "bachelor-in-de-elektronica-ict",
+            "academic_year": "2022-23",
+            "code": "PBBELI"
+        },
+        {
+            "title": "Bachelor in de energietechnologie",
+            "slug": "bachelor-in-de-energietechnologie",
+            "academic_year": "2022-23",
+            "code": "PBBETG"
+        },
+        {
+            "title": "Bachelor in de energietechnologie",
+            "slug": "bachelor-in-de-energietechnologie",
+            "academic_year": "2022-23",
+            "code": "PBBETO"
+        },
+        {
+            "title": "Bachelor in de integrale veiligheid",
+            "slug": "bachelor-in-de-integrale-veiligheid",
+            "academic_year": "2022-23",
+            "code": "PBBIVG"
+        },
+        {
+            "title": "Bachelor in de integrale veiligheid",
+            "slug": "bachelor-in-de-integrale-veiligheid",
+            "academic_year": "2022-23",
+            "code": "PBBIVO"
+        },
+        {
+            "title": "Bachelor in de logistiek management",
+            "slug": "bachelor-in-de-logistiek-management",
+            "academic_year": "2022-23",
+            "code": "PBBLMG"
+        },
+        {
+            "title": "Bachelor in de logistiek management",
+            "slug": "bachelor-in-de-logistiek-management",
+            "academic_year": "2022-23",
+            "code": "PBBLMO"
+        },
+        {
+            "title": "Bachelor in de orthopedagogie",
+            "slug": "bachelor-in-de-orthopedagogie",
+            "academic_year": "2022-23",
+            "code": "PBBOTG"
+        },
+        {
+            "title": "Bachelor in de orthopedagogie",
+            "slug": "bachelor-in-de-orthopedagogie",
+            "academic_year": "2022-23",
+            "code": "PBBOTO"
+        },
+        {
+            "title": "Bachelor in de vastgoed",
+            "slug": "bachelor-in-de-vastgoed",
+            "academic_year": "2022-23",
+            "code": "PBBVSTG"
+        },
+        {
+            "title": "Bachelor in de vastgoed",
+            "slug": "bachelor-in-de-vastgoed",
+            "academic_year": "2022-23",
+            "code": "PBBVSTO"
+        },
+        {
+            "title": "Bachelor in de toegepaste informatica",
+            "slug": "bachelor-in-de-toegepaste-informatica",
+            "academic_year": "2022-23",
+            "code": "PBBTI"
+        },
+        {
+            "title": "Bachelor in de toegepaste psychologie",
+            "slug": "bachelor-in-de-toegepaste-psychologie",
+            "academic_year": "2022-23",
+            "code": "PBBTP"
+        },
+        {
+            "title": "Bachelor in de toegepaste veiligheid",
+            "slug": "bachelor-in-de-toegepaste-veiligheid",
+            "academic_year": "2022-23",
+            "code": "PBBTVG"
+        },
+        {
+            "title": "Bachelor in de toegepaste veiligheid",
+            "slug": "bachelor-in-de-toegepaste-veiligheid",
+            "academic_year": "2022-23",
+            "code": "PBBTVO"
         }
     ]
     );
