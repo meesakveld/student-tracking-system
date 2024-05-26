@@ -1,4 +1,4 @@
-import Role from "../../models/Role";
+import Role from "../../models/Role.js";
 
 /**
  * Retrieves all roles.
@@ -6,7 +6,7 @@ import Role from "../../models/Role";
  * @returns {Promise<Array>} - A promise that resolves to an array of roles.
  * @throws {Error} - If no roles are found.
  */
-export const getAllRole = async (withGraphFetched = '[]') => {
+export const getAllRoles = async (withGraphFetched = '[]') => {
 
     // Get all roles
     const roles = await Role.query().withGraphFetched(withGraphFetched);

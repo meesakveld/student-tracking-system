@@ -8,9 +8,11 @@ import Express from "express";
 
 // Controllers
 import userRoutes from "./userRoutes.js";
+import authRoutes from "./authRoutes.js";
+import educationProgramme from "./educationProgrammeRoutes.js";
 
 // Middleware
-
+import { checkUserToken } from "../../controllers/api/AuthController.js";
 
 /**
  * ------------------------------
@@ -27,6 +29,12 @@ const router = Express.Router();
  * ------------------------------
 */
 
-router.use('/user', userRoutes)
+// —— Public routes | Auth routes ——
+router.use('/auth', authRoutes)
+router.use('/education-programmes', educationProgramme)
+
+// —— Private routes ——
+router.use('/user', checkUserToken, userRoutes)
+
 
 export default router;

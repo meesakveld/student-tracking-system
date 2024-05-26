@@ -5,10 +5,6 @@
 */
 
 export const componentsPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
     const section = {
         title: "Aanwezigheid hoor- en werkcolleges",
         content: "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
@@ -139,18 +135,24 @@ export const componentsPage = (req, res) => {
         ],
     }
 
+    const dataComments = [
+        {
+            canView: true,
+            title: "Werkcollege CV",
+            /* Give max characters that can be seen on page (3 sentences) */
+            text: "Mees heeft een goed gevulde CV. De opmaak is professioneel en overzichtelijk. De relevante ervaring en vaardigheden zijn duidelijk beschreven. Bovendien toont de CV een goede balans tussen opleiding en werkervaring.lkmqdsjf sjfioerjziofjer jjfffiiiiiihiuhiuhiuhuuhuhuuhuhiuhuhukhiuhnuhbynjnhkusdncguj,axnn,cgnd,hjrdhngc,bh,hg,dcnjhg,dcnhnv,jfc bgv,nkdsjflsjfisdjifojsdiofjsiojfefjeomfjermiofjreiojfiorejoirejgiorj gioerjgiorejgoirejgiejrgjeriojgioerjg ioerjogiregierog jreoigoierjgio"
+        }
+    ];
+
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
         section,
         labels,
         choiceLists,
         dropdown,
         filters,
-        usersTable
+        usersTable,
+        dataComments
     };
 
     res.render("components", data);

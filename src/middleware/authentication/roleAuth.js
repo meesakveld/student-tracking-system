@@ -1,4 +1,4 @@
-import { getEmployeeById } from '../services/models/Employee.js';
+import { getEmployeeById } from '../../services/models/Employee.js';
 
 /**
  * Middleware function for role-based authentication.

@@ -2,7 +2,7 @@
 <div class="body__inner">
     <main>
         <div class="main__inner search-student">
-            {{> titleSection title="Zoek studenten" }}
+            {{> titleSection title="Zoek studenten" returnUrl="/"}}
             {{> filters filters=userFilters }}
             {{> inputField placeholder="Zoek op naam" }}
             {{> table headers=usersTable.headers rows=usersTable.rows }}

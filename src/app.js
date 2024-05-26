@@ -9,10 +9,11 @@ import { create } from "express-handlebars";
 import bodyParser from "body-parser";
 import { VIEWS_PATH, PORT } from "./consts.js";
 import cookieParser from "cookie-parser";
+import handlebarsHelpers from "./lib/HandlebarsHelpers.js";
 
 
 // Middleware
-import jwtAuth from "./middleware/jwtAuth.js";
+import jwtAuth from "./middleware/authentication/jwtAuth.js";
 import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
 
 // Controllers
@@ -35,6 +36,7 @@ app.use(cookieParser());
 
 const hbs = create({
     extname: "hbs",
+    helpers: handlebarsHelpers
 });
 
 app.engine("hbs", hbs.engine);

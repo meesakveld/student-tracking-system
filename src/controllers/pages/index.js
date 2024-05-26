@@ -10,6 +10,7 @@ import { errorPage } from './ErrorController.js';
 import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
 import { welcomePage } from './WelcomeController.js';
+import  { commentsPage } from './CommentsController.js';
 
 export {
     componentsPage,
@@ -23,5 +24,6 @@ export {
     errorPage,
     userPage,
     usersPage,
-    welcomePage
+    welcomePage,
+    commentsPage
 }

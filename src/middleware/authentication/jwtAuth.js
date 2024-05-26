@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
-import { TOKEN_SALT } from '../consts.js';
-import { getUserById } from '../services/models/User.js';
+import { TOKEN_SALT } from '../../consts.js';
+import { getUserById } from '../../services/models/User.js';
 
 export default async (req, res, next) => {
 
@@ -19,7 +18,7 @@ export default async (req, res, next) => {
             return res.redirect('/welcome');
         }
 
-        const user = await getUserById(userData.id, '[role]');
+        const user = await getUserById(userData.id, '[role, employee.functions, student]');
         if (!user && req.path !== '/login') {
             return res.redirect('/login');
         }
@@ -29,6 +28,7 @@ export default async (req, res, next) => {
 
         return next()
     } catch (error) {
+        res.clearCookie("user");
         res.redirect('/login');
     }
 

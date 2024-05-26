@@ -5,10 +5,6 @@
  */
 
 export const studentPage = (req, res) => {
-    const firstname = "Philippe";
-    const lastname = "De Pauw - Waterschoot";
-    const role = "Admin";
-
     const student = {
         firstName: "Mees",
         lastName: "Akveld",
@@ -68,12 +64,11 @@ export const studentPage = (req, res) => {
         }
     ];
 
+    const pageTitle = `Studentenfiche van: ${student.firstName} ${student.lastName}`;
+
     const data = {
-        user: {
-            firstname,
-            lastname,
-            role,
-        },
+        user: req.user,
+        pageTitle,
         student,
         cards,
     };

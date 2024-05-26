@@ -9,10 +9,11 @@
                     <p class="input-field__error">{{flash}}</p>
 
                     {{#each inputs}}
-                        <div class="input-field">
-                            <p class="input-field__error">{{err}}</p>
-                            <input type="{{type}}" name="{{name}}" class="input-field__input" placeholder="{{label}}" value="{{value}}">
-                        </div>
+                    <div class="input-field">
+                        <p class="input-field__error">{{err}}</p>
+                        <input type="{{type}}" name="{{name}}" class="input-field__input" placeholder="{{label}}"
+                            value="{{value}}">
+                    </div>
                     {{/each}}
 
                     <div class="actions">

@@ -1,0 +1,11 @@
+{{!-- Comment --}}
+<div class="comments">
+    {{#each comments}}
+    {{#if canView}}
+    <a href="{{link}}" class="comment">
+        <h3>{{title}}</h3>
+        <p>{{text}}</p>
+    </a>
+    {{/if}}
+    {{/each}}
+</div>

@@ -13,6 +13,10 @@ import WorkplaceMentor from "./WorkplaceMentor.js";
 import Deregister from "./Deregister.js";
 import Course from "./Course.js";
 import StatusRegistration from "./StatusesRegistration.js";
+import Comment from "./Comment.js";
+import EducationProgramme from "./EducationProgramme.js";
+import Class from "./Class.js";
+import WorkplaceCoach from "./WorkplaceCoach.js";
 
 // define the NavigationItem model
 class Student extends Model {
@@ -49,7 +53,15 @@ class Student extends Model {
                     to: "attendances.student_id",
                 },
             },
-            users: {
+            class: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Class,
+                join: {
+                    from: "students.class_id",
+                    to: "classes.id",
+                },
+            },
+            user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
                 join: {
@@ -91,10 +103,10 @@ class Student extends Model {
             },
             workplace_coach: {
                 relation: Model.HasOneRelation,
-                modelClass: WorkplaceMentor,
+                modelClass: WorkplaceCoach,
                 join: {
                     from: "students.id",
-                    to: "workplace_coach.student_id",
+                    to: "workplace_coaches.student_id",
                 },
             },
             deregistrer: {
@@ -127,8 +139,8 @@ class Student extends Model {
                 join: {
                     from: "students.id",
                     through: {
-                        from: "students_labels.student_id",
-                        to: "students_labels.label_id",
+                        from: "student_labels.student_id",
+                        to: "student_labels.label_id",
                     },
                     to: "labels.id",
                 },
@@ -143,6 +155,18 @@ class Student extends Model {
                         to: "course_registration.course_id",
                     },
                     to: "courses.id",
+                },
+            },
+            education_programmes: {
+                relation: Model.ManyToManyRelation,
+                modelClass: EducationProgramme,
+                join: {
+                    from: "students.id",
+                    through: {
+                        from: "education_programmes_students.student_id",
+                        to: "education_programmes_students.education_programme_id",
+                    },
+                    to: "education_programmes.id",
                 },
             },
         }
