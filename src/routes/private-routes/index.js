@@ -37,7 +37,7 @@ router.get('/users/:id', roleAuth(["employee", "student"]), studentIdAuth, ctr.u
 router.get('/student/:id', ctr.studentPage);
 router.get('/student/:id/:detail', ctr.commentsPage);
 router.get('/student/:id/:detail/edit', ctr.studentDetailPage);
-router.get('/search-student', ctr.searchStudentPage);
+router.get('/search-student', roleAuth(["employee"]), ctr.searchStudentPage);
 router.get('/results', ctr.resultsPage);
 router.get('/presences', ctr.presencesPage);
 router.get('/teachers', ctr.teachersPage);
