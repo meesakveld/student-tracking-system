@@ -14,7 +14,7 @@ const loadEducationPrograms = () => {
                 return;
             }
             
-            const response = await fetch(`/api/education-programmes?academic_year=${academicYearValue}&employee_id=${employeeId ?? employeeId}`);
+            const response = await fetch(`/api/education-programmes?academic_year=${academicYearValue}&employee_id=${employeeId !== null ? employeeId : ''}`);
             const data = await response.json();
 
             const options = data.map(program => {
