@@ -138,9 +138,9 @@ export const usersPage = async (req, res) => {
                 user.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-",
                 isActive ? "Actief" : "Inactief"
             ],
-            user_id: user.user_id,
+            user: user.user,
             deleteButton: true,
-            infoButton: true
+            infoButton: true,
         };
     })
 

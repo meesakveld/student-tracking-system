@@ -4,52 +4,49 @@
  * ------------------------------
  */
 
-import { getStudentById } from "../../services/models/Student.js";
-import Student from "../../models/Student.js";
 
+import { getUserById } from "../../services/models/User.js";
 
 export const userPage = async (req, res) => {
 
     try {
 
         const id = parseInt(req.params.id);
+        const user = await getUserById(id, '[role, student.[labels, class, status_registration.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
 
-        const student = await getStudentById(id, '[user.role, labels, class, status_registration.status, trajectory_coach.user, workplace_coach, workplace_mentor]');
-        console.log(student);
+        let userData = user;
+        if (user.student) userData.account = user.student; delete userData.student
+        if (user.employee) userData.account = user.employee; delete userData.employee 
 
-
-        // show more recent status value -> status_registration.status.title
         const userInfo = {
-            firstName: student.user.firstname,
-            lastName: student.user.lastname,
-            email: student.user.email,
-            class: student.class.name,
-            status: student.status_registration[0]?.status.title || "-",
-            role: student.user.role.title || "-",
-            coach: student.trajectory_coach?.users || "-",
-            workCoach: student.workplace_coach?.employees || "-",
-            workMentor: student.workplace_mentor?.employees || "-",
-            labels: student.labels.map(label => label.title) || null,
+            firstName: userData.firstname,
+            lastName: userData.lastname,
+            email: userData.email,
+            class: userData.role === "student" ? "-" : userData.account?.class?.name,
+            status: userData.account?.status_registration?.[0]?.status.title || "-",
+            role: userData.role.title || "-",
+            coach: userData.account?.trajectory_coach?.users || "-",
+            workCoach: userData.account?.workplace_coach?.employees || "-",
+            workMentor: userData.account?.workplace_mentor?.employees || "-",
+            labels: userData.account?.labels?.map(label => label.title) || null,
         };
 
         const data = {
             user: req.user,
             userInfo,
-            returnUrl: "/"
+            returnUrl: "/users"
         };
 
         res.render('user', data);
 
     } catch (error) {
-        const errorObj = {
+        const data = {
             user: req.user,
             error: {
                 message: error.message,
                 code: 500
             }
         }
-        res.status(500).render('error', errorObj);
+        res.status(500).render('error', data);
     }
 };
-
-export default userPage;
