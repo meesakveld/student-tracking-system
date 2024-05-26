@@ -64,8 +64,11 @@ export const studentPage = (req, res) => {
         }
     ];
 
+    const pageTitle = `Studentenfiche van: ${student.firstName} ${student.lastName}`;
+
     const data = {
         user: req.user,
+        pageTitle,
         student,
         cards,
     };

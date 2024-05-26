@@ -23,18 +23,21 @@ export const userPage = async (req, res) => {
             firstName: userData.firstname,
             lastName: userData.lastname,
             email: userData.email,
-            class: userData.role === "student" ? "-" : userData.account?.class?.name,
-            status: userData.account?.status_registration?.[0]?.status.title || "-",
-            role: userData.role.title || "-",
-            coach: userData.account?.trajectory_coach?.users || "-",
-            workCoach: userData.account?.workplace_coach?.employees || "-",
-            workMentor: userData.account?.workplace_mentor?.employees || "-",
+            class: userData.account?.class?.name || (user.role.title === "student" ? "-" : null),
+            status: userData.account?.status_registration?.[0]?.status.title || (user.role.title === "student" ? "-" : null),
+            role: userData.role.title,
+            coach: userData.account?.trajectory_coach?.users || (user.role.title === "student" ? "-" : null),
+            workCoach: userData.account?.workplace_coach?.employees || (user.role.title === "student" ? "-" : null),
+            workMentor: userData.account?.workplace_mentor?.employees || (user.role.title === "student" ? "-" : null),
             labels: userData.account?.labels?.map(label => label.title) || null,
         };
+
+        const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
 
         const data = {
             user: req.user,
             userInfo,
+            pageTitle,
             returnUrl: returnUrl
         };
 

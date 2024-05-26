@@ -24,8 +24,11 @@ export const studentDetailPage = (req, res) => {
         content: "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
     };
 
+    const pageTitle = `Studentenfiche van: ${student.firstName} ${student.lastName}`;
+
     const data = {
         user: req.user,
+        pageTitle,
         student,
         section,
     };
