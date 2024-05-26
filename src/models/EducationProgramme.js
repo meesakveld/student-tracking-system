@@ -8,6 +8,7 @@ Model.knex(knex);
 import Class from "./Class.js";
 import ProgrammeLine from "./ProgrammeLine.js";
 import Course from "./Course.js";
+import Comment from "./Comment.js";
 
 // define the NavigationItem model
 class EducationProgramme extends Model {
