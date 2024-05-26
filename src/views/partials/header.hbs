@@ -3,7 +3,7 @@
         <a class="logo-sv--small" href="/"><img src="/assets/images/logo.svg" alt="logo_sv"></a>
         <!-- Container for user information and logout icon -->
         <div class="user-container">
-            <a href="#" class="user">{{ user.firstname }} {{ user.lastname }}</a>
+            <a href="/users/{{ user.id }}" class="user">{{ user.firstname }} {{ user.lastname }}</a>
             <a href="/logout" class="logout">
                 <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" stroke="#000" stroke-width="0"
                     viewBox="0 0 24 26">
