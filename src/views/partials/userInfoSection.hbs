@@ -54,7 +54,9 @@
             </div>
         </div>
     </div>
+    {{#eq user.role.title 'employee'}}
     <div class="user-info__button">
         <button class="button">Wijzigen</button>
     </div>
+    {{/eq}}
 </section>
