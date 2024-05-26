@@ -67,7 +67,7 @@ export const usersPage = async (req, res) => {
             disabled: !filterAcademicYear
         },
         {
-            id: "filter4",
+            id: "filterStatus",
             name: "filterStatus",
             labelText: "Filter op status:",
             options: [
