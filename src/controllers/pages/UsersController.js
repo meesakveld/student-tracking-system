@@ -139,6 +139,7 @@ export const usersPage = async (req, res) => {
                 isActive ? "Actief" : "Inactief"
             ],
             user: user.user,
+            returnUrl: '/users',
             deleteButton: true,
             infoButton: true,
         };
