@@ -7,7 +7,7 @@
 import Express from "express";
 
 // Controllers
-import { getAllEducationProgrammes } from "../../controllers/api/EducationProgramme.js";
+import { getAllEducationProgrammes } from "../../controllers/api/models/EducationProgramme.js";
 
 /**
  * ------------------------------

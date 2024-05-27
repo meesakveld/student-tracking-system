@@ -1,7 +1,7 @@
-import EducationProgramme from "../../models/EducationProgramme.js";
-import Employee from "../../models/Employee.js";
+import EducationProgramme from "../../../models/EducationProgramme.js";
+import Employee from "../../../models/Employee.js";
 
-import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
+import { employeeFunctionAuth } from "../../../utils/employeeFunctionAuth.js";
 
 export const getAllEducationProgrammes = async (req, res) => {
 
