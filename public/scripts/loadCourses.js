@@ -2,6 +2,15 @@ const loadCourses = () => {
 
     const courses = document.getElementById('filterCourse');
     const educationProgramme = document.getElementById('filterProgram');
+    const academicYear = document.getElementById('filterAcademicYear');
+
+    academicYear.addEventListener('change', async () => {
+        if (!academicYear.value) {
+            courses.innerHTML = '<option value="">Alle vakken</option>';
+            courses.setAttribute('disabled', true);
+            return;
+        }
+    });
 
     educationProgramme.addEventListener('change', async () => {
         try {
