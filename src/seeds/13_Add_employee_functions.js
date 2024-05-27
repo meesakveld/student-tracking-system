@@ -6,7 +6,7 @@ const seed = async function (knex) {
     await knex(tableName).insert([
         {
             employee_id: 1,
-            function_id: 1
+            function_id: 1,
         }
     ]);
 };

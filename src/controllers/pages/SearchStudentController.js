@@ -5,85 +5,171 @@
 */
 
 import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
+import EducationProgramme from "../../models/EducationProgramme.js";
+import Class from "../../models/Class.js";
+import Course from "../../models/Course.js";
+import Student from "../../models/Student.js";
 
-export const searchStudentPage = (req, res) => {
+/**
+ * Controller function for the search student page.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the rendering is complete.
+ */
+export const searchStudentPage = async (req, res) => {
 
-    employeeFunctionAuth(req.user.employee.functions, ["admin"]);
-    
-    const filterRole = req.query.filterRole;
+    const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin"]);
+
+    // ——— FILTERS DATA ———
+    const filterAcademicYear = req.query.filterAcademicYear;
     const filterProgramme = req.query.filterProgramme;
     const filterClass = req.query.filterClass;
     const filterCourse = req.query.filterCourse;
 
+    // ——— FILTERS OPTIONS ———
+    // ** Academic years **
+    const academicYearsQuery = await EducationProgramme.query()
+        .joinRelated(!hasFullAccess && 'courses.employees')
+        .where(builder => {
+            if (!hasFullAccess) {
+                builder.where('courses:employees.id', req.user.employee.id)
+            }
+        })
+        .distinct('academic_year')
+        .select('academic_year');
+    const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
+    const academicYearsOptions = academicYears.map(academicYear => ({ value: academicYear, label: academicYear, selected: academicYear === filterAcademicYear }));
+
+    // ** Education Programme **
+    const educationProgrammesQuery = !filterAcademicYear ? [] : await EducationProgramme.query()
+        .joinRelated(!hasFullAccess && 'courses.employees')
+        .where(builder => {
+            if (!hasFullAccess) {
+                builder.where('courses:employees.id', req.user.employee.id)
+            }
+        })
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('academic_year', filterAcademicYear);
+            }
+        })
+    const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme, data: [{ title: "id", value: programme.id }]}));
+
+    // ** Classes **
+    const classQuery = !filterProgramme ? [] : await Class.query()
+        .joinRelated('education_programmes')
+        .where(builder => {
+            if (filterProgramme) {
+                builder.where('education_programmes.code', filterProgramme);
+            }
+        });
+    const classOptions = classQuery.map(classItem => ({ value: classItem.name, label: classItem.name, selected: classItem.name === filterClass }));
+
+    // ** Courses **
+    const courseQuery = !filterProgramme ? [] : await Course.query()
+        .joinRelated(!hasFullAccess && 'employees')
+        .where(builder => {
+            if (!hasFullAccess) {
+                builder.where('employees.id', req.user.employee.id)
+            }
+        })
+        .joinRelated('education_programme')
+        .where(builder => {
+            if (filterProgramme) {
+                builder.where('education_programme.code', filterProgramme);
+            }
+        });
+    const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === parseInt(filterCourse) }));
+
     const userFilters = [
         {
-            id: "filter2",
-            name: "filterRole",
-            labelText: "Kies een schooljaar:",
+            id: "filterAcademicYear",
+            name: "filterAcademicYear",
+            labelText: "Filter op academisch jaar:",
             options: [
-                { value: "2023-2024", label: "2023-2024" },
-                { value: "2022-2023", label: "2022-2023" },
-                { value: "2021-2022", label: "2021-2022" },
+                { value: "", label: "Selecteer academisch jaar" },
+                ...academicYearsOptions
             ]
         },
         {
-            id: "filter1",
+            id: "filterProgram",
             name: "filterProgramme",
             labelText: "Kies een opleiding:",
             options: [
-                { value: "graduaat-programmeren", label: "Graduaat Programmeren" },
-                { value: "digitale-vormgeving", label: "Digitale Vormgeving" },
+                { value: "", label: "Alle opleidingen" },
+                ...educationProgrammesOptions
+            ],
+            disabled: !filterAcademicYear,
+            data: [
+                { title: "employee-id", value: req.user.employee.id}
             ]
         },
         {
-            id: "filter3",
+            id: "filterClass",
             name: "filterClass",
             labelText: "Kies een klas:",
             options: [
-                { value: "PGM1-A", label: "PGM1-A" },
-                { value: "PGM1-B", label: "PGM1-B" },
-                { value: "PGM1-C", label: "PGM1-C" },
+                { value: "", label: "Alle klassen"},
+                ...classOptions
+            ],
+            disabled: !filterProgramme || !classOptions.length > 0,
+            data: [
+                { title: "employee-id", value: req.user.employee.id}
             ]
         },
         {
-            id: "filter4",
-            name: "filterStatus",
+            id: "filterCourse",
+            name: "filterCourse",
             labelText: "Kies een vak:",
             options: [
-                { value: "it-business", label: "IT Business" },
-                { value: "it-communication", label: "IT Communication" },
-            ]
+                { value: "", label: "Alle vakken"},
+                ...courseOptions
+            ],
+            disabled: !filterProgramme || !courseOptions.length > 0,
         }
     ];
 
+    // ——— TABLE DATA ———
+    let students = [];
+
+    students = await Student.query()
+        .withGraphFetched('[user.role, education_programmes, class, courses]')
+        .joinRelated(filterProgramme && '[education_programmes]')
+        .where(builder => {
+            if (filterProgramme) {
+                builder.where('education_programmes.code', filterProgramme);
+            }
+        })
+        .joinRelated(filterClass && 'class')
+        .where(builder => {
+            if (filterClass) {
+                builder.where('class.name', filterClass);
+            }
+        })
+        .joinRelated(filterCourse && 'courses')
+        .where(builder => {
+            if (filterCourse) {
+                builder.where('courses.id', filterCourse);
+            }
+        });
+
+    const rows = students.map(student => {
+        return {
+            isActive: student.user.is_active,
+            cols: [
+                `${student.user.firstname} ${student.user.lastname}`,
+                student.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-", 
+                student.user.is_active ? "Actief" : "Inactief"],
+            returnUrl: '/search-student',
+            user: student.user,
+            infoButton: true,
+            studentButton: true,
+        }
+    });
+
     const usersTable = {
         headers: ["Naam", "Opleiding", "Status"],
-        rows: [
-            {
-                statusClass: "active",
-                cols: ["Mees Akveld", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "inactive",
-                cols: ["Benoît Biraguma", "Programmeren", "Inactief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "active",
-                cols: ["Ella Jekale", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "active",
-                cols: ["Tristan De Ridder", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-        ],
+        rows: rows,
     }
 
     const data = {

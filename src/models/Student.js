@@ -151,8 +151,8 @@ class Student extends Model {
                 join: {
                     from: "students.id",
                     through: {
-                        from: "course_registration.student_id",
-                        to: "course_registration.course_id",
+                        from: "course_registrations.student_id",
+                        to: "course_registrations.course_id",
                     },
                     to: "courses.id",
                 },

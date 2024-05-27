@@ -10,6 +10,8 @@ import ProgrammeLine from "./ProgrammeLine.js";
 import Attendance from "./Attendance.js";
 import WorkplaceMentor from "./WorkplaceMentor.js";
 import WorkplaceCoach from "./WorkplaceCoach.js";
+import Comment from "./Comment.js";
+import Employee from "./Employee.js";
 
 // define the NavigationItem model
 class Course extends Model {
@@ -87,6 +89,18 @@ class Course extends Model {
                 join: {
                     from: "courses.id",
                     to: "comments.course_id",
+                },
+            },
+            employees: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Employee,
+                join: {
+                    from: "courses.id",
+                    through: {
+                        from: "course_links.course_id",
+                        to: "course_links.employee_id",
+                    },
+                    to: "employees.id",
                 },
             },
         };
