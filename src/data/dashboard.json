@@ -74,7 +74,8 @@
             "employee"
         ],
         "functions": [
-            "admin"
+            "admin",
+            "teamleader"
         ]
     },
     {
