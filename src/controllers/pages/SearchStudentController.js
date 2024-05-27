@@ -105,7 +105,7 @@ export const searchStudentPage = async (req, res) => {
                 { value: "", label: "Alle klassen"},
                 ...classOptions
             ],
-            disabled: !filterProgramme,
+            disabled: !filterProgramme || !classOptions.length > 0,
             data: [
                 { title: "employee-id", value: req.user.employee.id}
             ]
@@ -118,7 +118,7 @@ export const searchStudentPage = async (req, res) => {
                 { value: "", label: "Alle vakken"},
                 ...courseOptions
             ],
-            disabled: !filterProgramme
+            disabled: !filterProgramme || !courseOptions.length > 0,
         }
     ];
 
