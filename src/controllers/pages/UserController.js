@@ -41,6 +41,10 @@ export const userPage = async (req, res) => {
             returnUrl: returnUrl
         };
 
+        if(data.user.employee.functions) {
+            data.user.employee.functions = data.user.employee.functions.map(func => func.title);
+        }
+
         res.render('user', data);
 
     } catch (error) {

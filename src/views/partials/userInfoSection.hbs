@@ -84,9 +84,11 @@
                 {{/if}}
             </div>
         </div>
+        {{#includes user.employee.functions '["admin", "teamleader"]'}}
         <div class="user-info__button">
             <button class="button">Wijzigen</button>
         </div>
+        {{/includes}}
     {{else}} <!-- If there is no user data => the page to add an user -->
         <div class="user-info">
             <div class="user-info__left">
