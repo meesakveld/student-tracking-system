@@ -43,15 +43,15 @@ class Attendance extends Model {
                     to: "students.id",
                 },
             },
-            courses: {
-                relation: Model.HasManyRelation,
+            course: {
+                relation: Model.BelongsToOneRelation,
                 modelClass: Course,
                 join: {
-                    from: "attendances.course_idcourses.id",
+                    from: "attendances.course_id",
                     to: "courses.id",
                 },
             },
-            attendance_types: {
+            attendance_type: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: AttendanceType,
                 join: {
