@@ -5,31 +5,15 @@
  */
 
 export const studentDetailPage = (req, res) => {
-    const student = {
-        firstName: "Mees",
-        lastName: "Akveld",
-        email: "mees.ak@student.arteveldehs.be",
-        class: "PGM1-C",
-        studyYear: "2023-2024",
-        status: "Werkstudent",
-        role: "Ambassadeur",
-        coach: "Isabelle Volckaert",
-        workCoach: "Viktor Verhaeghe",
-        workMentor: "Lander De Vos",
-        labels: ["Ambassadeur", "Stuver"]
-    };
 
     const section = {
         title: "Aanwezigheid hoor- en werkcolleges",
         content: "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
     };
 
-    const pageTitle = `Studentenfiche van: ${student.firstName} ${student.lastName}`;
-
     const data = {
         user: req.user,
-        pageTitle,
-        student,
+        pageTitle: `Studentenfiche van: ${req.user.firstname} ${req.user.lastname}`,
         section,
     };
 
