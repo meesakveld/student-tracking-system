@@ -147,36 +147,23 @@ export const searchStudentPage = async (req, res) => {
             }
         });
 
-    console.log(students)
+    console.log(students);
+    const rows = students.map(student => {
+        return {
+            isActive: student.user.is_active,
+            cols: [
+                `${student.user.firstname} ${student.user.lastname}`,
+                student.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-", 
+                student.user.is_active ? "Actief" : "Inactief"],
+            returnUrl: '/search-student',
+            infoButton: true,
+            studentButton: true,
+        }
+    });
 
     const usersTable = {
         headers: ["Naam", "Opleiding", "Status"],
-        rows: [
-            {
-                statusClass: "active",
-                cols: ["Mees Akveld", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "inactive",
-                cols: ["Benoît Biraguma", "Programmeren", "Inactief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "active",
-                cols: ["Ella Jekale", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                statusClass: "active",
-                cols: ["Tristan De Ridder", "Programmeren", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-        ],
+        rows: rows,
     }
 
     const data = {
