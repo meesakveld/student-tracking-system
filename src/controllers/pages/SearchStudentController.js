@@ -10,6 +10,12 @@ import Class from "../../models/Class.js";
 import Course from "../../models/Course.js";
 import Student from "../../models/Student.js";
 
+/**
+ * Controller function for the search student page.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the rendering is complete.
+ */
 export const searchStudentPage = async (req, res) => {
 
     const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin"]);
@@ -147,7 +153,6 @@ export const searchStudentPage = async (req, res) => {
             }
         });
 
-    console.log(students);
     const rows = students.map(student => {
         return {
             isActive: student.user.is_active,
