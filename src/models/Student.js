@@ -46,7 +46,7 @@ class Student extends Model {
     static get relationMappings() {
         return {
             attendances: {
-                relation: Model.BelongsToOneRelation,
+                relation: Model.HasManyRelation,
                 modelClass: Attendance,
                 join: {
                     from: "students.id",
