@@ -27,18 +27,28 @@ router.use(jwtAuth);
 
 /**
  * ------------------------------
- *            ROUTING
+ *        ROUTING — GET
  * ------------------------------
 */
 
 router.get('/', ctr.dashboardPage);
+
 router.get('/users', roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/:id', roleAuth(["employee", "student"]), studentIdAuth, ctr.userPage);
+
+router.get('/education-programs', roleAuth(["employee"], ["admin"]), (req, res) => {res.json({message: "Education Programs"})});
+
 router.get('/student-dashboard/:studentId', roleAuth(["employee", "student"]), studentIdAuth, ctr.studentDashboardPage);
 router.get('/student-dashboard/:studentId/:detail', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
-router.get('/student-dashboard/:studentId/:detail/edit', ctr.studentDetailPage);
-router.get('/search-student', roleAuth(["employee"]), ctr.searchStudentPage);
-router.get('/presences', ctr.presencesPage);
+router.get('/student-dashboard/:studentId/:detail/edit', roleAuth(["employee"]), ctr.studentDetailPage);
+
+router.get('/search-students', roleAuth(["employee"]), ctr.searchStudentPage);
+router.get('/search-employees', roleAuth(["employee"], ["teamleader"]), (req, res) => {res.json({message: "Search Employees"})});
+
+router.get('/attendance', ctr.presencesPage);
+router.get('/participation', (req, res) => {res.json({message: "Participation"})});
+router.get('/coach-reports', (req, res) => {res.json({message: "Coach Reports"})});
+
 router.get('/teachers', ctr.teachersPage);
 
 export default router;
