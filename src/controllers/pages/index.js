@@ -1,7 +1,6 @@
 import { componentsPage } from './ComponentsController.js';
 import { dashboardPage } from './DashboardController.js';
 import { presencesPage } from './PresencesController.js';
-import { resultsPage } from './ResultsController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { studentPage } from './StudentController.js';
 import { studentDetailPage } from './StudentDetailController.js';
@@ -16,7 +15,6 @@ export {
     componentsPage,
     dashboardPage,
     presencesPage,
-    resultsPage,
     searchStudentPage,
     studentPage,
     studentDetailPage,
