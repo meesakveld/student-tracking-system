@@ -1,0 +1,95 @@
+[
+    {
+        "title": "Gebruikers",
+        "url": "/users",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "admin"
+        ]
+    },
+    {
+        "title": "Zoek studenten",
+        "url": "/search-students",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "teacher",
+            "trajectory coach",
+            "learning coach",
+            "diversity coach",
+            "workplace coach",
+            "teamleader"
+        ]
+    },
+    {
+        "title": "Aanwezigheden opnemen",
+        "url": "/attendance-recording",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "teacher"
+        ]
+    },
+    {
+        "title": "Participatie tijdens lessen/opdrachten",
+        "url": "/participation-during-lessons-assignments",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "teacher"
+        ]
+    },
+    {
+        "title": "Coach verslagen",
+        "url": "/coach-reports",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "trajectory coach",
+            "learning coach",
+            "diversity coach",
+            "workplace coach"
+        ]
+    },
+    {
+        "title": "Zoek medewerkers",
+        "url": "/search-employees",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "teamleader"
+        ]
+    },
+    {
+        "title": "Opleidingsprogramma's",
+        "url": "/education-programs",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "admin"
+        ]
+    },
+    {
+        "title": "Student dashboard",
+        "url": "/student-dashboard/{student_id}",
+        "roles": [
+            "student"
+        ]
+    },
+    {
+        "title": "Mijn gegevens",
+        "url": "/users/{id}",
+        "roles": [
+            "student"
+        ],
+        "functions": []
+    }
+]
