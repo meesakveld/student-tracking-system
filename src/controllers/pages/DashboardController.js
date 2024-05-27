@@ -4,11 +4,12 @@
  * ------------------------------
 */
 
+import fsp from 'fs/promises';
 import { employeeFunctionAuth } from '../../utils/employeeFunctionAuth.js'
 
 export const dashboardPage = async (req, res) => {
 
-    const dashboardData = await import('../../data/dashboard.json', { assert: { type: 'json' } }).then(data => data.default);
+    const dashboardData = await fsp.readFile("src/data/dashboard.json", "utf-8").then(data => JSON.parse(data));
     const dashboardUserData = dashboardData.map(value => {
         if (!value.roles.includes(req.user.role.title)) return
         if (req.user.employee) {
