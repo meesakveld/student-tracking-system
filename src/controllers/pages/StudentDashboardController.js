@@ -2,50 +2,31 @@
  * ------------------------------
  *          STUDENT PAGE
  * ------------------------------
- */
+*/
 
-export const studentDashboardPage = (req, res) => {
-    const student = {
-        firstName: "Mees",
-        lastName: "Akveld",
-        email: "mees.ak@student.arteveldehs.be",
-        class: "PGM1-C",
-        studyYear: "2023-2024",
-        status: "Werkstudent",
-        role: "Ambassadeur",
-        coach: "Isabelle Volckaert",
-        workCoach: "Viktor Verhaeghe",
-        workMentor: "Lander De Vos",
-        labels: ["Ambassadeur", "Stuver"]
-    };
+import { getStudentById } from '../../services/models/Student.js';
+
+export const studentDashboardPage = async (req, res) => {
+    const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course]]')
+
+    const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+
 
     const cards = [
         {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Aanwezigheid hoor- en werkcolleges",
-            "description": "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
+            "link": `/student-dashboard/${student.id}/attendance`,
+            "title": "Aanwezigheden hoor- en werkcolleges",
+            "description": `Tijdens afgelopen les van ${mostRecentAttendance.course.name} was ${student.user.firstname}: ${mostRecentAttendance.attendance_type.title}`
         },
         {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Participatie tijdens colleges",
+            "link": `/student-dashboard/${student.id}/course-reports`,
+            "title": "Vak gerelateerde verslagen",
             "description": "Mees heeft tijdens de colleges actief deelgenomen en waardevolle inzichten gedeeld met de groep.",
-            "stars": [
-                { "filled": true },
-                { "filled": true },
-                { "filled": true },
-                { "filled": false },
-                { "filled": false }
-            ]
         },
         {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Prestatie oefeningen/opdrachten",
+            "link": `/student-dashboard/${student.id}/personal-reports`,
+            "title": "Persoonlijke verslagen",
             "description": "Mees heeft consistent sterke prestaties geleverd bij het uitvoeren van opdrachten en oefeningen, waarbij hij complexe problemen effectief heeft aangepakt."
-        },
-        {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Vak gerelateerde informatie",
-            "description": "Mees heeft waardevolle inzichten gedeeld tijdens de lessen en heeft blijk gegeven van diepgaand begrip van de vakinhoud."
         },
         {
             "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
@@ -54,7 +35,7 @@ export const studentDashboardPage = (req, res) => {
         },
         {
             "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Coaching",
+            "title": "Coaching verslagen",
             "description": "Mees heeft aanzienlijke vooruitgang geboekt dankzij de individuele coachingssessies, waarbij hij zijn vaardigheden en zelfvertrouwen heeft ontwikkeld. Verdere coaching is niet vereist."
         },
         {
@@ -64,13 +45,13 @@ export const studentDashboardPage = (req, res) => {
         }
     ];
 
-    const pageTitle = `Student dashboard van: ${student.firstName} ${student.lastName}`;
+    const pageTitle = `Student dashboard van: ${student.user.firstname} ${student.user.lastname}${student.class ? `  —  ${student.class.name}` : ""}`;
 
     const data = {
         user: req.user,
         pageTitle,
-        student,
         cards,
+        returnUrl: req.query.returnUrl || "/"
     };
 
     res.render('student', data);
