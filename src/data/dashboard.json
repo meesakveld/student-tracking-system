@@ -26,7 +26,7 @@
     },
     {
         "title": "Aanwezigheden opnemen",
-        "url": "/attendance-recording",
+        "url": "/attendance",
         "roles": [
             "employee"
         ],
@@ -36,7 +36,7 @@
     },
     {
         "title": "Participatie tijdens lessen/opdrachten",
-        "url": "/participation-during-lessons-assignments",
+        "url": "/participation",
         "roles": [
             "employee"
         ],
