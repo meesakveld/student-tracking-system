@@ -17,6 +17,10 @@ export default (roles = [], functions = []) => async (req, res, next) => {
         return res.render('error', { user: req.user, error: { code: 403, message: 'Je hebt geen toegang tot deze pagina' }});
     }
 
+    if (!functions.includes('admin') && !functions.length === 0) {
+        functions.push('admin');
+    }
+
     if (roles.includes('employee') && req.user.role.title === 'employee' && functions.length > 0) {
         try {
             const employee = await getEmployeeById(parseInt(req.user.id), '[functions]');
