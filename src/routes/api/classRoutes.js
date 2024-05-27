@@ -7,7 +7,7 @@
 import Express from "express";
 
 // Controllers
-import { getAllEducationProgrammes } from "../../controllers/api/models/EducationProgrammeController.js";
+import { getAllClasses } from "../../controllers/api/models/ClassController.js";
 
 /**
  * ------------------------------
@@ -25,6 +25,6 @@ const router = Express.Router();
 */
 
 // API Todos routes
-router.get('/', getAllEducationProgrammes);
+router.get('/', getAllClasses);
 
 export default router;

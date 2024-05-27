@@ -46,7 +46,7 @@ export const searchStudentPage = async (req, res) => {
                 builder.where('academic_year', filterAcademicYear);
             }
         })
-    const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme }));
+    const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme, data: [{ title: "id", value: programme.id }]}));
 
     // ** Classes **
     const classQuery = !filterProgramme ? [] : await Class.query()

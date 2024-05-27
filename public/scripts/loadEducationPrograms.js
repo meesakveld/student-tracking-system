@@ -18,7 +18,7 @@ const loadEducationPrograms = () => {
             const data = await response.json();
 
             const options = data.map(program => {
-                return `<option value="${program.code}">${program.title} - ${program.code}</option>`;
+                return `<option value="${program.code}" data-id="${program.id}">${program.title} - ${program.code}</option>`;
             });
 
             options.unshift('<option value="">Alle opleidingen</option>');
