@@ -35,8 +35,8 @@
         ]
     },
     {
-        "title": "Participatie tijdens lessen/opdrachten",
-        "url": "/participation",
+        "title": "Vak Verslagen",
+        "url": "/student-reports",
         "roles": [
             "employee"
         ],
@@ -45,8 +45,8 @@
         ]
     },
     {
-        "title": "Coach verslagen",
-        "url": "/coach-reports",
+        "title": "Coaching verslagen",
+        "url": "/coaching-reports",
         "roles": [
             "employee"
         ],
