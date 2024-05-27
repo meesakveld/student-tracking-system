@@ -79,7 +79,7 @@ export const searchStudentPage = async (req, res) => {
                 builder.where('education_programme.code', filterProgramme);
             }
         });
-    const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === filterCourse }));
+    const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === parseInt(filterCourse) }));
 
     const userFilters = [
         {
@@ -134,19 +134,19 @@ export const searchStudentPage = async (req, res) => {
 
     students = await Student.query()
         .withGraphFetched('[user.role, education_programmes, class, courses]')
-        .joinRelated('[education_programmes]')
+        .joinRelated(filterProgramme && '[education_programmes]')
         .where(builder => {
             if (filterProgramme) {
                 builder.where('education_programmes.code', filterProgramme);
             }
         })
-        .joinRelated('class')
+        .joinRelated(filterClass && 'class')
         .where(builder => {
             if (filterClass) {
                 builder.where('class.name', filterClass);
             }
         })
-        .joinRelated('courses')
+        .joinRelated(filterCourse && 'courses')
         .where(builder => {
             if (filterCourse) {
                 builder.where('courses.id', filterCourse);
