@@ -7,6 +7,18 @@ const seed = async function (knex) {
         {
             student_id: 1,
             course_id: 1
+        },
+        {
+            student_id: 1,
+            course_id: 6
+        },
+        {
+            student_id: 2,
+            course_id: 1
+        },
+        {
+            student_id: 2,
+            course_id: 2
         }
     ]);
 };
