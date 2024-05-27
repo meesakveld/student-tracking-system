@@ -139,10 +139,10 @@ export const usersPage = async (req, res) => {
                 isActive ? "Actief" : "Inactief"
             ],
             user: user.user,
+            student: user,
             returnUrl: '/users',
-            deleteButton: true,
             infoButton: true,
-            studentButton: true,
+            studentButton: user.user.role.title === "student",
         };
     })
 
