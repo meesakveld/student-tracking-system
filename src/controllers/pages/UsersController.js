@@ -142,6 +142,7 @@ export const usersPage = async (req, res) => {
             returnUrl: '/users',
             deleteButton: true,
             infoButton: true,
+            studentButton: true,
         };
     })
 
