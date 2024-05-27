@@ -5,6 +5,10 @@ const myHelpers = {
     includes: (array, arrayStringOfValues = '["", ""]', options) => {
         const arrayOfValues = JSON.parse(arrayStringOfValues);
 
+        if (!array || !array.length || !arrayOfValues || !arrayOfValues.length) {
+            return options.inverse(this);
+        }
+
         if (array.some(item => arrayOfValues.includes(item))) {
             return options.fn(this);
         } else {
