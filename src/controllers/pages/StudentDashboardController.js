@@ -4,7 +4,7 @@
  * ------------------------------
  */
 
-export const studentPage = (req, res) => {
+export const studentDashboardPage = (req, res) => {
     const student = {
         firstName: "Mees",
         lastName: "Akveld",
@@ -21,12 +21,12 @@ export const studentPage = (req, res) => {
 
     const cards = [
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Aanwezigheid hoor- en werkcolleges",
             "description": "Mees heeft alle colleges en workshops regelmatig bijgewoond. Hij heeft grote toewijding getoond en actief deelgenomen aan de lessen."
         },
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Participatie tijdens colleges",
             "description": "Mees heeft tijdens de colleges actief deelgenomen en waardevolle inzichten gedeeld met de groep.",
             "stars": [
@@ -38,22 +38,22 @@ export const studentPage = (req, res) => {
             ]
         },
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Prestatie oefeningen/opdrachten",
             "description": "Mees heeft consistent sterke prestaties geleverd bij het uitvoeren van opdrachten en oefeningen, waarbij hij complexe problemen effectief heeft aangepakt."
         },
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Vak gerelateerde informatie",
             "description": "Mees heeft waardevolle inzichten gedeeld tijdens de lessen en heeft blijk gegeven van diepgaand begrip van de vakinhoud."
         },
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Status student",
             "description": "Mees heeft een uitstekende academische status behouden gedurende het semester, met consistente inzet en uitmuntende resultaten."
         },
         {
-            "link": "/student/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
             "title": "Coaching",
             "description": "Mees heeft aanzienlijke vooruitgang geboekt dankzij de individuele coachingssessies, waarbij hij zijn vaardigheden en zelfvertrouwen heeft ontwikkeld. Verdere coaching is niet vereist."
         },
@@ -75,5 +75,3 @@ export const studentPage = (req, res) => {
 
     res.render('student', data);
 };
-
-export default studentPage;
