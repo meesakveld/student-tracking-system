@@ -5,8 +5,7 @@ const seed = async function (knex) {
     await knex(tableName).del();
     await knex(tableName).insert([
         {
-            user_id: 1,
-            id: 1
+            user_id: 1
         }
     ]);
 };

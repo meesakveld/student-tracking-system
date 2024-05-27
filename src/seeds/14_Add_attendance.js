@@ -2,7 +2,6 @@ const tableName = "attendances"; //! Change TABLENAME to the name of the table y
 
 const seed = async function (knex) {
     // Deletes ALL existing entries
-    // await knex.raw('SET session_replication_role = replica;');
     await knex(tableName).del();
     await knex(tableName).insert([
         {
@@ -10,9 +9,20 @@ const seed = async function (knex) {
             course_id: 1,
             date: "2021-01-01",
             attendance_type_id: 1,
+        },
+        {
+            student_id: 2,
+            course_id: 2,
+            date: "2021-01-01",
+            attendance_type_id: 2,
+        },
+        {
+            student_id: 1,
+            course_id: 6,
+            date: "2021-01-02",
+            attendance_type_id: 1,
         }
     ]);
-    // await knex.raw('SET session_replication_role = DEFAULT;');
 };
 
 export { seed };

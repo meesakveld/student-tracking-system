@@ -26,7 +26,7 @@
     },
     {
         "title": "Aanwezigheden opnemen",
-        "url": "/attendance-recording",
+        "url": "/attendance",
         "roles": [
             "employee"
         ],
@@ -35,8 +35,8 @@
         ]
     },
     {
-        "title": "Participatie tijdens lessen/opdrachten",
-        "url": "/participation-during-lessons-assignments",
+        "title": "Vak Verslagen",
+        "url": "/student-reports",
         "roles": [
             "employee"
         ],
@@ -45,8 +45,8 @@
         ]
     },
     {
-        "title": "Coach verslagen",
-        "url": "/coach-reports",
+        "title": "Coaching verslagen",
+        "url": "/coaching-reports",
         "roles": [
             "employee"
         ],
@@ -74,7 +74,8 @@
             "employee"
         ],
         "functions": [
-            "admin"
+            "admin",
+            "teamleader"
         ]
     },
     {

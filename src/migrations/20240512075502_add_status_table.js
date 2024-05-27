@@ -4,7 +4,7 @@ const tableName = "statuses"; //! Change TABLENAME to the name of the table you 
 export function up(knex) {
     return knex.schema.createTable(tableName, function (table) {
         table.increments("id").primary();
-        table.integer("title").notNullable();
+        table.string("title").notNullable();
     });
 }
  
