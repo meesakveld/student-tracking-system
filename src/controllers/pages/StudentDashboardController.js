@@ -64,7 +64,7 @@ export const studentDashboardPage = (req, res) => {
         }
     ];
 
-    const pageTitle = `Studentenfiche van: ${student.firstName} ${student.lastName}`;
+    const pageTitle = `Student dashboard van: ${student.firstName} ${student.lastName}`;
 
     const data = {
         user: req.user,
