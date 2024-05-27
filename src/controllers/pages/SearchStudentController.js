@@ -8,6 +8,7 @@ import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 import EducationProgramme from "../../models/EducationProgramme.js";
 import Class from "../../models/Class.js";
 import Course from "../../models/Course.js";
+import Student from "../../models/Student.js";
 
 export const searchStudentPage = async (req, res) => {
 
@@ -124,6 +125,29 @@ export const searchStudentPage = async (req, res) => {
 
     // ——— TABLE DATA ———
     let students = [];
+
+    students = await Student.query()
+        .withGraphFetched('[user.role, education_programmes, class, courses]')
+        .joinRelated('[education_programmes]')
+        .where(builder => {
+            if (filterProgramme) {
+                builder.where('education_programmes.code', filterProgramme);
+            }
+        })
+        .joinRelated('class')
+        .where(builder => {
+            if (filterClass) {
+                builder.where('class.name', filterClass);
+            }
+        })
+        .joinRelated('courses')
+        .where(builder => {
+            if (filterCourse) {
+                builder.where('courses.id', filterCourse);
+            }
+        });
+
+    console.log(students)
 
     const usersTable = {
         headers: ["Naam", "Opleiding", "Status"],
