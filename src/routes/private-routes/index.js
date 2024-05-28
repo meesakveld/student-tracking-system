@@ -8,6 +8,7 @@ import Express from "express";
 
 // Controllers
 import * as ctr from "../../controllers/pages/index.js";
+import * as post from "../../controllers/post/index.js";
 
 // Middleware
 import jwtAuth from "../../middleware/authentication/jwtAuth.js";
@@ -36,8 +37,8 @@ router.get('/', ctr.dashboardPage);
 router.get('/users', roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/:id', roleAuth(["employee", "student"]), studentIdAuth, ctr.userPage);
 
-router.get('/education-programs', roleAuth(["employee"], ["admin", "teamleader"]), (req, res) => { res.json({ message: "Education Programs" }) });
-router.get('/education-programs/:id', roleAuth(["employee"], ["admin", "teamleader"]), (req, res) => { res.json({ message: "Education Program" }) });
+router.get('/education-programmes', roleAuth(["employee"], ["admin", "teamleader"]), (req, res) => { res.json({ message: "Education Programs" }) });
+router.get('/education-programmes/:id', roleAuth(["employee"], ["admin", "teamleader"]), (req, res) => { res.json({ message: "Education Program" }) });
 
 router.get('/student-dashboard/:studentId', roleAuth(["employee", "student"]), studentIdAuth, ctr.studentDashboardPage);
 router.get('/student-dashboard/:studentId/attendance', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Attendance" }) });
@@ -65,14 +66,14 @@ router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Re
  * ------------------------------
 */
 
-router.post('/users', roleAuth(["employee"], ["admin"]), /* post.User */ );
-router.post('/education-programs', roleAuth(["employee"], ["admin", "teamleader"]), /* post.EducationProgram */ );
+router.post('/users', roleAuth(["employee"], ["admin"]), post.handleUser );
+router.post('/education-programmes', roleAuth(["employee"], ["admin", "teamleader"]), post.handleEducationProgramme );
 
-router.post('/student-dashboard/:studentId/course-reports', roleAuth(["employee"], ["teacher"]), /* post.CourseReport */ );
-router.post('/student-dashboard/:studentId/personal-reports', roleAuth(["employee"]), /* post.PersonalReport */ );
-router.post('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee"], ["trajectory coach", "learning coach", "diversity coach", "workplace coach"]), /* post.CoachingReport */ );
+router.post('/student-dashboard/:studentId/course-reports', roleAuth(["employee"], ["teacher"]), post.handleComment );
+router.post('/student-dashboard/:studentId/personal-reports', roleAuth(["employee"]), post.handleComment );
+router.post('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee"], ["trajectory coach", "learning coach", "diversity coach", "workplace coach"]), post.handleComment );
 
-router.post('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), /* post.Presence */ );
+router.post('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance );
 
 
 export default router;
