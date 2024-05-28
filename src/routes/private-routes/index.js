@@ -58,4 +58,21 @@ router.get('/attendances/add', roleAuth(["employee"], ["teacher", "teamleader"])
 router.get('/student-reports', (req, res) => { res.json({ message: "Participation" }) });
 router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Reports" }) });
 
+
+/**
+ * ------------------------------
+ *       ROUTING — POST
+ * ------------------------------
+*/
+
+router.post('/users', roleAuth(["employee"], ["admin"]), /* post.User */ );
+router.post('/education-programs', roleAuth(["employee"], ["admin", "teamleader"]), /* post.EducationProgram */ );
+
+router.post('/student-dashboard/:studentId/course-reports', roleAuth(["employee"], ["teacher"]), /* post.CourseReport */ );
+router.post('/student-dashboard/:studentId/personal-reports', roleAuth(["employee"]), /* post.PersonalReport */ );
+router.post('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee"], ["trajectory coach", "learning coach", "diversity coach", "workplace coach"]), /* post.CoachingReport */ );
+
+router.post('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), /* post.Presence */ );
+
+
 export default router;
