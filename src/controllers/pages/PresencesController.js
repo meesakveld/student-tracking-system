@@ -4,45 +4,48 @@
  * ------------------------------
 */
 
-export const presencesPage = (req, res) => {
-    const usersTable = {
-        headers: ["Aanwezig", "Naam", "Status"],
-        rows: [
-            {
+import { getAllAttendence } from "../../services/models/Attendence.js";
+import { getAllStudents } from "../../services/models/Student.js";
+
+export const presencesPage = async (req, res) => {
+
+    try {
+
+        const attendance = await getAllAttendence( '[students, course, attendance_type]');
+        const students = await getAllStudents('[user]');
+        
+        let attendanceData = attendance;
+        let studentsData = students;
+
+        console.log(attendanceData);
+        console.log(studentsData);
+
+        const usersTable = {
+            rows: studentsData.map((student, index) => ({
                 checkbox: true,
                 statusClass: "active",
-                cols: ["Mees Akveld", "Actief"],
+                cols: [student.user.firstname + " " + student.user.lastname, attendanceData[index].attendance_type.title],
                 infoButton: true,
                 studentButton: true,
-            },
-            {
-                checkbox: true,
-                statusClass: "inactive",
-                cols: ["Benoît Biraguma", "Inactief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                checkbox: true,
-                statusClass: "active",
-                cols: ["Ella Jekale", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-            {
-                checkbox: true,
-                statusClass: "active",
-                cols: ["Tristan De Ridder", "Actief"],
-                infoButton: true,
-                studentButton: true,
-            },
-        ],
+            })),
+        };
+
+
+        const data = {
+            user: req.user,
+            usersTable,
+        };
+
+        res.render('presences', data);
+
+    } catch (error) {
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
     }
-
-    const data = {
-        user: req.user,
-        usersTable,
-    };
-
-    res.render('presences', data);
 };

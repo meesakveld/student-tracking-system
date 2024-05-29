@@ -53,7 +53,7 @@ router.get('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(
 router.get('/search-students', roleAuth(["employee"]), ctr.searchStudentPage);
 router.get('/search-employees', roleAuth(["employee"], ["teamleader"]), ctr.teachersPage);
 
-router.get('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), /* ctr.presencesPage */);
+router.get('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), ctr.presencesPage);
 router.get('/attendances/add', roleAuth(["employee"], ["teacher", "teamleader"]), /* ctr.addPresencePage */);
 
 router.get('/student-reports', (req, res) => { res.json({ message: "Participation" }) });
