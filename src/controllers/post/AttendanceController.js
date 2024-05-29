@@ -1,34 +1,35 @@
 import Attendance from '../../models/Attendance.js';
 import { validationResult } from 'express-validator';
 
-// Develop Post request with validation → Possible after POST request are set in the routing
+export const createAttendances = async (req, res, next) => {
 
-export const createAttendance = async (req, res, next) => {
-    // Validate request body
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+    // Create an array of attendances ↓
+    let attendances = []
+    for (let i = 1; i <= req.body.totalStudents; i++) {
+        attendances.push({
+            student_id: parseInt(req.body[`name-${i}`]),
+            attendance_type_id: parseInt(req.body[`attendance-${i}`]),
+            course_id: parseInt(req.body.courseId),
+            date: req.body.date
+        })
     }
 
-    // Process the POST request
+    // Add attendances to the database ↓
     try {
-        // Your code to create the attendance record goes here
-
-        // Return success response
-        return res.status(201).json({ message: 'Attendance created successfully' });
+        await Attendance.query().insert(attendances)
     } catch (error) {
-        // Handle any errors that occur during processing
-        return res.status(500).json({ error: 'Internal server error' });
+        return console.log('error', error)
     }
+
+    // Redirect to the previous page ↓
+    return res.redirect(req.headers.referer)
+
 }
 
-export const updateAttendance = async (req, res, next) => {
-    const attendanceId = req.body.id;
-    const attendance = await Attendance.query().patchAndFetchById(attendanceId, {
-        attendances_type_id: req.body.todo,
-    });
-    res.redirect("/");
-    
+export const createAttendance = async (req, res, next) => {
+
+
+
 }
 
 export const deleteAttendance = async (req, res, next) => {
@@ -36,17 +37,16 @@ export const deleteAttendance = async (req, res, next) => {
 }
 
 export const handleAttendance = async (req, res, next) => {
-    const method = req.body.method;
 
-    if (method === "POST") {
+    if (req.body.method === "POST-MULTI") {
+        createAttendances(req, res, next);
+    }
+
+    if (req.body.method === "POST") {
         createAttendance(req, res, next);
     }
 
-    if (method === "PATCH") {
-        updateAttendance(req, res, next);
-    }
-
-    if (method === "DELETE") {
+    if (req.body.method === "DELETE") {
         deleteAttendance(req, res, next);
     }
 
