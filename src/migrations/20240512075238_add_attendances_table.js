@@ -6,7 +6,7 @@ export function up(knex) {
         table.increments("id").primary();
         table.integer("student_id").notNullable();
         table.integer("course_id").notNullable();
-        table.date("date").notNullable();
+        table.string("date").notNullable();
         table.integer("attendance_type_id").notNullable();
         table.timestamps(true, true);
 
