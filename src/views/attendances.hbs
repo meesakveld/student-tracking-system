@@ -1,0 +1,43 @@
+{{!-- Presences --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner presences">
+            {{> titleSection title='Aanwezigheden voor: 2023-2024 | PGM1-C | IT Business | Isabelle Volckaert' }}
+            <form action="/attendances" method="POST">
+
+                <div class="date">
+                    <p>Selecteer een datum</p>
+                    <input type="date" name="date" required>
+                </div>
+            
+                <button class="button">Opslaan</button>
+                <input type="hidden" name="method" value="POST-MULTI">
+                <input type="hidden" name="totalStudents" value="{{totalStudents}}">
+                <input type="hidden" name="courseId" value="{{courseId}}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Aanwezigheid type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each rows}}
+                        <tr>
+                            <td>
+                                <p>{{name}}</p>
+                                <input value="{{studentId}}" type="hidden" name="name-{{studentId}}">
+                            </td>
+                            <td>
+                                {{> dropdown options=attendanceOptions name=attendanceName }}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </form>
+            
+            {{!-- {{> table headers=usersTable.headers rows=usersTable.rows }} --}}
+        </div>
+    </main>
+</div>
