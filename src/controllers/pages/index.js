@@ -1,6 +1,6 @@
 import { componentsPage } from './ComponentsController.js';
 import { dashboardPage } from './DashboardController.js';
-import { presencesPage } from './PresencesController.js';
+import { presencesPage } from './AttendancesController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { studentDashboardPage } from './StudentDashboardController.js';
 import { studentDetailPage } from './StudentDetailController.js';
