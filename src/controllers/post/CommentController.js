@@ -88,6 +88,29 @@ export const updateComment = async (req, res, next) => {
 
 export const deleteComment = async (req, res, next) => {
 
+    const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader"]);
+
+    const comment_id = req.body.comment_id;
+    try {
+        // Fetch the existing comment to check the author employee_id
+        const existingComment = await Comment.query().findById(comment_id);
+        if (!existingComment) {
+            return res.status(404).json({ error: "Comment not found" });
+        }
+        // Check if the current user is the author or has full access
+        if (req.user.employee.id === existingComment.employee_id || hasFullAccess) {
+            // Delete the comment
+            await Comment.query().deleteById(comment_id);
+            return res.status(200).json({ message: "Comment deleted successfully" });
+        } else {
+            return res.status(403).json({ error: "You do not have permission to delete this comment" });
+        }
+    } catch (error) {
+        console.error("Error deleting comment:", error);
+        req.pageError = error.message;
+        next();
+    }
+
 }
 
 export const handleComment = async (req, res, next) => {
