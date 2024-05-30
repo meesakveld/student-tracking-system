@@ -11,7 +11,7 @@ export const addAttendancesPage = async (req, res) => {
     try {
 
         const attendanceTypes = await AttendanceType.query()
-        const attendanceOptions = (attendance_type_id) => {
+        const attendanceOptions = (attendance_type_id = 1) => {
             return attendanceTypes.map(item => {
                 return {
                     value: item.id,
@@ -25,14 +25,16 @@ export const addAttendancesPage = async (req, res) => {
             {
                 name: "Mees Akveld",
                 studentId: 1,
+                index: 1,
                 attendanceName: `attendance-${1}`,
-                attendanceOptions: attendanceOptions(1)
+                attendanceOptions: attendanceOptions()
             },
             {
                 name: "Tristan De Ridder",
                 studentId: 2,
+                index: 2,
                 attendanceName: `attendance-${2}`,
-                attendanceOptions: attendanceOptions(2)
+                attendanceOptions: attendanceOptions()
             },
         ]
 
