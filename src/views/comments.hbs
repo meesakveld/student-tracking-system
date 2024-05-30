@@ -3,5 +3,8 @@
     <div class="main__inner">
         {{> titleSection title="Alle opmerkingen" blueBg=true }}
         {{> comment comments=dataComments }}
+        <div class="main__inner--add">
+            {{> button label="+" link="{{ url }}" }}
+        </div>
     </div>
 </main>

@@ -42,6 +42,3 @@ export const studentDetailPage = (req, res) => {
 
     res.render('student-detail', data);
 }
-
-export default studentDetailPage;
-
