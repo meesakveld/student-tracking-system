@@ -493,13 +493,13 @@ td {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px solid var(--grey);
+    max-width: 10rem;
 }
 
-td.actions {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+td.actions a {
+    margin-right: 1rem;
 }
+
 
 td.active,
 td.inactive {
@@ -551,6 +551,7 @@ tr.inactive {
 }
 
 @media (max-width: 42.5rem) {
+
     .user-info__left,
     .user-info__right {
         flex: auto;
@@ -666,6 +667,17 @@ input[type="date"] {
     font-weight: bold;
     margin: 0;
 }
+
+
+/* Page Error */
+
+.page__error {
+    border: 1px solid red;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: red;
+}
+
 
 /* Comments */
 

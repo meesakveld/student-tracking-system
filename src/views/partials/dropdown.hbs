@@ -1,6 +1,8 @@
 {{!-- Dropdown partials --}}
 <div class="dropdown filter">
+    {{#if labelText}}
     <label class="dropdown__label" for="{{id}}">{{labelText}}</label>
+    {{/if}}
     <select {{#if disabled}}disabled{{/if}} class="dropdown__options" name="{{name}}" id="{{id}}" {{#each data}}data-{{title}}="{{value}}" {{/each}}>
         {{#each options}}
             <option {{#if selected}}selected{{/if}} value="{{value}}" {{#each data}}data-{{title}}="{{value}}" {{/each}}>{{label}}</option>

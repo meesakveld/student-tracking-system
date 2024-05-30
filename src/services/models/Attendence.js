@@ -1,4 +1,4 @@
-import Attendance from "../../models/Attendance"
+import Attendance from "../../models/Attendance.js"
 
 /**
  * Retrieves all attendances with optional graph fetching.

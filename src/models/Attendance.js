@@ -22,13 +22,13 @@ class Attendance extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["student_id", "course_id", "attendances_type_id", "date"],
+            required: ["student_id", "course_id", "attendance_type_id", "date"],
             properties: {
                 id: { type: "integer" },
                 student_id: { type: "integer" },
                 course_id: { type: "integer" },
-                attendances_type_id: { type: "integer" },
-                date: { type: "date" },
+                attendance_type_id: { type: "integer" },
+                date: { type: "string" },
             },
         };
     }
