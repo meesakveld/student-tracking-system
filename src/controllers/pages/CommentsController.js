@@ -50,17 +50,11 @@ export const commentsPage = (req, res) => {
         }
     ];
 
-    // make isAuthenticated function so button shows and comment can be added
-
-    const canAddComment = req.isAuthenticated();
-
     const data = {
         user: req.user,
         dataComments,
-        canAddComment
     };
 
     res.render('comments', data);
 };
 
-export default commentsPage;

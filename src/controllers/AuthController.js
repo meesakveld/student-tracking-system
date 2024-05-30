@@ -143,7 +143,6 @@ export const postRegister = async (req, res, next) => {
 }
 
 
-
 /**
  * ------------------------------
  *            LOGOUT

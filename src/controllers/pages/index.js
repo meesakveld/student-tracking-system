@@ -23,5 +23,5 @@ export {
     userPage,
     usersPage,
     welcomePage,
-    commentsPage
+    commentsPage,
 }

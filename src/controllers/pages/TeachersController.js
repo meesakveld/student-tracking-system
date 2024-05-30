@@ -43,5 +43,3 @@ export const teachersPage = (req, res) => {
 
     res.render('teachers', data);
 };
-
-export default teachersPage;
