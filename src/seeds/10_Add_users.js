@@ -28,6 +28,14 @@ const seed = async function (knex) {
             username: "meesakveld",  
             role_id: 1,
         },
+        {
+            firstname: "Evelien",
+            lastname: "Rutsaert",
+            email: "evelien.rutsaert@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "evelienrutsaert",
+            role_id: 2
+        }
     ]);
 };
 
