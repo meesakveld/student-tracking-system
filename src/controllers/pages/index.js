@@ -10,6 +10,8 @@ import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
 import { welcomePage } from './WelcomeController.js';
 import  { commentsPage } from './CommentsController.js';
+import { addCommentPage } from './AddCommentController.js';
+import { educationProgrammePage, educationProgrammesPage } from './EducationProgrammesController.js';
 
 export {
     componentsPage,
@@ -23,5 +25,8 @@ export {
     userPage,
     usersPage,
     welcomePage,
-    commentsPage
+    commentsPage,
+    addCommentPage,
+    educationProgrammePage,
+    educationProgrammesPage
 }
