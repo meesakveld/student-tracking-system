@@ -36,28 +36,9 @@ export const createAttendances = async (req, res, next) => {
 
 }
 
-export const createAttendance = async (req, res, next) => {
-
-
-
-}
-
-export const deleteAttendance = async (req, res, next) => {
-
-}
-
 export const handleAttendance = async (req, res, next) => {
 
     if (req.body.method === "POST-MULTI") {
         createAttendances(req, res, next);
     }
-
-    if (req.body.method === "POST") {
-        createAttendance(req, res, next);
-    }
-
-    if (req.body.method === "DELETE") {
-        deleteAttendance(req, res, next);
-    }
-
 }
