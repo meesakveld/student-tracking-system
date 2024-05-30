@@ -161,7 +161,8 @@ export const searchStudentPage = async (req, res) => {
                 student.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-", 
                 student.user.is_active ? "Actief" : "Inactief"],
             returnUrl: '/search-students',
-            student: student,
+            studentId: student.id,
+            userId: student.user.id,
             infoButton: true,
             studentButton: true,
         }

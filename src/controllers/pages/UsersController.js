@@ -138,14 +138,14 @@ export const usersPage = async (req, res) => {
                 user.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-",
                 isActive ? "Actief" : "Inactief"
             ],
-            user: user.user,
-            student: user,
+            studentId: user.id,
+            userId: user.user.id,
             returnUrl: '/users',
             infoButton: true,
             studentButton: user.user.role.title === "student",
         };
     })
-
+    
     const usersTable = {
         headers: ["Naam", "Rol", "Opleiding", "Status"],
         rows: rows
