@@ -30,7 +30,7 @@ class Comment extends Model {
                 student_id: { type: "integer" },
                 employee_id: { type: "integer" },
                 education_programme_id: { type: "integer" },
-                comment: { type: "text"},
+                comment: { type: "string"},
                 visible_to_student: { type: "boolean" },
                 tag: { type: "string" }
             },
