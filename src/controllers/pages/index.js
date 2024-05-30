@@ -4,7 +4,7 @@ import { addAttendancesPage } from './AttendancesController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { studentDashboardPage } from './StudentDashboardController.js';
 import { studentDetailPage } from './StudentDetailController.js';
-import { teachersPage } from './TeachersController.js';
+import { searchEmployeesPage } from './SearchEmployeesController.js'
 import { errorPage } from './ErrorController.js';
 import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
@@ -18,7 +18,7 @@ export {
     searchStudentPage,
     studentDashboardPage,
     studentDetailPage,
-    teachersPage,
+    searchEmployeesPage,
     errorPage,
     userPage,
     usersPage,

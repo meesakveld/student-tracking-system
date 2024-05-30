@@ -1,0 +1,14 @@
+{{!-- All the employees --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner results">
+            {{> titleSection title='Alle medewerkers' returnUrl="/" }}
+            {{> filters filters=userFilters }}
+            {{> inputField placeholder="Zoek op naam" }}
+            {{> table headers=teachersTable.headers rows=teachersTable.rows }}
+        </div>
+    </main>
+
+    <script src="/scripts/loadEducationPrograms.js"></script>
+    <script src="/scripts/loadCourses.js"></script>
+</div>
