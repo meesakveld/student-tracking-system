@@ -1,4 +1,5 @@
 import Attendance from '../../models/Attendance.js';
+import { NODE_ENV } from '../../consts.js';
 import { validationResult } from 'express-validator';
 
 export const createAttendances = async (req, res, next) => {
@@ -16,13 +17,22 @@ export const createAttendances = async (req, res, next) => {
 
     // Add attendances to the database ↓
     try {
-        await Attendance.query().insert(attendances)
-    } catch (error) {
-        return console.log('error', error)
-    }
+        if (NODE_ENV === 'development') {
+            attendances.forEach(async (item) => {
+                await Attendance.query().insert(item)
+            })
+        } else {
+            await Attendance.query().insert(attendances)
+        }
 
-    // Redirect to the previous page ↓
-    return res.redirect(req.headers.referer)
+        // Redirect to the previous page ↓
+        return res.redirect('/attendances')
+
+    } catch (error) {
+        // Add error in req ↓
+        req.pageError = error.message
+        next()
+    }
 
 }
 

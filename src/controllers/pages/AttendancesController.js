@@ -6,7 +6,7 @@
 
 import AttendanceType from "../../models/AttendanceType.js";
 
-export const presencesPage = async (req, res) => {
+export const addAttendancesPage = async (req, res) => {
 
     try {
 
@@ -38,6 +38,7 @@ export const presencesPage = async (req, res) => {
 
         const data = {
             user: req.user,
+            pageError: req.pageError,
             rows,
             courseId: 1,
             date: new Date(),

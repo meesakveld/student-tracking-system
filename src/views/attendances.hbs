@@ -3,6 +3,11 @@
     <main>
         <div class="main__inner presences">
             {{> titleSection title='Aanwezigheden voor: 2023-2024 | PGM1-C | IT Business | Isabelle Volckaert' }}
+
+            {{#if pageError}}
+                {{> pageError pageError=pageError}}
+            {{/if}}
+
             <form action="/attendances" method="POST">
 
                 <div class="date">
