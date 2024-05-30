@@ -160,8 +160,8 @@ export const searchStudentPage = async (req, res) => {
                 `${student.user.firstname} ${student.user.lastname}`,
                 student.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-", 
                 student.user.is_active ? "Actief" : "Inactief"],
-            returnUrl: '/search-student',
-            user: student.user,
+            returnUrl: '/search-students',
+            student: student,
             infoButton: true,
             studentButton: true,
         }

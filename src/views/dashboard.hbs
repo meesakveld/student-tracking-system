@@ -3,10 +3,9 @@
     <div class="main__inner dashboard">
         <h1 class="dashboard__title">Student Volgsysteem</h1>
         <section class="dashboard__links">
-            <!-- Expression of the links that can be seen depending on the role (admin, teacher, student) -->
-            <a href="/users" class="dashboard__link">Gebruikers</a>
-            <a href="/search-student" class="dashboard__link">Zoek studenten</a>
-            <a href="/teachers" class="dashboard__link">Docenten</a>
+            {{#dashboardLinks}}
+                <a href="{{url}}" class="dashboard__link">{{title}}</a>
+            {{/dashboardLinks}}
         </section>
     </div>
 </main>

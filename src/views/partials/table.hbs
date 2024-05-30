@@ -20,7 +20,7 @@
                 {{/each}}
                 <td class="actions">
                     {{#if infoButton }}
-                    <a class="button button--icon" href="/users/{{user.id}}?returnUrl={{returnUrl}}">
+                    <a class="button button--icon" href="/users/{{student.user.id}}?returnUrl={{returnUrl}}">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                             <defs />
                             <path d="M4.1 19.8h15.7V4.1H4.1v15.7ZM10.2 6h3.6v3.6h-3.6V6Zm0 4.2h3.6v7.7h-3.6v-7.7Z"
@@ -31,7 +31,7 @@
                     </a>
                     {{/if}}
                     {{#if studentButton }}
-                    <a class="button button--icon" href="/student/{{user.id}}?returnUrl={{returnUrl}}">
+                    <a class="button button--icon" href="/student-dashboard/{{student.id}}?returnUrl={{returnUrl}}">
                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                             <defs />
                             <path
@@ -42,7 +42,7 @@
                     </a>
                     {{/if}}
                     {{#if editButton}}
-                    <a class="button button--icon" href="/users/edit?id={{user_id}}">
+                    <a class="button button--icon" href="/users/edit?id={{student.user.id}}">
                         <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
                             <path
                                 d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"

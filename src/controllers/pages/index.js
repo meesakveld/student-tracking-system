@@ -1,8 +1,8 @@
 import { componentsPage } from './ComponentsController.js';
 import { dashboardPage } from './DashboardController.js';
-import { presencesPage } from './PresencesController.js';
+import { addAttendancesPage } from './AttendancesController.js';
 import { searchStudentPage } from './SearchStudentController.js';
-import { studentPage } from './StudentController.js';
+import { studentDashboardPage } from './StudentDashboardController.js';
 import { studentDetailPage } from './StudentDetailController.js';
 import { teachersPage } from './TeachersController.js';
 import { errorPage } from './ErrorController.js';
@@ -14,9 +14,9 @@ import  { commentsPage } from './CommentsController.js';
 export {
     componentsPage,
     dashboardPage,
-    presencesPage,
+    addAttendancesPage,
     searchStudentPage,
-    studentPage,
+    studentDashboardPage,
     studentDetailPage,
     teachersPage,
     errorPage,

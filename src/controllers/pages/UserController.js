@@ -41,7 +41,7 @@ export const userPage = async (req, res) => {
             returnUrl: returnUrl
         };
 
-        if(data.user.employee.functions) {
+        if (data.user.employee && data.user.employee.functions) {
             data.user.employee.functions = data.user.employee.functions.map(func => func.title);
         }
 

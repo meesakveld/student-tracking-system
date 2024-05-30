@@ -22,13 +22,13 @@ class Attendance extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["student_id", "course_id", "attendances_type_id", "date"],
+            required: ["student_id", "course_id", "attendance_type_id", "date"],
             properties: {
                 id: { type: "integer" },
                 student_id: { type: "integer" },
                 course_id: { type: "integer" },
-                attendances_type_id: { type: "integer" },
-                date: { type: "date" },
+                attendance_type_id: { type: "integer" },
+                date: { type: "string" },
             },
         };
     }
@@ -43,15 +43,15 @@ class Attendance extends Model {
                     to: "students.id",
                 },
             },
-            courses: {
-                relation: Model.HasManyRelation,
+            course: {
+                relation: Model.BelongsToOneRelation,
                 modelClass: Course,
                 join: {
-                    from: "attendances.course_idcourses.id",
+                    from: "attendances.course_id",
                     to: "courses.id",
                 },
             },
-            attendance_types: {
+            attendance_type: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: AttendanceType,
                 join: {
