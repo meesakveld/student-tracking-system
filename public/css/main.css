@@ -192,7 +192,6 @@ header {
 
 .student-detail .button {
     width: 6rem;
-    align-self: flex-end;
 }
 
 .dropdown {
@@ -283,10 +282,6 @@ a:hover {
     padding: 0.8rem 0;
 }
 
-.title-section .button {
-    padding: 0 1.8rem;
-}
-
 /* ------ Button styles ------ */
 
 .button {
@@ -309,6 +304,10 @@ a:hover {
 .button--dark {
     background-color: var(--dark);
     color: var(--light);
+}
+
+.button--hidden {
+    display: none;
 }
 
 .button--margin {

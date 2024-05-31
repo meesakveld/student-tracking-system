@@ -3,7 +3,6 @@ import { dashboardPage } from './DashboardController.js';
 import { addAttendancesPage } from './AttendancesController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { studentDashboardPage } from './StudentDashboardController.js';
-import { studentDetailPage } from './StudentDetailController.js';
 import { searchEmployeesPage } from './SearchEmployeesController.js'
 import { errorPage } from './ErrorController.js';
 import { userPage } from './UserController.js';
@@ -20,7 +19,6 @@ export {
     addAttendancesPage,
     searchStudentPage,
     studentDashboardPage,
-    studentDetailPage,
     searchEmployeesPage,
     errorPage,
     userPage,

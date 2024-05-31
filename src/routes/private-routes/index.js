@@ -47,13 +47,13 @@ router.get('/student-dashboard/:studentId/attendance', roleAuth(["employee", "st
 router.get('/student-dashboard/:studentId/status', roleAuth(["employee"]), studentIdAuth, (req, res) => { res.json({ message: "Status" }) });
 router.get('/student-dashboard/:studentId/course-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/course-reports/add', roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
-router.get('/student-dashboard/:studentId/course-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, /*ctr.viewCommentPage*/);
+router.get('/student-dashboard/:studentId/course-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentPage);
 router.get('/student-dashboard/:studentId/personal-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/personal-reports/add', roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
-router.get('/student-dashboard/:studentId/personal-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Personal Report | ctr.studentDetailPage" }) });
+router.get('/student-dashboard/:studentId/personal-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentPage);
 router.get('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/coaching-reports/add', roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
-router.get('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Coaching Report | ctr.studentDetailPage" }) });
+router.get('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Coaching Report | ctr.commentPage" }) });
 
 router.get('/search-students', roleAuth(["employee"]), ctr.searchStudentPage);
 router.get('/search-employees', roleAuth(["employee"], ["teamleader"]), ctr.searchEmployeesPage);

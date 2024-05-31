@@ -2,16 +2,17 @@
 <div class="body__inner">
     <main>
         <div class="main__inner student-detail">
-            {{> titleSection title=pageTitle blueBg=true }}
-            {{> textareaSection label=section.title value=section.content }}
+            {{> titleSection title=title blueBg=true returnUrl=returnUrl }}
+            {{> textareaSection disabled=true label=section.title value=section.content }}
             <div class="comment__buttons">
-                <a href="{{ link }}">
-                    <button>Bewerk</button>
-                </a>
-                <button>Verwijder</button>
-                {{> dropdown labelText=" Zichtbaarheid:" name="visibility" id="visibilityDropdown" options=visibilityOptions }}
+                {{#if mayEditComment}}
+                    {{> button label="Bewerken" id="editComment"}}
+                    {{> button label="Opslaan" id="editComment" class="button--hidden"}}
+                    {{> button label="Verwijder" id="editComment" class="button--dark button--hidden"}}
+                    {{!-- TODO: Add scripts to edit! --}}
+                {{/if}}
+                {{> dropdown disabled=true labelText=" Zichtbaarheid:" name="visibility" id="visibilityDropdown" options=dropdownVisibility.options }}
             </div>
-         {{> button label="Opslaan"}}
         </div>
     </main>
 </div>
