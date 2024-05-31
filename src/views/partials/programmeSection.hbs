@@ -27,15 +27,31 @@
         </div>
         <div class="form-group">
             <p class="semibold">Studiepunten</p>
-            {{> inputField placeholder="15"}}
+            {{> inputField placeholder="15" type="number"}}
         </div>
         {{> button label="+"}}
     </div>
     <div class="courses lightgrey-bg">
         <h1>De vakken</h1>
         <div class="form-group">
-            <p class="semibold">Naam</p>
-            {{> inputField placeholder="Naam van de opleding"}}
+            <p class="semibold">Naam van het vak</p>
+            {{> inputField placeholder="IT Professional"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Beschrijving</p>
+            <textarea name="" id=""></textarea>
+        </div>
+        <div class="form-group">
+            <p class="semibold">Studiepunten</p>
+            {{> inputField placeholder="2" type="number"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Contacturen</p>
+            {{> inputField placeholder="5" type="number"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Periode</p>
+            {{> dropdown }}
         </div>
     </div>
     {{> button label="Toevoegen"}}
