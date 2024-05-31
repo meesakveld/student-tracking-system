@@ -5,6 +5,7 @@
 */
 
 import Comment from '../../models/Comment.js';
+import { employeeFunctionAuth } from '../../utils/employeeFunctionAuth.js';
 import { formatDate } from '../../utils/formatDate.js'
 
 export const commentsPage = async (req, res) => {
@@ -15,12 +16,13 @@ export const commentsPage = async (req, res) => {
     }
 
     const comments = await Comment.query()
-        .withGraphFetched('[employee.user, course]')
+        .withGraphFetched('[employee.[user, functions], course]')
         .where(builder => {
             if (type) {
                 builder.where('tag', type)
             }
         })
+        .where('student_id', parseInt(req.params.studentId))
 
     const formattedComments = comments.map((comment) => {
         return {
@@ -32,10 +34,29 @@ export const commentsPage = async (req, res) => {
 
     const title = type === "course" ? "Vak gerelateerde verslagen" : type === "personal" ? "Persoonlijke verslagen" : "Coaching verslagen";
 
+    let canAddComment = false;
+    const isEmployee = req.user && req.user.role.title === "employee";
+    switch (type) {
+        case "course":
+            if (isEmployee && req.user.employee.functions.find(f => f.title === "teacher")) {
+                canAddComment = true;
+            }
+            break;
+        case "personal":
+            canAddComment = isEmployee
+            break;
+        case "coaching":
+            if (isEmployee && employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader" ,"trajectory coach", "learning coach", "diversity coach", "workplace coach"])) {
+                canAddComment = true;
+            }
+    }
+
     const data = {
         user: req.user,
         title: title,
         dataComments: formattedComments,
+        canAddComment,
+        studentId: req.params.studentId,
         returnUrl: `/student-dashboard/${req.params.studentId}`,
         addUrl: `/student-dashboard/${req.params.studentId}/${type}-reports/add`,
     };
