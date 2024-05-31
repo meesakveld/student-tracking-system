@@ -12,6 +12,7 @@ import WorkplaceMentor from "./WorkplaceMentor.js";
 import WorkplaceCoach from "./WorkplaceCoach.js";
 import Comment from "./Comment.js";
 import Employee from "./Employee.js";
+import Student from "./Student.js";
 
 // define the NavigationItem model
 class Course extends Model {
@@ -101,6 +102,18 @@ class Course extends Model {
                         to: "course_links.employee_id",
                     },
                     to: "employees.id",
+                },
+            },
+            students: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Student,
+                join: {
+                    from: "courses.id",
+                    through: {
+                        from: "course_registrations.course_id",
+                        to: "course_registrations.student_id",
+                    },
+                    to: "students.id",
                 },
             },
         };

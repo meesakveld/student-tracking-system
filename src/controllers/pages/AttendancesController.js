@@ -4,7 +4,116 @@
  * ------------------------------
 */
 
+import Attendance from "../../models/Attendance.js";
 import AttendanceType from "../../models/AttendanceType.js";
+import Course from "../../models/Course.js";
+
+export const attendancesStudentPage = async (req, res) => {
+
+    try {
+
+        const studentId = req.params.studentId;
+
+        const filterCourse = req.query.filterCourse;
+        const filterAttendanceType = req.query.filterAttendanceType;
+
+        // ** Courses **
+        const courseQuery = await Course.query()
+            .joinRelated('students')
+            .where('students.id', parseInt(studentId))
+        const courseOptions = courseQuery.map(course => {
+            return {
+                value: course.id,
+                label: course.name,
+                selected: course.id === filterCourse
+            }
+        });
+
+        // ** Attendance Types **
+        const attendanceTypesQuery = await AttendanceType.query()
+        const attendanceOptions = attendanceTypesQuery.map(attendanceType => {
+            return {
+                value: attendanceType.id,
+                label: attendanceType.title,
+                selected: attendanceType.id === filterAttendanceType
+            }
+        });
+
+        const userFilters = [
+            {
+                id: "filterCourse",
+                name: "filterCourse",
+                labelText: "Filter op vak:",
+                options: [
+                    { value: "", label: "Alle vakken" },
+                    ...courseOptions
+                ]
+            },
+            {
+                id: "filterAttendanceType",
+                name: "filterAttendanceType",
+                labelText: "Filter op aanwezigheid type:",
+                options: [
+                    { value: "", label: "Alle aanwezigheid types" },
+                    ...attendanceOptions
+                ]
+            }
+        ]
+
+        // ——— TABLE DATA ———
+        let attendances = [];
+
+        attendances = await Attendance.query()
+            .withGraphFetched('[attendance_type, course]')
+            .where('student_id', studentId)
+            .joinRelated('attendance_type')
+            .where(builder => {
+                if (filterCourse) {
+                    builder.where('course_id', filterCourse);
+                }
+                if (filterAttendanceType) {
+                    builder.where('attendance_type_id', filterAttendanceType);
+                }
+            });
+
+        const rows = attendances.map(attendance => {
+            return {
+                isActive: true,
+                cols: [
+                    attendance.date,
+                    attendance.course.name,
+                    attendance.attendance_type.title
+                ]
+            }
+        });
+
+        const attendancesTable = {
+            headers: ["Datum", "Vak", "Aanwezigheid type"],
+            rows: rows,
+        }
+
+        const data = {
+            user: req.user,
+            userFilters,
+            usersTable: attendancesTable,
+        }
+
+
+        res.render('student-attendances', data);
+
+    } catch (error) {
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
+    }
+
+};
 
 export const addAttendancesPage = async (req, res) => {
 
@@ -47,7 +156,7 @@ export const addAttendancesPage = async (req, res) => {
             totalStudents: rows.length
         };
 
-        res.render('attendances', data);
+        res.render('add-attendances', data);
 
     } catch (error) {
         const data = {

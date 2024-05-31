@@ -43,7 +43,7 @@ router.get('/education-programmes/add', roleAuth(["employee"], ["admin", "teamle
 router.get('/education-programmes/:id', roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammePage);
 
 router.get('/student-dashboard/:studentId', roleAuth(["employee", "student"]), studentIdAuth, ctr.studentDashboardPage);
-router.get('/student-dashboard/:studentId/attendance', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Attendance" }) });
+router.get('/student-dashboard/:studentId/attendance', roleAuth(["employee", "student"]), studentIdAuth, ctr.attendancesStudentPage);
 router.get('/student-dashboard/:studentId/status', roleAuth(["employee"]), studentIdAuth, (req, res) => { res.json({ message: "Status" }) });
 router.get('/student-dashboard/:studentId/course-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/course-reports/add', roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
