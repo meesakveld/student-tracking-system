@@ -499,7 +499,6 @@ input:hover {
 
 /* ------ Table ------ */
 
-
 .table-container {
     width: 100%;
     overflow-x: scroll;
@@ -738,6 +737,14 @@ input[type="date"] {
 
 
 /* Comments */
+h3 {
+    padding-bottom: 0;
+
+}
+
+h5 {
+    padding-bottom: 1rem;
+}
 
 .comments {
     display: flex;
@@ -776,6 +783,19 @@ input[type="date"] {
 
 .comment:hover {
     outline: 1px solid var(--blue);
+}
+
+.comment p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.comment__info {
+    display: flex;
+    gap: 1.2rem;
 }
 
 .comment a {
