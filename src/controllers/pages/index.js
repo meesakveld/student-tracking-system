@@ -10,6 +10,11 @@ import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
 import { welcomePage } from './WelcomeController.js';
 import  { commentsPage } from './CommentsController.js';
+import { addCommentPage } from './AddCommentController.js';
+import { educationProgrammePage, educationProgrammesPage } from './EducationProgrammesController.js';
+import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
+import { viewCommentPage } from './CommentsController.js';
+import { addUserPage } from './AddUserController.js';
 
 export {
     componentsPage,
@@ -23,5 +28,11 @@ export {
     userPage,
     usersPage,
     welcomePage,
-    commentsPage
+    commentsPage,
+    addCommentPage,
+    educationProgrammePage,
+    educationProgrammesPage,
+    addEducationProgrammePage,
+    viewCommentPage,
+    addUserPage
 }

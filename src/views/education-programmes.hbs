@@ -1,0 +1,13 @@
+{{!-- Education Programmes --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner overview">
+            {{> titleSection title='Overzicht van alle opleidingen' returnUrl="/" }}
+            {{> button label="Voeg een opleiding toe" link="/education-programmes/add" }}
+            {{> filters filters=educationProgrammesFilters }}
+            {{> inputField placeholder="Zoek op naam" }}
+            {{> table headers=educationProgrammesTable.headers rows=educationProgrammesTable.rows }}
+        </div>
+    </main>
+    <script src="/scripts/loadEducationPrograms.js"></script>
+</div>

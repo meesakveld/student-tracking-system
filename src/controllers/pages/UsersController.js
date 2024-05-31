@@ -160,5 +160,3 @@ export const usersPage = async (req, res) => {
 
     res.render("users", data);
 };
-
-export default usersPage;

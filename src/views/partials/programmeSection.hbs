@@ -1,0 +1,59 @@
+{{!-- Programme Section --}}
+<form action="">
+    <div class="education-programme lightgrey-bg">
+        <h1>De opleiding</h1>
+        <div class="form-group">
+            <p class="semibold">Naam van de opleiding</p>
+            {{> inputField placeholder="Graduaat in het programmeren"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Schooljaar (20XX-XX)</p>
+            {{> inputField placeholder="2023-24"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Code (in hoofdletters)</p>
+            {{> inputField placeholder="GRAPGMG"}}
+        </div>
+    </div>
+    <div class="programme-lines lightgrey-bg">
+        <h1>De programmalijnen</h1>
+        <div class="form-group">
+            <p class="semibold">Naam van de programmalijn</p>
+            {{> inputField placeholder="Business & Communication"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Beschrijving</p>
+            <textarea name="" id=""></textarea>
+        </div>
+        <div class="form-group">
+            <p class="semibold">Studiepunten</p>
+            {{> inputField placeholder="15" type="number"}}
+        </div>
+        {{> button label="+"}}
+    </div>
+    <div class="courses lightgrey-bg">
+        <h1>De vakken</h1>
+        <div class="form-group">
+            <p class="semibold">Naam van het vak</p>
+            {{> inputField placeholder="IT Professional"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Beschrijving</p>
+            <textarea name="" id=""></textarea>
+        </div>
+        <div class="form-group">
+            <p class="semibold">Studiepunten</p>
+            {{> inputField placeholder="2" type="number"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Contacturen</p>
+            {{> inputField placeholder="5" type="number"}}
+        </div>
+        <div class="form-group">
+            <p class="semibold">Periode</p>
+            {{> dropdown }}
+        </div>
+    </div>
+    {{> button label="Toevoegen"}}
+    {{> button label="Annuleren" dark=true link="/education-programmes"}}
+</form>

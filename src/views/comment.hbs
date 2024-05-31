@@ -1,0 +1,17 @@
+{{!-- Student Detail --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner student-detail">
+            {{> titleSection title=pageTitle blueBg=true }}
+            {{> textareaSection label=section.title value=section.content }}
+            <div class="comment__buttons">
+                <a href="{{ link }}">
+                    <button>Bewerk</button>
+                </a>
+                <button>Verwijder</button>
+                {{> dropdown labelText=" Zichtbaarheid:" name="visibility" id="visibilityDropdown" options=visibilityOptions }}
+            </div>
+         {{> button label="Opslaan"}}
+        </div>
+    </main>
+</div>
