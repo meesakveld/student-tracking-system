@@ -11,7 +11,6 @@ import Course from "../../models/Course.js";
 export const attendancesStudentPage = async (req, res) => {
 
     try {
-
         const studentId = req.params.studentId;
 
         const filterCourse = req.query.filterCourse;
@@ -25,7 +24,7 @@ export const attendancesStudentPage = async (req, res) => {
             return {
                 value: course.id,
                 label: course.name,
-                selected: course.id === filterCourse
+                selected: course.id === parseInt(filterCourse)
             }
         });
 
@@ -35,7 +34,7 @@ export const attendancesStudentPage = async (req, res) => {
             return {
                 value: attendanceType.id,
                 label: attendanceType.title,
-                selected: attendanceType.id === filterAttendanceType
+                selected: attendanceType.id === parseInt(filterAttendanceType)
             }
         });
 
@@ -96,6 +95,7 @@ export const attendancesStudentPage = async (req, res) => {
             user: req.user,
             userFilters,
             usersTable: attendancesTable,
+            title: `Aanwezigheden van ${req.user.firstname} ${req.user.lastname}`,
         }
 
 
