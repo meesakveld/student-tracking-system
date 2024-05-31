@@ -19,45 +19,55 @@
     </div>
     <div class="add-programme__section programme-lines lightgrey-bg">
         <h1>De programmalijnen</h1>
-        <div class="add-programme__group">
-            <p class="semibold">Naam van de programmalijn</p>
-            {{> inputField placeholder="Business & Communication"}}
-        </div>
-        <div class="add-programme__groups">
+        <div id="programmLines">
             <div class="add-programme__group">
-                <p class="semibold">Beschrijving</p>
-                <textarea name="" id=""></textarea>
+                <p class="semibold">Naam van de programmalijn</p>
+                {{> inputField placeholder="Business & Communication"}}
             </div>
-            <div class="add-programme__group">
-                <p class="semibold">Studiepunten</p>
-                {{> inputField placeholder="15" type="number"}}
+            <div class="add-programme__groups">
+                <div class="add-programme__group">
+                    <p class="semibold">Beschrijving</p>
+                    <textarea name="" id=""></textarea>
+                </div>
+                <div class="add-programme__group">
+                    <p class="semibold">Studiepunten</p>
+                    {{> inputField placeholder="15" type="number"}}
+                </div>
             </div>
         </div>
         <button id="addProgrammeLine" class="button">Een extra programmalijn toevoegen</button>
     </div>
     <div class="add-programme__section courses lightgrey-bg">
         <h1>De vakken</h1>
-        <div class="add-programme__group">
-            <p class="semibold">Naam van het vak</p>
-            {{> inputField placeholder="IT Professional"}}
-        </div>
-        <div class="add-programme__groups">
+        <div id="courses">
             <div class="add-programme__group">
-                <p class="semibold">Beschrijving</p>
-                <textarea name="" id=""></textarea>
+                <p class="semibold">Naam van het vak</p>
+                {{> inputField placeholder="IT Professional"}}
             </div>
-            <div class="add-programme__group">
+            <div class="add-programme__groups">
                 <div class="add-programme__group">
-                    <p class="semibold">Studiepunten</p>
-                    {{> inputField placeholder="2" type="number"}}
+                    <div class="add-programme__group">
+                        <p class="semibold">Beschrijving</p>
+                        <textarea name="" id=""></textarea>
+                    </div>
+                    <div class="add-programme__group">
+                        <p class="semibold">Programmalijn</p>
+                        {{> dropdown options=programmeLines }}
+                    </div>
                 </div>
                 <div class="add-programme__group">
-                    <p class="semibold">Contacturen</p>
-                    {{> inputField placeholder="5" type="number"}}
-                </div>
-                <div class="add-programme__group">
-                    <p class="semibold">Periode</p>
-                    {{> dropdown options=periods }}
+                    <div class="add-programme__group">
+                        <p class="semibold">Studiepunten</p>
+                        {{> inputField placeholder="2" type="number"}}
+                    </div>
+                    <div class="add-programme__group">
+                        <p class="semibold">Contacturen</p>
+                        {{> inputField placeholder="5" type="number"}}
+                    </div>
+                    <div class="add-programme__group">
+                        <p class="semibold">Periode</p>
+                        {{> dropdown options=periods }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,9 +75,11 @@
     </div>
     <div class="add-programme__section classes lightgrey-bg">
         <h1>De klassen</h1>
-        <div class="add-programme__group">
-            <p class="semibold">Naam van de klas (jaar-groep-klasgroep)</p>
-            {{> inputField placeholder="1-PGM-A"}}
+        <div id="classes">
+            <div class="add-programme__group">
+                <p class="semibold">Naam van de klas (jaar-groep-klasgroep)</p>
+                {{> inputField placeholder="1-PGM-A"}}
+            </div>
         </div>
         <button id="addClass" class="button">Een extra klas toevoegen</button>
     </div>

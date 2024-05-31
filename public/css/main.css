@@ -836,6 +836,11 @@ h5 {
     min-width: 30rem;
 }
 
+.add-programme__line {
+    margin: 2rem 0;
+    opacity: 0.2;
+}
+
 .add-programme textarea {
     margin-top: 1rem;
     min-height: 12vh;

@@ -5,6 +5,13 @@
 */
 
 export const addEducationProgrammePage = async (req, res) => {
+    // ——— PROGRAMME LINES ———
+    // Note that the programme lines showed when making a new course should be included in the options.
+    const programmeLines = [
+        { value: "Business & Communication", label: "Business & Communication" },
+        { value: "Creative Design & Development", label: "Creative Design & Development" },
+    ];
+
     // ——— PERIODS DATA ———
     // Note that a period needs to be linked to a semester in the back end!
     // The semester options are not icluded to prevent users from selecting a period with the wrong semester.
@@ -22,6 +29,7 @@ export const addEducationProgrammePage = async (req, res) => {
      // ——— RENDER DATA ———
     const data = {
         user: req.user,
+        programmeLines,
         periods,
     };
     res.render('add-education-programme', data);
