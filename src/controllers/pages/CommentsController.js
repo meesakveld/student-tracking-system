@@ -23,6 +23,11 @@ export const commentsPage = async (req, res) => {
             }
         })
         .where('student_id', parseInt(req.params.studentId))
+        .where(builder => {
+            if (req.user.role.title === "student") {
+                builder.where('visible_to_student', true)
+            }
+        })
 
     const formattedComments = comments.map((comment) => {
         return {
