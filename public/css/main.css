@@ -767,3 +767,32 @@ input[type="date"] {
 .comment__buttons button:hover {
     cursor: pointer;
 }
+
+/* ------ Add Programme ------ */
+
+.add-programme {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.add-programme__groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.add-programme__groups .add-programme__group {
+    flex: 1;
+    min-width: 30rem;
+}
+
+.add-programme textarea {
+    margin-top: 1rem;
+}
+
+.add-programme .dropdown {
+    margin: 1rem 0;
+}
+
