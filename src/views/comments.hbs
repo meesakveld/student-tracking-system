@@ -1,10 +1,8 @@
 {{!-- Comments section --}}
 <main>
     <div class="main__inner">
-        {{> titleSection title="Alle opmerkingen" blueBg=true }}
+        {{> titleSection title=title blueBg=true }}
+        {{> button label="Voeg verslag toe" link=addUrl paddingBottom=true }}
         {{> commentSection comments=dataComments }}
-        <div class="main__inner--add">
-            {{> button label="+" link="/add-comment" }}
-        </div>
     </div>
 </main>

@@ -4,80 +4,71 @@
 * ------------------------------
 */
 
-const dataComments = [
-    {
-        index: 0,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Workshop Presentatievaardigheden",
-        text: "De workshop over presentatievaardigheden was ontzettend informatief. Het bood praktische tips en strategieën voor effectief spreken in het openbaar. Ik heb vooral genoten van de interactieve activiteiten die hebben geholpen bij het versterken van de behandelde concepten."
-    },
-    {
-        index: 1,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student/1/aanwezigheid-hoor-en-werkcolleges/view-comment",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Softwareontwikkelingsproject",
-        text: "Ons softwareontwikkelingsproject was uitdagend maar lonend. Het samenwerken met mijn teamleden stelde ons in staat om elkaars sterke punten te benutten en hoogwaardige code te produceren. Ondanks enkele obstakels slaagden we erin om op tijd een functioneel product af te leveren."
-    },
-    {
-        index: 2,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Literatuuronderzoek",
-        text: "Het uitvoeren van het literatuuronderzoek voor mijn onderzoeksproject was een waardevolle leerervaring. Het betrof het kritisch analyseren van verschillende wetenschappelijke artikelen en het synthetiseren van de bevindingen tot een samenhangend verhaal. Dit proces heeft mij een dieper inzicht gegeven in het onderzoeksveld."
-    },
-    {
-        index: 3,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Stage-ervaring",
-        text: "Mijn stage-ervaring bij bedrijf XYZ heeft me praktische inzichten in de industrie gegeven. Ik kreeg de kans om te werken aan echte projecten en samen te werken met ervaren professionals. Deze ervaring heeft niet alleen mijn technische vaardigheden verbeterd, maar heeft me ook blootgesteld aan de nuances van de bedrijfscultuur."
-    },
-    {
-        index: 4,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Cursus Data-analyse",
-        text: "Het volgen van de cursus data-analyse was essentieel voor het uitbreiden van mijn analytische vaardigheden. De cursus behandelde een breed scala aan onderwerpen, van basisstatistische concepten tot geavanceerde technieken voor gegevensvisualisatie. Ik waardeerde de praktische benadering en het vermogen van de instructeur om complexe concepten op een duidelijke manier uit te leggen."
-    },
-    {
-        index: 5,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Netwerkevenement",
-        text: "Het bijwonen van het netwerkevenement was een waardevolle kans om in contact te komen met professionals in mijn vakgebied. Ik had zinvolle gesprekken met experts uit de industrie en kreeg inzicht in de huidige trends en mogelijkheden. Het was inspirerend om te zien hoe gepassioneerd en deskundig de sprekers waren."
-    },
-    {
-        index: 6,
-        link: "/student/1/aanwezigheid-hoor-en-werkcolleges/edit",
-        viewLink: "/student-dashboard/:studentId/course-reports/view-comment",
-        canView: true,
-        title: "Werkcollege CV",
-        text: "Mees heeft een goed gevulde CV. De opmaak is professioneel en overzichtelijk. De relevante ervaring en vaardigheden zijn duidelijk beschreven. Bovendien toont de CV een goede balans"
-    }
-];
+import Comment from '../../models/Comment.js';
+import { formatDate } from '../../utils/formatDate.js'
 
-export const commentsPage = (req, res) => {
+export const commentsPage = async (req, res) => {
+
+    const type = req.query.type
+    if (type !== "course" && type !== "personal" && type !== "coaching") {
+        return res.redirect("/error")
+    }
+
+    const comments = await Comment.query()
+        .withGraphFetched('[employee.user, course]')
+        .where(builder => {
+            if (type) {
+                builder.where('tag', type)
+            }
+        })
+
+    const formattedComments = comments.map((comment) => {
+        return {
+            title: `${formatDate(comment.created_at)}${comment.course ? ` — ${comment.course.name}` : ''} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
+            text: comment.comment,
+            ...comment
+        }
+    })
+
+    const title = type === "course" ? "Vak gerelateerde verslagen" : type === "personal" ? "Persoonlijke verslagen" : "Coaching verslagen";
+
     const data = {
         user: req.user,
-        dataComments,
+        title: title,
+        dataComments: formattedComments,
+        returnUrl: `/student-dashboard/${req.params.studentId}`,
+        addUrl: `/student-dashboard/${req.params.studentId}/${type}-reports/add`,
     };
+
     res.render('comments', data);
+
 };
 
-export const viewCommentPage = (req, res) => {
-    const comment = "sdfgkjsdfjds sdfds sdkf sdf sdfj sdfsd"    
+
+export const commentPage = (req, res) => {
+    const comment = "sdfgkjsdfjds sdfds sdkf sdf sdfj sdfsd"
 
     const data = {
         user: req.user,
         comment,
     };
     res.render('comment', data);
+};
+
+
+export const addCommentPage = (req, res) => {
+
+    const dataLink = [{
+        "url": `/student-dashboard/${req.user.id}/course-reports/add`
+    }];
+    const allowedRoles = ['admin', 'employee'];
+    const canAddComment = req.user && allowedRoles;
+
+    const data = {
+        user: req.user,
+        dataLink,
+        canAddComment,
+    };
+
+    res.render('add-comment', data);
 };

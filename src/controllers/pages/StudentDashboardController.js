@@ -49,17 +49,17 @@ export const studentDashboardPage = async (req, res) => {
             "description": formatedStatus || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/course-reports`,
+            "link": `/student-dashboard/${student.id}/course-reports?type=course`,
             "title": "Vak gerelateerde verslagen",
             "description": formatedCourseReport || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/personal-reports`,
+            "link": `/student-dashboard/${student.id}/personal-reports?type=personal`,
             "title": "Persoonlijke verslagen",
             "description": formatedPersonalReport || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/coaching-reports`,
+            "link": `/student-dashboard/${student.id}/coaching-reports?type=coaching`,
             "title": "Coaching verslagen",
             "description": formatedCoachingReport || noDataAvailable,
         },

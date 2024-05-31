@@ -9,11 +9,9 @@ import { errorPage } from './ErrorController.js';
 import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
 import { welcomePage } from './WelcomeController.js';
-import  { commentsPage } from './CommentsController.js';
-import { addCommentPage } from './AddCommentController.js';
+import  { commentsPage, commentPage, addCommentPage } from './CommentsController.js';
 import { educationProgrammePage, educationProgrammesPage } from './EducationProgrammesController.js';
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
-import { viewCommentPage } from './CommentsController.js';
 import { addUserPage } from './AddUserController.js';
 
 export {
@@ -30,9 +28,9 @@ export {
     welcomePage,
     commentsPage,
     addCommentPage,
+    commentPage,
     educationProgrammePage,
     educationProgrammesPage,
     addEducationProgrammePage,
-    viewCommentPage,
     addUserPage
 }

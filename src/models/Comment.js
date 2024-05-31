@@ -44,7 +44,7 @@ class Comment extends Model {
                 modelClass: Employee,
                 join: {
                     from: "comments.employee_id",
-                    to: "employee.id",
+                    to: "employees.id",
                 },
             },
             education_programme: {
