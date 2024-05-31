@@ -5,6 +5,7 @@
  */
 
 import { getUserById } from "../../services/models/User.js"
+
 export const editUserPage = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
@@ -36,7 +37,7 @@ export const editUserPage = async (req, res) => {
             userInfo,
             pageTitle,
             returnUrl: returnUrl,
-            editable: true
+            viewOnly: false
         };
 
         if (data.user.employee && data.user.employee.functions) {

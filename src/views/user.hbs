@@ -3,7 +3,28 @@
     <main>
         <div class="main__inner user">
             {{> titleSection title=pageTitle blueBg=true returnUrl=returnUrl }}
+            <div class="contact">
+                <div class="contact__item">
+                    <a href="{{ website }}">{{ website }}</a>
+                    {{> button label="Aanpassen" link="#" }}
+                    {{> button label="Verwijderen" dark=true }}
+
+                </div>
+                <div class="contact__item">
+                    <a href="{{ linkedIn }}">{{ linkedIn }}</a>
+                    {{> button label="Aanpassen" link="#" }}
+                    {{> button label="Verwijderen" dark=true }}
+
+                </div>
+                <div class="contact__item">
+                    <a href="{{ facebook }}">{{ facebook }}</a>
+                    {{> button label="Aanpassen" link="#" }}
+                    {{> button label="Verwijderen" dark=true }}
+
+                </div>
+            </div>
             {{> userInfoSection }}
+
         </div>
     </main>
 </div>

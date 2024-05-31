@@ -30,15 +30,21 @@ export const userPage = async (req, res) => {
             workCoach: userData.account?.workplace_coach?.employees || (user.role.title === "student" ? "-" : null),
             workMentor: userData.account?.workplace_mentor?.employees || (user.role.title === "student" ? "-" : null),
             labels: userData.account?.labels?.map(label => label.title) || null,
+            functions: "Teamleider, docent, stagebegeleider",
+            courses: "Graduaat Programmeren, Digitale Vormgeving",
+            subjects: "Web Animations, Programming 4, IT Communication",
         };
-
+        
         const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
-
+        
         const data = {
             user: req.user,
             userInfo,
             pageTitle,
-            returnUrl: returnUrl
+            returnUrl: returnUrl,
+            website: "https://www.artevelde.be",
+            linkedIn: "https://www.linkedin.com",
+            facebook: "https://www.facebook.com",
         };
 
         if (data.user.employee && data.user.employee.functions) {

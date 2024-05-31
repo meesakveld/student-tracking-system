@@ -600,6 +600,35 @@ tr.inactive {
     padding-top: 2rem;
 }
 
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 3rem;
+}
+
+.contact__item {
+    display: flex;
+    align-items: center;
+}
+
+.contact__item a {
+    font-size: 1.2rem;
+    color: var(--dark);
+    padding-right: 4rem;
+}
+
+.contact__item a:hover {
+    color: var(--blue);
+}
+
+.contact__item .button {
+    color: var(--light);
+    width: 7rem;
+    padding: 0.2rem;
+    margin-right: 1rem;
+}
+
 /* ------ Cards ------ */
 
 .cards {
