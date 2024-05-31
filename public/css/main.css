@@ -790,6 +790,7 @@ input[type="date"] {
 
 .add-programme textarea {
     margin-top: 1rem;
+    min-height: 12vh;
 }
 
 .add-programme .dropdown {

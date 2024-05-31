@@ -6,13 +6,15 @@
             <p class="semibold">Naam van de opleiding</p>
             {{> inputField placeholder="Graduaat in het programmeren"}}
         </div>
-        <div class="add-programme__group">
-            <p class="semibold">Schooljaar (20XX-XX)</p>
-            {{> inputField placeholder="2023-24"}}
-        </div>
-        <div class="add-programme__group">
-            <p class="semibold">Code (in hoofdletters)</p>
-            {{> inputField placeholder="GRAPGMG"}}
+        <div class="add-programme__groups">
+            <div class="add-programme__group">
+                <p class="semibold">Schooljaar (20XX-XX)</p>
+                {{> inputField placeholder="2023-24"}}
+            </div>
+            <div class="add-programme__group">
+                <p class="semibold">Code (in hoofdletters)</p>
+                {{> inputField placeholder="GRAPGMG"}}
+            </div>
         </div>
     </div>
     <div class="add-programme__section programme-lines lightgrey-bg">
@@ -31,7 +33,7 @@
                 {{> inputField placeholder="15" type="number"}}
             </div>
         </div>
-        {{> button label="Een extra programmalijn toevoegen"}}
+        <button id="addProgrammeLine" class="button">Een extra programmalijn toevoegen</button>
     </div>
     <div class="add-programme__section courses lightgrey-bg">
         <h1>De vakken</h1>
@@ -59,7 +61,7 @@
                 </div>
             </div>
         </div>
-        {{> button label="Een extra vak toevoegen"}}
+        <button id="addCourse" class="button">Een extra vak toevoegen</button>
     </div>
     <div class="add-programme__section classes lightgrey-bg">
         <h1>De klassen</h1>
@@ -67,10 +69,10 @@
             <p class="semibold">Naam van de klas (jaar-groep-klasgroep)</p>
             {{> inputField placeholder="1-PGM-A"}}
         </div>
-        {{> button label="Een extra klas toevoegen"}}
+        <button id="addClass" class="button">Een extra klas toevoegen</button>
     </div>
     <div class="actions">
-        {{> button label="Toevoegen"}}
+        <button type="submit" class="button">Toevoegen</button>
         {{> button label="Annuleren" dark=true link="/education-programmes"}}
     </div>
 </form>
