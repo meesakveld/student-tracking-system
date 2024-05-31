@@ -62,7 +62,7 @@ export const studentDashboardPage = async (req, res) => {
         },
         {
             "title": "Werkplekleren",
-            "description": "Informatie nog niet van toepassing/niet beschikbaar.",
+            "description": noDateAvailable,
             "locked": true
         }
     ];
