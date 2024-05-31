@@ -7,11 +7,13 @@
 import Attendance from "../../models/Attendance.js";
 import AttendanceType from "../../models/AttendanceType.js";
 import Course from "../../models/Course.js";
+import { getStudentById } from "../../services/models/Student.js";
 
 export const attendancesStudentPage = async (req, res) => {
 
     try {
         const studentId = req.params.studentId;
+        const student = await getStudentById(studentId, '[user]');
 
         const filterCourse = req.query.filterCourse;
         const filterAttendanceType = req.query.filterAttendanceType;
@@ -95,7 +97,7 @@ export const attendancesStudentPage = async (req, res) => {
             user: req.user,
             userFilters,
             usersTable: attendancesTable,
-            title: `Aanwezigheden van ${req.user.firstname} ${req.user.lastname}`,
+            title: `Aanwezigheden van ${student.user.firstname} ${student.user.lastname}`,
         }
 
 
