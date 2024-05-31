@@ -17,10 +17,10 @@ export const educationProgrammesPage = async (req, res) => {
     // ——— FILTERS OPTIONS ———
     // ** Academic years **
     const academicYearsQuery = await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .distinct('academic_year')
@@ -44,10 +44,10 @@ export const educationProgrammesPage = async (req, res) => {
     let educationProgrammes = [];
 
     educationProgrammes = await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .where(builder => {
