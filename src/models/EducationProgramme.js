@@ -9,6 +9,7 @@ import Class from "./Class.js";
 import ProgrammeLine from "./ProgrammeLine.js";
 import Course from "./Course.js";
 import Comment from "./Comment.js";
+import Employee from "./Employee.js";
 
 // define the NavigationItem model
 class EducationProgramme extends Model {
@@ -68,6 +69,18 @@ class EducationProgramme extends Model {
                     to: "courses.education_programme_id",
                 },
             },
+            employees: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Employee,
+                join: {
+                    from: "education_programmes.id",
+                    through: {
+                        from: "education_programmes_employees.education_programme_id",
+                        to: "education_programmes_employees.employee_id",
+                    },
+                    to: "employees.id",
+                },
+            }
         }
     }
 }

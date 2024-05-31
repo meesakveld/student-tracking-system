@@ -10,17 +10,13 @@
         ]
     },
     {
-        "title": "Zoek studenten",
-        "url": "/search-students",
+        "title": "Opleidingsprogramma's",
+        "url": "/education-programs",
         "roles": [
             "employee"
         ],
         "functions": [
-            "teacher",
-            "trajectory coach",
-            "learning coach",
-            "diversity coach",
-            "workplace coach",
+            "admin",
             "teamleader"
         ]
     },
@@ -55,6 +51,21 @@
             "learning coach",
             "diversity coach",
             "workplace coach"
+        ]
+    },
+    {
+        "title": "Zoek studenten",
+        "url": "/search-students",
+        "roles": [
+            "employee"
+        ],
+        "functions": [
+            "teacher",
+            "trajectory coach",
+            "learning coach",
+            "diversity coach",
+            "workplace coach",
+            "teamleader"
         ]
     },
     {

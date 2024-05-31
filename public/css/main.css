@@ -522,13 +522,13 @@ td {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px solid var(--grey);
+    max-width: 10rem;
 }
 
-td.actions {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
+td.actions a {
+    margin-right: 1rem;
 }
+
 
 td.active,
 td.inactive {

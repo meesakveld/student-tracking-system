@@ -76,7 +76,6 @@ class Employee extends Model {
                     to: "comments.employee_id",
                 },
             },
-
             workplace_coaches: {
                 relation: Model.HasManyRelation,
                 modelClass: WorkplaceCoach,
@@ -91,10 +90,10 @@ class Employee extends Model {
                 join: {
                     from: "employees.id",
                     through: {
-                        from: "course_registration.account_id",
-                        to: "course_registration.course_id",
+                        from: "course_links.employee_id",
+                        to: "course_links.course_id",
                     },
-                    to: "course.id",
+                    to: "courses.id",
                 },
             },
             education_programmes: {

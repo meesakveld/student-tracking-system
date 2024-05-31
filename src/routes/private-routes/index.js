@@ -54,7 +54,7 @@ router.get('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee
 router.get('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Coaching Report | ctr.studentDetailPage" }) });
 
 router.get('/search-students', roleAuth(["employee"]), ctr.searchStudentPage);
-router.get('/search-employees', roleAuth(["employee"], ["teamleader"]), ctr.teachersPage);
+router.get('/search-employees', roleAuth(["employee"], ["teamleader"]), ctr.searchEmployeesPage);
 
 router.get('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), /* ctr.addAttendancesPage */);
 router.get('/attendances/add', roleAuth(["employee"], ["teacher", "teamleader"]), ctr.addAttendancesPage);
@@ -73,9 +73,9 @@ router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Re
 router.post('/users', roleAuth(["employee"], ["admin"]), post.handleUser);
 router.post('/education-programmes', roleAuth(["employee"], ["admin", "teamleader"]), post.handleEducationProgramme);
 
-router.post('/student-dashboard/:studentId/course-reports', roleAuth(["employee"], ["teacher"]), post.handleComment);
-router.post('/student-dashboard/:studentId/personal-reports', roleAuth(["employee"]), post.handleComment);
-router.post('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee"], ["trajectory coach", "learning coach", "diversity coach", "workplace coach"]), post.handleComment);
+router.post('/student-dashboard/course-reports', roleAuth(["employee"], ["teacher"]), post.handleComment );
+router.post('/student-dashboard/personal-reports', roleAuth(["employee"]), post.handleComment );
+router.post('/student-dashboard/coaching-reports', roleAuth(["employee"], ["trajectory coach", "learning coach", "diversity coach", "workplace coach"]), post.handleComment );
 
 router.post('/attendances', roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.addAttendancesPage);
 

@@ -1,33 +1,30 @@
 /**
  * ------------------------------
- *      SEARCH STUDENT PAGE
+ *        TEACHERS PAGE
  * ------------------------------
 */
 
 import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 import EducationProgramme from "../../models/EducationProgramme.js";
-import Class from "../../models/Class.js";
 import Course from "../../models/Course.js";
-import Student from "../../models/Student.js";
+import Employee from "../../models/Employee.js";
+import Function from "../../models/Function.js";
 
-/**
- * Controller function for the search student page.
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @returns {Promise<void>} - A promise that resolves when the rendering is complete.
- */
-export const searchStudentPage = async (req, res) => {
+export const searchEmployeesPage = async (req, res) => {
 
     const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin"]);
-    const isTeamLeader = employeeFunctionAuth(req.user.employee.functions, ["teamleader"]);
 
     // ——— FILTERS DATA ———
+    const filterFunction = req.query.filterFunction;
     const filterAcademicYear = req.query.filterAcademicYear;
     const filterProgramme = req.query.filterProgramme;
-    const filterClass = req.query.filterClass;
     const filterCourse = req.query.filterCourse;
 
     // ——— FILTERS OPTIONS ———
+    // ** Function **
+    const functionQuery = await Function.query()
+    const functionOptions = functionQuery.map(item => ({ value: item.id, label: item.title, selected: item.id === parseInt(filterFunction)}))
+
     // ** Academic years **
     const academicYearsQuery = await EducationProgramme.query()
         .joinRelated(!hasFullAccess && 'employees')
@@ -54,26 +51,10 @@ export const searchStudentPage = async (req, res) => {
                 builder.where('academic_year', filterAcademicYear);
             }
         })
-    const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme, data: [{ title: "id", value: programme.id }]}));
-
-    // ** Classes **
-    const classQuery = !filterProgramme ? [] : await Class.query()
-        .joinRelated('education_programmes')
-        .where(builder => {
-            if (filterProgramme) {
-                builder.where('education_programmes.code', filterProgramme);
-            }
-        });
-    const classOptions = classQuery.map(classItem => ({ value: classItem.name, label: classItem.name, selected: classItem.name === filterClass }));
+    const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme, data: [{ title: "id", value: programme.id }] }));
 
     // ** Courses **
     const courseQuery = !filterProgramme ? [] : await Course.query()
-        .joinRelated(!hasFullAccess && !isTeamLeader && 'employees')
-        .where(builder => {
-            if (!hasFullAccess && !isTeamLeader) {
-                builder.where('employees.id', req.user.employee.id)
-            }
-        })
         .joinRelated('education_programme')
         .where(builder => {
             if (filterProgramme) {
@@ -83,6 +64,15 @@ export const searchStudentPage = async (req, res) => {
     const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === parseInt(filterCourse) }));
 
     const userFilters = [
+        {
+            id: "filterFunction",
+            name: "filterFunction",
+            labelText: "Filter op functie:",
+            options: [
+                { value: "", label: "Selecteer functie" },
+                ...functionOptions
+            ]
+        },
         {
             id: "filterAcademicYear",
             name: "filterAcademicYear",
@@ -102,20 +92,7 @@ export const searchStudentPage = async (req, res) => {
             ],
             disabled: !filterAcademicYear,
             data: [
-                { title: "employee-id", value: req.user.employee.id}
-            ]
-        },
-        {
-            id: "filterClass",
-            name: "filterClass",
-            labelText: "Kies een klas:",
-            options: [
-                { value: "", label: "Alle klassen"},
-                ...classOptions
-            ],
-            disabled: !filterProgramme || !classOptions.length > 0,
-            data: [
-                { title: "employee-id", value: req.user.employee.id}
+                { title: "employee-id", value: req.user.employee.id }
             ]
         },
         {
@@ -123,28 +100,35 @@ export const searchStudentPage = async (req, res) => {
             name: "filterCourse",
             labelText: "Kies een vak:",
             options: [
-                { value: "", label: "Alle vakken"},
+                { value: "", label: "Alle vakken" },
                 ...courseOptions
             ],
             disabled: !filterProgramme || !courseOptions.length > 0,
         }
-    ];
+    ]
+
 
     // ——— TABLE DATA ———
-    let students = [];
+    let employees = [];
 
-    students = await Student.query()
-        .withGraphFetched('[user.role, education_programmes, class, courses]')
+    employees = await Employee.query()
+        .withGraphFetched('[user.role, education_programmes, courses, functions]')
+        .joinRelated(filterFunction && '[functions]')
+        .where(builder => {
+            if (filterFunction) {
+                builder.where('functions.id', filterFunction)
+            }
+        })
+        .joinRelated(filterAcademicYear && '[education_programmes]')
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('education_programmes.academic_year', filterAcademicYear)
+            }
+        })
         .joinRelated(filterProgramme && '[education_programmes]')
         .where(builder => {
             if (filterProgramme) {
                 builder.where('education_programmes.code', filterProgramme);
-            }
-        })
-        .joinRelated(filterClass && 'class')
-        .where(builder => {
-            if (filterClass) {
-                builder.where('class.name', filterClass);
             }
         })
         .joinRelated(filterCourse && 'courses')
@@ -154,31 +138,30 @@ export const searchStudentPage = async (req, res) => {
             }
         });
 
-    const rows = students.map(student => {
+    const rows = employees.map(employee => {
         return {
-            isActive: student.user.is_active,
+            isActive: employee.user.is_active,
             cols: [
-                `${student.user.firstname} ${student.user.lastname}`,
-                student.education_programmes.map(programme => `${programme.title} - ${programme.code}`).join(", ") || "-", 
-                student.user.is_active ? "Actief" : "Inactief"],
-            returnUrl: '/search-students',
-            studentId: student.id,
-            userId: student.user.id,
-            infoButton: true,
-            studentButton: true,
+                `${employee.user.firstname} ${employee.user.lastname}`,
+                employee.functions.map(item => item.title).join(', '),
+                employee.education_programmes.map(item => item.title).join(', ')
+            ],
+            userId: employee.user.id,
+            returnUrl: '/search-employees',
+            infoButton: true
         }
-    });
+    })
 
-    const usersTable = {
-        headers: ["Naam", "Opleiding", "Status"],
+    const teachersTable = {
+        headers: ["Naam", "Rollen", "Opleidingen"],
         rows: rows,
     }
 
     const data = {
         user: req.user,
-        userFilters,
-        usersTable,
+        teachersTable,
+        userFilters
     };
 
-    res.render('search-student', data);
+    res.render('search-employees', data);
 };
