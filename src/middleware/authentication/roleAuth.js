@@ -25,7 +25,7 @@ export default (roles = [], functions = []) => async (req, res, next) => {
 
     if (roles.includes('employee') && req.user.role.title === 'employee' && functions.length > 0) {
         try {
-            const employee = await getEmployeeById(parseInt(req.user.id), '[functions]');
+            const employee = await getEmployeeById(parseInt(req.user.employee.id), '[functions]');
             const employeeFunctions = employee.functions.map(item => item.title);
             if (!functions.some(r => employeeFunctions.includes(r))) {
                 return res.render('error', { user: req.user, error: { code: 403, message: 'Je hebt geen toegang tot deze pagina' } });

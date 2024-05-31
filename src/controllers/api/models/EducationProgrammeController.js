@@ -16,10 +16,10 @@ export const getAllEducationProgrammes = async (req, res) => {
     }
 
     const education_programmes = await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess && req.query.employee_id) {
-                builder.where('courses:employees.id', req.query.employee_id)
+                builder.where('employees.id', req.query.employee_id)
             }
         })
         .where('academic_year', req.query.academic_year)

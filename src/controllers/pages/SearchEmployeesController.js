@@ -27,10 +27,10 @@ export const searchEmployeesPage = async (req, res) => {
 
     // ** Academic years **
     const academicYearsQuery = await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .distinct('academic_year')
@@ -40,10 +40,10 @@ export const searchEmployeesPage = async (req, res) => {
 
     // ** Education Programme **
     const educationProgrammesQuery = !filterAcademicYear ? [] : await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .where(builder => {
@@ -55,12 +55,6 @@ export const searchEmployeesPage = async (req, res) => {
 
     // ** Courses **
     const courseQuery = !filterProgramme ? [] : await Course.query()
-        .joinRelated(!hasFullAccess && 'employees')
-        .where(builder => {
-            if (!hasFullAccess) {
-                builder.where('employees.id', req.user.employee.id)
-            }
-        })
         .joinRelated('education_programme')
         .where(builder => {
             if (filterProgramme) {

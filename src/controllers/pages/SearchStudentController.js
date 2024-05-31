@@ -19,6 +19,7 @@ import Student from "../../models/Student.js";
 export const searchStudentPage = async (req, res) => {
 
     const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin"]);
+    const isTeamLeader = employeeFunctionAuth(req.user.employee.functions, ["teamleader"]);
 
     // ——— FILTERS DATA ———
     const filterAcademicYear = req.query.filterAcademicYear;
@@ -29,10 +30,10 @@ export const searchStudentPage = async (req, res) => {
     // ——— FILTERS OPTIONS ———
     // ** Academic years **
     const academicYearsQuery = await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .distinct('academic_year')
@@ -42,10 +43,10 @@ export const searchStudentPage = async (req, res) => {
 
     // ** Education Programme **
     const educationProgrammesQuery = !filterAcademicYear ? [] : await EducationProgramme.query()
-        .joinRelated(!hasFullAccess && 'courses.employees')
+        .joinRelated(!hasFullAccess && 'employees')
         .where(builder => {
             if (!hasFullAccess) {
-                builder.where('courses:employees.id', req.user.employee.id)
+                builder.where('employees.id', req.user.employee.id)
             }
         })
         .where(builder => {
@@ -67,9 +68,9 @@ export const searchStudentPage = async (req, res) => {
 
     // ** Courses **
     const courseQuery = !filterProgramme ? [] : await Course.query()
-        .joinRelated(!hasFullAccess && 'employees')
+        .joinRelated(!hasFullAccess && !isTeamLeader && 'employees')
         .where(builder => {
-            if (!hasFullAccess) {
+            if (!hasFullAccess && !isTeamLeader) {
                 builder.where('employees.id', req.user.employee.id)
             }
         })
