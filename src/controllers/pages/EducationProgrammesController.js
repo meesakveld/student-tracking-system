@@ -56,10 +56,28 @@ export const educationProgrammesPage = async (req, res) => {
             }
         });
 
+    const rows = educationProgrammes.map(programme => {
+        return {
+            isActive: true,
+            cols: [
+                programme.title,
+                programme.code,
+                programme.academic_year,
+            ],
+            infoButton: true,
+        }
+    });
+
+    const educationProgrammesTable = {
+        headers: ["Naam", "Opleidingscode", "Academisch jaar"],
+        rows: rows,
+    }
+
      // ——— RENDER DATA ———
     const data = {
         user: req.user,
         educationProgrammesFilters,
+        educationProgrammesTable
     };
     res.render("education-programmes", data);
 }
