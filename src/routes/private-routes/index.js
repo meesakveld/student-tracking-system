@@ -36,7 +36,8 @@ router.get('/', ctr.dashboardPage);
 
 router.get('/users', roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/:id', roleAuth(["employee", "student"]), studentIdAuth, ctr.userPage);
-router.get('/users/add', roleAuth(["employee"], ["admin"]), ctr.addUserPage);
+router.get('/users/:id/add-user', roleAuth(["employee"], ["admin"]), ctr.addUserPage);
+router.get('/users/:id/edit-user', roleAuth(["employee"], ["admin"]), ctr.editUserPage);
 
 router.get('/education-programmes', roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammesPage);
 router.get('/education-programmes/add', roleAuth(["employee"], ["admin", "teamleader"]), ctr.addEducationProgrammePage);

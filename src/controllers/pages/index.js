@@ -15,6 +15,7 @@ import { educationProgrammePage, educationProgrammesPage } from './EducationProg
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
 import { viewCommentPage } from './CommentsController.js';
 import { addUserPage } from './AddUserController.js';
+import { editUserPage } from './EditUserController.js';
 
 export {
     componentsPage,
@@ -34,5 +35,6 @@ export {
     educationProgrammesPage,
     addEducationProgrammePage,
     viewCommentPage,
-    addUserPage
+    addUserPage,
+    editUserPage
 }

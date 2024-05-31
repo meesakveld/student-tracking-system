@@ -1,7 +1,6 @@
 {{!-- User Section --}}
 <section class="lightgrey-bg">
     <!-- Javascript: when clicking on the 'wijzigen' button the viewOnly attribute is removed and a save button is added to send the changes -->
-    {{#if userInfo}} <!-- If there is user data -->
         <div class="user-info">
             <div class="user-info__left">
                 <h3>Persoonlijke informatie</h3>
@@ -89,61 +88,4 @@
             <button class="button">Wijzigen</button>
         </div>
         {{/includes}}
-    {{else}} <!-- If there is no user data => the page to add an user -->
-        <div class="user-info">
-            <div class="user-info__left">
-                <h3>Persoonlijke informatie</h3>
-                <div class="user-info__item">
-                    <p class="semibold">Voornaam</p>
-                    {{> inputField placeholder='Voornaam'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Achternaam</p>
-                    {{> inputField placeholder='Achternaam'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">E-mailadres</p>
-                    {{> inputField placeholder='E-mailadres'}}
-                </div>
-                <h3>Labels</h3>
-                <div class="user-info__item">
-                    {{> labelList labels=labels}}
-                </div>
-            </div>
-            <div class="user-info__right">
-                <h3>School gerelateerde informatie</h3>
-                <div class="user-info__item">
-                    <p class="semibold">Klas</p>
-                    {{> inputField placeholder='Klas'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Studiejaar</p>
-                    {{> inputField placeholder='Studiejaar'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Statuut</p>
-                    {{> inputField placeholder='Statuut'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Rol</p>
-                    {{> inputField placeholder='Rol'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Trajectcoach</p>
-                    {{> inputField placeholder='Trajectcoach'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Werkplekcoach</p>
-                    {{> inputField placeholder='Werkplekcoach'}}
-                </div>
-                <div class="user-info__item">
-                    <p class="semibold">Werkplekmentor</p>
-                    {{> inputField placeholder='Werkplekmentor'}}
-                </div>
-            </div>
-        </div>
-        <div class="user-info__button">
-            <button class="button">Toevoegen</button>
-        </div>
-    {{/if}}
 </section>
