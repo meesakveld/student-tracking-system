@@ -13,8 +13,14 @@ export const editUserPage = async (req, res) => {
         const user = await getUserById(id, '[role, student.[labels, class, status_registration.status, trajectory_coach.user, workplace_coach.user, workplace_mentor.user], employee]');
         
         let userData = user;
-        if (user.student) userData.account = user.student; delete userData.student;
-        if (user.employee) userData.account = user.employee; delete userData.employee;
+        if (user.student) {
+            userData.account = user.student;
+            delete userData.student;
+        }
+        if (user.employee) {
+            userData.account = user.employee;
+            delete userData.employee;
+        }
 
         const userInfo = {
             id: userData.id,
@@ -31,20 +37,23 @@ export const editUserPage = async (req, res) => {
         };
 
         const pageTitle = `Edit Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
+        const isStudent = user.role.title === "student";
 
         const data = {
             user: req.user,
             userInfo,
             pageTitle,
             returnUrl: returnUrl,
-            viewOnly: false
+            viewOnly: false,
+            isStudent,
         };
 
         if (data.user.employee && data.user.employee.functions) {
             data.user.employee.functions = data.user.employee.functions.map(func => func.title);
         }
 
-        res.render('edit-user', data);
+        const template = isStudent ? 'edit-student' : 'edit-employee';
+        res.render(template, data);
 
     } catch (error) {
         const data = {
