@@ -2,9 +2,9 @@
 <main>
     <div class="main__inner">
         {{> titleSection title="Alle opmerkingen" blueBg=true }}
-        {{> comment comments=dataComments }}
+        {{> commentSection comments=dataComments }}
         <div class="main__inner--add">
-            {{> button label="+" link="{{ url }}" }}
+            {{> button label="+" link="/add-comment" }}
         </div>
     </div>
 </main>

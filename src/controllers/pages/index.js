@@ -12,6 +12,8 @@ import { welcomePage } from './WelcomeController.js';
 import  { commentsPage } from './CommentsController.js';
 import { addCommentPage } from './AddCommentController.js';
 import { educationProgrammePage, educationProgrammesPage } from './EducationProgrammesController.js';
+import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
+import { viewCommentPage } from './CommentsController.js';
 
 export {
     componentsPage,
@@ -28,5 +30,7 @@ export {
     commentsPage,
     addCommentPage,
     educationProgrammePage,
-    educationProgrammesPage
+    educationProgrammesPage,
+    addEducationProgrammePage,
+    viewCommentPage
 }
