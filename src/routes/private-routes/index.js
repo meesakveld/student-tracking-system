@@ -44,13 +44,13 @@ router.get('/education-programmes/:id', roleAuth(["employee"], ["admin", "teamle
 
 router.get('/student-dashboard/:studentId', roleAuth(["employee", "student"]), studentIdAuth, ctr.studentDashboardPage);
 router.get('/student-dashboard/:studentId/attendance', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Attendance" }) });
+router.get('/student-dashboard/:studentId/status', roleAuth(["employee"]), studentIdAuth, (req, res) => { res.json({ message: "Status" }) });
 router.get('/student-dashboard/:studentId/course-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/course-reports/add', roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
 router.get('/student-dashboard/:studentId/course-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, ctr.viewCommentPage);
-router.get('/student-dashboard/:studentId/personal-reports', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Personal Reports | ctr.commentsPage" }) });
+router.get('/student-dashboard/:studentId/personal-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/personal-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Personal Report | ctr.studentDetailPage" }) });
-router.get('/student-dashboard/:studentId/status', roleAuth(["employee"]), studentIdAuth, (req, res) => { res.json({ message: "Status" }) });
-router.get('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Coaching Reports | ctr.commentsPage" }) });
+router.get('/student-dashboard/:studentId/coaching-reports', roleAuth(["employee", "student"]), studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(["employee", "student"]), studentIdAuth, (req, res) => { res.json({ message: "Coaching Report | ctr.studentDetailPage" }) });
 
 router.get('/search-students', roleAuth(["employee"]), ctr.searchStudentPage);
