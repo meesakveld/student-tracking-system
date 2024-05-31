@@ -14,11 +14,12 @@ export const userPage = async (req, res) => {
         const id = parseInt(req.params.id);
         const returnUrl = req.query.returnUrl || "/";
         const user = await getUserById(id, '[role, student.[labels, class, status_registration.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
-
+        
+        
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
         if (user.employee) userData.account = user.employee; delete userData.employee 
-
+        
         const userInfo = {
             firstName: userData.firstname,
             lastName: userData.lastname,
@@ -35,10 +36,14 @@ export const userPage = async (req, res) => {
             subjects: "Web Animations, Programming 4, IT Communication",
         };
         
+        const isStudent = user.role.title === 'student';
         const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
         
         const data = {
-            user: req.user,
+            user: {
+                ...req.user,
+                isStudent: isStudent
+            },
             userInfo,
             pageTitle,
             returnUrl: returnUrl,

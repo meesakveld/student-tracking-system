@@ -612,23 +612,22 @@ tr.inactive {
     align-items: center;
 }
 
-.contact__item a {
-    font-size: 1.2rem;
-    color: var(--dark);
-    padding-right: 4rem;
-}
-
-.contact__item a:hover {
-    color: var(--blue);
-}
-
 .contact__item .button {
-    color: var(--light);
-    width: 7rem;
-    padding: 0.2rem;
     margin-right: 1rem;
 }
 
+.contact__item-link a {
+    color: var(--dark);
+    margin-right: 5rem;
+}
+
+.contact__item-link a:hover {
+    color: var(--blue);
+}
+
+.user__fiche {
+    margin-top: 2rem;
+}
 /* ------ Cards ------ */
 
 .cards {
