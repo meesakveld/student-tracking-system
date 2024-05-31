@@ -5,38 +5,60 @@
 */
 
 import { getStudentById } from '../../services/models/Student.js';
+import { formatDate } from '../../utils/formatDate.js';
 
 export const studentDashboardPage = async (req, res) => {
-    const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course]]')
+    const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]')
 
+    // Most recent attendance
     const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    mostRecentAttendance.date = mostRecentAttendance && formatDate(mostRecentAttendance.date);
+    const formatedAttendance = mostRecentAttendance && `${student.user.firstname} was ${mostRecentAttendance.attendance_type.title.toLowerCase()} op ${mostRecentAttendance.date} bij ${mostRecentAttendance.course.name}.`;
+    
+    // Most recent status
+    const mostRecentStatus = student.status_registrations.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const formatedStatus = mostRecentStatus && `${student.user.firstname} is sinds ${formatDate(mostRecentStatus.created_at)} ${mostRecentStatus.status.title.toLowerCase()}.`;
 
+    // Most recent course reports
+    const mostRecentCourseReport = student.comments.filter(comment => comment.tag === "course").sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const formatedCourseReport = mostRecentCourseReport && `${mostRecentCourseReport.course.name} — ${formatDate(mostRecentCourseReport.created_at)} | ${mostRecentCourseReport.comment}`
+
+    // Most recent personal reports
+    const mostRecentPersonalReport = student.comments.filter(comment => comment.tag === "personal").sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const formatedPersonalReport = mostRecentPersonalReport && `${formatDate(mostRecentPersonalReport.created_at)} | ${mostRecentPersonalReport.comment}`
+
+    // Most recent coaching reports
+    const mostRecentCoachingReport = student.comments.filter(comment => comment.tag === "coaching").sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    const formatedCoachingReport = mostRecentCoachingReport && `${formatDate(mostRecentCoachingReport.created_at)} | ${mostRecentCoachingReport.comment}`
+
+    // No data available
+    const noDateAvailable = "Informatie nog niet van toepassing/niet beschikbaar.";
 
     const cards = [
         {
             "link": `/student-dashboard/${student.id}/attendance`,
             "title": "Aanwezigheden hoor- en werkcolleges",
-            "description": `Tijdens afgelopen les van ${mostRecentAttendance.course.name} was ${student.user.firstname}: ${mostRecentAttendance.attendance_type.title}`
+            "description": formatedAttendance || noDateAvailable,
+        },
+        {
+            "link": `/student-dashboard/${student.id}/status`,
+            "title": "Status student",
+            "description": formatedStatus || noDateAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/course-reports`,
             "title": "Vak gerelateerde verslagen",
-            "description": "Mees heeft tijdens de colleges actief deelgenomen en waardevolle inzichten gedeeld met de groep.",
+            "description": formatedCourseReport || noDateAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/personal-reports`,
             "title": "Persoonlijke verslagen",
-            "description": "Mees heeft consistent sterke prestaties geleverd bij het uitvoeren van opdrachten en oefeningen, waarbij hij complexe problemen effectief heeft aangepakt."
+            "description": formatedPersonalReport || noDateAvailable,
         },
         {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
-            "title": "Status student",
-            "description": "Mees heeft een uitstekende academische status behouden gedurende het semester, met consistente inzet en uitmuntende resultaten."
-        },
-        {
-            "link": "/student-dashboard/1/aanwezigheid-hoor-en-werkcolleges",
+            "link": `/student-dashboard/${student.id}/coaching-reports`,
             "title": "Coaching verslagen",
-            "description": "Mees heeft aanzienlijke vooruitgang geboekt dankzij de individuele coachingssessies, waarbij hij zijn vaardigheden en zelfvertrouwen heeft ontwikkeld. Verdere coaching is niet vereist."
+            "description": formatedCoachingReport || noDateAvailable,
         },
         {
             "title": "Werkplekleren",
