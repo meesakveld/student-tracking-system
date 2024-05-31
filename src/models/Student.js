@@ -125,7 +125,7 @@ class Student extends Model {
                     to: "comments.student_id",
                 },
             },
-            status_registration: {
+            status_registrations: {
                 relation: Model.HasManyRelation,
                 modelClass: StatusRegistration,
                 join: {

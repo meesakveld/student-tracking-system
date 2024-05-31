@@ -13,7 +13,7 @@ export const userPage = async (req, res) => {
 
         const id = parseInt(req.params.id);
         const returnUrl = req.query.returnUrl || "/";
-        const user = await getUserById(id, '[role, student.[labels, class, status_registration.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
+        const user = await getUserById(id, '[role, student.[labels, class, status_registrations.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
 
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
@@ -24,7 +24,7 @@ export const userPage = async (req, res) => {
             lastName: userData.lastname,
             email: userData.email,
             class: userData.account?.class?.name || (user.role.title === "student" ? "-" : null),
-            status: userData.account?.status_registration?.[0]?.status.title || (user.role.title === "student" ? "-" : null),
+            status: userData.account?.status_registrations?.[0]?.status.title || (user.role.title === "student" ? "-" : null),
             role: userData.role.title,
             coach: userData.account?.trajectory_coach?.users || (user.role.title === "student" ? "-" : null),
             workCoach: userData.account?.workplace_coach?.employees || (user.role.title === "student" ? "-" : null),

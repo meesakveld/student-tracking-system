@@ -68,7 +68,7 @@ class Comment extends Model {
                 modelClass: Course,
                 join: {
                     from: "comments.course_id",
-                    to: "course.id",
+                    to: "courses.id",
                 },
             },
 
