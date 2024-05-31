@@ -8,7 +8,10 @@ import { getStudentById } from '../../services/models/Student.js';
 import { formatDate } from '../../utils/formatDate.js';
 
 export const studentDashboardPage = async (req, res) => {
-    const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]')
+    const studentIsLoggedIn = req.user.role.title === "student";
+
+    const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]');
+    student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? 1 : 0));
 
     // Most recent attendance
     const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
@@ -32,37 +35,37 @@ export const studentDashboardPage = async (req, res) => {
     const formatedCoachingReport = mostRecentCoachingReport && `${formatDate(mostRecentCoachingReport.created_at)} | ${mostRecentCoachingReport.comment}`
 
     // No data available
-    const noDateAvailable = "Informatie nog niet van toepassing/niet beschikbaar.";
+    const noDataAvailable = "Informatie nog niet van toepassing/niet beschikbaar.";
 
     const cards = [
         {
             "link": `/student-dashboard/${student.id}/attendance`,
             "title": "Aanwezigheden hoor- en werkcolleges",
-            "description": formatedAttendance || noDateAvailable,
+            "description": formatedAttendance || noDataAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/status`,
             "title": "Status student",
-            "description": formatedStatus || noDateAvailable,
+            "description": formatedStatus || noDataAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/course-reports`,
             "title": "Vak gerelateerde verslagen",
-            "description": formatedCourseReport || noDateAvailable,
+            "description": formatedCourseReport || noDataAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/personal-reports`,
             "title": "Persoonlijke verslagen",
-            "description": formatedPersonalReport || noDateAvailable,
+            "description": formatedPersonalReport || noDataAvailable,
         },
         {
             "link": `/student-dashboard/${student.id}/coaching-reports`,
             "title": "Coaching verslagen",
-            "description": formatedCoachingReport || noDateAvailable,
+            "description": formatedCoachingReport || noDataAvailable,
         },
         {
             "title": "Werkplekleren",
-            "description": noDateAvailable,
+            "description": noDataAvailable,
             "locked": true
         }
     ];
