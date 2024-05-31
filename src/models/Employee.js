@@ -76,7 +76,6 @@ class Employee extends Model {
                     to: "comments.employee_id",
                 },
             },
-
             workplace_coaches: {
                 relation: Model.HasManyRelation,
                 modelClass: WorkplaceCoach,

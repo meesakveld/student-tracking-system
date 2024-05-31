@@ -7,6 +7,30 @@ const seed = async function (knex) {
         {
             education_programme_id: 14,
             employee_id: 1,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 2,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 3,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 4,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 5,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 6,
+        },
+        {
+            education_programme_id: 14,
+            employee_id: 7,
         }
     ]);
 };

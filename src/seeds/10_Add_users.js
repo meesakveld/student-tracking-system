@@ -7,7 +7,7 @@ const seed = async function (knex) {
         {
             firstname: "John",
             lastname: "Doe",
-            email: "john.doe@arteveldehs.be",
+            email: "admin@arteveldehs.be",
             password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
             username: "johndoe",
             role_id: 2,
@@ -28,6 +28,55 @@ const seed = async function (knex) {
             username: "meesakveld",  
             role_id: 1,
         },
+        {
+            firstname: "Evelien",
+            lastname: "Rutsaert",
+            email: "teacher@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "evelienrutsaert",
+            role_id: 2
+        },
+        {
+            firstname: "Philippe",
+            lastname: "De Pauw - Waterschoot",
+            email: "teamleader@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "philippedepauw-waterschoot",
+            role_id: 2
+        },
+        {
+            firstname: "Inge",
+            lastname: "Sintobin",
+            email: "trajectorycoach@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "ingesintobin",
+            role_id: 2
+        },
+        {
+            firstname: "Isabelle",
+            lastname: "Volckaert",
+            email: "learningcoach@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "isabellevolckaert",
+            role_id: 2
+        },
+        {
+            firstname: "Jane",
+            lastname: "Doe",
+            email: "diversitycoach@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "janedoe",
+            role_id: 2
+        },
+        {
+            firstname: "Inge",
+            lastname: "De Canck",
+            email: "workplacecoach@arteveldehs.be",
+            password: "$2b$10$Dz1QP6X2aty4He993qqVjuImsjlCcQbn6LopTlKysJpLF5E8DDxrK",
+            username: "ingedecanck",
+            role_id: 2
+        },
+        
     ]);
 };
 
