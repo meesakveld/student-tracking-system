@@ -49,35 +49,49 @@ export const createComment = async (req, res, next) => {
 export const updateComment = async (req, res, next) => {
     const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader"]);
 
-    const comment_id = req.body.comment_id;
+    const comment_id = parseInt(req.body.comment_id);
     const comment = req.body.comment;
-    const visible_to_student = req.body.visible_to_student;
+    const visible_to_student = parseInt(req.body.visible_to_student)
+    const course_id = parseInt(req.body.course_id)
     const tag = req.body.tag;
 
-    if (tag && tag !== "coaching" && tag !== "personal" && tag !== "course") {
-        return res.status(400).json({ error: "Invalid tag" });
+    if (tag !== "coaching" && tag !== "personal" && tag !== "course") {
+        req.pageError = "Ongeldige tag. Huidige tag: " + tag;
+        return next();
+    }
+
+    if (tag === "course" && !course_id) {
+        req.pageError = "Een vak is verplicht voor dit type verslag";
+        return next();
     }
 
     try {
         // Fetch the existing comment to get the author employee_id
         const existingComment = await Comment.query().findById(comment_id);
         if (!existingComment) {
-            return res.status(404).json({ error: "Comment not found" });
+            req.pageError = "Verwijderen mislukt! Verslag met id " + comment_id + " niet gevonden";
+            return next();
         }
 
         // Check if the current user is the author or has full access
         if (req.user.employee.id === existingComment.employee_id || hasFullAccess) {
             const updatedComment = {
                 comment: comment,
-                visible_to_student: visible_to_student,
+                visible_to_student: visible_to_student === 1 ? true : false,
                 tag: tag
             };
 
+            if (tag === "course") {
+                updatedComment.course_id = course_id;
+            }
+
             // Update the comment
-            const updated = await Comment.query().patchAndFetchById(comment_id, updatedComment);
-            return res.status(200).json(updated);
+            const updated = await Comment.query().findById(comment_id).patch(updatedComment);
+            req.flash = "Gelukt! Het verslag is bijgewerkt";
+            return next();
         } else {
-            return res.status(403).json({ error: "You do not have permission to update this comment" });
+            req.pageError = "Je hebt geen toestemming om dit verslag bij te werken";
+            return next();
         }
     } catch (error) {
         console.error("Error updating comment:", error);
@@ -95,15 +109,17 @@ export const deleteComment = async (req, res, next) => {
         // Fetch the existing comment to check the author employee_id
         const existingComment = await Comment.query().findById(comment_id);
         if (!existingComment) {
-            return res.status(404).json({ error: "Comment not found" });
+            req.pageError = "Verwijderen mislukt! Verslag met id " + comment_id + " niet gevonden";
+            return next();
         }
         // Check if the current user is the author or has full access
         if (req.user.employee.id === existingComment.employee_id || hasFullAccess) {
             // Delete the comment
-            await Comment.query().deleteById(comment_id);
-            return res.status(200).json({ message: "Comment deleted successfully" });
+            await Comment.query().deleteById(parseInt(comment_id));
+            res.redirect("/student-dashboard/" + req.params.studentId + `/${req.body.tag}-reports?type=${req.body.tag}`);
         } else {
-            return res.status(403).json({ error: "You do not have permission to delete this comment" });
+            req.pageError = "Je hebt geen toestemming om dit verslag te verwijderen";
+            return next();
         }
     } catch (error) {
         console.error("Error deleting comment:", error);

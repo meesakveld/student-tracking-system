@@ -3,15 +3,35 @@
     <main>
         <div class="main__inner student-detail">
             {{> titleSection title=title blueBg=true returnUrl=returnUrl }}
-            {{> textareaSection disabled=true label=section.title value=section.content }}
+
+            {{#if pageError}}
+                {{> pageError pageError=pageError}}
+            {{/if}}
+            {{#if flash}}
+                {{> flash flash=flash}}
+            {{/if}}
+
+            <form action="/student-dashboard/{{comment.student_id}}/{{comment.tag}}-reports/{{comment.id}}?type={{comment.tag}}" method="POST" id="comment">
+                {{> textareaSection name="comment" id="commentTextArea" disabled=true label=section.title value=section.content }}
+                <input type="hidden" name="method" value="PATCH">
+                <input type="hidden" name="comment_id" value="{{comment.id}}">
+                <input type="hidden" name="tag" value="{{comment.tag}}">
+            </form>
             <div class="comment__buttons">
                 {{#if mayEditComment}}
                     {{> button label="Bewerken" id="editComment"}}
-                    {{> button label="Opslaan" id="editComment" class="button--hidden"}}
-                    {{> button label="Verwijder" id="editComment" class="button--dark button--hidden"}}
-                    {{!-- TODO: Add scripts to edit! --}}
+                    {{> button type="button" form="comment" label="Opslaan" id="saveComment" class="hidden hide"}}
+                    <form method="POST" action="/student-dashboard/{{comment.student_id}}/{{comment.tag}}-reports/{{comment.id}}?type={{comment.tag}}" id="deleteComment">
+                        {{> button type="button" form="deleteComment" label="Verwijder" id="deleteComment" class="button--dark hidden hide"}}
+                        <input type="hidden" name="method" value="DELETE">
+                        <input type="hidden" name="comment_id" value="{{comment.id}}">
+                        <input type="hidden" name="tag" value="{{comment.tag}}">
+                    </form>
                 {{/if}}
-                {{> dropdown disabled=true labelText=" Zichtbaarheid:" name="visibility" id="visibilityDropdown" options=dropdownVisibility.options }}
+                {{#each dropdowns}}
+                    {{> dropdown disabled=disabled labelText=label name=name id=id options=options class=class inputClass=inputClass labelClass=labelClass }}
+                {{/each}}
+                <script src="/scripts/commentEditHandler.js"></script>
             </div>
         </div>
     </main>

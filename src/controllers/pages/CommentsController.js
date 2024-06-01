@@ -9,6 +9,8 @@ import { getStudentById } from '../../services/models/Student.js';
 import { getCommentById } from '../../services/models/Comment.js';
 import { employeeFunctionAuth } from '../../utils/employeeFunctionAuth.js';
 import { formatDate } from '../../utils/formatDate.js'
+import Student from '../../models/Student.js';
+import Course from '../../models/Course.js';
 
 export const commentsPage = async (req, res) => {
 
@@ -75,62 +77,125 @@ export const commentsPage = async (req, res) => {
 
 export const commentPage = async (req, res) => {
 
-    const studentId = req.params.studentId;
-    const reportId = req.params.reportId;
-    const type = req.query.type;
-    let convertedType = type;
+    try {
 
-    if (type !== "course" && type !== "personal" && type !== "coaching") {
+        const hasFullAccess = req.user.role.title === "employee" && employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader"]);
+        const isEmployee = req.user.role.title === "employee";
+
+        const studentId = req.params.studentId;
+        const reportId = req.params.reportId;
+        const type = req.query.type;
+        let convertedType = type;
+
+        const reqComment = req.body.comment;
+        const reqVisibleToStudent = parseInt(req.body.visible_to_student);
+        const reqCourseId = parseInt(req.body.course_id) || req.body.course_id ? 0 : null;
+
+        if (type !== "course" && type !== "personal" && type !== "coaching") {
+            throw new Error("Pagina niet gevonden")
+        }
+        if (type === "course") convertedType = "Vak gerelateerd"
+        if (type === "personal") convertedType = "Persoonlijk"
+        if (type === "coaching") convertedType = "Coaching"
+
+        const comment = await getCommentById(reportId, '[employee.[user, functions], course.employees.user]');
+        const student = await Student.query().findById(studentId).withGraphFetched('[user]')
+
+        const commentWrittenByLoggedInUser = isEmployee && parseInt(req.user.employee.id) === comment.employee_id;
+
+        const courses = await Course.query()
+            .joinRelated('students')
+            .where('student_id', studentId)
+            .joinRelated(commentWrittenByLoggedInUser && 'employees')
+            .where(builder => {
+                if (commentWrittenByLoggedInUser) {
+                    builder.where('employees.id', parseInt(req.user.employee.id))
+                }
+            })
+            .where(builder => {
+                if (req.user.role.title === "student" || (!commentWrittenByLoggedInUser && !hasFullAccess)) {
+                    builder.findById(comment.course_id)
+                }
+            })
+
+        const title = `${convertedType} verslag van ${student.user.firstname} ${student.user.lastname}`
+        const section = {
+            title: `${formatDate(comment.created_at)} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
+            content: reqComment || comment.comment,
+        };
+
+        const courseOptions = courses.map(course => {
+            return {
+                label: course.name,
+                value: course.id,
+                selected: reqCourseId > 0 ? reqCourseId === course.id : reqCourseId === 0 ? false : comment.course_id === course.id
+            }
+        });
+
+        const dropdowns = [
+            {
+                label: 'Vak:',
+                name: 'course_id',
+                id: 'courseDropdown',
+                options: [
+                    { label: 'Selecteer vak', value: 0, selected: !comment.course },
+                    ...courseOptions
+                ],
+                visible: type === "course",
+                disabled: true,
+                inputClass: 'hide',
+                form: 'comment'
+            },
+            {
+                label: 'Zichtbaarheid:',
+                name: 'visible_to_student',
+                id: 'visibilityDropdown',
+                options: [
+                    {
+                        label: `Niet zichtbaar voor ${student.user.firstname}`,
+                        value: 0,
+                        selected: reqVisibleToStudent !== null ? reqVisibleToStudent === 0 : comment.visible_to_student
+                    },
+                    {
+                        label: `Zichtbaar voor ${student.user.firstname}`,
+                        value: 1,
+                        selected: reqVisibleToStudent !== null ? reqVisibleToStudent === 1 : comment.visible_to_student
+                    },
+                ],
+                disabled: true,
+                visible: req.user.role.title === "employee",
+                inputClass: 'hide',
+                form: 'comment'
+            }
+        ]
+
+        let mayEditComment = req.user.role.title === "employee" && req.user.employee.id === comment.employee_id;
+        if (req.user.employee && employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader"])) mayEditComment = true;
+
+        const data = {
+            user: req.user,
+            title,
+            section,
+            comment: comment,
+            mayEditComment: mayEditComment,
+            pageError: req.pageError,
+            flash: req.flash,
+            dropdowns: dropdowns.filter(dropdown => dropdown.visible),
+            returnUrl: `/student-dashboard/${studentId}/${type}-reports?type=${type}`,
+        };
+
+        res.render('comment', data);
+
+    } catch (error) {
         const data = {
             user: req.user,
             error: {
-                message: 'Pagina niet gevonden',
+                message: error.message,
                 code: 404
             }
         }
         return res.render('error', data)
     }
-    if (type === "course") convertedType = "Vak gerelateerd"
-    if (type === "personal") convertedType = "Persoonlijk"
-    if (type === "coaching") convertedType = "Coaching"
-
-    const student = await getStudentById(studentId, '[user]');
-    const comment = await getCommentById(reportId, '[employee.[user, functions], course]');
-
-    const title = `${convertedType} verslag van ${student.user.firstname} ${student.user.lastname}`
-    const section = {
-        title: `${formatDate(comment.created_at)} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
-        content: comment.comment,
-    };
-
-    const dropdownVisibility = {
-        options: [
-            {
-                label: `Niet zichtbaar voor ${student.user.firstname}`,
-                value: "0",
-                selected: comment.visible_to_student
-            },
-            {
-                label: `Zichtbaar voor ${student.user.firstname}`,
-                value: "1",
-                selected: comment.visible_to_student
-            },
-        ]
-    };
-    const dropdownCourses = {
-
-    }
-
-    const data = {
-        user: req.user,
-        title,
-        section,
-        mayEditComment: false,
-        dropdownVisibility: dropdownVisibility,
-        returnUrl: `/student-dashboard/${studentId}/${type}-reports?type=${type}`,
-    };
-
-    res.render('comment', data);
 };
 
 

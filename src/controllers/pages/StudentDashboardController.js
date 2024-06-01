@@ -6,12 +6,13 @@
 
 import { getStudentById } from '../../services/models/Student.js';
 import { formatDate } from '../../utils/formatDate.js';
+import { NODE_ENV as vrs } from '../../consts.js';
 
 export const studentDashboardPage = async (req, res) => {
     const studentIsLoggedIn = req.user.role.title === "student";
 
     const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]');
-    student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? 1 : 0));
+    student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? (vrs === 'development' ? 1 : true) : (vrs === 'development' ? 0 : false)));
 
     // Most recent attendance
     const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
