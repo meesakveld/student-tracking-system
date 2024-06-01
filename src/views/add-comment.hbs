@@ -1,7 +1,21 @@
 {{!-- Comments add section --}}
 <main>
-    <div class="main__inner">
-        {{> titleSection title="Voeg opmerking toe" blueBg=true }}
-        {{> textareaSection label=section.title value=section.content }}
+    <div class="main__inner student-detail">
+        {{> titleSection title=title blueBg=true returnUrl=returnUrl }}
+        
+        {{#if pageError}} {{> pageError pageError=pageError}} {{/if}}
+        {{#if flash}} {{> flash flash=flash}} {{/if}}
+
+        <form action="/student-dashboard/{{student.id}}/{{comment.tag}}-reports/add?type={{comment.tag}}" method="POST" id="comment">
+            {{> textareaSection name="comment" id="commentTextArea" placeholder="Schrijf hier het verslag." label=comment.title value=comment.comment }}
+            <input type="hidden" name="method" value="POST">
+            <input type="hidden" name="tag" value="{{comment.tag}}">
+            <input type="hidden" name="student_id" value="{{student.id}}">
+        </form>
+
+        <div class="comment__buttons">            
+            {{> button type="button" form="comment" label="Toevoegen" id="saveComment"}}
+            {{#each dropdowns}} {{> dropdown labelText=label name=name id=id options=options class=class inputClass=inputClass labelClass=labelClass }} {{/each}}
+        </div>
     </div>
 </main>
