@@ -58,8 +58,6 @@ export const createComment = async (req, res, next) => {
         tag: tag
     }
 
-    console.log("newComment", newComment);
-
     if (tag === "course") {
         newComment.course_id = course_id;
     }
