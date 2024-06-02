@@ -6,12 +6,14 @@
 
 import { getStudentById } from '../../services/models/Student.js';
 import { formatDate } from '../../utils/formatDate.js';
+import { NODE_ENV as vrs } from '../../consts.js';
 
 export const studentDashboardPage = async (req, res) => {
     const studentIsLoggedIn = req.user.role.title === "student";
 
     const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]');
-    student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? 1 : 0));
+    student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? (vrs === 'development' ? 1 : true) : (vrs === 'development' ? 0 : false)));
+    student.comments = student.comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     // Most recent attendance
     const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
@@ -49,17 +51,17 @@ export const studentDashboardPage = async (req, res) => {
             "description": formatedStatus || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/course-reports`,
+            "link": `/student-dashboard/${student.id}/course-reports?type=course`,
             "title": "Vak gerelateerde verslagen",
             "description": formatedCourseReport || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/personal-reports`,
+            "link": `/student-dashboard/${student.id}/personal-reports?type=personal`,
             "title": "Persoonlijke verslagen",
             "description": formatedPersonalReport || noDataAvailable,
         },
         {
-            "link": `/student-dashboard/${student.id}/coaching-reports`,
+            "link": `/student-dashboard/${student.id}/coaching-reports?type=coaching`,
             "title": "Coaching verslagen",
             "description": formatedCoachingReport || noDataAvailable,
         },

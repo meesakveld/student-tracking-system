@@ -10,7 +10,7 @@ const seed = async function (knex) {
         },
         {
             student_id: 1,
-            course_id: 6
+            course_id: 4
         },
         {
             student_id: 2,

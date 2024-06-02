@@ -1,6 +1,7 @@
 {{!-- Button --}}
-{{# if dark}}
-<a href="{{ link }}" class="button button--dark">{{ label }}</a>
+{{#eq type 'button'}}
+<button id="{{id}}" form="{{form}}" class="button {{class}}" {{#if paddingBottom}}style="margin-bottom: 1rem;"{{/if}}>{{ label }}</button>
 {{else}}
-<a href="{{ link }}" class="button">{{ label }}</a>
-{{/if}}
+{{!-- Link --}}
+<a href="{{ link }}" id="{{id}}" class="button {{#if class}}{{class}}{{/if}} {{#if paddingBottom}}button--margin{{/if}}">{{ label }}</a>
+{{/eq}}
