@@ -86,8 +86,20 @@ export const attendancesStudentPage = async (req, res) => {
                     attendance.course.name,
                     attendance.attendance_type.title
                 ],
-                editButton: true,
-                deleteButton: true,
+                edit: {
+                    edit: true,
+                    actionUrl: "",
+                    infoInputs: [
+                        `<input type="hidden" name="attendanceId" value="${attendance.id}">`
+                    ]
+                },
+                delete: {
+                    delete: true,
+                    actionUrl: "",
+                    infoInputs: [
+                        `<input type="hidden" name="attendanceId" value="${attendance.id}">`
+                    ]
+                }
             }
         });
 
@@ -100,7 +112,10 @@ export const attendancesStudentPage = async (req, res) => {
             user: req.user,
             userFilters,
             usersTable: attendancesTable,
+            pageError: req.pageError,
+            flash: req.flash,
             title: `Aanwezigheden van ${student.user.firstname} ${student.user.lastname}`,
+            returnUrl: `/student-dashboard/${studentId}`,
         }
 
 

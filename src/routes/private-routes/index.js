@@ -75,6 +75,7 @@ router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Re
 router.post('/users', roleAuth(["employee"], ["admin"]), post.handleUser);
 router.post('/education-programmes', roleAuth(["employee"], ["admin", "teamleader"]), post.handleEducationProgramme);
 
+router.post('/student-dashboard/:studentId/attendance', roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.attendancesStudentPage);
 router.post('/student-dashboard/:studentId/course-reports/:reportId', roleAuth(["employee"], ["teacher", "teamleader"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 router.post('/student-dashboard/:studentId/personal-reports/:reportId', roleAuth(["employee"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 router.post('/student-dashboard/:studentId/coaching-reports/:reportId', roleAuth(["employee"], ["teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"]), valid.CommentValidation, post.handleComment, ctr.handleComment );

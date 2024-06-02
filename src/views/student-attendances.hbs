@@ -2,7 +2,11 @@
 <div class="body__inner">
     <main>
         <div class="main__inner search-student">
-            {{> titleSection title=title returnUrl="/"}}
+            {{> titleSection title=title returnUrl=returnUrl}}
+
+            {{#if pageError}}{{> pageError pageError=pageError}}{{/if}}
+            {{#if flash}}{{> flash flash=flash}}{{/if}}
+
             {{> filters filters=userFilters }}
             {{> table headers=usersTable.headers rows=usersTable.rows }}
         </div>

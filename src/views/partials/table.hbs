@@ -41,19 +41,23 @@
                         </svg>
                     </a>
                     {{/if}}
-                    {{#if editButton}}
-                    <button class="button button--icon" id="edit">
-                        <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-                            <path
-                                d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
-                                style="fill:#000;stroke-width:0" />
-                        </svg>
-                    </button>
+                    {{#if edit.edit}}
+                    <form action="{{edit.actionUrl}}">
+                        <input type="hidden" name="method" value="PUT">
+                        {{#each edit.infoInputs}}{{{this}}}{{/each}}
+                        <button class="button button--icon" id="edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
+                                <path
+                                    d="M7.6 21.7H2.3v-5.2L16.4 2.3l5.2 5.2L7.5 21.6Zm-3.7-1.6h3l9.9-9.9-3-3-9.9 9.9v3ZM15 6l3 3 1.5-1.5-3-3L15 6Z"
+                                    style="fill:#000;stroke-width:0" />
+                            </svg>
+                        </button>
+                    </form>
                     {{/if}}
-                    {{#if deleteButton}}
-                    <form action="{{deleteAction}}" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
-                        {{#each deleteInputs}}{{this}}{{/each}}
+                    {{#if delete.delete}}
+                    <form action="{{delete.actionUrl}}" method="POST" class="button button--icon">
+                        <input type="hidden" name="method" value="DELETE">
+                        {{#each delete.infoInputs}}{{{this}}}{{/each}}
                         <button class="button button--icon">
                             <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1"
                                 viewBox="0 0 1024 1024">

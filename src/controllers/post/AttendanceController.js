@@ -1,6 +1,5 @@
 import Attendance from '../../models/Attendance.js';
 import { NODE_ENV } from '../../consts.js';
-import { validationResult } from 'express-validator';
 
 export const createAttendances = async (req, res, next) => {
 
@@ -36,9 +35,40 @@ export const createAttendances = async (req, res, next) => {
 
 }
 
+export const deleteAttendance = async (req, res, next) => {
+
+    const attendanceId = parseInt(req.body.attendanceId)
+
+    if (!attendanceId) {
+        req.pageError = "Geen ID gevonden"
+        return next()
+    }
+
+    try {
+        await Attendance.query().deleteById(attendanceId)
+        req.flash = "Gelukt! De aanwezigheid is verwijderd."
+        next()
+    }
+    catch (error) {
+        req.pageError = error.message
+        next()
+    }
+
+}
+
 export const handleAttendance = async (req, res, next) => {
 
     if (req.body.method === "POST-MULTI") {
         createAttendances(req, res, next);
     }
+
+    else if (req.body.method === "DELETE") {
+        deleteAttendance(req, res, next);
+    }
+
+    else {
+        req.pageError = "Methode niet gevonden"
+        next()
+    }
+    
 }
