@@ -13,7 +13,7 @@ export const userPage = async (req, res) => {
 
         const id = parseInt(req.params.id);
         const returnUrl = req.query.returnUrl || "/";
-        const user = await getUserById(id, '[role, student.[labels, class, status_registration.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
+        const user = await getUserById(id, '[role, student.[labels, class, status_registrations.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
         
         
         let userData = user;
