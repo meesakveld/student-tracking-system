@@ -1,19 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('addProgrammeLine').addEventListener('click', function(event) {
+const activeFunctions = () => {
+    document.getElementById('addProgrammeLine').addEventListener('click', function (event) {
         event.preventDefault();
         addProgrammeLine();
     });
 
-    document.getElementById('addCourse').addEventListener('click', function(event) {
+    document.getElementById('addCourse').addEventListener('click', function (event) {
         event.preventDefault();
         addCourse();
     });
 
-    document.getElementById('addClass').addEventListener('click', function(event) {
+    document.getElementById('addClass').addEventListener('click', function (event) {
         event.preventDefault();
         addClass();
     });
-});
+}
+
+activeFunctions();
 
 function addProgrammeLine() {
     const programmeLineTemplate = `
@@ -105,7 +107,7 @@ function addClass() {
     const classTemplate = `
         <hr class="add-programme__line">
         <div class="add-programme__group">
-            <p class="semibold">Naam van de klas (jaar-groep-klasgroep)</p>
+            <p class="semibold">Naam van de klas</p>
             <div class="input-field">
                 <input class="input-field__input" type="text" placeholder="1-PGM-A">
             </div>
