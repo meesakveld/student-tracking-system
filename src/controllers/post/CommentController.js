@@ -17,7 +17,7 @@ export const createComment = async (req, res, next) => {
     const comment = req.body.comment;
     const student_id = parseInt(req.body.student_id);
     const employee_id = parseInt(req.user.employee.id);
-    let education_programme_id = NaN
+    let education_programme_id = NaN;
     const visible_to_student = parseInt(req.body.visible_to_student);
     const tag = req.body.tag;
 
@@ -36,7 +36,11 @@ export const createComment = async (req, res, next) => {
         const educationProgramme = await EducationProgramme.query().findById(course.education_programme_id);
         education_programme_id = educationProgramme.id;
     } else {
-        const educationProgramme = await EducationProgramme.query().findOne({ student_id: student_id });
+        const educationProgramme = await EducationProgramme.query()
+            .joinRelated("students")
+            .where("students.id", student_id)
+            .first();
+
         if (!educationProgramme) {
             req.pageError = "Opleiding niet gevonden voor student met id " + student_id;
             return next();
@@ -53,6 +57,8 @@ export const createComment = async (req, res, next) => {
         visible_to_student: visible_to_student === 1 ? true : false,
         tag: tag
     }
+
+    console.log("newComment", newComment);
 
     if (tag === "course") {
         newComment.course_id = course_id;

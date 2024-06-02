@@ -32,6 +32,7 @@ export const commentsPage = async (req, res) => {
                 builder.where('visible_to_student', true)
             }
         })
+        .orderBy('created_at', 'desc')
 
     const formattedComments = comments.map((comment) => {
         return {
@@ -220,23 +221,25 @@ export const addCommentPage = async (req, res) => {
             throw new Error(`Pagina met tag ${type} niet gevonden`)
         }
 
-        const courses = await Course.query()
-            .joinRelated('students')
-            .where('student_id', parseInt(studentId))
-            .joinRelated(!hasFullAccess && 'employees')
-            .where(builder => {
-                if (!hasFullAccess) {
-                    builder.where('employees.id', parseInt(req.user.employee.id))
+        let courseOptions = [];
+        if (type === "course") {
+            const courses = await Course.query()
+                .joinRelated('students')
+                .where('student_id', parseInt(studentId))
+                .joinRelated(!hasFullAccess && 'employees')
+                .where(builder => {
+                    if (!hasFullAccess) {
+                        builder.where('employees.id', parseInt(req.user.employee.id))
+                    }
+                })
+            courseOptions = courses.map(course => {
+                return {
+                    label: course.name,
+                    value: course.id,
+                    selected: reqCourseId > 0 ? reqCourseId === course.id : reqCourseId === 0
                 }
-            })
-        const courseOptions = courses.map(course => {
-            return {
-                label: course.name,
-                value: course.id,
-                selected: reqCourseId > 0 ? reqCourseId === course.id : reqCourseId === 0
-            }
-        });
-
+            });
+        }
 
         let dropdowns = [
             {
