@@ -1,10 +1,18 @@
 {{!-- Comments section --}}
 <main>
     <div class="main__inner">
-        {{> titleSection title="Alle opmerkingen" blueBg=true }}
+        {{> titleSection title=title blueBg=true }}
+        {{#if canAddComment}}
+            {{> button label="Voeg verslag toe" link=addUrl paddingBottom=true }}
+        {{/if}}
+        {{#if dataComments}}
         {{> commentSection comments=dataComments }}
-        <div class="main__inner--add">
-            {{> button label="+" link="/add-comment" }}
+        {{else}}
+        <div class="comments">
+            <div class="comment">
+                <p>Er zijn nog geen verslagen toegevoegd.</p>
+            </div>
         </div>
+        {{/if}}
     </div>
 </main>

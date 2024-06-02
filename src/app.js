@@ -14,7 +14,7 @@ import handlebarsHelpers from "./lib/HandlebarsHelpers.js";
 
 // Middleware
 import jwtAuth from "./middleware/authentication/jwtAuth.js";
-import AuthLoginValidation from "./middleware/validation/AuthLoginValidation.js";
+import * as valid from "./middleware/validation/index.js";
 
 // Controllers
 import * as ctr from "./controllers/pages/index.js";
@@ -61,7 +61,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/welcome', ctr.welcomePage);
 
 app.get("/login", jwtAuth, auth.login);
-app.post("/login", AuthLoginValidation ,auth.postLogin, auth.login);
+app.post("/login", valid.AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
