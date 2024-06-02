@@ -86,15 +86,8 @@ export const attendancesStudentPage = async (req, res) => {
                     attendance.course.name,
                     attendance.attendance_type.title
                 ],
-                edit: {
-                    edit: true,
-                    actionUrl: "",
-                    infoInputs: [
-                        `<input type="hidden" name="attendanceId" value="${attendance.id}">`
-                    ]
-                },
                 delete: {
-                    delete: true,
+                    delete: req.user.employee ? true : false,
                     actionUrl: "",
                     infoInputs: [
                         `<input type="hidden" name="attendanceId" value="${attendance.id}">`

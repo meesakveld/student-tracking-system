@@ -6,7 +6,9 @@
                 {{#each headers}}
                 <th>{{this}}</th>
                 {{/each}}
+                {{#checkIfRowsHasActions rows}}
                 <th>Acties</th>
+                {{/checkIfRowsHasActions}}
             </tr>
         </thead>
         <tbody>
