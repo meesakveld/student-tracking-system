@@ -13,6 +13,7 @@ export const studentDashboardPage = async (req, res) => {
 
     const student = await getStudentById(parseInt(req.params.studentId), '[user, class, attendances.[attendance_type, course], comments.course, status_registrations.status]');
     student.comments = student.comments.filter(comment => comment.visible_to_student === (studentIsLoggedIn ? (vrs === 'development' ? 1 : true) : (vrs === 'development' ? 0 : false)));
+    student.comments = student.comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     // Most recent attendance
     const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
