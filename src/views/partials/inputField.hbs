@@ -1,10 +1,10 @@
 {{!-- Input field --}}
 {{# if viewOnly}}
 <div class="input-field input-field--view">
-    <input type="{{ type }}" class="input-field__input" placeholder="{{ placeholder }}" readonly value="{{ value }}">
+    <input id="{{id}}" name="{{name}}" type="{{ type }}" class="input-field__input" placeholder="{{ placeholder }}" readonly value="{{ value }}">
 </div>
 {{else}}
 <div class="input-field">
-    <input type="{{ type }}" class="input-field__input" placeholder="{{ placeholder }}" value="{{ value }}">
+    <input id="{{id}}" name="{{name}}" type="{{ type }}" class="input-field__input" placeholder="{{ placeholder }}" value="{{ value }}">
 </div>
 {{/if}}
