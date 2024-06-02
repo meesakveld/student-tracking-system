@@ -513,7 +513,7 @@ table {
 
 @media (max-width: 76.25rem) {
     table {
-        width: 70rem;
+        min-width: 70rem;
     }
 
 }
@@ -523,13 +523,15 @@ td {
     padding: 1rem 0;
     text-align: left;
     border-bottom: 1px solid var(--grey);
-    max-width: 10rem;
 }
 
-td.actions a {
+td.actions {
+    display: flex;
+}
+
+td.actions a, td.actions button {
     margin-right: 1rem;
 }
-
 
 td.active,
 td.inactive {

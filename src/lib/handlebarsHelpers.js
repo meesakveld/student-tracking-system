@@ -14,6 +14,22 @@ const myHelpers = {
         } else {
             return options.inverse(this);
         }
+    },
+    checkIfRowsHasActions: function (rows, options) {
+        
+        if (!rows || !rows.length) {
+            return options.inverse(this);
+        }
+
+        const hasOneTrue = rows.some(row => {
+            if (row.infoButton || row.studentButton || row.edit?.edit || row.delete?.delete) return true
+        });
+
+        if (hasOneTrue) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
     }
 }
 

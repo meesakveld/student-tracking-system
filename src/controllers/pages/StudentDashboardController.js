@@ -16,10 +16,12 @@ export const studentDashboardPage = async (req, res) => {
     student.comments = student.comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     // Most recent attendance
-    const mostRecentAttendance = student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-    mostRecentAttendance.date = mostRecentAttendance && formatDate(mostRecentAttendance.date);
+    const mostRecentAttendance = student.attendances && student.attendances.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+    if (mostRecentAttendance) {
+        mostRecentAttendance.date = mostRecentAttendance && formatDate(mostRecentAttendance.date);
+    }
     const formatedAttendance = mostRecentAttendance && `${student.user.firstname} was ${mostRecentAttendance.attendance_type.title.toLowerCase()} op ${mostRecentAttendance.date} bij ${mostRecentAttendance.course.name}.`;
-    
+
     // Most recent status
     const mostRecentStatus = student.status_registrations.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
     const formatedStatus = mostRecentStatus && `${student.user.firstname} is sinds ${formatDate(mostRecentStatus.created_at)} ${mostRecentStatus.status.title.toLowerCase()}.`;
