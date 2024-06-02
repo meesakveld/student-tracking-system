@@ -75,7 +75,8 @@ export const attendancesStudentPage = async (req, res) => {
                 if (filterAttendanceType) {
                     builder.where('attendance_type_id', filterAttendanceType);
                 }
-            });
+            })
+            .orderBy('date', 'desc');
 
         const rows = attendances.map(attendance => {
             return {
@@ -84,7 +85,9 @@ export const attendancesStudentPage = async (req, res) => {
                     attendance.date,
                     attendance.course.name,
                     attendance.attendance_type.title
-                ]
+                ],
+                editButton: true,
+                deleteButton: true,
             }
         });
 
