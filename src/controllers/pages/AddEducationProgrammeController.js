@@ -173,6 +173,8 @@ export const addEducationProgrammePage = async (req, res) => {
         user: req.user,
         title: 'Voeg een opleiding toe',
         method: 'POST',
+        formAction: '/education-programmes/add',
+        cancelUrl: '/education-programmes',
         education_programme: {
             data: education_programme,
             error: req.education_programme?.error,

@@ -34,6 +34,36 @@ export const createEducationProgramme = async (req, res, next) => {
 
 export const updateEducationProgramme = async (req, res, next) => {
 
+    if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
+        return next();
+    }
+
+    try {
+
+        const data = req.data;
+        const id = parseInt(req.params.id);
+
+        const educationProgramme = {
+            id: id,
+            title: data.educationProgramme.title,
+            slug: data.educationProgramme.slug,
+            academic_year: data.educationProgramme.academic_year,
+            code: data.educationProgramme.code,
+            programme_lines: data.programmaLines,
+            courses: data.courses,
+            classes: data.classes
+        };
+
+        const updatedEducationProgramme = await EducationProgramme.query().upsertGraph(educationProgramme, { relate: true, unrelate: true });
+
+        return res.redirect(`/education-programmes/${updatedEducationProgramme.id}`);
+
+    } catch (error) {
+        console.log(error);
+        req.pageError = error.message;
+        next();
+    }
+
 }
 
 export const deleteEducationProgramme = async (req, res, next) => {

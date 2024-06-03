@@ -11,6 +11,7 @@ import { welcomePage } from './WelcomeController.js';
 import  { commentsPage, commentPage, addCommentPage, handleComment } from './CommentsController.js';
 import { educationProgrammesPage } from './EducationProgrammesController.js';
 import { educationProgrammePage } from './EducationProgrammeController.js';
+import { educationProgrammeEditPage } from './EducationProgrammeEditController.js';
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
 import { addUserPage } from './AddUserController.js';
 import { editUserPage } from './EditUserController.js';
@@ -20,6 +21,7 @@ export {
     dashboardPage,
     addAttendancesPage,
     attendancesStudentPage,
+    educationProgrammeEditPage,
     searchStudentPage,
     studentDashboardPage,
     searchEmployeesPage,

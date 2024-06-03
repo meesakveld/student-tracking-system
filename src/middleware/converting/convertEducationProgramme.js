@@ -17,6 +17,7 @@ export const convertEducationProgramme = async (req, res, next) => {
     let programmeLinesIndex = 0;
     while (inputData.hasOwnProperty(`programme_line_${programmeLinesIndex}-name`)) {
         outputData.programmaLines.push({
+            id: inputData[`programme_line_${programmeLinesIndex}-id`] || undefined,
             name: inputData[`programme_line_${programmeLinesIndex}-name`] || undefined,
             slug: inputData[`programme_line_${programmeLinesIndex}-name`] ? inputData[`programme_line_${programmeLinesIndex}-name`].toLowerCase().replace(/ /g, '-') : undefined,
             description: inputData[`programme_line_${programmeLinesIndex}-description`] || undefined,
@@ -33,6 +34,7 @@ export const convertEducationProgramme = async (req, res, next) => {
         let semester = parseInt(periodSemester[1]) || null;
 
         outputData.courses.push({
+            id: inputData[`course_${courseIndex}-id`] || undefined,
             name: inputData[`course_${courseIndex}-name`] || '',
             description: inputData[`course_${courseIndex}-description`] || '',
             period: period,
@@ -47,6 +49,7 @@ export const convertEducationProgramme = async (req, res, next) => {
     let classIndex = 0;
     while (inputData.hasOwnProperty(`class_${classIndex}-name`)) {
         outputData.classes.push({
+            id: inputData[`class_${classIndex}-id`] || undefined,
             name: inputData[`class_${classIndex}-name`] || ''
         });
         classIndex++;

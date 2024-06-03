@@ -41,6 +41,7 @@ router.get('/users/:id/edit', auth.roleAuth(["employee"], ["admin"]), ctr.editUs
 router.get('/education-programmes', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammesPage);
 router.get('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.addEducationProgrammePage);
 router.get('/education-programmes/:id', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammePage);
+router.get('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammeEditPage);
 
 router.get('/student-dashboard/:studentId', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.studentDashboardPage);
 router.get('/student-dashboard/:studentId/attendance', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.attendancesStudentPage);
@@ -74,6 +75,7 @@ router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Re
 
 router.post('/users', auth.roleAuth(["employee"], ["admin"]), post.handleUser);
 router.post('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.addEducationProgrammePage);
+router.post('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.addEducationProgrammePage);
 
 router.post('/student-dashboard/:studentId/attendance', auth.roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.attendancesStudentPage);
 router.post('/student-dashboard/:studentId/course-reports/:reportId', auth.roleAuth(["employee"], ["teacher", "teamleader"]), valid.CommentValidation, post.handleComment, ctr.handleComment );

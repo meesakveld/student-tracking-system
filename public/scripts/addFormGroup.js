@@ -212,13 +212,16 @@ function addClass() {
     const $alreadyExistingClasses = document.querySelectorAll('.class');
     const id = $alreadyExistingClasses.length;
 
+    const lineHR = document.createElement('hr');
+    lineHR.classList.add('add-programme__line');
+
     const classDiv = document.createElement('div');
     classDiv.classList.add('add-programme__group', 'class');
     classDiv.id = `class_${id}`;
 
     const paragraph = document.createElement('p');
     paragraph.classList.add('semibold');
-    paragraph.textContent = 'Naam van de klas';
+    paragraph.textContent = 'Naam van de klas*';
 
     const inputField = document.createElement('div');
     inputField.classList.add('input-field');
@@ -230,6 +233,8 @@ function addClass() {
     input.placeholder = '1-PGM-A';
 
     inputField.appendChild(input);
+
+    classDiv.appendChild(lineHR);
     classDiv.appendChild(paragraph);
     classDiv.appendChild(inputField);
 
