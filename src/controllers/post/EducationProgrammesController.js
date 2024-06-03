@@ -2,7 +2,12 @@ import EducationProgramme from "../../models/EducationProgramme.js"
 
 export const createEducationProgramme = async (req, res, next) => {
 
+    if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
+        return next();
+    }
+
     try {
+
         const data = req.data;
 
         const educationProgramme = {
