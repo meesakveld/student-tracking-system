@@ -64,7 +64,10 @@ export const educationProgrammesPage = async (req, res) => {
                 programme.code,
                 programme.academic_year,
             ],
-            infoButton: true,
+            infoButton: {
+                info: true,
+                url: `/education-programmes/${programme.id}`
+            }
         }
     });
 
@@ -80,9 +83,4 @@ export const educationProgrammesPage = async (req, res) => {
         educationProgrammesTable
     };
     res.render("education-programmes", data);
-}
-
-
-export const educationProgrammePage = async (req, res) => {
-    res.json({ message: "Education Programme" });
 }

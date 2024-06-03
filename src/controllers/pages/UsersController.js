@@ -141,8 +141,14 @@ export const usersPage = async (req, res) => {
             studentId: user.id,
             userId: user.user.id,
             returnUrl: '/users',
-            infoButton: true,
-            studentButton: user.user.role.title === "student",
+            infoButton: {
+                info: true,
+                url: `/users/${user.user.id}?returnUrl=/users`
+            },
+            studentButton: {
+                student: user.user.role.title === "student",
+                url: `/student-dashboard/${user.id}?returnUrl=/users`
+            },
         };
     })
     

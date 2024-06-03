@@ -133,7 +133,12 @@ export const addEducationProgrammePage = async (req, res) => {
                 },
                 isNotLastInArray: index !== req.data.courses.length - 1,
                 dropdown: {
-                    periods: periods,
+                    periods: periods.map(period => {
+                        return {
+                            ...period,
+                            selected: period.value === course.period + "-" + course.semester,
+                        }
+                    }),
                 },
             }
         });
@@ -166,6 +171,8 @@ export const addEducationProgrammePage = async (req, res) => {
     // ——— RENDER DATA ———
     const data = {
         user: req.user,
+        title: 'Voeg een opleiding toe',
+        method: 'POST',
         education_programme: {
             data: education_programme,
             error: req.education_programme?.error,
@@ -185,5 +192,5 @@ export const addEducationProgrammePage = async (req, res) => {
         pageError: req.pageError,
     };
 
-    res.render('add-education-programme', data);
+    res.render('education-programme', data);
 };
