@@ -500,7 +500,6 @@ input:hover {
 
 /* ------ Table ------ */
 
-
 .table-container {
     width: 100%;
     overflow-x: scroll;
@@ -603,6 +602,34 @@ tr.inactive {
     padding-top: 2rem;
 }
 
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 3rem;
+}
+
+.contact__item {
+    display: flex;
+    align-items: center;
+}
+
+.contact__item .button {
+    margin-right: 1rem;
+}
+
+.contact__item-link a {
+    color: var(--dark);
+    margin-right: 5rem;
+}
+
+.contact__item-link a:hover {
+    color: var(--blue);
+}
+
+.user__fiche {
+    margin-top: 2rem;
+}
 /* ------ Cards ------ */
 
 .cards {
@@ -722,6 +749,14 @@ input[type="date"] {
 
 
 /* Comments */
+h3 {
+    padding-bottom: 0;
+
+}
+
+h5 {
+    padding-bottom: 1rem;
+}
 
 .comments {
     display: flex;
@@ -762,6 +797,19 @@ input[type="date"] {
     outline: 1px solid var(--blue);
 }
 
+.comment p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.comment__info {
+    display: flex;
+    gap: 1.2rem;
+}
+
 .comment a {
     color: var(--dark);
 }
@@ -781,9 +829,42 @@ input[type="date"] {
     cursor: pointer;
 }
 
-
 /* Hidden */
 
 .hidden {
     display: none;
+}
+
+/* ------ Add Programme ------ */
+
+.add-programme {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.add-programme__groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.add-programme__groups .add-programme__group {
+    flex: 1;
+    min-width: 30rem;
+}
+
+.add-programme__line {
+    margin: 2rem 0;
+    opacity: 0.2;
+}
+
+.add-programme textarea {
+    margin-top: 1rem;
+    min-height: 12vh;
+}
+
+.add-programme .dropdown {
+    margin: 1rem 0;
 }

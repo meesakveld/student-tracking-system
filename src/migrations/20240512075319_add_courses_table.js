@@ -11,7 +11,6 @@ export function up(knex) {
         table.integer("period");
         table.integer("semester");
         table.integer("education_programme_id").notNullable();
-        table.integer("programme_line_id").notNullable();
         table.timestamps(true, true);
     });
 }

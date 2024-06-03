@@ -12,7 +12,6 @@ const seed = async function (knex) {
             period: 1,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "IT Professional",
@@ -22,7 +21,6 @@ const seed = async function (knex) {
             period: 2,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "IT Portfolio",
@@ -32,7 +30,6 @@ const seed = async function (knex) {
             period: 3,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "IT Portfolio",
@@ -42,7 +39,6 @@ const seed = async function (knex) {
             period: 4,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "IT Exploration",
@@ -52,7 +48,6 @@ const seed = async function (knex) {
             period: 5,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "IT Exploration",
@@ -62,7 +57,6 @@ const seed = async function (knex) {
             period: 6,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 1
         },
         {
             name: "Data Management 1",
@@ -72,7 +66,6 @@ const seed = async function (knex) {
             period: 1,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 2
         },
         {
             name: "Data Management 2",
@@ -82,7 +75,6 @@ const seed = async function (knex) {
             period: 3,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 2
         },
         {
             name: "Data Management 3",
@@ -92,7 +84,6 @@ const seed = async function (knex) {
             period: 5,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 2
         },
         {
             name: "Web 1: Essentials",
@@ -102,7 +93,6 @@ const seed = async function (knex) {
             period: 1,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Web 2: Intermediate",
@@ -112,7 +102,6 @@ const seed = async function (knex) {
             period: 2,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Web 3: Advanced",
@@ -122,7 +111,6 @@ const seed = async function (knex) {
             period: 3,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Web 4: Web Anumations & Interactions",
@@ -132,7 +120,6 @@ const seed = async function (knex) {
             period: 4,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Web 5: Web Frameworks",
@@ -142,7 +129,6 @@ const seed = async function (knex) {
             period: 5,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Web 6: Creative Coding",
@@ -152,7 +138,6 @@ const seed = async function (knex) {
             period: 6,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 3
         },
         {
             name: "Programming 1: Essentials",
@@ -162,7 +147,6 @@ const seed = async function (knex) {
             period: 1,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "Programming 2: Intermediate",
@@ -172,7 +156,6 @@ const seed = async function (knex) {
             period: 2,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "Programming 3: Advanced",
@@ -182,7 +165,6 @@ const seed = async function (knex) {
             period: 3,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "Programming 4: JAMStack",
@@ -192,7 +174,6 @@ const seed = async function (knex) {
             period: 4,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "Programming 5: Full-stack",
@@ -202,7 +183,6 @@ const seed = async function (knex) {
             period: 5,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "Programming 6: Mobile",
@@ -212,7 +192,6 @@ const seed = async function (knex) {
             period: 6,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 4
         },
         {
             name: "@Work 1: Static Web Projects",
@@ -222,7 +201,6 @@ const seed = async function (knex) {
             period: 2,
             semester: 1,
             education_programme_id: 14,
-            programme_line_id: 5
         },
         {
             name: "@Work 2: Dynamic Web Projects",
@@ -232,7 +210,6 @@ const seed = async function (knex) {
             period: 4,
             semester: 2,
             education_programme_id: 14,
-            programme_line_id: 5
         },
         {
             name: "@Work 3: Multidiciplinary Web Projects",
@@ -242,7 +219,6 @@ const seed = async function (knex) {
             period: 6,
             semester: 3,
             education_programme_id: 14,
-            programme_line_id: 5
         },
         {
             name: "@Work 4: Graduation Project",
@@ -252,7 +228,6 @@ const seed = async function (knex) {
             period: 7,
             semester: 4,
             education_programme_id: 14,
-            programme_line_id: 5
         },
         {
             name: "@Work 5: Internship",
@@ -262,7 +237,6 @@ const seed = async function (knex) {
             period: 8,
             semester: 4,
             education_programme_id: 14,
-            programme_line_id: 5
         },
     ]);
 };

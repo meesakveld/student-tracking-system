@@ -30,6 +30,13 @@ const myHelpers = {
         } else {
             return options.inverse(this);
         }
+    },
+    ifOne: (...args) => {
+        const options = args.pop();
+        const valueToCheckFor = args[0];
+        const argsToCheck = args.slice(1);
+
+        return argsToCheck.some(arg => arg !== valueToCheckFor) ? options.fn(this) : options.inverse(this);
     }
 }
 

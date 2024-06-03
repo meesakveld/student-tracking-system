@@ -12,6 +12,7 @@ import  { commentsPage, commentPage, addCommentPage, handleComment } from './Com
 import { educationProgrammePage, educationProgrammesPage } from './EducationProgrammesController.js';
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
 import { addUserPage } from './AddUserController.js';
+import { editUserPage } from './EditUserController.js';
 
 export {
     componentsPage,
@@ -32,5 +33,6 @@ export {
     educationProgrammePage,
     educationProgrammesPage,
     addEducationProgrammePage,
-    addUserPage
+    addUserPage,
+    editUserPage
 }

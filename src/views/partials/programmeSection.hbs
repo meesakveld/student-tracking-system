@@ -1,59 +1,133 @@
 {{!-- Programme Section --}}
-<form action="">
-    <div class="education-programme lightgrey-bg">
+<form class="add-programme" action="/education-programmes/add" method="POST">
+    <input type="hidden" name="method" value="POST">
+
+    {{#if pageError}}
+        {{> pageError pageError=pageError}}
+    {{/if}}
+    {{#ifOne undefiend education_programme.error programme_lines.error courses.error classes.error}}
+        {{> pageError pageError="Er is een fout opgetreden. Bekijk de velden en probeer het opnieuw."}}
+    {{/ifOne}}
+
+    <div class="add-programme__section education-programme lightgrey-bg">
         <h1>De opleiding</h1>
-        <div class="form-group">
-            <p class="semibold">Naam van de opleiding</p>
-            {{> inputField placeholder="Graduaat in het programmeren"}}
+        {{#if education_programme.error}}
+            {{> pageError pageError=education_programme.error}}
+        {{/if}}
+        <div class="add-programme__group">
+            <p class="semibold">Naam van de opleiding*</p>
+            {{> inputField name=education_programme.data.title.name placeholder="Graduaat in het programmeren" value=education_programme.data.title.value}}
         </div>
-        <div class="form-group">
-            <p class="semibold">Schooljaar (20XX-XX)</p>
-            {{> inputField placeholder="2023-24"}}
-        </div>
-        <div class="form-group">
-            <p class="semibold">Code (in hoofdletters)</p>
-            {{> inputField placeholder="GRAPGMG"}}
+        <div class="add-programme__groups">
+            <div class="add-programme__group">
+                <p class="semibold">Academisch jaar (20XX-XX)*</p>
+                {{> inputField name=education_programme.data.academic_year.name placeholder="2023-24" value=education_programme.data.academic_year.value}}
+            </div>
+            <div class="add-programme__group">
+                <p class="semibold">Code (in hoofdletters)*</p>
+                {{> inputField idValue="code" name=education_programme.data.code.name placeholder="GRAPGMG" value=education_programme.data.code.value }}
+            </div>
+            <script src="/scripts/transferToUppercase.js"></script>
         </div>
     </div>
-    <div class="programme-lines lightgrey-bg">
+
+    <div class="add-programme__section programme-lines lightgrey-bg">
         <h1>De programmalijnen</h1>
-        <div class="form-group">
-            <p class="semibold">Naam van de programmalijn</p>
-            {{> inputField placeholder="Business & Communication"}}
+        {{#if programme_lines.error}}
+        {{> pageError pageError=programme_lines.error}}
+        {{/if}}
+        <div id="programmeLines">
+            {{#each programme_lines.data}}
+            <div id="{{id}}" class="programmeLine">
+                <div class="add-programme__group">
+                    <p class="semibold">Naam van de programmalijn*</p>
+                    {{> inputField name=name.name placeholder="Business & Communication" value=name.value}}
+                </div>
+                <div class="add-programme__groups">
+                    <div class="add-programme__group">
+                        <p class="semibold">Beschrijving</p>
+                        <textarea name={{description.name}}>{{description.value}}</textarea>
+                    </div>
+                    <div class="add-programme__group">
+                        <p class="semibold">Studiepunten*</p>
+                        {{> inputField name=study_points.name placeholder="15" type="number" value=study_points.value}}
+                    </div>
+                </div>
+            </div>
+
+            {{#if isNotLastInArray}} <hr class="add-programme__line"> {{/if}}
+            {{/each}}
         </div>
-        <div class="form-group">
-            <p class="semibold">Beschrijving</p>
-            <textarea name="" id=""></textarea>
-        </div>
-        <div class="form-group">
-            <p class="semibold">Studiepunten</p>
-            {{> inputField placeholder="15" type="number"}}
-        </div>
-        {{> button label="+"}}
+        <button id="addProgrammeLine" class="button" form="">Een extra programmalijn toevoegen</button>
+
     </div>
-    <div class="courses lightgrey-bg">
+
+    <div class="add-programme__section courses lightgrey-bg">
         <h1>De vakken</h1>
-        <div class="form-group">
-            <p class="semibold">Naam van het vak</p>
-            {{> inputField placeholder="IT Professional"}}
+        {{#if courses.error}}
+        {{> pageError pageError=courses.error}}
+        {{/if}}
+        <div id="courses">
+            {{#each courses.data}}
+
+            <div id="{{id}}" class="course">
+                <div class="add-programme__group">
+                    <p class="semibold">Naam van het vak*</p>
+                    {{> inputField placeholder="IT Professional" name=name.name value=name.value}}
+                </div>
+                <div class="add-programme__groups">
+                    <div class="add-programme__group">
+                        <div class="add-programme__group">
+                            <p class="semibold">Beschrijving</p>
+                            <textarea name={{description.name}} id="">{{description.value}}</textarea>
+                        </div>
+                        <div class="add-programme__group">
+                            <p class="semibold">Periode*</p>
+                            {{> dropdown options=dropdown.periods name=period.name value=period.value}}
+                        </div>
+                    </div>
+                    <div class="add-programme__group">
+                        <div class="add-programme__group">
+                            <p class="semibold">Studiepunten*</p>
+                            {{> inputField placeholder="2" type="number" name=study_points.name value=study_points.value}}
+                        </div>
+                        <div class="add-programme__group">
+                            <p class="semibold">Contacturen*</p>
+                            {{> inputField placeholder="5" type="number" name=contact_hours.name value=contact_hours.value}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#if isNotLastInArray}} <hr class="add-programme__line"> {{/if}}
+            
+            {{/each}}
+
         </div>
-        <div class="form-group">
-            <p class="semibold">Beschrijving</p>
-            <textarea name="" id=""></textarea>
-        </div>
-        <div class="form-group">
-            <p class="semibold">Studiepunten</p>
-            {{> inputField placeholder="2" type="number"}}
-        </div>
-        <div class="form-group">
-            <p class="semibold">Contacturen</p>
-            {{> inputField placeholder="5" type="number"}}
-        </div>
-        <div class="form-group">
-            <p class="semibold">Periode</p>
-            {{> dropdown }}
-        </div>
+
+        <button id="addCourse" class="button" form="">Een extra vak toevoegen</button>
     </div>
-    {{> button label="Toevoegen"}}
-    {{> button label="Annuleren" dark=true link="/education-programmes"}}
+
+    <div class="add-programme__section classes lightgrey-bg">
+        <h1>De klassen</h1>
+        {{#if classes.error}}
+        {{> pageError pageError=classes.error}}
+        {{/if}}
+        <div id="classes">
+        {{#each classes.data}}
+            <div class="add-programme__group class" id="{{id}}">
+                <p class="semibold">Naam van de klas*</p>
+                {{> inputField placeholder="1-PGM-A" name=name.name value=name.value}}
+            </div>
+
+        {{#if isNotLastInArray}} <hr class="add-programme__line"> {{/if}}
+        {{/each}}
+        </div>
+
+        <button id="addClass" class="button" form="">Een extra klas toevoegen</button>
+    </div>
+
+    <div class="actions">
+        {{> button label="Annuleren" class="button--dark" link="/education-programmes"}}
+        <button type="submit" class="button">Toevoegen</button>
+    </div>
 </form>

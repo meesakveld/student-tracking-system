@@ -6,7 +6,6 @@ Model.knex(knex);
 
 // related models
 import EducationProgramme from "./EducationProgramme.js";
-import ProgrammeLine from "./ProgrammeLine.js";
 import Attendance from "./Attendance.js";
 import WorkplaceMentor from "./WorkplaceMentor.js";
 import WorkplaceCoach from "./WorkplaceCoach.js";
@@ -27,17 +26,16 @@ class Course extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["name", "education_programme_id", "programme_line_id"],
+            required: ["name", "education_programme_id"],
             properties: {
                 id: { type: "integer" },
                 name: { type: "string", maxLength: 255 },
-                description: { type: "text"},
+                description: { type: "string"},
                 study_points: { type: "integer" },
                 contact_hours: { type: "integer" },
-                period: { type: "string", maxLength: 255 },
-                semester: { type: "string", maxLength: 255 },
+                period: { type: "integer", maxLength: 255 },
+                semester: { type: "integer", maxLength: 255 },
                 education_programme_id: { type: "integer" },
-                programme_line_id: { type: "integer"}
             },
         };
     }
@@ -50,14 +48,6 @@ class Course extends Model {
                 join: {
                     from: "courses.education_programme_id",
                     to: "education_programmes.id",
-                },
-            },
-            programme_lines: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: ProgrammeLine,
-                join: {
-                    from: "courses.programme_line_id",
-                    to: "programme_lines.id",
                 },
             },
             attendances: {
