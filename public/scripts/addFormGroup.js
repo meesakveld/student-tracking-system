@@ -15,7 +15,7 @@ function addProgrammeLine() {
 
     const nameLabel = document.createElement('p');
     nameLabel.classList.add('semibold');
-    nameLabel.textContent = 'Naam van de programmalijn';
+    nameLabel.textContent = 'Naam van de programmalijn*';
 
     const inputField1 = document.createElement('div');
     inputField1.classList.add('input-field');
@@ -50,7 +50,7 @@ function addProgrammeLine() {
 
     const studyPointsLabel = document.createElement('p');
     studyPointsLabel.classList.add('semibold');
-    studyPointsLabel.textContent = 'Studiepunten';
+    studyPointsLabel.textContent = 'Studiepunten*';
 
     const studyPointsInputField = document.createElement('div');
     studyPointsInputField.classList.add('input-field');
@@ -93,7 +93,7 @@ function addCourse() {
 
     const nameLabel = document.createElement('p');
     nameLabel.classList.add('semibold');
-    nameLabel.textContent = 'Naam van het vak';
+    nameLabel.textContent = 'Naam van het vak*';
 
     const inputField1 = document.createElement('div');
     inputField1.classList.add('input-field');
@@ -129,7 +129,7 @@ function addCourse() {
 
     const periodLabel = document.createElement('p');
     periodLabel.classList.add('semibold');
-    periodLabel.textContent = 'Periode';
+    periodLabel.textContent = 'Periode*';
 
     const periodDropdown = document.createElement('div');
     periodDropdown.classList.add('dropdown', 'filter');
@@ -155,7 +155,7 @@ function addCourse() {
 
     const studyPointsLabel = document.createElement('p');
     studyPointsLabel.classList.add('semibold');
-    studyPointsLabel.textContent = 'Studiepunten';
+    studyPointsLabel.textContent = 'Studiepunten*';
 
     const studyPointsInputField = document.createElement('div');
     studyPointsInputField.classList.add('input-field');
@@ -175,7 +175,7 @@ function addCourse() {
 
     const contactHoursLabel = document.createElement('p');
     contactHoursLabel.classList.add('semibold');
-    contactHoursLabel.textContent = 'Contacturen';
+    contactHoursLabel.textContent = 'Contacturen*';
 
     const contactHoursInputField = document.createElement('div');
     contactHoursInputField.classList.add('input-field');
@@ -189,11 +189,15 @@ function addCourse() {
     contactHoursInputField.appendChild(contactHoursInput);
     contactHoursGroup.appendChild(contactHoursLabel);
     contactHoursGroup.appendChild(contactHoursInputField);
-
+    
+    const studyPointsContactHoursGroup = document.createElement('div');
+    studyPointsContactHoursGroup.appendChild(studyPointsGroup);
+    studyPointsContactHoursGroup.appendChild(contactHoursGroup);
+    
     innerGroupsDiv.appendChild(descriptionGroup);
+    innerGroupsDiv.appendChild(studyPointsContactHoursGroup);
     innerGroupsDiv.appendChild(periodGroup);
-    innerGroupsDiv.appendChild(studyPointsGroup);
-    innerGroupsDiv.appendChild(contactHoursGroup);
+
 
     courseDiv.appendChild(lineHR);
     courseDiv.appendChild(outerGroupDiv);
