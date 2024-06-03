@@ -1,6 +1,10 @@
 {{!-- Programme Section --}}
-<form class="add-programme" action="">
+<form class="add-programme" action="/education-programmes/add" method="POST">
+    <input type="hidden" name="method" value="POST">
 
+    {{#if pageError}}
+        {{> pageError pageError=pageError}}
+    {{/if}}
     {{#ifOne undefiend education_programme.error programme_lines.error courses.error classes.error}}
         {{> pageError pageError="Er is een fout opgetreden. Bekijk de velden en probeer het opnieuw."}}
     {{/ifOne}}
@@ -21,7 +25,7 @@
             </div>
             <div class="add-programme__group">
                 <p class="semibold">Code (in hoofdletters)</p>
-                {{> inputField id="code" name=education_programme.data.code.name placeholder="GRAPGMG" value=education_programme.data.code.value }}
+                {{> inputField idValue="code" name=education_programme.data.code.name placeholder="GRAPGMG" value=education_programme.data.code.value }}
             </div>
             <script src="/scripts/transferToUppercase.js"></script>
         </div>
@@ -32,7 +36,7 @@
         {{#if programme_lines.error}}
         {{> pageError pageError=programme_lines.error}}
         {{/if}}
-        <div id="programmLines">
+        <div id="programmeLines">
             {{#each programme_lines.data}}
             <div id="{{id}}" class="programmeLine">
                 <div class="add-programme__group">
@@ -54,7 +58,7 @@
             {{#if isNotLastInArray}} <hr class="add-programme__line"> {{/if}}
             {{/each}}
         </div>
-        <button id="addProgrammeLine" class="button">Een extra programmalijn toevoegen</button>
+        <button id="addProgrammeLine" class="button" form="">Een extra programmalijn toevoegen</button>
 
     </div>
 
@@ -100,7 +104,7 @@
 
         </div>
 
-        <button id="addCourse" class="button">Een extra vak toevoegen</button>
+        <button id="addCourse" class="button" form="">Een extra vak toevoegen</button>
     </div>
 
     <div class="add-programme__section classes lightgrey-bg">
@@ -119,7 +123,7 @@
         {{/each}}
         </div>
 
-        <button id="addClass" class="button">Een extra klas toevoegen</button>
+        <button id="addClass" class="button" form="">Een extra klas toevoegen</button>
     </div>
 
     <div class="actions">

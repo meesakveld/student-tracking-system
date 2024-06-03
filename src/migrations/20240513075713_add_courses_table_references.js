@@ -4,7 +4,6 @@ const tableName = "courses"; //! Change TABLENAME to the name of the table you w
 export function up(knex) {
     return knex.schema.table(tableName, function (table) {
         table.foreign("education_programme_id").references("education_programmes.id");
-        table.foreign("programme_line_id").references("programme_lines.id");
     });
 }
  
@@ -12,6 +11,5 @@ export function up(knex) {
 export function down(knex) {
     return knex.schema.table(tableName, function (table) {
         table.dropForeign("education_programme_id");
-        table.dropForeign("programme_line_id");
     });
 }

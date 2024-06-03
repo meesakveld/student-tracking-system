@@ -7,8 +7,6 @@
 export const addEducationProgrammePage = async (req, res) => {
     
 
-
-
     // ——— PERIODS ———
     const periods = [
         { value: "1-1", label: "Periode 1" },
@@ -25,15 +23,15 @@ export const addEducationProgrammePage = async (req, res) => {
     // ** Education programme data **
     let education_programme = {
         title: {
-            value: "",
+            value: req.data?.educationProgramme?.title || "",
             name: "education_programme-title",
         },
         academic_year: {
-            value: "",
+            value: req.data?.educationProgramme?.academic_year || "",
             name: "education_programme-academic_year",
         },
         code: {
-            value: "",
+            value: req.data?.educationProgramme?.code || "",
             name: "education_programme-code",
         },
     }
@@ -51,12 +49,33 @@ export const addEducationProgrammePage = async (req, res) => {
                 name: "programme_line_0-description",
             },
             study_points: {
-                value: NaN, // Is a number
+                value: null, // Is a number
                 name: "programme_line_0-study_points",
             },
-            isNotLastInArray: true,
+            isNotLastInArray: false,
         },
     ]
+    if (req.data?.programmaLines) {
+        programme_lines = req.data.programmaLines.map((programme_line, index) => {
+            return {
+                id: `programme_line_${index}`,
+                name: {
+                    value: programme_line.name,
+                    name: `programme_line_${index}-name`,
+                },
+                description: {
+                    value: programme_line.description,
+                    name: `programme_line_${index}-description`,
+                },
+                study_points: {
+                    value: programme_line.study_points,
+                    name: `programme_line_${index}-study_points`,
+                },
+                isNotLastInArray: index !== req.data.programmaLines.length - 1,
+            }
+        });
+    }
+
 
     // ** Courses data **
     let courses = [
@@ -71,23 +90,54 @@ export const addEducationProgrammePage = async (req, res) => {
                 name: "course_0-description",
             },
             study_points: {
-                value: NaN, // Is a number
+                value: null, // Is a number
                 name: "course_0-study_points",
             },
             contact_hours: {
-                value: NaN, // Is a number
+                value: null, // Is a number
                 name: "course_0-contact_hours",
             },
             period: {
-                value: NaN, // Is a number
+                value: null, // Is a number
                 name: "course_0-period",
             },
-            isNotLastInArray: true,
+            isNotLastInArray: false,
             dropdown: {
                 periods: periods,
             },
         },
     ]
+    if (req.data?.courses) {
+        courses = req.data.courses.map((course, index) => {
+            return {
+                id: `course_${index}`,
+                name: {
+                    value: course.name,
+                    name: `course_${index}-name`,
+                },
+                description: {
+                    value: course.description,
+                    name: `course_${index}-description`,
+                },
+                study_points: {
+                    value: course.studyPoints,
+                    name: `course_${index}-study_points`,
+                },
+                contact_hours: {
+                    value: course.contactHours,
+                    name: `course_${index}-contact_hours`,
+                },
+                period: {
+                    value: course.period + "-" + course.semester,
+                    name: `course_${index}-period`,
+                },
+                isNotLastInArray: index !== req.data.courses.length - 1,
+                dropdown: {
+                    periods: periods,
+                },
+            }
+        });
+    }
 
     // ** Classes data **
     let classes = [
@@ -97,9 +147,21 @@ export const addEducationProgrammePage = async (req, res) => {
                 value: "",
                 name: "class_0-name",
             },
-            isNotLastInArray: true,
+            isNotLastInArray: false,
         },
     ]
+    if (req.data?.classes) {
+        classes = req.data.classes.map((classData, index) => {
+            return {
+                id: `class_${index}`,
+                name: {
+                    value: classData.name,
+                    name: `class_${index}-name`,
+                },
+                isNotLastInArray: index !== req.data.classes.length - 1,
+            }
+        });
+    }
 
     // ——— RENDER DATA ———
     const data = {
@@ -120,6 +182,7 @@ export const addEducationProgrammePage = async (req, res) => {
             data: classes,
             error: req.classes?.error,
         },
+        pageError: req.pageError,
     };
 
     res.render('add-education-programme', data);
