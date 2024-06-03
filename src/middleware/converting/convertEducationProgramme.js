@@ -3,10 +3,10 @@ export const convertEducationProgramme = async (req, res, next) => {
 
     let outputData = {
         educationProgramme: {
-            title: inputData['education_programme-title'] || '',
-            slug: inputData['education_programme-title'] ? inputData['education_programme-title'].toLowerCase().replace(/ /g, '-') : '',
-            academic_year: inputData['education_programme-academic_year'] || '',
-            code: inputData['education_programme-code'] || ''
+            title: inputData['education_programme-title'] || undefined,
+            slug: inputData['education_programme-title'] ? inputData['education_programme-title'].toLowerCase().replace(/ /g, '-') : undefined,
+            academic_year: inputData['education_programme-academic_year'] || undefined,
+            code: inputData['education_programme-code'] || undefined
         },
         programmaLines: [],
         courses: [],
@@ -17,10 +17,10 @@ export const convertEducationProgramme = async (req, res, next) => {
     let programmeLinesIndex = 0;
     while (inputData.hasOwnProperty(`programme_line_${programmeLinesIndex}-name`)) {
         outputData.programmaLines.push({
-            name: inputData[`programme_line_${programmeLinesIndex}-name`] || '',
-            slug: inputData[`programme_line_${programmeLinesIndex}-name`] ? inputData[`programme_line_${programmeLinesIndex}-name`].toLowerCase().replace(/ /g, '-') : '',
-            description: inputData[`programme_line_${programmeLinesIndex}-description`] || null,
-            study_points: parseInt(inputData[`programme_line_${programmeLinesIndex}-study_points`]) || null
+            name: inputData[`programme_line_${programmeLinesIndex}-name`] || undefined,
+            slug: inputData[`programme_line_${programmeLinesIndex}-name`] ? inputData[`programme_line_${programmeLinesIndex}-name`].toLowerCase().replace(/ /g, '-') : undefined,
+            description: inputData[`programme_line_${programmeLinesIndex}-description`] || undefined,
+            study_points: parseInt(inputData[`programme_line_${programmeLinesIndex}-study_points`]) || undefined
         });
         programmeLinesIndex++;
     }
