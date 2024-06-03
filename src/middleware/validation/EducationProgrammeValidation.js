@@ -71,9 +71,9 @@ export const EducationProgrammeValidation = (req, res, next) => {
 
         // Check if all courses have all the required fields or check if all are empty
         data.courses.forEach((course, index) => {
-            // required: name, description, period, studyPoints, contactHours
+            // required: name, description, period, study_points, contact_hours
             if (!course.name) {
-                if (!course.description && !course.period && !course.studyPoints && !course.contactHours  && index !== 0) {
+                if (!course.description && !course.period && !course.study_points && !course.contact_hours  && index !== 0) {
                     return;
                 }
                 throw {
@@ -83,7 +83,7 @@ export const EducationProgrammeValidation = (req, res, next) => {
             }
 
             if (!course.period) {
-                if (!course.name && !course.description && !course.studyPoints && !course.contactHours && index !== 0) {
+                if (!course.name && !course.description && !course.study_points && !course.contact_hours && index !== 0) {
                     return;
                 }
                 throw {
@@ -92,8 +92,8 @@ export const EducationProgrammeValidation = (req, res, next) => {
                 };
             }
 
-            if (!course.studyPoints) {
-                if (!course.name && !course.description && !course.period && !course.contactHours && index !== 0) {
+            if (!course.study_points) {
+                if (!course.name && !course.description && !course.period && !course.contact_hours && index !== 0) {
                     return;
                 }
                 throw {
@@ -102,8 +102,8 @@ export const EducationProgrammeValidation = (req, res, next) => {
                 };
             }
 
-            if (!course.contactHours) {
-                if (!course.name && !course.description && !course.period && !course.studyPoints && index !== 0) {
+            if (!course.contact_hours) {
+                if (!course.name && !course.description && !course.period && !course.study_points && index !== 0) {
                     return;
                 }
                 throw {
