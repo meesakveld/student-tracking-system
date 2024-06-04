@@ -1,27 +1,30 @@
 {{!-- User Section --}}
 <section class="lightgrey-bg">
     <!-- Javascript: when clicking on the 'wijzigen' button the viewOnly attribute is removed and a save button is added to send the changes -->
-        <div class="user-info">
-            <div class="user-info__left">
+    <div class="user-info">
+        <div class="user-info__left">
+            <div class="user-info-container">
                 <h3>Persoonlijke informatie</h3>
                 {{#if userInfo.firstName}}
                 <div class="user-info__item">
                     <p class="semibold">Voornaam</p>
-                    {{> inputField viewOnly=true value=userInfo.firstName }}
+                    {{> inputField value=userInfo.firstName }}
                 </div>
                 {{/if}}
                 {{#if userInfo.lastName}}
                 <div class="user-info__item">
                     <p class="semibold">Achternaam</p>
-                    {{> inputField viewOnly=true value=userInfo.lastName }}
+                    {{> inputField value=userInfo.lastName }}
                 </div>
                 {{/if}}
                 {{#if userInfo.email}}
                 <div class="user-info__item">
                     <p class="semibold">E-mailadres</p>
-                    {{> inputField viewOnly=true value=userInfo.email }}
+                    {{> inputField value=userInfo.email }}
                 </div>
                 {{/if}}
+            </div>
+            <div class="user-info-container">
                 <h3>Labels</h3>
                 {{#if userInfo.labels}}
                 <div class="user-info__item">
@@ -37,55 +40,83 @@
                 </div>
                 {{/if}}
             </div>
-            <div class="user-info__right">
+            <div class="user-info-container">
+                <h3>Links</h3>
+                {{#if userInfo.website}}
+                <div class="user-info__item">
+                    <p class="semibold">Website</p>
+                    {{> inputField value=userInfo.website }}
+                </div>
+                {{/if}}
+                {{#if userInfo.linkedIn}}
+                <div class="user-info__item">
+                    <p class="semibold">
+                        LinkedIn
+                    </p>
+                    {{> inputField value=userInfo.linkedIn }}
+                </div>
+                {{/if}}
+                {{#if userInfo.facebook}}
+                <div class="user-info__item">
+                    <p class="semibold">
+                        Facebook
+                    </p>
+                    {{> inputField value=userInfo.facebook }}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="user-info__right">
+            <div class="user-info-container">
                 <h3>School gerelateerde informatie</h3>
                 {{#if userInfo.class}}
                 <div class="user-info__item">
                     <p class="semibold">Klas</p>
-                    {{> inputField viewOnly=true value=userInfo.class }}
+                    {{> inputField value=userInfo.class }}
                 </div>
                 {{/if}}
                 {{#if userInfo.studyYear}}
                 <div class="user-info__item">
                     <p class="semibold">Studiejaar</p>
-                    {{> inputField viewOnly=true value=userInfo.studyYear }}
+                    {{> inputField value=userInfo.studyYear }}
                 </div>
                 {{/if}}
                 {{#if userInfo.status}}
                 <div class="user-info__item">
                     <p class="semibold">Status</p>
-                    {{> inputField viewOnly=true value=userInfo.status }}
+                    {{> inputField value=userInfo.status }}
                 </div>
                 {{/if}}
                 {{#if userInfo.role}}
                 <div class="user-info__item">
                     <p class="semibold">Rol</p>
-                    {{> inputField viewOnly=true value=userInfo.role }}
+                    {{> inputField value=userInfo.role }}
                 </div>
                 {{/if}}
                 {{#if userInfo.coach}}
                 <div class="user-info__item">
                     <p class="semibold">Trajectcoach</p>
-                    {{> inputField viewOnly=true value=userInfo.coach }}
+                    {{> inputField value=userInfo.coach }}
                 </div>
                 {{/if}}
                 {{#if userInfo.workCoach}}
                 <div class="user-info__item">
                     <p class="semibold">Werkplekcoach</p>
-                    {{> inputField viewOnly=true value=userInfo.workCoach }}
+                    {{> inputField value=userInfo.workCoach }}
                 </div>
                 {{/if}}
                 {{#if userInfo.workMentor}}
                 <div class="user-info__item">
                     <p class="semibold">Werkplekmentor</p>
-                    {{> inputField viewOnly=true value=userInfo.workMentor }}
+                    {{> inputField value=userInfo.workMentor }}
                 </div>
                 {{/if}}
             </div>
         </div>
-        {{#includes user.employee.functions '["admin", "teamleader"]'}}
-        <div class="user-info__button">
-            <button class="button">Wijzigen</button>
-        </div>
-        {{/includes}}
+    </div>
+    {{#includes user.employee.functions '["admin", "teamleader"]'}}
+    <div class="user-info__button">
+        <button class="button">Wijzigen</button>
+    </div>
+    {{/includes}}
 </section>

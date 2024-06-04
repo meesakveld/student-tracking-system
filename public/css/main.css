@@ -572,13 +572,21 @@ tr.inactive {
     flex-wrap: wrap;
 }
 
+.user-info-container {
+    flex: 1;
+    min-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
 .user-info__left,
 .user-info__right {
     flex: 1;
     min-width: 30rem;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 2rem;
 }
 
 @media (max-width: 42.5rem) {
@@ -593,7 +601,7 @@ tr.inactive {
 .user-info__item {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0;
 }
 
 .user-info__button {

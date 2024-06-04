@@ -34,6 +34,9 @@ export const userPage = async (req, res) => {
             functions: "Teamleider, docent, stagebegeleider",
             courses: "Graduaat Programmeren, Digitale Vormgeving",
             subjects: "Web Animations, Programming 4, IT Communication",
+            website: "https://www.artevelde.be",
+            linkedIn: "https://www.linkedin.com",
+            facebook: "https://www.facebook.com",
         };
         
         const isStudent = user.role.title === 'student';
@@ -44,12 +47,10 @@ export const userPage = async (req, res) => {
                 ...req.user,
                 isStudent: isStudent
             },
+            viewOnly: true,
             userInfo,
             pageTitle,
             returnUrl: returnUrl,
-            website: "https://www.artevelde.be",
-            linkedIn: "https://www.linkedin.com",
-            facebook: "https://www.facebook.com",
         };
 
         if (data.user.employee && data.user.employee.functions) {
