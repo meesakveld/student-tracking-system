@@ -1,25 +1,22 @@
 /**
  * ------------------------------
- *          USER PAGE
+ *       EDIT USER PAGE
  * ------------------------------
  */
 
+import { getUserById } from "../../services/models/User.js"
 
-import { getUserById } from "../../services/models/User.js";
-
-export const userPage = async (req, res) => {
-
+export const userEditStudentPage = async (req, res) => {
     try {
-
         const id = parseInt(req.params.id);
         const returnUrl = req.query.returnUrl || "/";
         const user = await getUserById(id, '[role, student.[labels, class, status_registrations.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
-        
-        
+
+
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
-        if (user.employee) userData.account = user.employee; delete userData.employee 
-        
+        if (user.employee) userData.account = user.employee; delete userData.employee
+
         const userInfo = {
             firstName: userData.firstname,
             lastName: userData.lastname,
@@ -35,15 +32,12 @@ export const userPage = async (req, res) => {
             linkedIn: "https://www.linkedin.com",
             facebook: "https://www.facebook.com",
         };
-        
+
         const isStudent = user.role.title === 'student';
         const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
-        
+
         const data = {
-            user: {
-                ...req.user,
-                isStudent: isStudent
-            },
+            user: req.user,
             viewOnly: true,
             userInfo,
             pageTitle,

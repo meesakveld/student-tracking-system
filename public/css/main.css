@@ -198,8 +198,37 @@ header {
     position: relative;
 }
 
+.dropdown:has(.dropdown__options[multiple]) {
+    width: 100%;
+}
+
 .dropdown__options:hover {
     cursor: pointer;
+}
+
+.dropdown__options[multiple] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--grey);
+}
+
+.dropdown__options[multiple] option {
+    height: 3rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    background-color: var(--light);
+}
+
+.dropdown__options[multiple] option:hover {
+    background-color: var(--lightblue);
+}
+
+.dropdown__options[multiple] option:checked {
+    background-color: var(--blue);
+    color: var(--light);
 }
 
 /* ------ For the lightgrey bg section ------ */
