@@ -7,6 +7,7 @@ Model.knex(knex);
 // related models
 import Status from "./Status.js";
 import Student from "./Student.js";
+import Deregister from "./Deregister.js";
 
 // define the NavigationItem model
 class StatusRegistration extends Model {

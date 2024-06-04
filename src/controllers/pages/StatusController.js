@@ -17,66 +17,19 @@ export const statusStudentPage = async (req, res) => {
         const studentId = req.params.studentId;
         const student = await getStudentById(studentId, '[user]');
 
-        const filterCourse = req.query.filterCourse;
-        const filterAttendanceType = req.query.filterAttendanceType;
 
-        // // ** Courses **
-        // const courseQuery = await Course.query()
-        //     .joinRelated('students')
-        //     .where('students.id', parseInt(studentId))
-        // const courseOptions = courseQuery.map(course => {
-        //     return {
-        //         value: course.id,
-        //         label: course.name,
-        //         selected: course.id === parseInt(filterCourse)
-        //     }
-        // });
-
-        // // ** Attendance Types **
-        // const attendanceTypesQuery = await AttendanceType.query()
-        // const attendanceOptions = attendanceTypesQuery.map(attendanceType => {
-        //     return {
-        //         value: attendanceType.id,
-        //         label: attendanceType.title,
-        //         selected: attendanceType.id === parseInt(filterAttendanceType)
-        //     }
-        // });
-
-        // const userFilters = [
-        //     {
-        //         id: "filterCourse",
-        //         name: "filterCourse",
-        //         labelText: "Filter op vak:",
-        //         options: [
-        //             { value: "", label: "Alle vakken" },
-        //             ...courseOptions
-        //         ]
-        //     },
-        //     {
-        //         id: "filterAttendanceType",
-        //         name: "filterAttendanceType",
-        //         labelText: "Filter op aanwezigheid type:",
-        //         options: [
-        //             { value: "", label: "Alle aanwezigheid types" },
-        //             ...attendanceOptions
-        //         ]
-        //     }
-        // ]
 
         // ——— TABLE DATA ———
         let statuses = [];
-        let deregister = [];
 
         statuses = await StatusRegistration.query()
-            .withGraphFetched('[status]')
+            .withGraphFetched('[status, deregister]')
             .where('student_id', studentId)
             .joinRelated('status')
             .orderBy('date', 'desc');
 
-        deregister = await Deregister.query()
-            .withGraphFetched('[student]')
-            .where('student_id', studentId)
-            .joinRelated('student')
+
+            console.log(statuses);
 
         const rows = statuses.map(status => {
             return {
@@ -84,14 +37,18 @@ export const statusStudentPage = async (req, res) => {
                 cols: [
                     status.date,
                     status.status.title,
-                    deregister.reason
+                    status.deregister.reason
                 ],
             }
         });
 
         const statusTable = {
-            headers: ["Datum", "Status type", "Comment"],
+            headers: ["Datum", "Status type", "Annotatie"],
             rows: rows,
+        }
+
+        const addStatusFormData = {
+            formAction: `/student-dashboard/${studentId}/status`,
         }
 
         const data = {
@@ -99,12 +56,12 @@ export const statusStudentPage = async (req, res) => {
             usersTable: statusTable,
             pageError: req.pageError,
             flash: req.flash,
-            title: `Aanwezigheden van ${student.user.firstname} ${student.user.lastname}`,
+            title: `Status van ${student.user.firstname} ${student.user.lastname}`,
             returnUrl: `/student-dashboard/${studentId}`,
         }
 
 
-        res.render('student-attendances', data);
+        res.render('student-statuses', data);
 
     } catch (error) {
         console.log(error);
