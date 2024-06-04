@@ -26,13 +26,13 @@ class StatusRegistration extends Model {
                 id: { type: "integer" },
                 status_id: { type: "integer" },
                 student_id: { type: "integer" },
-                date: { type: "date"}
+                date: { type: "date" }
             },
         };
     }
 
     static get relationMappings() {
-        return{
+        return {
             status: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Status,
@@ -49,8 +49,16 @@ class StatusRegistration extends Model {
                     to: "students.id",
                 },
             },
+            deregister: {
+                relation: Model.HasOneRelation,
+                modelClass: Deregister,
+                join: {
+                    from: "statuses_registrations.deregister_id",
+                    to: "deregisters.id",
+                },
+            }
         }
     }
-    }
+}
 
 export default StatusRegistration;

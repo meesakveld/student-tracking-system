@@ -39,7 +39,15 @@ class Deregister extends Model {
                     from: "deregisters.student_id",
                     to: "students.id",
                 },
-            }
+            },
+            statusRegistrations: {
+                relation: Model.HasOneRelation,
+                modelClass: StatusesRegistration,
+                join: {
+                    from: "deregisters.statuses_registration_id",
+                    to: "statuses_registrations.id",
+                },
+            },
         }
     }
 }
