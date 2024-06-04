@@ -7,7 +7,8 @@ const seed = async function (knex) {
         {
             student_id: 1,
             reason: "Personal reasons",
-            deregisters_date: "2023-12-31"
+            deregisters_date: "2023-12-31",
+            statuses_registration_id: 1
         }
     ]);
 };

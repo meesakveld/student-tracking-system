@@ -7,7 +7,8 @@ export function up(knex) {
         table.integer("student_id").notNullable();
         table.string("reason").notNullable();
         table.date("deregisters_date").notNullable();
-        table.timestamps(true, true);       
+        table.integer("statuses_registration_id").notNullable();
+        table.timestamps(true, true);
     });
 }
  
