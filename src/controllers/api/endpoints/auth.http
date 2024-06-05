@@ -1,8 +1,0 @@
-# Get account token
-GET http://localhost:3000/api/auth/login
-content-type: application/json
-
-{
-    "email": "tristan.deridder@arteveldehs.be",
-    "password": "secret123"
-}

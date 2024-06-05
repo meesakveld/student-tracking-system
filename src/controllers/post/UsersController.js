@@ -1,5 +1,9 @@
 export const createUser = async (req, res, next) => {
 
+    console.log(req.data)
+
+    next();
+
 }
 
 export const updateUser = async (req, res, next) => {
