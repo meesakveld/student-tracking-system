@@ -3,9 +3,6 @@
  *        PRESENCES PAGE
  * ------------------------------
 */
-
-import AttendanceType from "../../models/AttendanceType.js";
-import Course from "../../models/Course.js";
 import Deregister from "../../models/Deregister.js";
 import Status from "../../models/Status.js";
 import StatusRegistration from "../../models/StatusesRegistration.js";
@@ -18,6 +15,23 @@ export const statusStudentPage = async (req, res) => {
         const student = await getStudentById(studentId, '[user]');
 
 
+        const statusTypeQuery = await Status.query();
+        const statusOptions = statusTypeQuery.map(statusType => {
+            return {
+                value: statusType.id,
+                label: statusType.title,
+                selected: statusType.id === parseInt(req.query.statusType) || statusType.id === 1
+            }
+        });
+
+        const statusAddition = {
+            id: "statusType",
+            name: "statusType",
+            labelText: "Status type",
+            options: [
+                ...statusOptions
+            ]
+        }
 
         // ——— TABLE DATA ———
         let statuses = [];
@@ -27,9 +41,6 @@ export const statusStudentPage = async (req, res) => {
             .where('student_id', studentId)
             .joinRelated('status')
             .orderBy('date', 'desc');
-
-
-            console.log(statuses);
 
         const rows = statuses.map(status => {
             return {
@@ -53,6 +64,7 @@ export const statusStudentPage = async (req, res) => {
 
         const data = {
             user: req.user,
+            statusAddition,
             usersTable: statusTable,
             pageError: req.pageError,
             flash: req.flash,

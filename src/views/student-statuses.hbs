@@ -10,8 +10,9 @@
             
             <form class="filters" action="{{addStatusFormData.formAction}}">
                 <h2>Voeg status toe:</h2>
-                {{> dropdown }}
-                {{> inputField placeholder="Annotatie" }}
+                
+                {{> dropdown options=statusAddition.options name=statusAddition.name id=statusAddition.id}}
+                {{> inputField placeholder="Reden van uitschrijving" name="deregister"}}
 
                 <div>
                     <button class="button">Toevoegen</button>

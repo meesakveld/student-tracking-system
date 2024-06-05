@@ -5,6 +5,9 @@ const seed = async function (knex) {
     await knex(tableName).del();
     await knex(tableName).insert([
         {
+            title: "Actief"
+        },
+        {
             title: "Inactief"
         },
         {
