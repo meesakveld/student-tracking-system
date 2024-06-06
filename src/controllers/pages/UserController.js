@@ -12,51 +12,98 @@ export const userPage = async (req, res) => {
     try {
 
         const id = parseInt(req.params.id);
-        const returnUrl = req.query.returnUrl || "/";
-        const user = await getUserById(id, '[role, student.[labels, class, status_registrations.status, trajectory_coach.user, workplace_coach, workplace_mentor], employee]');
-        
-        
+        const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
+                
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
         if (user.employee) userData.account = user.employee; delete userData.employee 
-        
-        const userInfo = {
-            firstName: userData.firstname,
-            lastName: userData.lastname,
-            email: userData.email,
-            class: userData.account?.class?.name || (user.role.title === "student" ? "-" : null),
-            status: userData.account?.status_registrations?.[0]?.status.title || (user.role.title === "student" ? "-" : null),
-            role: userData.role.title,
-            coach: userData.account?.trajectory_coach?.users || (user.role.title === "student" ? "-" : null),
-            workCoach: userData.account?.workplace_coach?.employees || (user.role.title === "student" ? "-" : null),
-            workMentor: userData.account?.workplace_mentor?.employees || (user.role.title === "student" ? "-" : null),
-            labels: userData.account?.labels?.map(label => label.title) || null,
-            website: "https://www.artevelde.be",
-            linkedIn: "https://www.linkedin.com",
-            facebook: "https://www.facebook.com",
-        };
-        
-        const isStudent = user.role.title === 'student';
-        const pageTitle = `Informatie over: ${userInfo.firstName} ${userInfo.lastName}`;
-        
-        const data = {
-            user: {
-                ...req.user,
-                isStudent: isStudent
-            },
-            viewOnly: true,
-            userInfo,
-            pageTitle,
-            returnUrl: returnUrl,
-        };
 
-        if (data.user.employee && data.user.employee.functions) {
-            data.user.employee.functions = data.user.employee.functions.map(func => func.title);
+        // ——— PERSONAL DATA ———
+        let personal = {
+            firstname: {
+                value: userData.firstname,
+                name: "personal-firstname",
+            },
+            lastname: {
+                value: userData.lastname,
+                name: "personal-lastname",
+            },
+            email: {
+                value: userData.email,
+                name: "personal-email",
+            },
         }
 
-        res.render('user-student', data);
+        // ——— CONTACT DATA ———
+        let contact = {
+            website: {
+                value: userData.contact?.website || "",
+                name: "contact-website",
+            },
+            linkedin: {
+                value: userData.contact?.linkedin || "",
+                name: "contact-linkedin",
+            },
+            facebook: {
+                value: userData.contact?.facebook || "",
+                name: "contact-facebook",
+            },
+        }
+
+        // ——— LABEL DATA ———
+        let labels = {
+            label: {
+                name: "labels",
+            },
+            dropdown: {
+                labels: userData.account.labels.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: true })),
+            }
+        }
+
+        // ——— EDUCATION PROGRAMME DATA ———
+        let education_programme = {
+            education_programmes: userData.account.education_programmes.map((education_programme, index) => {
+                return {
+                    id: `education_programme_${index}`,
+                    education_programme_id: {
+                        value: education_programme.id,
+                        name: `education_programme_${index}_id`,
+                    },
+                    title: {
+                        value: education_programme.title,
+                        name: `education_programme_${index}_title`,
+                    },
+                    courses: userData.account.courses.filter((course) => course.education_programme_id === education_programme.id).map((course, indexCourse) => {
+                        return {
+                            id: `education_programme_${index}-${indexCourse}`,
+                            name: `courses-${index}`,
+                            value: course.id,
+                            label: course.name,
+                            selected: true,
+                        }
+                    })
+                }
+            })
+        }
+
+
+        const data = {
+            user: req.user,
+            title: `Gebruiker: ${userData.firstname} ${userData.lastname}`,
+            returnUrl: '/users',
+            formData: {
+                personal: personal,
+                labels: labels,
+                contact: contact,
+                education_programme: education_programme,
+            },
+            viewOnly: true,
+        };
+
+        res.render('user', data);
 
     } catch (error) {
+        console.error(error);
         const data = {
             user: req.user,
             error: {

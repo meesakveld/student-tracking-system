@@ -3,7 +3,6 @@ export const convertUser = (req, res, next) => {
     const data = req.body;
 
     let outputData = {
-        username: data['personal-firstname'].toLowerCase() + data['personal-lastname'].toLowerCase(),
         firstname: data['personal-firstname'] || undefined,
         lastname: data['personal-lastname'] || undefined,
         email: data['personal-email'] || undefined,
@@ -11,7 +10,7 @@ export const convertUser = (req, res, next) => {
         contact: {
             website: data['contact-website'],
             linkedin: data['contact-linkedin'],
-            github: data['contact-github'],
+            facebook: data['contact-facebook'],
         },
         labels: [],
         education_programmes: [],
@@ -20,6 +19,9 @@ export const convertUser = (req, res, next) => {
 
     // Labels
     let labelIndex = 0;
+    if (typeof data.labels === 'string') {
+        data.labels = [data.labels];
+    }
     data.labels?.forEach(label => {
         outputData.labels.push({
             id: parseInt(label)

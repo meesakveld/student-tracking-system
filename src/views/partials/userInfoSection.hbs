@@ -86,7 +86,7 @@
                             name=formData.contact.linkedin.name }}
                         </div>
                         {{/if}}
-                        {{#if formData.contact.facebook}}
+                        {{#isnt formData.contact.facebook undefiend}}
                         <div class="user-info__item">
                             <p class="semibold">
                                 Facebook
@@ -94,7 +94,7 @@
                             {{> inputField type="url" placeholder="Facebook" value=formData.contact.facebook.value
                             name=formData.contact.facebook.name }}
                         </div>
-                        {{/if}}
+                        {{/isnt}}
                     </div>
                 </div>
             </div>
