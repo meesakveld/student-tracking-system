@@ -34,6 +34,7 @@ export const reportsPage = async (req, res, next) => {
             title: title,
             addUrl: '/search-students',
             dataComments: formattedComments,
+            returnUrl: "/"
         };
 
         // Render page
