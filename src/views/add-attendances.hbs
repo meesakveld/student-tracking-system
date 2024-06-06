@@ -2,12 +2,13 @@
 <div class="body__inner">
     <main>
         <div class="main__inner presences">
-            {{> titleSection title='Aanwezigheden voor: 2023-2024 | PGM1-C | IT Business | Isabelle Volckaert' }}
+            {{> titleSection title='Aanwezigheden openemen' returnUrl='/' }}
 
             {{#if pageError}}
                 {{> pageError pageError=pageError}}
             {{/if}}
 
+            {{> filters filters=userFilters }}
             <form action="/attendances" method="POST">
 
                 <div class="date">
@@ -45,4 +46,6 @@
             {{!-- {{> table headers=usersTable.headers rows=usersTable.rows }} --}}
         </div>
     </main>
+    <script src="/scripts/loadEducationPrograms.js"></script>
+    <script src="/scripts/loadCourses.js"></script>
 </div>

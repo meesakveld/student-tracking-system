@@ -4,9 +4,11 @@
  * ------------------------------
 */
 
+import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 import Attendance from "../../models/Attendance.js";
 import AttendanceType from "../../models/AttendanceType.js";
 import Course from "../../models/Course.js";
+import EducationProgramme from "../../models/EducationProgramme.js";
 import { getStudentById } from "../../services/models/Student.js";
 
 export const attendancesStudentPage = async (req, res) => {
@@ -130,10 +132,107 @@ export const attendancesStudentPage = async (req, res) => {
 
 export const addAttendancesPage = async (req, res) => {
 
-    try {
+    const hasFullAccess = employeeFunctionAuth(req.user.employee.functions, ["admin"]);
+    const isTeamLeader = employeeFunctionAuth(req.user.employee.functions, ["teamleader"]);
 
+    // ——— FILTERS DATA ———
+    const filterProgramme = req.query.filterProgramme;
+    const filterAcademicYear = req.query.filterAcademicYear;
+    const filterCourse = req.query.filterCourse;
+
+    // ——— FILTERS OPTIONS ———
+    const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
+    const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
+    const academicYearsOptions = academicYears.map(academicYear => ({ value: academicYear, label: academicYear, selected: academicYear === filterAcademicYear}));
+
+    try {
+        // ** Education Programme **
+        const educationProgrammesQuery = !filterAcademicYear ? [] : await EducationProgramme.query()
+        .joinRelated(!hasFullAccess && 'employees')
+        .where(builder => {
+            if (!hasFullAccess) {
+                builder.where('employees.id', req.user.employee.id)
+            }
+        })
+        .where(builder => {
+            if (filterAcademicYear) {
+                builder.where('academic_year', filterAcademicYear);
+            }
+        })
+        const educationProgrammesOptions = educationProgrammesQuery.map(programme => ({ value: programme.code, label: `${programme.title} - ${programme.code}`, selected: programme.code === filterProgramme, data: [{ title: "id", value: programme.id }]}));
+
+        // ** Courses **
+        const courseQuery = !filterProgramme ? [] : await Course.query()
+        .joinRelated(!hasFullAccess && !isTeamLeader && 'employees')
+        .where(builder => {
+            if (!hasFullAccess && !isTeamLeader) {
+                builder.where('employees.id', req.user.employee.id)
+            }
+        })
+        .joinRelated('education_programme')
+        .where(builder => {
+            if (filterProgramme) {
+                builder.where('education_programme.code', filterProgramme);
+            }
+        });
+        const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === parseInt(filterCourse) }));
+
+        // ** Attendance Types **
+        const attendanceTypesQuery = await AttendanceType.query()
+        const attendanceOptions = attendanceTypesQuery.map(attendanceType => {
+            return {
+                value: attendanceType.id,
+                label: attendanceType.title
+            }
+        });
+
+        const userFilters = [
+            {
+                id: "filterAcademicYear",
+                name: "filterAcademicYear",
+                labelText: "Filter op academiejaar:",
+                options: [
+                    { value: "", label: "Selecteer een academisch jaar" },
+                    ...academicYearsOptions
+                ]
+            },
+            {
+                id: "filterProgram",
+                name: "filterProgramme",
+                labelText: "Kies een opleiding:",
+                options: [
+                    { value: "", label: "Alle opleidingen" },
+                    ...educationProgrammesOptions
+                ],
+                disabled: !filterAcademicYear,
+                data: [
+                    { title: "employee-id", value: req.user.employee.id}
+                ]
+            },
+            {
+                id: "filterCourse",
+                name: "filterCourse",
+                labelText: "Filter op vak:",
+                options: [
+                    { value: "", label: "Alle vakken" },
+                    ...courseOptions
+                ],
+                disabled: !filterProgramme || !courseOptions.length > 0,
+            },
+            {
+                id: "filterAttendanceType",
+                name: "filterAttendanceType",
+                labelText: "Filter op aanwezigheid type:",
+                options: [
+                    { value: "", label: "Alle aanwezigheid types" },
+                    ...attendanceOptions
+                ],
+            }
+        ]
+
+        // ** Attendances **
         const attendanceTypes = await AttendanceType.query()
-        const attendanceOptions = (attendance_type_id = 1) => {
+        const attendanceTableOptions = (attendance_type_id = 1) => {
             return attendanceTypes.map(item => {
                 return {
                     value: item.id,
@@ -143,25 +242,27 @@ export const addAttendancesPage = async (req, res) => {
             })
         }
 
+        // ——— TABLE DATA ———
         const rows = [
             {
                 name: "Mees Akveld",
                 studentId: 1,
                 index: 1,
                 attendanceName: `attendance-${1}`,
-                attendanceOptions: attendanceOptions()
+                attendanceOptions: attendanceTableOptions()
             },
             {
                 name: "Tristan De Ridder",
                 studentId: 2,
                 index: 2,
                 attendanceName: `attendance-${2}`,
-                attendanceOptions: attendanceOptions()
+                attendanceOptions: attendanceTableOptions()
             },
         ]
 
         const data = {
             user: req.user,
+            userFilters,
             pageError: req.pageError,
             rows,
             courseId: 1,

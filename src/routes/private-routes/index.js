@@ -59,8 +59,7 @@ router.get('/student-dashboard/:studentId/coaching-reports/:reportId', auth.role
 router.get('/search-students', auth.roleAuth(["employee"]), ctr.searchStudentPage);
 router.get('/search-employees', auth.roleAuth(["employee"], ["teamleader"]), ctr.searchEmployeesPage);
 
-router.get('/attendances', auth.roleAuth(["employee"], ["teacher", "teamleader"]), /* ctr.addAttendancesPage */);
-router.get('/attendances/add', auth.roleAuth(["employee"], ["teacher", "teamleader"]), ctr.addAttendancesPage);
+router.get('/add-attendances', auth.roleAuth(["employee"], ["teacher", "teamleader"]), ctr.addAttendancesPage);
 
 router.get('/student-reports', (req, res) => { res.json({ message: "Participation" }) });
 router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Reports" }) });
@@ -83,7 +82,7 @@ router.post('/student-dashboard/:studentId/course-reports/:reportId', auth.roleA
 router.post('/student-dashboard/:studentId/personal-reports/:reportId', auth.roleAuth(["employee"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 router.post('/student-dashboard/:studentId/coaching-reports/:reportId', auth.roleAuth(["employee"], ["teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 
-router.post('/attendances', auth.roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.addAttendancesPage);
+router.post('/add-attendances', auth.roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.addAttendancesPage);
 
 
 export default router;
