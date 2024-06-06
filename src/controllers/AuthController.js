@@ -152,3 +152,134 @@ export const logout = async (req, res) => {
     res.clearCookie("user");
     res.redirect("/");
 }
+
+
+
+
+
+
+/**
+ * ------------------------------
+ *       UPDATE PASSWORD
+ * ------------------------------
+*/
+
+export const updatePasswordPage = async (req, res, next) => {
+
+    try {
+
+        const token = req.params.token;
+        const data = jwt.verify(token, TOKEN_SALT);
+
+        if (!data) {
+            return res.redirect("/login");
+        }
+
+        // check if user is already logged in
+        if (req.user) {
+            return res.redirect("/");
+        }
+
+        // get form inputs
+        const inputs = [
+            {
+                name: "password1",
+                label: "Wachtwoord",
+                type: "password",
+                err: req.formErrorFields?.password1 ? req.formErrorFields.password1 : "",
+            },
+            {
+                name: "password2",
+                label: "Wachtwoord",
+                type: "password",
+                err: req.formErrorFields?.password2 ? req.formErrorFields.password2 : "",
+            },
+        ];
+
+        // get flash messages
+        const flash = req.flash || null;
+
+        res.render("update-password", { layout: "base", inputs, flash, token });
+
+    } catch (error) {
+        const data = {
+            layout: "base",
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
+    }
+
+
+}
+
+
+export const updatePassword = async (req, res, next) => {
+
+    try {
+        // check errors
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            req.formErrorFields = {};
+            errors.array().forEach((error) => {
+                req.formErrorFields[error.path] = error.msg;
+            });
+
+            // set flash message
+            req.flash = "Er zijn fouten gevonden in het formulier";
+
+            // redirect to the login page
+            return next();
+        }
+
+        // Check if both passwords are the same
+        if (req.body.password1 !== req.body.password2) {
+            req.flash = "Wachtwoorden komen niet overeen";
+            return next();
+        }
+
+        const token = req.params.token;
+
+        if (!token) {
+            req.flash = "Token is niet geldig";
+            return next();
+        }
+
+        const data = jwt.verify(token, TOKEN_SALT);
+        if (!data) {
+            req.flash = "Token is niet geldig";
+            return next();
+        }
+
+        const user = await User.query().findById(data.id);
+
+        if (!user) {
+            return res.redirect("/login");
+        }
+
+        console.log(req.body);
+        // hash password
+        const pass = bcrypt.hashSync(req.body.password1, 10);
+
+        await User.query().findById(data.id).patch({
+            password: pass,
+        });
+
+        res.redirect("/login");
+
+    } catch (error) {
+        console.log(error);
+        const data = {
+            layout: "base",
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
+    }
+
+}

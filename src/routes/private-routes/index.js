@@ -46,7 +46,7 @@ router.get('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin
 
 router.get('/student-dashboard/:studentId', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.studentDashboardPage);
 router.get('/student-dashboard/:studentId/attendance', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.attendancesStudentPage);
-router.get('/student-dashboard/:studentId/status', auth.roleAuth(["employee"]), auth.studentIdAuth, (req, res) => { res.json({ message: "Status" }) });
+router.get('/student-dashboard/:studentId/status', auth.roleAuth(["employee"]), auth.studentIdAuth, ctr.statusStudentPage);
 router.get('/student-dashboard/:studentId/course-reports', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.commentsPage);
 router.get('/student-dashboard/:studentId/course-reports/add', auth.roleAuth(["employee"], ["teacher"]), ctr.addCommentPage);
 router.get('/student-dashboard/:studentId/course-reports/:reportId', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.commentPage);
@@ -81,8 +81,8 @@ router.post('/users/:id/edit/employee', auth.roleAuth(["employee"], ["admin"]), 
 
 router.post('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.addEducationProgrammePage);
 router.post('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.educationProgrammeEditPage);
-
 router.post('/student-dashboard/:studentId/attendance', auth.roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.attendancesStudentPage);
+router.post('/student-dashboard/:studentId/status', auth.roleAuth(["employee"], ["teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"]), post.handleStatus, ctr.statusStudentPage);
 router.post('/student-dashboard/:studentId/course-reports/:reportId', auth.roleAuth(["employee"], ["teacher", "teamleader"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 router.post('/student-dashboard/:studentId/personal-reports/:reportId', auth.roleAuth(["employee"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
 router.post('/student-dashboard/:studentId/coaching-reports/:reportId', auth.roleAuth(["employee"], ["teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"]), valid.CommentValidation, post.handleComment, ctr.handleComment );

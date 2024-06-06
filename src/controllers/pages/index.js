@@ -4,6 +4,7 @@ import { welcomePage } from './WelcomeController.js';
 import { dashboardPage } from './DashboardController.js';
 
 import { addAttendancesPage, attendancesStudentPage } from './AttendancesController.js';
+import { statusStudentPage } from './StatusController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { searchEmployeesPage } from './SearchEmployeesController.js'
 import { studentDashboardPage } from './StudentDashboardController.js';
@@ -27,6 +28,7 @@ export {
     dashboardPage,
     addAttendancesPage,
     attendancesStudentPage,
+    statusStudentPage,
     educationProgrammeEditPage,
     searchStudentPage,
     studentDashboardPage,
