@@ -1,0 +1,26 @@
+{{!-- Search student --}}
+<div class="body__inner">
+    <main>
+        <div class="main__inner search-student">
+            {{> titleSection title=title returnUrl=returnUrl}}
+
+            {{#if pageError}}{{> pageError pageError=pageError}}{{/if}}
+            {{#if flash}}{{> flash flash=flash}}{{/if}}
+
+            
+            <form class="filters" action="{{addStatusFormData.formAction}}" method="{{addStatusFormData.method}}">
+                <h2>Voeg status toe:</h2>
+                <input type="hidden" name="method" value="POST">
+                {{> dropdown options=statusAddition.options name=statusAddition.name id=statusAddition.id}}
+                {{> inputField placeholder="Reden van uitschrijving" name="note"}}
+
+                <div>
+                    <button class="button">Toevoegen</button>
+                </div>
+            </form>
+
+            {{> table headers=usersTable.headers rows=usersTable.rows }}
+        </div>
+    </main>
+
+</div>

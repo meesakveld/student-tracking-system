@@ -5,9 +5,10 @@ const seed = async function (knex) {
     await knex(tableName).del();
     await knex(tableName).insert([
         {
-            status_id: 1,
+            status_id: 5,
             student_id: 1,
             date: "2021-01-01",
+            note: "Personal issues"
         }
     ]);
 };

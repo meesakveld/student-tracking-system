@@ -1,6 +1,7 @@
 import { componentsPage } from './ComponentsController.js';
 import { dashboardPage } from './DashboardController.js';
 import { addAttendancesPage, attendancesStudentPage } from './AttendancesController.js';
+import { statusStudentPage } from './StatusController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { studentDashboardPage } from './StudentDashboardController.js';
 import { searchEmployeesPage } from './SearchEmployeesController.js'
@@ -21,6 +22,7 @@ export {
     dashboardPage,
     addAttendancesPage,
     attendancesStudentPage,
+    statusStudentPage,
     educationProgrammeEditPage,
     searchStudentPage,
     studentDashboardPage,
