@@ -202,6 +202,13 @@ header {
     }
 }
 
+@media (max-width: 25rem) {
+    .dropdown {
+        width: 100%;
+    }
+    
+}
+
 /* ------ For the lightgrey bg section ------ */
 
 .lightgrey-bg {
