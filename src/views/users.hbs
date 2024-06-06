@@ -3,7 +3,8 @@
     <main>
         <div class="main__inner overview">
             {{> titleSection title='Overzicht van alle gebruikers' returnUrl="/" }}
-            {{> button label="Voeg een gebruiker toe" link="/users/add-user" }}
+            {{> button label="Voeg een student toe" link="/users/add-student" }}
+            {{> button label="Voeg een medewerker toe" link="/users/add-employee" }}
             {{> filters filters=userFilters }}
             {{> inputField placeholder="Zoek op naam" }}
             {{> table headers=usersTable.headers rows=usersTable.rows }}
