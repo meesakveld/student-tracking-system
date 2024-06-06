@@ -113,26 +113,10 @@ export const EducationProgrammeValidation = (req, res, next) => {
             }
         });
 
-        // ** ——— Classes ——— **
-        // Check if there are classes
-        if (!data?.classes) {
-            throw {
-                message: "Minimaal één klas is verplicht",
-                type: "classes",
-            };
-        }
-
-        // Check if the first class has a name
-        if (!data.classes[0].name) {
-            throw {
-                message: "Klasnaam is verplicht",
-                type: "classes",
-            };
-        }
-
         next();
 
     } catch (error) {
+        console.log(error)
         switch (error.type) {
             case "educationProgramme":
                 req.education_programme = req.education_programme || {};
