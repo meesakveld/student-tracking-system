@@ -3,10 +3,13 @@
     <main>
         <div class="main__inner user">
             {{> titleSection title=title blueBg=true returnUrl=returnUrl }}
+            {{#if passwordResetFlash}}
+                {{> flash flash=passwordResetFlash}}
+            {{/if}}
             {{> userInfoSection }}
-            {{#if user.isStudent}}
+            {{#if studentFicheUrl}}
                 <div class="user__fiche">
-                    {{> button label="Bekijk student fiche" link="/student-dashboard/2"}}
+                    {{> button label="Bekijk student fiche" link=studentFicheUrl}}
                 </div>
             {{/if}}
         </div>

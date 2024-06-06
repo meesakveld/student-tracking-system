@@ -11,6 +11,13 @@ export const userPage = async (req, res) => {
 
     try {
 
+        let passwordResetFlash = null;
+        if (req.query.token) {
+            const token = req.query.token;
+            const baseUrl = `${req.protocol}://${req.get('host')}`;
+            passwordResetFlash = `De nieuwe gebruiker kan het wachtwoord instellen via deze link: <a href="${`${baseUrl}/update-password/${token}`}">${baseUrl}/update-password/${token}</a>`;
+        }
+
         const id = parseInt(req.params.id);
         const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee.[functions, courses, education_programmes]]');
 
@@ -106,7 +113,7 @@ export const userPage = async (req, res) => {
 
         const data = {
             user: req.user,
-            title: `Gebruiker: ${userData.firstname} ${userData.lastname}`,
+            title: `${userData.firstname} ${userData.lastname}`,
             returnUrl: req.query.returnUrl || "/",
             formData: {
                 personal: personal,
@@ -117,6 +124,8 @@ export const userPage = async (req, res) => {
             },
             viewOnly: true,
             editUrl: `/users/${id}/edit-${userData.role.title.toLowerCase()}`,
+            studentFicheUrl: personal.role.value === 1 ? `/student-dashboard/${userData.account.id}` : null,
+            passwordResetFlash: passwordResetFlash,
         };
 
         res.render('user', data);

@@ -167,7 +167,7 @@
                             <p class="input-field__input">{{title.value}}</p>
                             <input type="hidden" name="{{education_programme_id.name}}" value="{{education_programme_id.value}}">
                         </div>
-
+                        {{#isnt (length courses) 0}}
                         <div class="user-info__item">
                             <p class="semibold">Vakken</p>
                             <div class="checkbox-list">
@@ -179,6 +179,7 @@
                                 {{/each}}
                             </div>
                         </div>
+                        {{/isnt}}
 
                     </div>
 
