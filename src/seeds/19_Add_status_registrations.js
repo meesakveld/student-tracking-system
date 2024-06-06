@@ -7,8 +7,8 @@ const seed = async function (knex) {
         {
             status_id: 5,
             student_id: 1,
-            deregister_id: 1,
             date: "2021-01-01",
+            note: "Personal issues"
         }
     ]);
 };

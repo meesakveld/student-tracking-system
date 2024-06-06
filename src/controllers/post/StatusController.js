@@ -2,7 +2,6 @@ import { validationResult } from "express-validator";
 import StatusesRegistration from "../../models/StatusesRegistration.js";
 
 export const createStatus = async (req, res, next) => {
-
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -13,33 +12,27 @@ export const createStatus = async (req, res, next) => {
     try {
         const status_id = parseInt(req.body.statusType);
         const student_id = parseInt(req.params.studentId);
-        const deregister = req.body.deregister;
-        const date = req.body.date;
+        const note = req.body.note !== "" ? req.body.note : null;
+        const date = new Date().toISOString();
 
-        if (!status_id) {
-            req.pageError = "Een status is verplicht.";
-            return next();
-        }
-
-        const newStatus = {
+        let newStatus = {
             status_id: status_id,
             student_id: student_id,
-            deregister: deregister,
-            date: date
+            date: date,
         };
 
+        if (note) {
+            newStatus.note = note;
+        }
 
-        const statusRegistration = await StatusesRegistration.query().insert(newStatus);
-        res.json({ message: "success", detail: "Status is toegevoegd." });
-        // return res.redirect(`/students/${student_id}/status`);
+        await StatusesRegistration.query().insert(newStatus);
 
-        
+        next();
     } catch (error) {
         req.pageError = error.message;
         next();
     }
 }
-
 
 export const handleStatus = async (req, res, next) => {
     const method = req.body.method;
@@ -47,5 +40,4 @@ export const handleStatus = async (req, res, next) => {
     if (method === "POST") {
         createStatus(req, res, next);
     }
-
 }

@@ -7,7 +7,6 @@ Model.knex(knex);
 // related models
 import Status from "./Status.js";
 import Student from "./Student.js";
-import Deregister from "./Deregister.js";
 
 // define the NavigationItem model
 class StatusRegistration extends Model {
@@ -27,7 +26,8 @@ class StatusRegistration extends Model {
                 id: { type: "integer" },
                 status_id: { type: "integer" },
                 student_id: { type: "integer" },
-                date: { type: "date" }
+                date: { type: "string" },
+                note: { type: "string" },
             },
         };
     }
@@ -50,14 +50,6 @@ class StatusRegistration extends Model {
                     to: "students.id",
                 },
             },
-            deregister: {
-                relation: Model.HasOneRelation,
-                modelClass: Deregister,
-                join: {
-                    from: "statuses_registrations.deregister_id",
-                    to: "deregisters.id",
-                },
-            }
         }
     }
 }

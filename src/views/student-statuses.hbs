@@ -8,11 +8,11 @@
             {{#if flash}}{{> flash flash=flash}}{{/if}}
 
             
-            <form class="filters" action="{{addStatusFormData.formAction}}">
+            <form class="filters" action="{{addStatusFormData.formAction}}" method="{{addStatusFormData.method}}">
                 <h2>Voeg status toe:</h2>
-                
+                <input type="hidden" name="method" value="POST">
                 {{> dropdown options=statusAddition.options name=statusAddition.name id=statusAddition.id}}
-                {{> inputField placeholder="Reden van uitschrijving" name="deregister"}}
+                {{> inputField placeholder="Reden van uitschrijving" name="note"}}
 
                 <div>
                     <button class="button">Toevoegen</button>

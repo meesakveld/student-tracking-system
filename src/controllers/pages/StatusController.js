@@ -3,7 +3,6 @@
  *        PRESENCES PAGE
  * ------------------------------
 */
-import Deregister from "../../models/Deregister.js";
 import Status from "../../models/Status.js";
 import StatusRegistration from "../../models/StatusesRegistration.js";
 import { getStudentById } from "../../services/models/Student.js";
@@ -37,7 +36,7 @@ export const statusStudentPage = async (req, res) => {
         let statuses = [];
 
         statuses = await StatusRegistration.query()
-            .withGraphFetched('[status, deregister]')
+            .withGraphFetched('[status]')
             .where('student_id', studentId)
             .joinRelated('status')
             .orderBy('date', 'desc');
@@ -46,9 +45,9 @@ export const statusStudentPage = async (req, res) => {
             return {
                 isActive: true,
                 cols: [
-                    status.date,
+                    status.date.split('T')[0],
                     status.status.title,
-                    status.deregister.reason
+                    status.note
                 ],
             }
         });
@@ -60,12 +59,14 @@ export const statusStudentPage = async (req, res) => {
 
         const addStatusFormData = {
             formAction: `/student-dashboard/${studentId}/status`,
+            method: "POST",
         }
 
         const data = {
             user: req.user,
             statusAddition,
             usersTable: statusTable,
+            addStatusFormData: addStatusFormData,
             pageError: req.pageError,
             flash: req.flash,
             title: `Status van ${student.user.firstname} ${student.user.lastname}`,

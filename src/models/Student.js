@@ -10,7 +10,6 @@ import Label from "./Label.js";
 import User from "./User.js";
 import Employee from "./Employee.js";
 import WorkplaceMentor from "./WorkplaceMentor.js";
-import Deregister from "./Deregister.js";
 import Course from "./Course.js";
 import StatusRegistration from "./StatusesRegistration.js";
 import Comment from "./Comment.js";
@@ -107,14 +106,6 @@ class Student extends Model {
                 join: {
                     from: "students.id",
                     to: "workplace_coaches.student_id",
-                },
-            },
-            deregistrer: {
-                relation: Model.HasManyRelation,
-                modelClass: Deregister,
-                join: {
-                    from: "students.id",
-                    to: "deregisters.student_id",
                 },
             },
             comments: {
