@@ -4,8 +4,12 @@
         {{> dropdown }}
     {{/each}}
     <div>
-        <a href="#" class="button button--dark" id="reset">Reset</a>
-        <button class="button">Zoeken</button>
-        <script src="/scripts/setResetButtonHrefToPathUrl.js"></script>
+        {{#isnt noReset true}}
+            <a href="#" class="button button--dark" id="reset">Reset</a>
+            <script src="/scripts/setResetButtonHrefToPathUrl.js"></script>
+        {{/isnt}}
+        {{#isnt noSearch true}}
+            <button class="button">Zoeken</button>
+        {{/isnt}}
     </div>
 </form>

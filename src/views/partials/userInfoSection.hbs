@@ -1,122 +1,192 @@
 {{!-- User Section --}}
-<section class="lightgrey-bg">
-    <!-- Javascript: when clicking on the 'wijzigen' button the viewOnly attribute is removed and a save button is added to send the changes -->
-    <div class="user-info">
-        <div class="user-info__left">
-            <div class="user-info-container">
-                <h3>Persoonlijke informatie</h3>
-                {{#if userInfo.firstName}}
-                <div class="user-info__item">
-                    <p class="semibold">Voornaam</p>
-                    {{> inputField value=userInfo.firstName }}
+{{#if viewOnly}}
+    {{#if editUrl}}
+        {{> button label="Bewerken" class="button" paddingBottom=true link=editUrl}}
+    {{/if}}
+{{/if}}
+
+<div class="add-programme">
+    <form action="{{formOptions.action}}" method="POST" class="add-programme" id="add-user">
+        <input type="hidden" name="method" value="{{formOptions.method}}">
+
+        {{#if pageError}}
+        {{> pageError pageError=pageError}}
+        {{/if}}
+
+        {{#isnt viewOnly true}}
+        <div class="actions">
+            {{> button label="Annuleren" class="button--dark" link=cancelUrl}}
+            <button type="submit" class="button">Opslaan</button>
+        </div>
+        {{/isnt}}
+
+        <section class="lightgrey-bg">
+            <div class="user-info">
+                <div class="user-info__left">
+                    <div class="user-info-container">
+                        <h3>Persoonlijke informatie</h3>
+                        {{#if formData.personal.firstname}}
+                        <div class="user-info__item">
+                            <p class="semibold">Voornaam</p>
+                            {{> inputField placeholder="Voornaam" value=formData.personal.firstname.value
+                            name=formData.personal.firstname.name }}
+                        </div>
+                        {{/if}}
+                        {{#if formData.personal.lastname}}
+                        <div class="user-info__item">
+                            <p class="semibold">Achternaam</p>
+                            {{> inputField placeholder="Achternaam" value=formData.personal.lastname.value
+                            name=formData.personal.lastname.name }}
+                        </div>
+                        {{/if}}
+                        {{#if formData.personal.email}}
+                        <div class="user-info__item">
+                            <p class="semibold">E-mailadres</p>
+                            {{> inputField placeholder="E-mailadres" value=formData.personal.email.value
+                            name=formData.personal.email.name }}
+                        </div>
+                        {{/if}}
+                        {{#if formData.personal.student_id}}
+                        <input type="hidden" name="{{formData.personal.student_id.name}}" value="{{formData.personal.student_id.value}}">
+                        {{/if}}
+                        {{#if formData.personal.employee_id}}
+                        <input type="hidden" name="{{formData.personal.employee_id.name}}" value="{{formData.personal.employee_id.value}}">
+                        {{/if}}
+                        <div class="user-info__item">
+                            <p class="semibold">Rol</p>
+                            <p class="input-field__input">{{formData.personal.role.label}}</p>
+                            <input type="hidden" name="personal-role" value="1">
+                        </div>
+                    </div>
+                    {{#eq formData.personal.role.value 1}}
+                        <div class="user-info-container">
+                            <h3>Labels</h3>
+                            {{#isnt (length formData.labels.dropdown.labels) 0}}
+                                {{#isnt viewOnly true}}
+                                <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te
+                                        selecteren.</em>
+                                </p>
+                                {{/isnt}}
+                                <div class="user-info__item">
+                                    <div class="input-field input-field--label input-field--view">
+                                        {{> dropdown form="add-user" disabled=viewOnly multiple=true options=formData.labels.dropdown.labels name=formData.labels.label.name}}
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="user-info__item">
+                                    <p>Geen labels</p>
+                                </div>
+                            {{/isnt}}
+                        </div>
+                    {{/eq}}
                 </div>
-                {{/if}}
-                {{#if userInfo.lastName}}
-                <div class="user-info__item">
-                    <p class="semibold">Achternaam</p>
-                    {{> inputField value=userInfo.lastName }}
-                </div>
-                {{/if}}
-                {{#if userInfo.email}}
-                <div class="user-info__item">
-                    <p class="semibold">E-mailadres</p>
-                    {{> inputField value=userInfo.email }}
-                </div>
-                {{/if}}
-            </div>
-            <div class="user-info-container">
-                <h3>Labels</h3>
-                {{#if userInfo.labels}}
-                <div class="user-info__item">
-                    <div class="input-field input-field--label input-field--view">
-                        {{#each userInfo.labels}}
-                        <input readonly type="text" class="input-field__input" value="{{this}}">
-                        {{/each}}
+                <div class="user-info__right">
+                    <div class="user-info-container">
+                        <h3>Links</h3>
+                        {{#if formData.contact.website}}
+                        <div class="user-info__item">
+                            <p class="semibold">Website</p>
+                            {{> inputField type="url" placeholder="Website" value=formData.contact.website.value
+                            name=formData.contact.website.name
+                            }}
+                        </div>
+                        {{/if}}
+                        {{#if formData.contact.linkedin}}
+                        <div class="user-info__item">
+                            <p class="semibold">
+                                LinkedIn
+                            </p>
+                            {{> inputField type="url" placeholder="LinkedIn" value=formData.contact.linkedin.value
+                            name=formData.contact.linkedin.name }}
+                        </div>
+                        {{/if}}
+                        {{#isnt formData.contact.facebook undefiend}}
+                        <div class="user-info__item">
+                            <p class="semibold">
+                                Facebook
+                            </p>
+                            {{> inputField type="url" placeholder="Facebook" value=formData.contact.facebook.value
+                            name=formData.contact.facebook.name }}
+                        </div>
+                        {{/isnt}}
                     </div>
                 </div>
-                {{else}}
-                <div class="user-info__item">
-                    <p>Geen labels</p>
-                </div>
-                {{/if}}
             </div>
-            <div class="user-info-container">
-                <h3>Links</h3>
-                {{#if userInfo.website}}
-                <div class="user-info__item">
-                    <p class="semibold">Website</p>
-                    {{> inputField value=userInfo.website }}
-                </div>
-                {{/if}}
-                {{#if userInfo.linkedIn}}
-                <div class="user-info__item">
-                    <p class="semibold">
-                        LinkedIn
-                    </p>
-                    {{> inputField value=userInfo.linkedIn }}
-                </div>
-                {{/if}}
-                {{#if userInfo.facebook}}
-                <div class="user-info__item">
-                    <p class="semibold">
-                        Facebook
-                    </p>
-                    {{> inputField value=userInfo.facebook }}
-                </div>
-                {{/if}}
+            {{#includes user.employee.functions '["admin", "teamleader"]'}}
+            <div class="user-info__button">
+                <button class="button">Wijzigen</button>
             </div>
+            {{/includes}}
+        </section>
+
+        <section class="lightgrey-bg">
+            <div>
+                <h3>Opleidingen</h3>
+                {{#isnt viewOnly true}}
+                    <div class="filters">
+                        {{> filters filters=formData.education_programme.education_programme_filters noReset=true noSearch=true
+                        }}
+                        <button disabled="disabled" class="button" id="add-education-programme"
+                            form="selectEducationProgramme">Toevoegen</button>
+                        <script src="/scripts/loadEducationPrograms.js"></script>
+                        <script src="/scripts/addEducationProgramme.js"></script>
+                    </div>
+
+                    {{#isnt (length formData.education_programme.education_programmes) 0}}
+                        <hr class="add-programme__line">
+                    {{/isnt}}
+                {{/isnt}}
+
+                <div id="education_programmes">
+
+                    {{#each formData.education_programme.education_programmes}}
+
+                    <div id="education-programme-container">
+
+                        <div class="user-info__item">
+                            <p class="input-field__input">{{title.value}}</p>
+                            <input type="hidden" name="{{education_programme_id.name}}" value="{{education_programme_id.value}}">
+                        </div>
+
+                        <div class="user-info__item">
+                            <p class="semibold">Vakken</p>
+                            <div class="checkbox-list">
+                                {{#each courses}}
+                                <div>
+                                    <input {{#if ../../viewOnly}}disabled="true"{{/if}} type="checkbox" id="{{id}}" name="{{name}}" value="{{value}}" {{#if selected}}checked="true"{{/if}}>
+                                    <label for="{{id}}">{{label}}</label>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {{#if notLastInArray}}
+                    <hr class="add-programme__line">
+                    {{/if}}
+
+                    {{/each}}
+
+                    {{#if viewOnly}}
+                        {{#eq (length formData.education_programme.education_programmes) 0}}
+                            <p>Nog geen opleidingen toegevoegd.</p>
+                        {{/eq}}
+                    {{/if}}
+
+                </div>
+
+            </div>
+        </section>
+
+        
+    </form>
+
+    {{#isnt viewOnly true}}
+        <div class="actions">
+            {{> button label="Annuleren" class="button--dark" link=cancelUrl}}
+            <button form="add-user" type="submit" class="button">Opslaan</button>
         </div>
-        <div class="user-info__right">
-            <div class="user-info-container">
-                <h3>School gerelateerde informatie</h3>
-                {{#if userInfo.class}}
-                <div class="user-info__item">
-                    <p class="semibold">Klas</p>
-                    {{> inputField value=userInfo.class }}
-                </div>
-                {{/if}}
-                {{#if userInfo.studyYear}}
-                <div class="user-info__item">
-                    <p class="semibold">Studiejaar</p>
-                    {{> inputField value=userInfo.studyYear }}
-                </div>
-                {{/if}}
-                {{#if userInfo.status}}
-                <div class="user-info__item">
-                    <p class="semibold">Status</p>
-                    {{> inputField value=userInfo.status }}
-                </div>
-                {{/if}}
-                {{#if userInfo.role}}
-                <div class="user-info__item">
-                    <p class="semibold">Rol</p>
-                    {{> inputField value=userInfo.role }}
-                </div>
-                {{/if}}
-                {{#if userInfo.coach}}
-                <div class="user-info__item">
-                    <p class="semibold">Trajectcoach</p>
-                    {{> inputField value=userInfo.coach }}
-                </div>
-                {{/if}}
-                {{#if userInfo.workCoach}}
-                <div class="user-info__item">
-                    <p class="semibold">Werkplekcoach</p>
-                    {{> inputField value=userInfo.workCoach }}
-                </div>
-                {{/if}}
-                {{#if userInfo.workMentor}}
-                <div class="user-info__item">
-                    <p class="semibold">Werkplekmentor</p>
-                    {{> inputField value=userInfo.workMentor }}
-                </div>
-                {{/if}}
-            </div>
-        </div>
-    </div>
-    {{#includes user.employee.functions '["admin", "teamleader"]'}}
-    <div class="user-info__button">
-        <button class="button">Wijzigen</button>
-    </div>
-    {{/includes}}
-</section>
+    {{/isnt}}
+
+</div>

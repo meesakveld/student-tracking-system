@@ -23,7 +23,7 @@ class User extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["firstname", "lastname", "email", "password", "username"],
+            required: ["firstname", "lastname", "email", "password"],
             properties: {
                 id: { type: "integer" },
                 firstname: { type: "string", maxLength: 255 },
@@ -31,7 +31,6 @@ class User extends Model {
                 is_active: { type: "boolean" },
                 email: { type: "string", maxLength: 255 },
                 password: { type: "string", maxLength: 255 },
-                username: { type: "string", maxLength: 255 },
                 role_id: { type: "integer" },
             },
         };
@@ -39,7 +38,7 @@ class User extends Model {
 
     static get relationMappings() {
         return {
-            contacts: {
+            contact: {
                 relation: Model.HasOneRelation,
                 modelClass: Contact,
                 join: {

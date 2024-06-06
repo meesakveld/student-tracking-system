@@ -198,8 +198,37 @@ header {
     position: relative;
 }
 
+.dropdown:has(.dropdown__options[multiple]) {
+    width: 100%;
+}
+
 .dropdown__options:hover {
     cursor: pointer;
+}
+
+.dropdown__options[multiple] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--grey);
+}
+
+.dropdown__options[multiple] option {
+    height: 3rem;
+    padding: 0.5rem;
+    border: 1px solid var(--grey);
+    background-color: var(--light);
+}
+
+.dropdown__options[multiple] option:hover {
+    background-color: var(--lightblue);
+}
+
+.dropdown__options[multiple] option:checked {
+    background-color: var(--blue);
+    color: var(--light);
 }
 
 /* ------ For the lightgrey bg section ------ */
@@ -325,6 +354,11 @@ a:hover {
 
 .button--icon svg {
     width: 2rem;
+}
+
+.button[disabled] {
+    background-color: var(--lightblue);
+    cursor: not-allowed;
 }
 
 /* ------ Input fields ------ */
@@ -469,6 +503,26 @@ input:hover {
     padding-right: 1rem;
 }
 
+
+/* ------ Checkbox list ------ */
+
+.checkbox-list {
+    columns: 1;
+    column-gap: 1.5rem;
+    row-gap: 0.3rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+
+    @media (width > 55rem) {
+        columns: 2;
+    }
+
+    @media (width > 70rem) {
+        columns: 3;
+    }
+}
+
+
 /* ------ Filters ------ */
 
 .filters {
@@ -481,6 +535,7 @@ input:hover {
     margin-bottom: 1rem;
     padding: 1rem;
     border: 1px solid var(--grey);
+    background-color: white;
 }
 
 @media (max-width: 49.375rem) {

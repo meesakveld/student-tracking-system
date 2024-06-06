@@ -3,7 +3,7 @@
     {{#if labelText}}
     <label class="dropdown__label {{labelClass}}" for="{{id}}">{{labelText}}</label>
     {{/if}}
-    <select {{#if disabled}}disabled{{/if}} {{#if form}}form="{{form}}"{{/if}} class="dropdown__options {{inputClass}}" name="{{name}}" id="{{id}}" {{#each data}}data-{{title}}="{{value}}" {{/each}}>
+    <select {{#if multiple}}multiple size="{{length options}}"{{/if}} {{#if disabled}}disabled{{/if}} {{#if form}}form="{{form}}"{{/if}} class="dropdown__options {{inputClass}}" name="{{name}}" id="{{id}}" {{#each data}}data-{{title}}="{{value}}" {{/each}}>
         {{#each options}}
             <option {{#if selected}}selected{{/if}} value="{{value}}" {{#each data}}data-{{title}}="{{value}}" {{/each}}>{{label}}</option>
         {{/each}}
