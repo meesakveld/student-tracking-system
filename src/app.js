@@ -23,6 +23,7 @@ import * as auth from "./controllers/AuthController.js";
 // Routes
 import apiRoutes from "./routes/api/index.js";
 import privateRoutes from "./routes/private-routes/index.js";
+import pdfRoutes from "./routes/pdf/index.js";
 
 /**
  * ------------------------------
@@ -67,6 +68,9 @@ app.get("/logout", auth.logout);
 
 // —— API Routes ——
 app.use("/api", apiRoutes);
+
+// —— PDF Routes ——
+app.use("/pdf", pdfRoutes);
 
 // —— Private routes ——
 app.use("/", privateRoutes)
