@@ -66,6 +66,9 @@ app.post("/login", valid.AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
+app.get("/update-password/:token", auth.updatePasswordPage);
+app.post("/update-password/:token", auth.updatePassword, auth.updatePasswordPage);
+
 // —— API Routes ——
 app.use("/api", apiRoutes);
 
