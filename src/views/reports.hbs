@@ -1,0 +1,16 @@
+{{!-- Comments section --}}
+<main>
+    <div class="main__inner">
+        {{> titleSection title=title blueBg=true }}
+        {{> button label="Voeg verslag toe" link="/search-students" paddingBottom=true }}
+        {{#if dataComments}}
+        {{> commentSection comments=dataComments }}
+        {{else}}
+        <div class="comments">
+            <div class="comment">
+                <p>Er zijn nog geen verslagen toegevoegd.</p>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</main>

@@ -63,8 +63,8 @@ router.get('/search-employees', auth.roleAuth(["employee"], ["teamleader"]), ctr
 router.get('/attendances', auth.roleAuth(["employee"], ["teacher", "teamleader"]), /* ctr.addAttendancesPage */);
 router.get('/attendances/add', auth.roleAuth(["employee"], ["teacher", "teamleader"]), ctr.addAttendancesPage);
 
-router.get('/student-reports', (req, res) => { res.json({ message: "Participation" }) });
-router.get('/coaching-reports', (req, res) => { res.json({ message: "Coaching Reports" }) });
+router.get('/course-reports', ctr.reportsPage);
+router.get('/coaching-reports', ctr.reportsPage);
 
 
 

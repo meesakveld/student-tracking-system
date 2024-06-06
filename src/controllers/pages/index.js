@@ -20,6 +20,7 @@ import { educationProgrammesPage } from './EducationProgrammesController.js';
 import { educationProgrammePage } from './EducationProgrammeController.js';
 import { educationProgrammeEditPage } from './EducationProgrammeEditController.js';
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
+import { reportsPage } from './ReportsController.js';
 
 import { errorPage } from './ErrorController.js';
 
@@ -45,5 +46,6 @@ export {
     educationProgrammesPage,
     addEducationProgrammePage,
     userStudentAddPage,
-    userEditStudentPage
+    userEditStudentPage,
+    reportsPage
 }
