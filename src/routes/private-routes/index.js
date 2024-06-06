@@ -35,9 +35,10 @@ router.get('/', ctr.dashboardPage);
 
 router.get('/users', auth.roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/add-student', auth.roleAuth(["employee"], ["admin"]), ctr.userStudentAddPage);
-router.get('/users/add-employee', auth.roleAuth(["employee"], ["admin"]), ctr.userStudentAddPage);
+router.get('/users/add-employee', auth.roleAuth(["employee"], ["admin"]), ctr.userEmployeeAddPage);
 router.get('/users/:id', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.userPage);
-router.get('/users/:id/edit/student', auth.roleAuth(["employee"], ["admin"]), ctr.userEditStudentPage);
+router.get('/users/:id/edit-student', auth.roleAuth(["employee"], ["admin"]), ctr.userStudentEditPage);
+router.get('/users/:id/edit-employee', auth.roleAuth(["employee"], ["admin"]), ctr.userEmployeeEditPage);
 
 router.get('/education-programmes', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammesPage);
 router.get('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.addEducationProgrammePage);
@@ -75,9 +76,9 @@ router.get('/coaching-reports', ctr.reportsPage);
 */
 
 router.post('/users/add-student', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userStudentAddPage);
-router.post('/users/add-employee', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userStudentAddPage);
-router.post('/users/:id/edit/student', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userEditStudentPage);
-router.post('/users/:id/edit/employee', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userStudentAddPage);
+router.post('/users/add-employee', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userEmployeeAddPage);
+router.post('/users/:id/edit-student', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userStudentEditPage);
+router.post('/users/:id/edit-employee', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userEmployeeEditPage);
 
 router.post('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.addEducationProgrammePage);
 router.post('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.educationProgrammeEditPage);

@@ -50,7 +50,7 @@ const addEducationProgramme = () => {
                             ${programme.courses.sort((a, b) => a.name.localeCompare(b.name)).map((course, index) => {
                                 return `
                                     <div>
-                                        <input type="checkbox" id="courses-${indexId}-${index}" name="courses-${indexId}" value="${course.id}" checked="true">
+                                        <input type="checkbox" id="courses-${indexId}-${index}" name="courses-${indexId}" value="${course.id}">
                                         <label for="courses-${indexId}-${index}">${course.name}</label>
                                     </div>
                                 `                          

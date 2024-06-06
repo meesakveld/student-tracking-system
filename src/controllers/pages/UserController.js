@@ -12,7 +12,7 @@ export const userPage = async (req, res) => {
     try {
 
         const id = parseInt(req.params.id);
-        const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
+        const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee.[functions, courses, education_programmes]]');
 
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
@@ -65,6 +65,16 @@ export const userPage = async (req, res) => {
             }
         }
 
+        // ——— FUNCTIONS DATA ———
+        let functions = {
+            functions: {
+                name: "functions",
+            },
+            dropdown: {
+                functions: !userData.account?.functions ? [] : userData.account.functions.map(func => ({ type: "checkbox", value: func.id, label: func.title, selected: true })),
+            }
+        }
+
         // ——— EDUCATION PROGRAMME DATA ———
         let education_programme = {}
         if (userData.account.education_programmes) {
@@ -101,11 +111,12 @@ export const userPage = async (req, res) => {
             formData: {
                 personal: personal,
                 labels: labels,
+                functions: functions,
                 contact: contact,
                 education_programme: education_programme,
             },
             viewOnly: true,
-            editUrl: `/users/${id}/edit/${userData.role.title.toLowerCase()}`,
+            editUrl: `/users/${id}/edit-${userData.role.title.toLowerCase()}`,
         };
 
         res.render('user', data);

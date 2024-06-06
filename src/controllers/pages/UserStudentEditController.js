@@ -8,7 +8,7 @@ import EducationProgramme from "../../models/EducationProgramme.js";
 import Label from "../../models/Label.js";
 import { getUserById } from "../../services/models/User.js"
 
-export const userEditStudentPage = async (req, res) => {
+export const userStudentEditPage = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
@@ -53,6 +53,10 @@ export const userEditStudentPage = async (req, res) => {
 
         // ** Contact data **
         let contact = {
+            contact_id: {
+                value: userData.contact?.id,
+                name: "contact-id",
+            },
             website: {
                 value: userData.contact?.website || "",
                 name: "contact-website",
@@ -140,7 +144,7 @@ export const userEditStudentPage = async (req, res) => {
             returnUrl: `/users/${id}`,
             cancelUrl: `/users/${id}`,
             formOptions: {
-                action: `/users/${id}/edit/student`,
+                action: `/users/${id}/edit-student`,
                 method: "PATCH-STUDENT",
             },
             formData: {

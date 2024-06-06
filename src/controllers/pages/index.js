@@ -12,8 +12,10 @@ import { studentDashboardPage } from './StudentDashboardController.js';
 
 import { userPage } from './UserController.js';
 import { usersPage } from './UsersController.js';
-import { userEditStudentPage } from './UserStudentEditController.js';
+import { userStudentEditPage } from './UserStudentEditController.js';
 import { userStudentAddPage } from './UserStudentAddController.js';
+import { userEmployeeAddPage } from './UserEmployeeAddController.js';
+import { userEmployeeEditPage } from './UserEmployeeEditController.js';
 
 import  { commentsPage, commentPage, addCommentPage, handleComment } from './CommentsController.js';
 import { educationProgrammesPage } from './EducationProgrammesController.js';
@@ -37,6 +39,8 @@ export {
     errorPage,
     userPage,
     usersPage,
+    userEmployeeEditPage,
+    userEmployeeAddPage,
     welcomePage,
     commentsPage,
     addCommentPage,
@@ -46,6 +50,6 @@ export {
     educationProgrammesPage,
     addEducationProgrammePage,
     userStudentAddPage,
-    userEditStudentPage,
+    userStudentEditPage,
     reportsPage
 }

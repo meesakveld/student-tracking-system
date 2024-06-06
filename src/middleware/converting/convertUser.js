@@ -13,8 +13,14 @@ export const convertUser = (req, res, next) => {
             facebook: data['contact-facebook'],
         },
         labels: [],
+        functions: [],
         education_programmes: [],
         courses: [],
+    }
+
+    // If contact-id
+    if (data['contact-id']) {
+        outputData.contact.id = parseInt(data['contact-id']);
     }
 
     // Account id
@@ -35,6 +41,18 @@ export const convertUser = (req, res, next) => {
             id: parseInt(label)
         });
         labelIndex++;
+    });
+
+    // Functions
+    let functionIndex = 0;
+    if (typeof data.functions === 'string') {
+        data.functions = [data.functions];
+    }
+    data.functions?.forEach(func => {
+        outputData.functions.push({
+            id: parseInt(func)
+        });
+        functionIndex++;
     });
 
 
