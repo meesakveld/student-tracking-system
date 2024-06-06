@@ -80,7 +80,7 @@ router.post('/users/:id/edit/student', auth.roleAuth(["employee"], ["admin"]), c
 router.post('/users/:id/edit/employee', auth.roleAuth(["employee"], ["admin"]), cvt.convertUser, valid.userAuthication, post.handleUser, ctr.userStudentAddPage);
 
 router.post('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.addEducationProgrammePage);
-router.post('/education-programmes/:id/edit/student', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.educationProgrammeEditPage);
+router.post('/education-programmes/:id/edit', auth.roleAuth(["employee"], ["admin", "teamleader"]), cvt.convertEducationProgramme, valid.EducationProgrammeValidation, post.handleEducationProgramme, ctr.educationProgrammeEditPage);
 
 router.post('/student-dashboard/:studentId/attendance', auth.roleAuth(["employee"], ["teacher", "teamleader"]), post.handleAttendance, ctr.attendancesStudentPage);
 router.post('/student-dashboard/:studentId/course-reports/:reportId', auth.roleAuth(["employee"], ["teacher", "teamleader"]), valid.CommentValidation, post.handleComment, ctr.handleComment );
