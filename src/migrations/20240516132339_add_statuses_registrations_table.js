@@ -6,7 +6,8 @@ export function up(knex) {
         table.increments("id").primary();
         table.integer("status_id").notNullable();
         table.integer("student_id").notNullable();
-        table.date("date").notNullable();
+        table.string("date").notNullable();
+        table.string("note");
         table.timestamps(true, true);
 
         table.foreign("status_id").references("statuses.id");

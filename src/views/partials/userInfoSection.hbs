@@ -1,4 +1,10 @@
 {{!-- User Section --}}
+{{#if viewOnly}}
+    {{#if editUrl}}
+        {{> button label="Bewerken" class="button" paddingBottom=true link=editUrl}}
+    {{/if}}
+{{/if}}
+
 <div class="add-programme">
     <form action="{{formOptions.action}}" method="POST" class="add-programme" id="add-user">
         <input type="hidden" name="method" value="{{formOptions.method}}">
@@ -40,31 +46,39 @@
                             name=formData.personal.email.name }}
                         </div>
                         {{/if}}
+                        {{#if formData.personal.student_id}}
+                        <input type="hidden" name="{{formData.personal.student_id.name}}" value="{{formData.personal.student_id.value}}">
+                        {{/if}}
+                        {{#if formData.personal.employee_id}}
+                        <input type="hidden" name="{{formData.personal.employee_id.name}}" value="{{formData.personal.employee_id.value}}">
+                        {{/if}}
                         <div class="user-info__item">
                             <p class="semibold">Rol</p>
-                            <p class="input-field__input">Student</p>
+                            <p class="input-field__input">{{formData.personal.role.label}}</p>
                             <input type="hidden" name="personal-role" value="1">
                         </div>
                     </div>
-                    <div class="user-info-container">
-                        <h3>Labels</h3>
-                        {{#if formData.labels}}
-                        {{#isnt viewOnly true}}
-                        <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te
-                                selecteren.</em>
-                        </p>
-                        {{/isnt}}
-                        <div class="user-info__item">
-                            <div class="input-field input-field--label input-field--view">
-                                {{> dropdown form="add-user" disabled=viewOnly multiple=true options=formData.labels.dropdown.labels name=formData.labels.label.name}}
-                            </div>
+                    {{#eq formData.personal.role.value 1}}
+                        <div class="user-info-container">
+                            <h3>Labels</h3>
+                            {{#isnt (length formData.labels.dropdown.labels) 0}}
+                                {{#isnt viewOnly true}}
+                                <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te
+                                        selecteren.</em>
+                                </p>
+                                {{/isnt}}
+                                <div class="user-info__item">
+                                    <div class="input-field input-field--label input-field--view">
+                                        {{> dropdown form="add-user" disabled=viewOnly multiple=true options=formData.labels.dropdown.labels name=formData.labels.label.name}}
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="user-info__item">
+                                    <p>Geen labels</p>
+                                </div>
+                            {{/isnt}}
                         </div>
-                        {{else}}
-                        <div class="user-info__item">
-                            <p>Geen labels</p>
-                        </div>
-                        {{/if}}
-                    </div>
+                    {{/eq}}
                 </div>
                 <div class="user-info__right">
                     <div class="user-info-container">
@@ -139,7 +153,7 @@
                             <div class="checkbox-list">
                                 {{#each courses}}
                                 <div>
-                                    <input {{#if viewOnly}}disabled="true"{{/if}} type="checkbox" id="{{id}}" name="{{name}}" value="{{value}}" {{#if selected}}checked="true"{{/if}}>
+                                    <input {{#if ../../viewOnly}}disabled="true"{{/if}} type="checkbox" id="{{id}}" name="{{name}}" value="{{value}}" {{#if selected}}checked="true"{{/if}}>
                                     <label for="{{id}}">{{label}}</label>
                                 </div>
                                 {{/each}}
@@ -153,6 +167,12 @@
                     {{/if}}
 
                     {{/each}}
+
+                    {{#if viewOnly}}
+                        {{#eq (length formData.education_programme.education_programmes) 0}}
+                            <p>Nog geen opleidingen toegevoegd.</p>
+                        {{/eq}}
+                    {{/if}}
 
                 </div>
 

@@ -32,7 +32,7 @@
     },
     {
         "title": "Vak Verslagen",
-        "url": "/student-reports",
+        "url": "/course-reports",
         "roles": [
             "employee"
         ],

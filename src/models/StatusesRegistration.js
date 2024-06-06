@@ -26,13 +26,14 @@ class StatusRegistration extends Model {
                 id: { type: "integer" },
                 status_id: { type: "integer" },
                 student_id: { type: "integer" },
-                date: { type: "date"}
+                date: { type: "string" },
+                note: { type: "string" },
             },
         };
     }
 
     static get relationMappings() {
-        return{
+        return {
             status: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Status,
@@ -51,6 +52,6 @@ class StatusRegistration extends Model {
             },
         }
     }
-    }
+}
 
 export default StatusRegistration;

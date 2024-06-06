@@ -31,6 +31,11 @@ export const userStudentAddPage = async (req, res) => {
                 value: req.data?.email || "",
                 name: "personal-email",
             },
+            role: {
+                value: 1,
+                label: "student",
+                name: "personal-role",
+            }
         };
 
         // ** Contact data **

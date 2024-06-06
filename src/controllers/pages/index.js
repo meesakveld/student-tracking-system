@@ -4,6 +4,7 @@ import { welcomePage } from './WelcomeController.js';
 import { dashboardPage } from './DashboardController.js';
 
 import { addAttendancesPage, attendancesStudentPage } from './AttendancesController.js';
+import { statusStudentPage } from './StatusController.js';
 import { searchStudentPage } from './SearchStudentController.js';
 import { searchEmployeesPage } from './SearchEmployeesController.js'
 import { studentDashboardPage } from './StudentDashboardController.js';
@@ -19,6 +20,7 @@ import { educationProgrammesPage } from './EducationProgrammesController.js';
 import { educationProgrammePage } from './EducationProgrammeController.js';
 import { educationProgrammeEditPage } from './EducationProgrammeEditController.js';
 import { addEducationProgrammePage } from './AddEducationProgrammeController.js';
+import { reportsPage } from './ReportsController.js';
 
 import { errorPage } from './ErrorController.js';
 
@@ -27,6 +29,7 @@ export {
     dashboardPage,
     addAttendancesPage,
     attendancesStudentPage,
+    statusStudentPage,
     educationProgrammeEditPage,
     searchStudentPage,
     studentDashboardPage,
@@ -43,5 +46,6 @@ export {
     educationProgrammesPage,
     addEducationProgrammePage,
     userStudentAddPage,
-    userEditStudentPage
+    userEditStudentPage,
+    reportsPage
 }

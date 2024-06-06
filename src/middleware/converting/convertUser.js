@@ -17,6 +17,14 @@ export const convertUser = (req, res, next) => {
         courses: [],
     }
 
+    // Account id
+    if (data['personal-student_id']) {
+        outputData.student_id = parseInt(data['personal-student_id']);
+    }
+    if (data['personal-employee_id']) {
+        outputData.employee_id = parseInt(data['personal-employee_id']);
+    }
+
     // Labels
     let labelIndex = 0;
     if (typeof data.labels === 'string') {

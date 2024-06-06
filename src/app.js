@@ -23,6 +23,7 @@ import * as auth from "./controllers/AuthController.js";
 // Routes
 import apiRoutes from "./routes/api/index.js";
 import privateRoutes from "./routes/private-routes/index.js";
+import pdfRoutes from "./routes/pdf/index.js";
 
 /**
  * ------------------------------
@@ -65,8 +66,14 @@ app.post("/login", valid.AuthLoginValidation ,auth.postLogin, auth.login);
 
 app.get("/logout", auth.logout);
 
+app.get("/update-password/:token", auth.updatePasswordPage);
+app.post("/update-password/:token", auth.updatePassword, auth.updatePasswordPage);
+
 // —— API Routes ——
 app.use("/api", apiRoutes);
+
+// —— PDF Routes ——
+app.use("/pdf", pdfRoutes);
 
 // —— Private routes ——
 app.use("/", privateRoutes)
