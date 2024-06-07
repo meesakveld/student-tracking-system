@@ -1,12 +1,12 @@
-import { renderAttendanceTemplate } from './AtttendancesController.js';
-import { renderStatusTemplate } from './StatusController.js';
+import { renderAttendancePdf } from './AtttendancesController.js';
+import { renderStatusPdf } from './StatusController.js';
 import { renderCourseReportsPdf } from './CourseReportsController.js';
 import { renderPersonalReportsPdf } from './PersonalReportsController.js';
 import { renderCoachReportsPdf } from './CoachReportsController.js';
 
 export {
-    renderAttendanceTemplate,
-    renderStatusTemplate,
+    renderAttendancePdf,
+    renderStatusPdf,
     renderCourseReportsPdf,
     renderPersonalReportsPdf,
     renderCoachReportsPdf,

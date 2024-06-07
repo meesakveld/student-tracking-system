@@ -3,14 +3,21 @@
     <main>
         <div class="main__inner search-student">
             {{> titleSection title=title returnUrl=returnUrl}}
-            {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            {{#isnt (length usersTable.rows) 0}}
+                {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            {{/isnt}}
             <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
 
             {{#if pageError}}{{> pageError pageError=pageError}}{{/if}}
             {{#if flash}}{{> flash flash=flash}}{{/if}}
 
             {{> filters filters=userFilters }}
+
+            {{#isnt (length usersTable.rows) 0}}
             {{> table headers=usersTable.headers rows=usersTable.rows }}
+            {{else}}
+                <p>Geen aanwezigheden gevonden.</p>
+            {{/isnt}}
         </div>
     </main>
 
