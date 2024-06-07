@@ -69,19 +69,19 @@ export const createUserEmployee = async (req, res, next) => {
             employee: {}
         };
 
-        if (data.contact && (data.contact.website !== "" || data.contact.linkedin !== "" || data.contact.facebook !== "")) {
+        if (data.contact) {
             user.contact = data.contact;
         }
 
-        if (data.functions && data.functions.length > 0) {
+        if (data.functions) {
             user.employee.functions = data.functions;
         }
 
-        if (data.education_programmes && data.education_programmes.length > 0) {
+        if (data.education_programmes) {
             user.employee.education_programmes = data.education_programmes;
         }
 
-        if (data.courses && data.courses.length > 0) {
+        if (data.courses) {
             user.employee.courses = data.courses;
         }
 
@@ -114,14 +114,11 @@ export const updateUserStudent = async (req, res, next) => {
             lastname: data.lastname,
             email: data.email,
             role_id: data.role_id,
+            is_active: data.is_active === 1 ? true : false,
             student: {}
         };
 
-        if (data.is_active) {
-            user.is_active = data.is_active;
-        }
-
-        if (data.contact && (data.contact.website !== "" || data.contact.linkedin !== "" || data.contact.facebook !== "")) {
+        if (data.contact) {
             user.contact = data.contact
         }
 
@@ -129,15 +126,15 @@ export const updateUserStudent = async (req, res, next) => {
             user.student.id = data.student_id;
         }
 
-        if (data.labels && data.labels.length > 0) {
+        if (data.labels) {
             user.student.labels = data.labels;
         }
 
-        if (data.education_programmes && data.education_programmes.length > 0) {
+        if (data.education_programmes) {
             user.student.education_programmes = data.education_programmes;
         }
 
-        if (data.courses && data.courses.length > 0) {
+        if (data.courses) {
             user.student.courses = data.courses;
         }
 
