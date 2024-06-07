@@ -133,7 +133,7 @@ export const userPage = async (req, res) => {
                 education_programme: education_programme,
             },
             viewOnly: true,
-            mayEdit: employeeFunctionAuth(req.user.employee.functions, ['admin', 'teamleader']),
+            mayEdit: req.user.employee?.functions ? employeeFunctionAuth(req.user.employee?.functions, ['admin', 'teamleader']) : false,
             editUrl: `/users/${id}/edit-${userData.role.title.toLowerCase()}`,
             studentFicheUrl: personal.role.value === 1 ? `/student-dashboard/${userData.account.id}` : null,
             passwordResetFlash: passwordResetFlash,
