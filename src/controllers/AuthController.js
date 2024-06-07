@@ -195,6 +195,8 @@ export const updatePasswordPage = async (req, res, next) => {
             return res.redirect("/login");
         }
 
+        res.clearCookie("user");
+
         // get form inputs
         const inputs = [
             {
@@ -214,7 +216,7 @@ export const updatePasswordPage = async (req, res, next) => {
         // get flash messages
         const flash = req.flash || null;
 
-        res.render("update-password", { layout: "base", inputs, flash, token });
+        return res.render("update-password", { layout: "base", inputs, flash, token });
 
     } catch (error) {
         const data = {
