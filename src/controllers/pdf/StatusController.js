@@ -1,5 +1,6 @@
 import { getStudentById } from '../../services/models/Student.js';
 import { generatePdf } from '../../utils/gerenatePDF.js';
+import { formatDate } from '../../utils/formatDate.js';
 
 export const renderStatusPdf = async (req, res, next) => {
     try {
@@ -16,7 +17,7 @@ export const renderStatusPdf = async (req, res, next) => {
         const data = {
             title: `Status van ${student.user.firstname} ${student.user.lastname}`,
             headers: ['Date', 'Status', 'Annotatie'],
-            rows: student.status_registrations.map(att => [att.date, att.status.title, att.note]),
+            rows: student.status_registrations.map(att => [formatDate(att.date), att.status.title, (att.note || '')]),
             columnSize: [80, 100, 320]
         };
 
