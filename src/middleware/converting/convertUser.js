@@ -1,7 +1,7 @@
 export const convertUser = (req, res, next) => {
 
     const data = req.body;
-
+    
     let outputData = {
         firstname: data['personal-firstname'] || undefined,
         lastname: data['personal-lastname'] || undefined,
@@ -16,6 +16,11 @@ export const convertUser = (req, res, next) => {
         functions: [],
         education_programmes: [],
         courses: [],
+    }
+
+    // If is_active
+    if (data['personal-is_active']) {
+        outputData.is_active = parseInt(data['personal-is_active']);
     }
 
     // If contact-id
@@ -78,7 +83,6 @@ export const convertUser = (req, res, next) => {
 
         educationProgrammeIndex++;
     }
-
 
     req.data = outputData;
 

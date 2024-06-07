@@ -62,6 +62,12 @@
                             <p class="input-field__input">{{formData.personal.role.label}}</p>
                             <input type="hidden" name="{{formData.personal.role.name}}" value="{{formData.personal.role.value}}">
                         </div>
+                        {{#if formData.personal.is_active}}
+                        <div class="user-info__item">
+                            <p class="semibold">Account status</p>
+                            {{> dropdown disabled=viewOnly options=formData.personal.is_active.dropdown.options name=formData.personal.is_active.name}}
+                        </div>
+                        {{/if}}
                     </div>
                     {{#eq formData.personal.role.value 1}}
                         <div class="user-info-container">

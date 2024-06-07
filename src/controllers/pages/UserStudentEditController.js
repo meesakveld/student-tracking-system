@@ -50,6 +50,15 @@ export const userStudentEditPage = async (req, res) => {
                 value: userData.account.id,
                 name: "personal-student_id",
             },
+            is_active: {
+                name: "personal-is_active",
+                dropdown: {
+                    options: [
+                        { value: 1, label: "Actief", selected: userData.is_active},
+                        { value: 0, label: "Inactief", selected: !userData.is_active},
+                    ],
+                },
+            }
         }
 
         // ** Contact data **

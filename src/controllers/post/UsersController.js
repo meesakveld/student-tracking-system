@@ -107,7 +107,7 @@ export const updateUserStudent = async (req, res, next) => {
 
         const data = req.data;
         const id = parseInt(req.params.id);
-
+        
         const user = {
             id: id,
             firstname: data.firstname,
@@ -116,6 +116,10 @@ export const updateUserStudent = async (req, res, next) => {
             role_id: data.role_id,
             student: {}
         };
+
+        if (data.is_active) {
+            user.is_active = data.is_active;
+        }
 
         if (data.contact && (data.contact.website !== "" || data.contact.linkedin !== "" || data.contact.facebook !== "")) {
             user.contact = data.contact
@@ -166,6 +170,7 @@ export const updateUserEmployee = async (req, res, next) => {
             lastname: data.lastname,
             email: data.email,
             role_id: data.role_id,
+            is_active: data.is_active === 1 ? true : false,
             employee: {}
         };
 
@@ -188,6 +193,8 @@ export const updateUserEmployee = async (req, res, next) => {
         if (data.courses && data.courses.length > 0) {
             user.employee.courses = data.courses;
         }
+
+        console.log(user)
 
         const updatedUser = await User.query().upsertGraph(user, { relate: true, unrelate: true });
 

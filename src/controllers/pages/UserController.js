@@ -45,6 +45,15 @@ export const userPage = async (req, res) => {
                 label: userData.role.title,
                 name: "personal-role",
             },
+            is_active: {
+                name: "personal-is_active",
+                dropdown: {
+                    options: [
+                        { value: 1, label: "Actief", selected: userData.is_active},
+                        { value: 0, label: "Inactief", selected: !userData.is_active},
+                    ],
+                },
+            }
         }
 
         // ——— CONTACT DATA ———
