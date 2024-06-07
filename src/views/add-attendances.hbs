@@ -2,47 +2,67 @@
 <div class="body__inner">
     <main>
         <div class="main__inner presences">
-            {{> titleSection title='Aanwezigheden voor: 2023-2024 | PGM1-C | IT Business | Isabelle Volckaert' }}
+            {{> titleSection title='Aanwezigheden opnemen' returnUrl='/'}}
 
             {{#if pageError}}
                 {{> pageError pageError=pageError}}
             {{/if}}
 
-            <form action="/attendances" method="POST">
+            {{#if flash}}
+                {{> flash flash=flash}}
+            {{/if}}
+
+            {{> filters filters=userFilters }}
+            <script src="/scripts/hideFilterSearch.js"></script>
+
+            {{#isnt (length addAttendanceTable.rows) 0}}
+            <form action="/add-attendances" method="POST" id="add-attendances">
 
                 <div class="date">
                     <p>Selecteer een datum</p>
                     <input type="date" name="date" required>
                 </div>
             
-                <button class="button">Opslaan</button>
+                <button class="button" form="add-attendances">Opslaan</button>
                 <input type="hidden" name="method" value="POST-MULTI">
                 <input type="hidden" name="totalStudents" value="{{totalStudents}}">
                 <input type="hidden" name="courseId" value="{{courseId}}">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Naam</th>
-                            <th>Aanwezigheid type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each rows}}
-                        <tr>
-                            <td>
-                                <p>{{name}}</p>
-                                <input value="{{studentId}}" type="hidden" name="name-{{index}}">
-                            </td>
-                            <td>
-                                {{> dropdown options=attendanceOptions name=attendanceName }}
-                            </td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <table class="users">
+                        <thead>
+                            <tr>
+                                {{#each addAttendanceTable.headers}}
+                                <th>{{this}}</th>
+                                {{/each}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each addAttendanceTable.rows}}
+                            <tr>
+                                {{#each cols}}
+                                <td>{{this.value}}</td>
+                                    {{#each this.data}}
+                                    <input type="hidden" name="{{title}}" value="{{value}}">
+                                    {{/each}}
+                                {{/each}}
+                                <td class="actions">
+                                    {{> dropdown options=dropdown.attendanceTypes.options form="add-attendances" name=dropdown.attendanceTypes.name}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
             </form>
+            {{else}}
+                {{#if addAttendanceTable.hasSearched}}
+                <p>Er zijn geen studenten gevonden.</p>
+                {{/if}}
+            {{/isnt}}
             
-            {{!-- {{> table headers=usersTable.headers rows=usersTable.rows }} --}}
         </div>
     </main>
+    <script src="/scripts/loadEducationPrograms.js"></script>
+    <script src="/scripts/loadCourses.js"></script>
+    <script src="/scripts/hideFilterSearch.js"></script>
 </div>

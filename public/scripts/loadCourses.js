@@ -33,7 +33,7 @@ const loadCourses = () => {
             }
 
             const options = data.map(item => {
-                return `<option value="${item.name}">${item.name}</option>`;
+                return `<option value="${item.id}">${item.name}</option>`;
             });
 
             options.unshift('<option value="">Alle vakken</option>');
