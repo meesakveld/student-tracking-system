@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-export const generatePdf = async (title, headers, rows) => {
+export const generatePdf = async (title, headers, rows, columnsSize) => {
     // Generate the PDF document
     const doc = new PDFDocument();
     const filePath = path.join(__dirname, '../../output.pdf'); // Adjust the path as necessary
@@ -28,12 +28,13 @@ export const generatePdf = async (title, headers, rows) => {
 
     // Add the table to the PDF
     doc.table(tableData, {
+        columnsSize: columnsSize,
         prepareHeader: (row, rectHeader) => {
-            doc.font("Helvetica-Bold").fontSize(8);
+            doc.font("Helvetica-Bold").fontSize(10);
         },
         prepareRow: (row, i) => {
-            doc.font("Helvetica").fontSize(10);
-        }
+            doc.font("Helvetica").fontSize(9);
+        },
     });
 
     // Finalize the PDF document

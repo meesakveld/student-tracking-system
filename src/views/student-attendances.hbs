@@ -3,6 +3,8 @@
     <main>
         <div class="main__inner search-student">
             {{> titleSection title=title returnUrl=returnUrl}}
+            {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
 
             {{#if pageError}}{{> pageError pageError=pageError}}{{/if}}
             {{#if flash}}{{> flash flash=flash}}{{/if}}
