@@ -28,11 +28,30 @@ section.centered {
     width: 100%;
 }
 
+@media (max-width: 50rem) {
+    section.centered {
+        max-width: 31rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    section.centered {
+        max-width: 17.4rem;
+        padding: 2.7rem;
+    }
+}
+
 .main__inner--centered .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+}
+
+@media (max-width: 36rem) {
+    .main__inner--centered .actions {
+        flex-direction: column;
+    }
 }
 
 .actions p {

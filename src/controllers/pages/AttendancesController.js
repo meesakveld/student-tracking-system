@@ -8,6 +8,7 @@ import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 import Attendance from "../../models/Attendance.js";
 import AttendanceType from "../../models/AttendanceType.js";
 import Course from "../../models/Course.js";
+import Student from "../../models/Student.js";
 import EducationProgramme from "../../models/EducationProgramme.js";
 import { getStudentById } from "../../services/models/Student.js";
 
@@ -139,6 +140,7 @@ export const addAttendancesPage = async (req, res) => {
     const filterProgramme = req.query.filterProgramme;
     const filterAcademicYear = req.query.filterAcademicYear;
     const filterCourse = req.query.filterCourse;
+    const filterAttendanceType = req.query.filterAttendanceType;
 
     // ——— FILTERS OPTIONS ———
     const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
@@ -177,15 +179,6 @@ export const addAttendancesPage = async (req, res) => {
         });
         const courseOptions = courseQuery.map(course => ({ value: course.id, label: course.name, selected: course.id === parseInt(filterCourse) }));
 
-        // ** Attendance Types **
-        const attendanceTypesQuery = await AttendanceType.query()
-        const attendanceOptions = attendanceTypesQuery.map(attendanceType => {
-            return {
-                value: attendanceType.id,
-                label: attendanceType.title
-            }
-        });
-
         const userFilters = [
             {
                 id: "filterAcademicYear",
@@ -218,15 +211,6 @@ export const addAttendancesPage = async (req, res) => {
                     ...courseOptions
                 ],
                 disabled: !filterProgramme || !courseOptions.length > 0,
-            },
-            {
-                id: "filterAttendanceType",
-                name: "filterAttendanceType",
-                labelText: "Filter op aanwezigheid type:",
-                options: [
-                    { value: "", label: "Alle aanwezigheid types" },
-                    ...attendanceOptions
-                ],
             }
         ]
 
@@ -243,28 +227,42 @@ export const addAttendancesPage = async (req, res) => {
         }
 
         // ——— TABLE DATA ———
-        const rows = [
-            {
-                name: "Mees Akveld",
-                studentId: 1,
-                index: 1,
-                attendanceName: `attendance-${1}`,
-                attendanceOptions: attendanceTableOptions()
-            },
-            {
-                name: "Tristan De Ridder",
-                studentId: 2,
-                index: 2,
-                attendanceName: `attendance-${2}`,
-                attendanceOptions: attendanceTableOptions()
-            },
-        ]
+        let students = [];
+
+        students = await Student.query()
+            .withGraphFetched('[user.role, education_programmes, courses, attendances]')
+            .joinRelated(filterProgramme && '[education_programmes]')
+            .where(builder => {
+                if (filterProgramme) {
+                    builder.where('education_programmes.code', filterProgramme);
+                }
+            })
+            .joinRelated(filterCourse && 'courses')
+            .where(builder => {
+                if (filterCourse) {
+                    builder.where('courses.id', filterCourse);
+                }
+            })
+
+        const rows = students.map(student => {
+            return {
+                isActive: true,
+                cols: [
+                    `${student.user.firstname} ${student.user.lastname}`,
+                ]
+            }
+        });
+
+        const addAttendanceTable = {
+            headers: ["Naam", "Aanwezigheid type"],
+            rows: rows,
+        }
 
         const data = {
             user: req.user,
             userFilters,
+            addAttendanceTable,
             pageError: req.pageError,
-            rows,
             courseId: 1,
             date: new Date(),
             totalStudents: rows.length
