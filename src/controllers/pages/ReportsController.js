@@ -22,6 +22,7 @@ export const reportsPage = async (req, res, next) => {
             return {
                 title: `${formatDate(comment.created_at)}${comment.course ? ` — ${comment.course.name}` : ''} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
                 text: comment.comment,
+                returnUrl: `${reportType === "course" ? '/course-reports' : reportType === "personal" ? '/personal-reports' : '/coaching-reports'}/`,
                 ...comment
             };
         });

@@ -2,7 +2,7 @@
 <div class="comments">
     {{#each comments}}
     <div class="comment">
-        <a href="/student-dashboard/{{ student_id }}/{{ tag }}-reports/{{ id }}?type={{ tag }}">
+        <a href="/student-dashboard/{{ student_id }}/{{ tag }}-reports/{{ id }}?type={{ tag }}{{#if returnUrl}}&returnUrl={{returnUrl}}{{/if}}">
             <h3>{{title}}</h3>
             <p>{{text}}</p>
         </a>

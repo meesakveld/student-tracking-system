@@ -182,7 +182,7 @@ export const commentPage = async (req, res) => {
             pageError: req.pageError,
             flash: req.flash,
             dropdowns: dropdowns.filter(dropdown => dropdown.visible),
-            returnUrl: `/student-dashboard/${studentId}/${type}-reports?type=${type}`,
+            returnUrl: req.query.returnUrl || `/student-dashboard/${studentId}/${type}-reports?type=${type}`,
         };
 
         res.render('comment', data);
