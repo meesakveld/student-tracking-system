@@ -12,10 +12,11 @@ export const renderStatusTemplate = async (req, res, next) => {
             title: `Status van ${student.user.firstname} ${student.user.lastname}`,
             headers: ['Date', 'Status', 'Annotatie'],
             rows: student.status_registrations.map(att => [att.date, att.status.title, att.note]),
+            columnSize: [80, 100, 320]
         };
 
         // Generate the PDF
-        const filePath = await generatePdf(data.title, data.headers, data.rows);
+        const filePath = await generatePdf(data.title, data.headers, data.rows, data.columnSize);
 
         // Send the PDF file as a response
         res.sendFile(filePath, (err) => {

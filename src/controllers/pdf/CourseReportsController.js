@@ -17,12 +17,13 @@ export const renderCourseReportsPdf = async (req, res, next) => {
             title: `Verslagen van ${comments[0].student.user.firstname} ${comments[0].student.user.lastname}`,
             headers: ['Date', 'Vak', 'Verslag', 'Auteur'],
             rows: comments.map(com => [formatDate(com.created_at), com.course.name, com.comment, (com.employee.user.firstname + ' ' + com.employee.user.lastname)] ),
+            columnSize: [80, 80, 240, 100]
         };
 
         console.log(data.rows[0])
 
         // Generate the PDF
-        const filePath = await generatePdf(data.title, data.headers, data.rows);
+        const filePath = await generatePdf(data.title, data.headers, data.rows, data.columnSize);
 
         // Send the PDF file as a response
         res.sendFile(filePath, (err) => {
