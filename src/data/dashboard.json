@@ -22,7 +22,7 @@
     },
     {
         "title": "Aanwezigheden opnemen",
-        "url": "/attendance",
+        "url": "/add-attendances",
         "roles": [
             "employee"
         ],

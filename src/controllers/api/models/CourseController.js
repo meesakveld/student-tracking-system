@@ -30,7 +30,6 @@ export const getAllCourses = async (req, res) => {
                 builder.where('education_programme_id', req.query.education_programme_id);
             }
         })
-        .select('name');
 
     if (!courses || courses.length === 0) {
         return res.json({ errors: [{ msg: "Geen cursussen gevonden" }] });
