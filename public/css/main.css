@@ -322,6 +322,16 @@ a {
     margin-bottom: 2rem;
 }
 
+.button--light {
+    background-color: var(--light);
+    color: var(--blue);
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+}
+
 .button--icon {
     padding: 0;
     background: none;

@@ -6,13 +6,21 @@
 
 
 import { getUserById } from "../../services/models/User.js";
+import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 
 export const userPage = async (req, res) => {
 
     try {
 
+        let passwordResetFlash = null;
+        if (req.query.token) {
+            const token = req.query.token;
+            const baseUrl = `${req.protocol}://${req.get('host')}`;
+            passwordResetFlash = `De gebruiker kan het wachtwoord updaten via deze link: <a href="${`${baseUrl}/update-password/${token}`}">${baseUrl}/update-password/${token}</a>`;
+        }
+
         const id = parseInt(req.params.id);
-        const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
+        const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee.[functions, courses, education_programmes]]');
 
         let userData = user;
         if (user.student) userData.account = user.student; delete userData.student
@@ -37,6 +45,15 @@ export const userPage = async (req, res) => {
                 label: userData.role.title,
                 name: "personal-role",
             },
+            is_active: {
+                name: "personal-is_active",
+                dropdown: {
+                    options: [
+                        { value: 1, label: "Actief", selected: userData.is_active},
+                        { value: 0, label: "Inactief", selected: !userData.is_active},
+                    ],
+                },
+            }
         }
 
         // ——— CONTACT DATA ———
@@ -62,6 +79,16 @@ export const userPage = async (req, res) => {
             },
             dropdown: {
                 labels: !userData.account?.labels ? [] : userData.account.labels.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: true })),
+            }
+        }
+
+        // ——— FUNCTIONS DATA ———
+        let functions = {
+            functions: {
+                name: "functions",
+            },
+            dropdown: {
+                functions: !userData.account?.functions ? [] : userData.account.functions.map(func => ({ type: "checkbox", value: func.id, label: func.title, selected: true })),
             }
         }
 
@@ -96,16 +123,20 @@ export const userPage = async (req, res) => {
 
         const data = {
             user: req.user,
-            title: `Gebruiker: ${userData.firstname} ${userData.lastname}`,
+            title: `${userData.firstname} ${userData.lastname}`,
             returnUrl: req.query.returnUrl || "/",
             formData: {
                 personal: personal,
                 labels: labels,
+                functions: functions,
                 contact: contact,
                 education_programme: education_programme,
             },
             viewOnly: true,
-            editUrl: `/users/${id}/edit/${userData.role.title.toLowerCase()}`,
+            mayEdit: employeeFunctionAuth(req.user.employee.functions, ['admin', 'teamleader']),
+            editUrl: `/users/${id}/edit-${userData.role.title.toLowerCase()}`,
+            studentFicheUrl: personal.role.value === 1 ? `/student-dashboard/${userData.account.id}` : null,
+            passwordResetFlash: passwordResetFlash,
         };
 
         res.render('user', data);

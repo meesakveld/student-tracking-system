@@ -25,7 +25,7 @@ export const userAuthication = async (req, res, next) => {
 
         // Functions
         if (data.role_id === 2) { // Teacher
-            if (!data.functions || data.functions.length === 0) {
+            if (data.functions.length === 0) {
                 throw new Error("Minimaal één functie is verplicht.");
             }
         }

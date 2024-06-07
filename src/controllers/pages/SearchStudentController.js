@@ -164,8 +164,14 @@ export const searchStudentPage = async (req, res) => {
             returnUrl: '/search-students',
             studentId: student.id,
             userId: student.user.id,
-            infoButton: true,
-            studentButton: true,
+            infoButton: {
+                info: true,
+                url: `/users/${student.user.id}?returnUrl=/search-students`
+            },
+            studentButton: {
+                student: true,
+                url: `/student-dashboard/${student.id}?returnUrl=/search-students`
+            }
         }
     });
 

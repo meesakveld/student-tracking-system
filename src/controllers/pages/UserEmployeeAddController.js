@@ -5,12 +5,12 @@
 */
 
 import EducationProgramme from "../../models/EducationProgramme.js";
-import Label from "../../models/Label.js";
+import Function from "../../models/Function.js";
 
-export const userStudentAddPage = async (req, res) => {
+export const userEmployeeAddPage = async (req, res) => {
     try {
-        const labelsData = await Label.query();
-        const labelsDropdown = labelsData.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: req.data?.labels?.some(item => item.id === label.id)}));
+        const functionsData = await Function.query();
+        const functionDropdown = functionsData.map(item => ({ type: "checkbox", value: item.id, label: item.title, selected: req.data?.functions?.some(functionItem => item.id === functionItem.id)}));
 
         const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
         const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
@@ -32,8 +32,8 @@ export const userStudentAddPage = async (req, res) => {
                 name: "personal-email",
             },
             role: {
-                value: 1,
-                label: "student",
+                value: 2,
+                label: "employee",
                 name: "personal-role",
             }
         };
@@ -55,12 +55,12 @@ export const userStudentAddPage = async (req, res) => {
         };
 
         // ** Label data **
-        let labels = {
+        let functions = {
             label: {
-                name: "labels",
+                name: "functions",
             },
             dropdown: {
-                labels: [...labelsDropdown],
+                functions: [...functionDropdown],
             }
         };
 
@@ -123,16 +123,16 @@ export const userStudentAddPage = async (req, res) => {
 
         const data = {
             user: req.user,
-            title: "Student toevoegen",
+            title: "Medewerker toevoegen",
             returnUrl: "/users",
             cancelUrl: "/users",
             formOptions: {
-                action: "/users/add-student",
-                method: "POST-STUDENT",
+                action: "/users/add-employee",
+                method: "POST-EMPLOYEE",
             },
             formData: {
                 personal: personal,
-                labels: labels,
+                functions: functions,
                 contact: contact,
                 education_programme: education_programme,
             },

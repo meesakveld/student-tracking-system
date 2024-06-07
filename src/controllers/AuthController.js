@@ -85,7 +85,7 @@ export const postLogin = async (req, res, next) => {
         }
     );
 
-    // set cookie, this is very unsafe, but for now it's okay
+    // set cookie
     res.cookie("user", token, { httpOnly: true });
 
     // redirect to the home page
@@ -169,16 +169,33 @@ export const updatePasswordPage = async (req, res, next) => {
     try {
 
         const token = req.params.token;
+
+        if (!token) {
+            return res.redirect("/login");
+        }
+
         const data = jwt.verify(token, TOKEN_SALT);
 
         if (!data) {
             return res.redirect("/login");
         }
 
-        // check if user is already logged in
-        if (req.user) {
-            return res.redirect("/");
+        if (!data.tag === "password") {
+            return res.redirect("/login");
         }
+
+        if (!data.email || !data.password) {
+            return res.redirect("/login");
+        }
+
+        // get user id
+        const user = await User.query().findOne({ email: data.email, password: data.password });
+        
+        if (!user) {
+            return res.redirect("/login");
+        }
+
+        res.clearCookie("user");
 
         // get form inputs
         const inputs = [
@@ -199,7 +216,7 @@ export const updatePasswordPage = async (req, res, next) => {
         // get flash messages
         const flash = req.flash || null;
 
-        res.render("update-password", { layout: "base", inputs, flash, token });
+        return res.render("update-password", { layout: "base", inputs, flash, token });
 
     } catch (error) {
         const data = {
@@ -254,17 +271,16 @@ export const updatePassword = async (req, res, next) => {
             return next();
         }
 
-        const user = await User.query().findById(data.id);
+        const user = await User.query().findOne({ email: data.email, password: data.password });
 
         if (!user) {
             return res.redirect("/login");
         }
 
-        console.log(req.body);
         // hash password
         const pass = bcrypt.hashSync(req.body.password1, 10);
 
-        await User.query().findById(data.id).patch({
+        await User.query().findById(user.id).patch({
             password: pass,
         });
 

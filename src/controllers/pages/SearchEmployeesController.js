@@ -148,7 +148,10 @@ export const searchEmployeesPage = async (req, res) => {
             ],
             userId: employee.user.id,
             returnUrl: '/search-employees',
-            infoButton: true
+            infoButton: {
+                info: true,
+                url: `/users/${employee.user.id}?returnUrl=/search-employees`
+            }
         }
     })
 

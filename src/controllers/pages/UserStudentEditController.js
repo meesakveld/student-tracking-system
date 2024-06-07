@@ -7,8 +7,9 @@
 import EducationProgramme from "../../models/EducationProgramme.js";
 import Label from "../../models/Label.js";
 import { getUserById } from "../../services/models/User.js"
+import { generatePasswordJWT } from "../../utils/generatePasswordJWT.js";
 
-export const userEditStudentPage = async (req, res) => {
+export const userStudentEditPage = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
@@ -49,10 +50,23 @@ export const userEditStudentPage = async (req, res) => {
                 value: userData.account.id,
                 name: "personal-student_id",
             },
+            is_active: {
+                name: "personal-is_active",
+                dropdown: {
+                    options: [
+                        { value: 1, label: "Actief", selected: userData.is_active},
+                        { value: 0, label: "Inactief", selected: !userData.is_active},
+                    ],
+                },
+            }
         }
 
         // ** Contact data **
         let contact = {
+            contact_id: {
+                value: userData.contact?.id,
+                name: "contact-id",
+            },
             website: {
                 value: userData.contact?.website || "",
                 name: "contact-website",
@@ -134,13 +148,17 @@ export const userEditStudentPage = async (req, res) => {
             })),
         };
 
+        // ——— PASSWORD RESET URL ———
+        const updatePasswordToken = generatePasswordJWT(userData)
+        const updatePasswordUrl = `/users/${id}?token=${updatePasswordToken.token}`;
+
         const data = {
             user: req.user,
             title: `${userData.firstname} ${userData.lastname} — Bewerken`,
             returnUrl: `/users/${id}`,
             cancelUrl: `/users/${id}`,
             formOptions: {
-                action: `/users/${id}/edit/student`,
+                action: `/users/${id}/edit-student`,
                 method: "PATCH-STUDENT",
             },
             formData: {
@@ -149,6 +167,7 @@ export const userEditStudentPage = async (req, res) => {
                 contact: contact,
                 education_programme: education_programme,
             },
+            updatePasswordUrl: updatePasswordUrl,
             pageError: req.pageError,
         }
 

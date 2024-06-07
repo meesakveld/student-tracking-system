@@ -1,7 +1,7 @@
 export const convertUser = (req, res, next) => {
 
     const data = req.body;
-
+    
     let outputData = {
         firstname: data['personal-firstname'] || undefined,
         lastname: data['personal-lastname'] || undefined,
@@ -13,8 +13,19 @@ export const convertUser = (req, res, next) => {
             facebook: data['contact-facebook'],
         },
         labels: [],
+        functions: [],
         education_programmes: [],
         courses: [],
+    }
+
+    // If is_active
+    if (data['personal-is_active']) {
+        outputData.is_active = parseInt(data['personal-is_active']);
+    }
+
+    // If contact-id
+    if (data['contact-id']) {
+        outputData.contact.id = parseInt(data['contact-id']);
     }
 
     // Account id
@@ -35,6 +46,18 @@ export const convertUser = (req, res, next) => {
             id: parseInt(label)
         });
         labelIndex++;
+    });
+
+    // Functions
+    let functionIndex = 0;
+    if (typeof data.functions === 'string') {
+        data.functions = [data.functions];
+    }
+    data.functions?.forEach(func => {
+        outputData.functions.push({
+            id: parseInt(func)
+        });
+        functionIndex++;
     });
 
 
@@ -60,7 +83,6 @@ export const convertUser = (req, res, next) => {
 
         educationProgrammeIndex++;
     }
-
 
     req.data = outputData;
 

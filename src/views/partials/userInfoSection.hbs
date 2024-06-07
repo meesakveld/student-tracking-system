@@ -1,7 +1,9 @@
 {{!-- User Section --}}
-{{#if viewOnly}}
-    {{#if editUrl}}
-        {{> button label="Bewerken" class="button" paddingBottom=true link=editUrl}}
+{{#if mayEdit}}
+    {{#if viewOnly}}
+        {{#if editUrl}}
+            {{> button label="Bewerken" paddingBottom=true link=editUrl}}
+        {{/if}}
     {{/if}}
 {{/if}}
 
@@ -17,6 +19,9 @@
         <div class="actions">
             {{> button label="Annuleren" class="button--dark" link=cancelUrl}}
             <button type="submit" class="button">Opslaan</button>
+            {{#if updatePasswordUrl}}
+                {{> button label="Update password" class="button--light" paddingBottom=true link=updatePasswordUrl}}
+            {{/if}}
         </div>
         {{/isnt}}
 
@@ -55,17 +60,21 @@
                         <div class="user-info__item">
                             <p class="semibold">Rol</p>
                             <p class="input-field__input">{{formData.personal.role.label}}</p>
-                            <input type="hidden" name="personal-role" value="1">
+                            <input type="hidden" name="{{formData.personal.role.name}}" value="{{formData.personal.role.value}}">
                         </div>
+                        {{#if formData.personal.is_active}}
+                        <div class="user-info__item">
+                            <p class="semibold">Account status</p>
+                            {{> dropdown disabled=viewOnly options=formData.personal.is_active.dropdown.options name=formData.personal.is_active.name}}
+                        </div>
+                        {{/if}}
                     </div>
                     {{#eq formData.personal.role.value 1}}
                         <div class="user-info-container">
                             <h3>Labels</h3>
                             {{#isnt (length formData.labels.dropdown.labels) 0}}
                                 {{#isnt viewOnly true}}
-                                <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te
-                                        selecteren.</em>
-                                </p>
+                                <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te selecteren.</em></p>
                                 {{/isnt}}
                                 <div class="user-info__item">
                                     <div class="input-field input-field--label input-field--view">
@@ -79,10 +88,32 @@
                             {{/isnt}}
                         </div>
                     {{/eq}}
+                    {{#eq formData.personal.role.value 2}}
+                        <div class="user-info-container">
+                            <h3>Functies</h3>
+                            {{#isnt (length formData.functions.dropdown.functions) 0}}
+                                {{#isnt viewOnly true}}
+                                <p><em>U kunt Control-klikken (Windows) of Command-klikken (Mac) om er meer dan één te selecteren.</em></p>
+                                {{/isnt}}
+                                <div class="user-info__item">
+                                    <div class="input-field input-field--label input-field--view">
+                                        {{> dropdown form="add-user" disabled=viewOnly multiple=true options=formData.functions.dropdown.functions name=formData.functions.label.name}}
+                                    </div>
+                                </div>
+                            {{else}}
+                                <div class="user-info__item">
+                                    <p>Geen functies</p>
+                                </div>
+                            {{/isnt}}
+                        </div>
+                    {{/eq}}
                 </div>
                 <div class="user-info__right">
                     <div class="user-info-container">
                         <h3>Links</h3>
+                        {{#if formData.contact.contact_id}}
+                        <input type="hidden" name="{{formData.contact.contact_id.name}}" value="{{formData.contact.contact_id.value}}">
+                        {{/if}}
                         {{#if formData.contact.website}}
                         <div class="user-info__item">
                             <p class="semibold">Website</p>
@@ -147,7 +178,7 @@
                             <p class="input-field__input">{{title.value}}</p>
                             <input type="hidden" name="{{education_programme_id.name}}" value="{{education_programme_id.value}}">
                         </div>
-
+                        {{#isnt (length courses) 0}}
                         <div class="user-info__item">
                             <p class="semibold">Vakken</p>
                             <div class="checkbox-list">
@@ -159,6 +190,7 @@
                                 {{/each}}
                             </div>
                         </div>
+                        {{/isnt}}
 
                     </div>
 

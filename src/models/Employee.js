@@ -26,7 +26,7 @@ class Employee extends Model {
     static get jsonSchema() {
         return {
             type: "object",
-            required: ["user_id", "role_id"],
+            required: ["user_id"],
             properties: {
                 id: { type: "integer" },
                 user_id: { type: "integer" },

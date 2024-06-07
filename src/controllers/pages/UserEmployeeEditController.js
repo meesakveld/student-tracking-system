@@ -1,68 +1,95 @@
-/*
-* ------------------------------
-*        ADD USER PAGE
-* ------------------------------
-*/
+/**
+ * ------------------------------
+ *       EDIT USER PAGE
+ * ------------------------------
+ */
 
 import EducationProgramme from "../../models/EducationProgramme.js";
-import Label from "../../models/Label.js";
+import Function from "../../models/Function.js";
+import { getUserById } from "../../services/models/User.js"
+import { generatePasswordJWT } from "../../utils/generatePasswordJWT.js";
 
-export const userStudentAddPage = async (req, res) => {
+export const userEmployeeEditPage = async (req, res) => {
     try {
-        const labelsData = await Label.query();
-        const labelsDropdown = labelsData.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: req.data?.labels?.some(item => item.id === label.id)}));
+        const id = parseInt(req.params.id);
+        const user = await getUserById(id, '[role, contact, student, employee.[functions, courses, education_programmes]]');
+
+        let userData = user;
+        if (user.student) userData.account = user.student; delete userData.student
+        if (user.employee) userData.account = user.employee; delete userData.employee
+
+        const functionsData = await Function.query();
+        const functionsDropdown = functionsData.map(func => ({ type: "checkbox", value: func.id, label: func.title, selected: userData.account?.functions?.some(item => item.id === func.id) }));
 
         const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
         const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
         const academicYearsOptions = academicYears.map(academicYear => ({ value: academicYear, label: academicYear }));
 
+
         // ——— INITIAL DATA ———
         // ** Personal data **
         let personal = {
             firstname: {
-                value: req.data?.firstname || "",
+                value: userData.firstname,
                 name: "personal-firstname",
             },
             lastname: {
-                value: req.data?.lastname || "",
+                value: userData.lastname,
                 name: "personal-lastname",
             },
             email: {
-                value: req.data?.email || "",
+                value: userData.email,
                 name: "personal-email",
             },
             role: {
-                value: 1,
-                label: "student",
+                value: 2,
+                label: "employee",
                 name: "personal-role",
+            },
+            employee_id: {
+                value: userData.account.id,
+                name: "personal-employee_id",
+            },
+            is_active: {
+                name: "personal-is_active",
+                dropdown: {
+                    options: [
+                        { value: 1, label: "Actief", selected: userData.is_active},
+                        { value: 0, label: "Inactief", selected: !userData.is_active},
+                    ],
+                },
             }
-        };
+        }
 
         // ** Contact data **
         let contact = {
+            contact_id: {
+                value: userData.contact?.id,
+                name: "contact-id",
+            },
             website: {
-                value: req.data?.contact?.website || "",
+                value: userData.contact?.website || "",
                 name: "contact-website",
             },
             linkedin: {
-                value: req.data?.contact?.linkedin || "",
+                value: userData.contact?.linkedin || "",
                 name: "contact-linkedin",
             },
             facebook: {
-                value: req.data?.contact?.facebook || "",
+                value: userData.contact?.facebook || "",
                 name: "contact-facebook",
             },
-        };
+        }
 
-        // ** Label data **
-        let labels = {
+        // ** Functions data **
+        let functions = {
             label: {
-                name: "labels",
+                name: "functions",
             },
             dropdown: {
-                labels: [...labelsDropdown],
+                functions: [...functionsDropdown],
             }
-        };
+        }
 
         // ** Education programme data **
         let education_programme = {
@@ -91,7 +118,7 @@ export const userStudentAddPage = async (req, res) => {
                     ]
                 }
             ],
-            education_programmes: !req.data?.education_programmes ? [] : await Promise.all(req.data?.education_programmes.map(async (education_programme, index) => {
+            education_programmes: await Promise.all(userData.account.education_programmes.map(async (education_programme, index) => {
                 const education_programme_data = await EducationProgramme.query().findById(education_programme.id).withGraphFetched('courses');
                 const formattedCourses = education_programme_data.courses.map((course, indexCourse) => {
                     return {
@@ -99,7 +126,7 @@ export const userStudentAddPage = async (req, res) => {
                         name: `courses-${index}`,
                         value: course.id,
                         label: course.name,
-                        selected: req.data?.courses?.some(item => item.id === course.id),
+                        selected: userData.account?.courses?.some(item => item.id === course.id),
                     };
                 });
 
@@ -114,34 +141,47 @@ export const userStudentAddPage = async (req, res) => {
                         name: `education_programme_${index}-title`,
                     },
                     courses: formattedCourses,
-                    notLastInArray: index !== req.data.education_programmes.length - 1,
+                    notLastInArray: index !== userData.account?.education_programmes.length - 1,
                 };
 
                 return data;
             })),
         };
 
+        // ——— PASSWORD RESET URL ———
+        const updatePasswordToken = generatePasswordJWT(userData)
+        const updatePasswordUrl = `/users/${id}?token=${updatePasswordToken.token}`;
+
         const data = {
             user: req.user,
-            title: "Student toevoegen",
-            returnUrl: "/users",
-            cancelUrl: "/users",
+            title: `${userData.firstname} ${userData.lastname} — Bewerken`,
+            returnUrl: `/users/${id}`,
+            cancelUrl: `/users/${id}`,
             formOptions: {
-                action: "/users/add-student",
-                method: "POST-STUDENT",
+                action: `/users/${id}/edit-employee`,
+                method: "PATCH-EMPLOYEE",
             },
             formData: {
                 personal: personal,
-                labels: labels,
+                functions: functions,
                 contact: contact,
                 education_programme: education_programme,
             },
+            updatePasswordUrl: updatePasswordUrl,
             pageError: req.pageError,
-        };
+        }
 
         res.render('user', data);
 
     } catch (error) {
-        console.error(error);
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
     }
 };
