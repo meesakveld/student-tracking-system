@@ -7,6 +7,7 @@
 import EducationProgramme from "../../models/EducationProgramme.js";
 import Function from "../../models/Function.js";
 import { getUserById } from "../../services/models/User.js"
+import { generatePasswordJWT } from "../../utils/generatePasswordJWT.js";
 
 export const userEmployeeEditPage = async (req, res) => {
     try {
@@ -138,6 +139,10 @@ export const userEmployeeEditPage = async (req, res) => {
             })),
         };
 
+        // ——— PASSWORD RESET URL ———
+        const updatePasswordToken = generatePasswordJWT(userData)
+        const updatePasswordUrl = `/users/${id}?token=${updatePasswordToken.token}`;
+
         const data = {
             user: req.user,
             title: `${userData.firstname} ${userData.lastname} — Bewerken`,
@@ -153,6 +158,7 @@ export const userEmployeeEditPage = async (req, res) => {
                 contact: contact,
                 education_programme: education_programme,
             },
+            updatePasswordUrl: updatePasswordUrl,
             pageError: req.pageError,
         }
 

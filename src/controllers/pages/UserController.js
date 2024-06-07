@@ -6,6 +6,7 @@
 
 
 import { getUserById } from "../../services/models/User.js";
+import { employeeFunctionAuth } from "../../utils/employeeFunctionAuth.js";
 
 export const userPage = async (req, res) => {
 
@@ -15,7 +16,7 @@ export const userPage = async (req, res) => {
         if (req.query.token) {
             const token = req.query.token;
             const baseUrl = `${req.protocol}://${req.get('host')}`;
-            passwordResetFlash = `De nieuwe gebruiker kan het wachtwoord instellen via deze link: <a href="${`${baseUrl}/update-password/${token}`}">${baseUrl}/update-password/${token}</a>`;
+            passwordResetFlash = `De gebruiker kan het wachtwoord updaten via deze link: <a href="${`${baseUrl}/update-password/${token}`}">${baseUrl}/update-password/${token}</a>`;
         }
 
         const id = parseInt(req.params.id);
@@ -123,6 +124,7 @@ export const userPage = async (req, res) => {
                 education_programme: education_programme,
             },
             viewOnly: true,
+            mayEdit: employeeFunctionAuth(req.user.employee.functions, ['admin', 'teamleader']),
             editUrl: `/users/${id}/edit-${userData.role.title.toLowerCase()}`,
             studentFicheUrl: personal.role.value === 1 ? `/student-dashboard/${userData.account.id}` : null,
             passwordResetFlash: passwordResetFlash,

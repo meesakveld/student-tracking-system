@@ -1,7 +1,9 @@
 {{!-- User Section --}}
-{{#if viewOnly}}
-    {{#if editUrl}}
-        {{> button label="Bewerken" class="button" paddingBottom=true link=editUrl}}
+{{#if mayEdit}}
+    {{#if viewOnly}}
+        {{#if editUrl}}
+            {{> button label="Bewerken" paddingBottom=true link=editUrl}}
+        {{/if}}
     {{/if}}
 {{/if}}
 
@@ -17,6 +19,9 @@
         <div class="actions">
             {{> button label="Annuleren" class="button--dark" link=cancelUrl}}
             <button type="submit" class="button">Opslaan</button>
+            {{#if updatePasswordUrl}}
+                {{> button label="Update password" class="button--light" paddingBottom=true link=updatePasswordUrl}}
+            {{/if}}
         </div>
         {{/isnt}}
 

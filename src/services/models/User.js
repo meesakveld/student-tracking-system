@@ -42,8 +42,6 @@ export const getUserById = async (id, withGraphFetched = '[]') => {
         throw new Error('User not found');
     }
 
-    delete user.password;
-
     return user;
 }
 

@@ -17,7 +17,7 @@ export const createUserStudent = async (req, res, next) => {
             lastname: data.lastname,
             email: data.email,
             role_id: data.role_id,
-            password: passwordJWT.passwordJWTtoken,
+            password: passwordJWT.passwordBcrypt,
             student: {}
         };
 
@@ -65,7 +65,7 @@ export const createUserEmployee = async (req, res, next) => {
             lastname: data.lastname,
             email: data.email,
             role_id: data.role_id,
-            password: passwordJWT.passwordJWTtoken,
+            password: passwordJWT.passwordBcrypt,
             employee: {}
         };
 
@@ -136,8 +136,6 @@ export const updateUserStudent = async (req, res, next) => {
         if (data.courses && data.courses.length > 0) {
             user.student.courses = data.courses;
         }
-
-        console.log(user)
 
         const updatedUser = await User.query().upsertGraph(user, { relate: true, unrelate: true });
 
