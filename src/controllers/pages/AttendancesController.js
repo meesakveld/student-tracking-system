@@ -259,10 +259,22 @@ export const addAttendancesPage = async (req, res) => {
         });
     }
 
-    const rows = students.map((student) => {
+    const rows = students.map((student, index) => {
       return {
         isActive: true,
-        cols: [`${student.user.firstname} ${student.user.lastname}`],
+        cols: [{
+            value: `${student.user.firstname} ${student.user.lastname}`,
+            data: [{
+              title: `name-${index}`,
+              value: student.id,
+            }, ],
+        }],
+        dropdown: {
+          attendanceTypes: {
+            name: `attendance-${index}`,
+            options: attendanceOptions,
+          },
+        },
       };
     });
 
@@ -278,6 +290,7 @@ export const addAttendancesPage = async (req, res) => {
       addAttendanceTable,
       attendanceOptions,
       pageError: req.pageError,
+      flash: req.flash,
       courseId: 1,
       date: new Date(),
       totalStudents: rows.length,

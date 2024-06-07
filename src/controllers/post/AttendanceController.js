@@ -5,7 +5,7 @@ export const createAttendances = async (req, res, next) => {
 
     // Create an array of attendances ↓
     let attendances = []
-    for (let i = 1; i <= req.body.totalStudents; i++) {
+    for (let i = 0; i <= req.body.totalStudents - 1; i++) {
         attendances.push({
             student_id: parseInt(req.body[`name-${i}`]),
             attendance_type_id: parseInt(req.body[`attendance-${i}`]),
@@ -13,7 +13,7 @@ export const createAttendances = async (req, res, next) => {
             date: req.body.date
         })
     }
-
+    
     // Add attendances to the database ↓
     try {
         if (NODE_ENV === 'development') {
@@ -25,7 +25,9 @@ export const createAttendances = async (req, res, next) => {
         }
 
         // Redirect to the previous page ↓
-        return res.redirect('/attendances')
+        req.flash = "Gelukt! De aanwezigheden zijn toegevoegd."
+        return next()
+        
 
     } catch (error) {
         // Add error in req ↓

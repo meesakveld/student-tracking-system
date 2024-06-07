@@ -8,18 +8,22 @@
                 {{> pageError pageError=pageError}}
             {{/if}}
 
+            {{#if flash}}
+                {{> flash flash=flash}}
+            {{/if}}
+
             {{> filters filters=userFilters }}
             <script src="/scripts/hideFilterSearch.js"></script>
 
             {{#isnt (length addAttendanceTable.rows) 0}}
-            <form action="/attendances" method="POST">
+            <form action="/add-attendances" method="POST" id="add-attendances">
 
                 <div class="date">
                     <p>Selecteer een datum</p>
                     <input type="date" name="date" required>
                 </div>
             
-                <button class="button">Opslaan</button>
+                <button class="button" form="add-attendances">Opslaan</button>
                 <input type="hidden" name="method" value="POST-MULTI">
                 <input type="hidden" name="totalStudents" value="{{totalStudents}}">
                 <input type="hidden" name="courseId" value="{{courseId}}">
@@ -36,10 +40,13 @@
                             {{#each addAttendanceTable.rows}}
                             <tr>
                                 {{#each cols}}
-                                <td>{{this}}</td>
+                                <td>{{this.value}}</td>
+                                    {{#each this.data}}
+                                    <input type="hidden" name="{{title}}" value="{{value}}">
+                                    {{/each}}
                                 {{/each}}
                                 <td class="actions">
-                                    {{> dropdown options=../attendanceOptions  }}
+                                    {{> dropdown options=dropdown.attendanceTypes.options form="add-attendances" name=dropdown.attendanceTypes.name}}
                                 </td>
                             </tr>
                             {{/each}}
