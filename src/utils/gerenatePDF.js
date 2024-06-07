@@ -29,7 +29,7 @@ export const generatePdf = async (title, headers, rows) => {
     // Add the table to the PDF
     doc.table(tableData, {
         prepareHeader: (row, rectHeader) => {
-            doc.font("Helvetica-Bold").fontSize(8);
+            doc.font("Helvetica-Bold").fontSize(10);
         },
         prepareRow: (row, i) => {
             doc.font("Helvetica").fontSize(10);

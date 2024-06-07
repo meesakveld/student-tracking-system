@@ -59,8 +59,8 @@ class Comment extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Student,
                 join: {
-                    from: "comments.education_programme_id",
-                    to: "education_programme.id",
+                    from: "comments.student_id",
+                    to: "students.id",
                 },
             },
             course: {
