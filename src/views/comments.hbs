@@ -4,6 +4,8 @@
         {{> titleSection title=title blueBg=true }}
         {{#if canAddComment}}
             {{> button label="Voeg verslag toe" link=addUrl paddingBottom=true }}
+            {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
         {{/if}}
         {{#if dataComments}}
         {{> commentSection comments=dataComments }}

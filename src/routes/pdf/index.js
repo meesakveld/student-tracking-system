@@ -30,6 +30,11 @@ router.use(jwtAuth);
 */
 
 // —— Private routes ——
-router.get('/attendances/:studentId', ctr.renderAttendanceTemplate);
+router.get('/student-dashboard/:studentId/attendance', ctr.renderAttendanceTemplate);
+router.get('/student-dashboard/:studentId/status', ctr.renderAttendanceTemplate);
+router.get('/student-dashboard/:studentId/course-reports', ctr.renderAttendanceTemplate);
+router.get('/student-dashboard/:studentId/personal-reports', ctr.renderAttendanceTemplate);
+router.get('/student-dashboard/:studentId/coaching-reports', ctr.renderAttendanceTemplate);
+
 
 export default router;
