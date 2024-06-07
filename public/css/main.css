@@ -206,7 +206,7 @@ header {
     .dropdown {
         width: 100%;
     }
-    
+
 }
 
 /* ------ For the lightgrey bg section ------ */
@@ -650,6 +650,13 @@ tr.inactive {
     .user-info__right {
         flex: auto;
         min-width: 0;
+    }
+}
+
+@media (max-width: 38rem) {
+
+    .user-info-container p {
+        width: 16.6rem;
     }
 }
 
