@@ -1,7 +1,7 @@
 import { getStudentById } from '../../services/models/Student.js';
 import { generatePdf } from '../../utils/gerenatePDF.js';
 
-export const renderAttendanceTemplate = async (req, res, next) => {
+export const renderAttendanceTemplateAttendance = async (req, res, next) => {
     try {
         // Fetch attendance data for the student
         const studentId = req.params.studentId;

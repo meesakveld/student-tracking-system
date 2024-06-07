@@ -1,17 +1,17 @@
 import { getStudentById } from '../../services/models/Student.js';
 import { generatePdf } from '../../utils/gerenatePDF.js';
 
-export const renderAttendanceTemplate = async (req, res, next) => {
+export const renderAttendanceTemplateStatus = async (req, res, next) => {
     try {
         // Fetch attendance data for the student
         const studentId = req.params.studentId;
-        const student = await getStudentById(studentId, '[user, attendances.[course, attendance_type]]');
+        const student = await getStudentById(studentId, '[user, status_registrations.[status]]');
 
         // Prepare the data for the PDF
         const data = {
-            title: `Aanwezigheden van ${student.user.firstname} ${student.user.lastname}`,
-            headers: ['Date', 'Course', 'Type'],
-            rows: student.attendances.map(att => [att.date, att.course.name, att.attendance_type.title]),
+            title: `Status van ${student.user.firstname} ${student.user.lastname}`,
+            headers: ['Date', 'Status', 'Annotatie'],
+            rows: student.status_registrations.map(att => [att.date, att.status.title, att.note]),
         };
 
         // Generate the PDF

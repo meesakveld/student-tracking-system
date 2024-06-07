@@ -1,5 +1,9 @@
-import { renderAttendanceTemplate } from './AtttendancesController.js';
+import { renderAttendanceTemplateAttendance } from './AtttendancesController.js';
+import { renderAttendanceTemplateStatus } from './StatusController.js';
+import { renderAttendanceTemplateReports } from './ReportsController.js';
 
 export {
-    renderAttendanceTemplate,
+    renderAttendanceTemplateAttendance,
+    renderAttendanceTemplateStatus,
+    renderAttendanceTemplateReports
 }
