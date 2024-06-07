@@ -3,7 +3,9 @@
     <main>
         <div class="main__inner search-student">
             {{> titleSection title=title returnUrl=returnUrl}}
-            {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            {{#isnt (length usersTable.rows) 0}}
+                {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
+            {{/isnt}}
             <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
 
             {{#if pageError}}{{> pageError pageError=pageError}}{{/if}}
@@ -20,8 +22,12 @@
                     <button class="button">Toevoegen</button>
                 </div>
             </form>
-
-            {{> table headers=usersTable.headers rows=usersTable.rows }}
+            
+            {{#isnt (length usersTable.rows) 0}}
+                {{> table headers=usersTable.headers rows=usersTable.rows }}
+            {{else}}
+                <p>Geen statuses gevonden.</p>
+            {{/isnt}}
         </div>
     </main>
 

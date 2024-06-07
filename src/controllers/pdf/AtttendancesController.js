@@ -1,11 +1,16 @@
 import { getStudentById } from '../../services/models/Student.js';
 import { generatePdf } from '../../utils/gerenatePDF.js';
 
-export const renderAttendanceTemplate = async (req, res, next) => {
+export const renderAttendancePdf = async (req, res, next) => {
     try {
         // Fetch attendance data for the student
         const studentId = req.params.studentId;
         const student = await getStudentById(studentId, '[user, attendances.[course, attendance_type]]');
+
+        // If the student has no attendances, redirect to url without the pdf extension
+        if (student.attendances.length === 0) {
+            return res.redirect(`/student-dashboard/${studentId}/attendance`);
+        }
 
         // Prepare the data for the PDF
         const data = {
