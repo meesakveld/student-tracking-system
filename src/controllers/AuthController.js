@@ -64,6 +64,11 @@ export const postLogin = async (req, res, next) => {
         return next();
     }
 
+    if (user.is_active === 0) {
+        req.flash = "Gebruiker is niet actief. Neem contact op met de beheerder";
+        return next();
+    }
+
     // check password
     const match = bcrypt.compareSync(req.body.password, user.password);
 
