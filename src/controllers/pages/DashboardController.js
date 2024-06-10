@@ -5,11 +5,15 @@
 */
 
 import fsp from 'fs/promises';
+import path from 'path';
 import { employeeFunctionAuth } from '../../utils/employeeFunctionAuth.js'
+import { NODE_ENV } from '../../consts.js';
 
 export const dashboardPage = async (req, res) => {
 
-    const dashboardData = await fsp.readFile("src/data/dashboard.json", "utf-8").then(data => JSON.parse(data));
+    const __dirname = path.resolve();
+    const filePath = path.join(__dirname, (NODE_ENV === 'production' ? '' : 'public'), 'data', 'dashboard.json');
+    const dashboardData = await fsp.readFile(filePath, "utf-8").then(data => JSON.parse(data));
     const dashboardUserData = dashboardData.map(value => {
         if (!value.roles.includes(req.user.role.title)) return
         if (req.user.employee) {
