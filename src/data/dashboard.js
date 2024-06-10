@@ -1,52 +1,52 @@
 export default [
     {
-        "title": "Gebruikers",
-        "url": "/users",
-        "roles": [
+        title: "Gebruikers",
+        url: "/users",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "admin"
         ]
     },
     {
-        "title": "Opleidingsprogramma's",
-        "url": "/education-programmes",
-        "roles": [
+        title: "Opleidingsprogramma's",
+        url: "/education-programmes",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "admin",
             "teamleader"
         ]
     },
     {
-        "title": "Aanwezigheden opnemen",
-        "url": "/add-attendances",
-        "roles": [
+        title: "Aanwezigheden opnemen",
+        url: "/add-attendances",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "teacher"
         ]
     },
     {
-        "title": "Vak Verslagen",
-        "url": "/course-reports",
-        "roles": [
+        title: "Vak Verslagen",
+        url: "/course-reports",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "teacher"
         ]
     },
     {
-        "title": "Coaching verslagen",
-        "url": "/coaching-reports",
-        "roles": [
+        title: "Coaching verslagen",
+        url: "/coaching-reports",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "trajectory coach",
             "learning coach",
             "diversity coach",
@@ -54,12 +54,12 @@ export default [
         ]
     },
     {
-        "title": "Zoek studenten",
-        "url": "/search-students",
-        "roles": [
+        title: "Zoek studenten",
+        url: "/search-students",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "teacher",
             "trajectory coach",
             "learning coach",
@@ -69,28 +69,28 @@ export default [
         ]
     },
     {
-        "title": "Zoek medewerkers",
-        "url": "/search-employees",
-        "roles": [
+        title: "Zoek medewerkers",
+        url: "/search-employees",
+        roles: [
             "employee"
         ],
-        "functions": [
+        functions: [
             "teamleader"
         ]
     },
     {
-        "title": "Student dashboard",
-        "url": "/student-dashboard/{student_id}",
-        "roles": [
+        title: "Student dashboard",
+        url: "/student-dashboard/{student_id}",
+        roles: [
             "student"
         ]
     },
     {
-        "title": "Mijn gegevens",
-        "url": "/users/{id}",
-        "roles": [
+        title: "Mijn gegevens",
+        url: "/users/{id}",
+        roles: [
             "student"
         ],
-        "functions": []
+        functions: []
     }
 ]
