@@ -2,16 +2,15 @@ import PDFDocument from 'pdfkit-table';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+const __dirname = path.dirname(__filename);
+const rootPath = path.resolve(__dirname, '../../');
 
 export const generatePdf = async (title, headers, rows, columnsSize) => {
     // Generate the PDF document
     const doc = new PDFDocument();
-    const filePath = path.join(__dirname, '../../output.pdf'); // Adjust the path as necessary
+    const filePath = path.join(rootPath, 'output.pdf')
 
     // Generate PDF using a stream
     const stream = doc.pipe(fs.createWriteStream(filePath));
