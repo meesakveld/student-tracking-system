@@ -14,64 +14,78 @@ import Course from '../../models/Course.js';
 
 export const commentsPage = async (req, res) => {
 
-    const type = req.query.type
-    if (type !== "course" && type !== "personal" && type !== "coaching") {
-        return res.redirect("/error")
-    }
+    try {
 
-    const comments = await Comment.query()
-        .withGraphFetched('[employee.[user, functions], course]')
-        .where(builder => {
-            if (type) {
-                builder.where('tag', type)
-            }
-        })
-        .where('student_id', parseInt(req.params.studentId))
-        .where(builder => {
-            if (req.user.role.title === "student") {
-                builder.where('visible_to_student', true)
-            }
-        })
-        .orderBy('created_at', 'desc')
-
-    const formattedComments = comments.map((comment) => {
-        return {
-            title: `${formatDate(comment.created_at)}${comment.course ? ` — ${comment.course.name}` : ''} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
-            text: comment.comment,
-            ...comment
+        const type = req.query.type
+        if (type !== "course" && type !== "personal" && type !== "coaching") {
+            return res.redirect("/error")
         }
-    })
 
-    const title = type === "course" ? "Vak gerelateerde verslagen" : type === "personal" ? "Persoonlijke verslagen" : "Coaching verslagen";
+        const comments = await Comment.query()
+            .withGraphFetched('[employee.[user, functions], course]')
+            .where(builder => {
+                if (type) {
+                    builder.where('tag', type)
+                }
+            })
+            .where('student_id', parseInt(req.params.studentId))
+            .where(builder => {
+                if (req.user.role.title === "student") {
+                    builder.where('visible_to_student', true)
+                }
+            })
+            .orderBy('created_at', 'desc')
 
-    let canAddComment = false;
-    const isEmployee = req.user && req.user.role.title === "employee";
-    switch (type) {
-        case "course":
-            if (isEmployee && req.user.employee.functions.find(f => f.title === "teacher")) {
-                canAddComment = true;
+        const formattedComments = comments.map((comment) => {
+            return {
+                title: `${formatDate(comment.created_at)}${comment.course ? ` — ${comment.course.name}` : ''} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
+                text: comment.comment,
+                ...comment
             }
-            break;
-        case "personal":
-            canAddComment = isEmployee
-            break;
-        case "coaching":
-            if (isEmployee && employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"])) {
-                canAddComment = true;
-            }
+        })
+
+        const title = type === "course" ? "Vak gerelateerde verslagen" : type === "personal" ? "Persoonlijke verslagen" : "Coaching verslagen";
+
+        let canAddComment = false;
+        const isEmployee = req.user && req.user.role.title === "employee";
+        switch (type) {
+            case "course":
+                if (isEmployee && req.user.employee.functions.find(f => f.title === "teacher")) {
+                    canAddComment = true;
+                }
+                break;
+            case "personal":
+                canAddComment = isEmployee
+                break;
+            case "coaching":
+                if (isEmployee && employeeFunctionAuth(req.user.employee.functions, ["admin", "teamleader", "trajectory coach", "learning coach", "diversity coach", "workplace coach"])) {
+                    canAddComment = true;
+                }
+        }
+
+        const data = {
+            user: req.user,
+            title: title,
+            dataComments: formattedComments,
+            canAddComment,
+            studentId: req.params.studentId,
+            returnUrl: `/student-dashboard/${req.params.studentId}`,
+            addUrl: `/student-dashboard/${req.params.studentId}/${type}-reports/add?type=${type}`,
+        };
+
+        res.render('comments', data);
+
+    } catch (error) {
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
-
-    const data = {
-        user: req.user,
-        title: title,
-        dataComments: formattedComments,
-        canAddComment,
-        studentId: req.params.studentId,
-        returnUrl: `/student-dashboard/${req.params.studentId}`,
-        addUrl: `/student-dashboard/${req.params.studentId}/${type}-reports/add?type=${type}`,
-    };
-
-    res.render('comments', data);
 
 };
 
@@ -188,14 +202,15 @@ export const commentPage = async (req, res) => {
         res.render('comment', data);
 
     } catch (error) {
+        console.log(error);
         const data = {
             user: req.user,
             error: {
                 message: error.message,
-                code: 404
-            }
-        }
-        return res.render('error', data)
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };
 
@@ -292,14 +307,15 @@ export const addCommentPage = async (req, res) => {
         res.render('add-comment', data);
 
     } catch (error) {
+        console.log(error);
         const data = {
             user: req.user,
             error: {
                 message: error.message,
-                code: 404
-            }
-        }
-        return res.render('error', data)
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     };
 
 }

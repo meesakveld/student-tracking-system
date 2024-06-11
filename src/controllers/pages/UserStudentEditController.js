@@ -10,6 +10,7 @@ import { getUserById } from "../../services/models/User.js"
 import { generatePasswordJWT } from "../../utils/generatePasswordJWT.js";
 
 export const userStudentEditPage = async (req, res) => {
+    
     try {
         const id = parseInt(req.params.id);
         const user = await getUserById(id, '[role, contact, student.[labels, courses, education_programmes], employee]');
@@ -174,13 +175,14 @@ export const userStudentEditPage = async (req, res) => {
         res.render('user', data);
 
     } catch (error) {
+        console.log(error);
         const data = {
             user: req.user,
             error: {
                 message: error.message,
-                code: 500
-            }
-        }
-        res.status(500).render('error', data);
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };

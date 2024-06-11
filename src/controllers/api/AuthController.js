@@ -12,29 +12,33 @@ import User from "../../models/User.js";
 */
 export const getUserToken = async (req, res, next) => {
 
-    // check errors
-    const errors = validationResult(req);
+    try {
+        // check errors
+        const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ "Bad Request": errors.array() });
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ "Bad Request": errors.array() });
+        }
+
+        // check if user exists
+        const user = await User.query().findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ errors: [{ msg: "Gebruiker bestaat niet" }] });
+        }
+
+        // check password
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!passwordMatch) {
+            return res.status(400).json({ errors: [{ msg: "Wachtwoord is onjuist" }] });
+        }
+
+        // create token
+        const token = jwt.sign({ id: user.id }, TOKEN_SALT, { expiresIn: "1h" });
+
+        return res.status(200).json({ token });
+    } catch (err) {
+        return res.status(500).json({ errors: [{ msg: "Server error", error: err }] });
     }
-
-    // check if user exists
-    const user = await User.query().findOne({ email: req.body.email });
-    if (!user) {
-        return res.status(400).json({ errors: [{ msg: "Gebruiker bestaat niet" }] });
-    }
-
-    // check password
-    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-    if (!passwordMatch) {
-        return res.status(400).json({ errors: [{ msg: "Wachtwoord is onjuist" }] });
-    }
-
-    // create token
-    const token = jwt.sign({ id: user.id }, TOKEN_SALT, { expiresIn: "1h" });
-
-    return res.status(200).json({ token });
 }
 
 

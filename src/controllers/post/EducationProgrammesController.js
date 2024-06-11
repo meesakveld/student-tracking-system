@@ -2,11 +2,11 @@ import EducationProgramme from "../../models/EducationProgramme.js"
 
 export const createEducationProgramme = async (req, res, next) => {
 
-    if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
-        return next();
-    }
-
     try {
+
+        if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
+            return next();
+        }
 
         const data = req.data;
 
@@ -34,11 +34,11 @@ export const createEducationProgramme = async (req, res, next) => {
 
 export const updateEducationProgramme = async (req, res, next) => {
 
-    if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
-        return next();
-    }
-
     try {
+
+        if (req.pageError || req.education_programme?.error || req.programme_lines?.error || req.courses?.error || req.classes?.error) {
+            return next();
+        }
 
         const data = req.data;
         const id = parseInt(req.params.id);
@@ -67,7 +67,7 @@ export const updateEducationProgramme = async (req, res, next) => {
 }
 
 export const deleteEducationProgramme = async (req, res, next) => {
-
+    return next()
 }
 
 export const handleEducationProgramme = async (req, res, next) => {

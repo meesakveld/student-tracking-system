@@ -138,15 +138,15 @@ export const educationProgrammeEditPage = async (req, res) => {
         res.render("education-programme", renderData);
 
     } catch (error) {
-        console.error(error);
+        console.log(error);
         const data = {
             user: req.user,
             error: {
                 message: error.message,
-                code: 500
-            }
-        }
-        res.status(500).render('error', data);
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 
 }

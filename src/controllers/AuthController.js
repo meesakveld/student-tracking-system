@@ -42,59 +42,75 @@ export const login = async (req, res, next) => {
 
 export const postLogin = async (req, res, next) => {
 
-    const errors = validationResult(req);
+    try {
 
-    if (!errors.isEmpty()) {
-        req.formErrorFields = {};
-        errors.array().forEach((error) => {
-            req.formErrorFields[error.path] = error.msg;
-        });
+        const errors = validationResult(req);
 
-        // set flash message
-        req.flash = "Er zijn fouten gevonden in het formulier";
+        if (!errors.isEmpty()) {
+            req.formErrorFields = {};
+            errors.array().forEach((error) => {
+                req.formErrorFields[error.path] = error.msg;
+            });
 
-        // redirect to the login page
-        return next();
-    }
+            // set flash message
+            req.flash = "Er zijn fouten gevonden in het formulier";
 
-    // check if user exists
-    const user = await User.query().findOne({ email: req.body.email });
-    if (!user) {
-        req.flash = "Gebruiker bestaat niet";
-        return next();
-    }
-
-    if (user.is_active === 0) {
-        req.flash = "Gebruiker is niet actief. Neem contact op met de beheerder";
-        return next();
-    }
-
-    // check password
-    const match = bcrypt.compareSync(req.body.password, user.password);
-
-    if (!match) {
-        req.flash = "Wachtwoord is fout";
-        return next();
-    }
-
-    // token
-    const token = jwt.sign(
-        {
-            id: user.id,
-            email: user.email,
-            role: user.role,
-        },
-        TOKEN_SALT,
-        {
-            expiresIn: "1h",
+            // redirect to the login page
+            return next();
         }
-    );
 
-    // set cookie
-    res.cookie("user", token, { httpOnly: true });
+        // check if user exists
+        const user = await User.query().findOne({ email: req.body.email });
+        if (!user) {
+            req.flash = "Gebruiker bestaat niet";
+            return next();
+        }
 
-    // redirect to the home page
-    res.redirect("/");
+        if (user.is_active === 0) {
+            req.flash = "Gebruiker is niet actief. Neem contact op met de beheerder";
+            return next();
+        }
+
+        // check password
+        const match = bcrypt.compareSync(req.body.password, user.password);
+
+        if (!match) {
+            req.flash = "Wachtwoord is fout";
+            return next();
+        }
+
+        // token
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+                role: user.role,
+            },
+            TOKEN_SALT,
+            {
+                expiresIn: "1h",
+            }
+        );
+
+        // set cookie
+        res.cookie("user", token, { httpOnly: true });
+
+        // redirect to the home page
+        res.redirect("/");
+
+    } catch (error) {
+
+        console.log(error);
+        const data = {
+            layout: "base",
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
+
+    }
 
 }
 
@@ -106,41 +122,59 @@ export const postLogin = async (req, res, next) => {
  * ------------------------------
 */
 export const register = async (req, res, next) => {
-    // check errors
-    const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-        req.formErrorFields = {};
-        errors.array().forEach((error) => {
-            req.formErrorFields[error.path] = error.msg;
+    try {
+
+        // check errors
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            req.formErrorFields = {};
+            errors.array().forEach((error) => {
+                req.formErrorFields[error.path] = error.msg;
+            });
+
+            // set flash message
+            req.flash = "Er zijn fouten gevonden in het formulier";
+
+            // redirect to the login page
+            return next();
+        }
+
+        // check if user exists
+        const userExists = await User.query().findOne({ email: req.body.email });
+        if (userExists) {
+            req.flash = "Gebruiker bestaat al";
+            return next();
+        }
+
+        // hash password
+        const pass = bcrypt.hashSync(req.body.password, 10);
+
+        const user = await User.query().insert({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: pass,
         });
 
-        // set flash message
-        req.flash = "Er zijn fouten gevonden in het formulier";
-
         // redirect to the login page
-        return next();
+        res.redirect("/login");
+
+    } catch (error) {
+
+        console.log(error);
+        const data = {
+            layout: "base",
+            error: {
+                message: error.message,
+                code: 500
+            }
+        }
+        res.status(500).render('error', data);
+
     }
 
-    // check if user exists
-    const userExists = await User.query().findOne({ email: req.body.email });
-    if (userExists) {
-        req.flash = "Gebruiker bestaat al";
-        return next();
-    }
-
-    // hash password
-    const pass = bcrypt.hashSync(req.body.password, 10);
-
-    const user = await User.query().insert({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: pass,
-    });
-
-    // redirect to the login page
-    res.redirect("/login");
 }
 
 export const postRegister = async (req, res, next) => {
@@ -195,7 +229,7 @@ export const updatePasswordPage = async (req, res, next) => {
 
         // get user id
         const user = await User.query().findOne({ email: data.email, password: data.password });
-        
+
         if (!user) {
             return res.redirect("/login");
         }

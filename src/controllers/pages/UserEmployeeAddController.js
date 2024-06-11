@@ -10,7 +10,7 @@ import Function from "../../models/Function.js";
 export const userEmployeeAddPage = async (req, res) => {
     try {
         const functionsData = await Function.query();
-        const functionDropdown = functionsData.map(item => ({ type: "checkbox", value: item.id, label: item.title, selected: req.data?.functions?.some(functionItem => item.id === functionItem.id)}));
+        const functionDropdown = functionsData.map(item => ({ type: "checkbox", value: item.id, label: item.title, selected: req.data?.functions?.some(functionItem => item.id === functionItem.id) }));
 
         const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
         const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
@@ -142,6 +142,14 @@ export const userEmployeeAddPage = async (req, res) => {
         res.render('user', data);
 
     } catch (error) {
-        console.error(error);
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };

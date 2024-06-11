@@ -2,6 +2,8 @@ import Class from "../../../models/Class.js"
 
 export const getAllClasses = async (req, res) => {
 
+    try {
+
     if (!req.query.education_programme_id) {
         return res.json({ errors: [{ msg: "Geen opleiding opgegeven" }] });
     }
@@ -20,5 +22,10 @@ export const getAllClasses = async (req, res) => {
     }
     
     res.json(classes);
+
+    } catch (error) {
+        console.error(error);
+        res.json({ errors: [{ msg: "Er is iets fout gegaan", error }] });
+    }
 
 }

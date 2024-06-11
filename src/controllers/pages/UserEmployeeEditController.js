@@ -179,9 +179,9 @@ export const userEmployeeEditPage = async (req, res) => {
             user: req.user,
             error: {
                 message: error.message,
-                code: 500
-            }
-        }
-        res.status(500).render('error', data);
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };

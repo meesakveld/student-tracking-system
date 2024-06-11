@@ -3,11 +3,11 @@ import { generatePasswordJWT } from "../../utils/generatePasswordJWT.js";
 
 export const createUserStudent = async (req, res, next) => {
 
-    if (req.pageError) {
-        return next();
-    }
-
     try {
+
+        if (req.pageError) {
+            return next();
+        }
 
         const data = req.data;
         const passwordJWT = generatePasswordJWT(data);
@@ -50,12 +50,12 @@ export const createUserStudent = async (req, res, next) => {
 }
 
 export const createUserEmployee = async (req, res, next) => {
-    
-    if (req.pageError) {
-        return next();
-    }
 
     try {
+
+        if (req.pageError) {
+            return next();
+        }
 
         const data = req.data;
         const passwordJWT = generatePasswordJWT(data);
@@ -90,24 +90,26 @@ export const createUserEmployee = async (req, res, next) => {
         return res.redirect(`/users/${newUser.id}?token=${passwordJWT.token}`);
 
     } catch (error) {
+
         console.error(error);
         req.pageError = error.message;
         next();
+
     }
 
 }
 
 export const updateUserStudent = async (req, res, next) => {
 
-    if (req.pageError) {
-        return next();
-    }
-
     try {
+
+        if (req.pageError) {
+            return next();
+        }
 
         const data = req.data;
         const id = parseInt(req.params.id);
-        
+
         const user = {
             id: id,
             firstname: data.firstname,
@@ -152,11 +154,11 @@ export const updateUserStudent = async (req, res, next) => {
 
 export const updateUserEmployee = async (req, res, next) => {
 
-    if (req.pageError) {
-        return next();
-    }
-
     try {
+
+        if (req.pageError) {
+            return next();
+        }
 
         const data = req.data;
         const id = parseInt(req.params.id);
@@ -206,7 +208,7 @@ export const updateUserEmployee = async (req, res, next) => {
 }
 
 export const softDeleteUser = async (req, res, next) => {
-
+    next();
 }
 
 export const handleUser = async (req, res, next) => {

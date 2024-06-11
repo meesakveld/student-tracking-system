@@ -40,7 +40,16 @@ export const reportsPage = async (req, res, next) => {
 
         // Render page
         res.render('reports', data);
+
     } catch (error) {
-        next(error);
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };

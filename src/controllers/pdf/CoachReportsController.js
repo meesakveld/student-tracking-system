@@ -15,13 +15,13 @@ export const renderCoachReportsPdf = async (req, res, next) => {
         if (comments.length === 0) {
             return res.redirect(`/student-dashboard/${studentId}/coaching-reports?type=coaching`);
         }
-        
+
 
         // Prepare the data for the PDF
         const data = {
             title: `Verslagen van ${comments[0].student.user.firstname} ${comments[0].student.user.lastname}`,
             headers: ['Date', 'Verslag', 'Auteur'],
-            rows: comments.map(com => [formatDate(com.created_at), com.comment, (com.employee.user.firstname + ' ' + com.employee.user.lastname)] ),
+            rows: comments.map(com => [formatDate(com.created_at), com.comment, (com.employee.user.firstname + ' ' + com.employee.user.lastname)]),
             columnSize: [80, 320, 100]
         };
 
@@ -33,12 +33,23 @@ export const renderCoachReportsPdf = async (req, res, next) => {
         // Send the PDF file as a response
         res.sendFile(filePath, (err) => {
             if (err) {
-                next(err);
+                throw err;
             } else {
                 console.log('Sent:', filePath);
             }
         });
-    } catch (err) {
-        next(err);
-    }
+
+    } catch (error) {
+
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
+
+    };
 };

@@ -2,14 +2,16 @@ import { validationResult } from "express-validator";
 import StatusesRegistration from "../../models/StatusesRegistration.js";
 
 export const createStatus = async (req, res, next) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        req.pageError = errors.array().map(error => error.msg).join(", ");
-        return next();
-    }
 
     try {
+
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            req.pageError = errors.array().map(error => error.msg).join(", ");
+            return next();
+        }
+
         const status_id = parseInt(req.body.statusType);
         const student_id = parseInt(req.params.studentId);
         const note = req.body.note !== "" ? req.body.note : null;
@@ -28,6 +30,7 @@ export const createStatus = async (req, res, next) => {
         await StatusesRegistration.query().insert(newStatus);
 
         next();
+        
     } catch (error) {
         req.pageError = error.message;
         next();

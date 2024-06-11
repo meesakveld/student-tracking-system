@@ -8,9 +8,11 @@ import EducationProgramme from "../../models/EducationProgramme.js";
 import Label from "../../models/Label.js";
 
 export const userStudentAddPage = async (req, res) => {
+
     try {
+
         const labelsData = await Label.query();
-        const labelsDropdown = labelsData.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: req.data?.labels?.some(item => item.id === label.id)}));
+        const labelsDropdown = labelsData.map(label => ({ type: "checkbox", value: label.id, label: label.title, selected: req.data?.labels?.some(item => item.id === label.id) }));
 
         const academicYearsQuery = await EducationProgramme.query().distinct('academic_year').select('academic_year');
         const academicYears = academicYearsQuery.map(academicYear => academicYear.academic_year);
@@ -142,6 +144,14 @@ export const userStudentAddPage = async (req, res) => {
         res.render('user', data);
 
     } catch (error) {
-        console.error(error);
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
     }
 };

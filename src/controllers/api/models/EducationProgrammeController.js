@@ -6,6 +6,7 @@ import { employeeFunctionAuth } from "../../../utils/employeeFunctionAuth.js";
 export const getAllEducationProgrammes = async (req, res) => {
 
     try {
+
         let hasFullAccess = true;
         if (req.query.employee_id) {
             const employee = await Employee.query().findById(req.query.employee_id).withGraphFetched('functions');
@@ -40,9 +41,10 @@ export const getAllEducationProgrammes = async (req, res) => {
         }
 
         res.json(education_programmes);
+
     } catch (error) {
         console.error(error);
-        res.status(500).json({ errors: [{ msg: `Er is iets misgegaan. Error: ${error.message}` }] });
+        res.json({ errors: [{ msg: "Er is iets fout gegaan", error }] });
     }
 
 };

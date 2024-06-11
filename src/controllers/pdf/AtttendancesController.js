@@ -26,12 +26,21 @@ export const renderAttendancePdf = async (req, res, next) => {
         // Send the PDF file as a response
         res.sendFile(filePath, (err) => {
             if (err) {
-                next(err);
+                throw err;
             } else {
                 console.log('Sent:', filePath);
             }
         });
-    } catch (err) {
-        next(err);
-    }
+
+    } catch (error) {
+        console.log(error);
+        const data = {
+            user: req.user,
+            error: {
+                message: error.message,
+                code: 500,
+            },
+        };
+        res.status(data.error.code).render("error", data);
+    };
 };
