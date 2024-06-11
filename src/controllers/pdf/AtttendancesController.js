@@ -12,6 +12,10 @@ export const renderAttendancePdf = async (req, res, next) => {
             return res.redirect(`/student-dashboard/${studentId}/attendance`);
         }
 
+        student.attendances.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        });
+
         // Prepare the data for the PDF
         const data = {
             title: `Aanwezigheden van ${student.user.firstname} ${student.user.lastname}`,

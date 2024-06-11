@@ -10,12 +10,12 @@ export const renderCoachReportsPdf = async (req, res, next) => {
             .withGraphFetched('[employee.[user], course, student.[user]]')
             .where('student_id', studentId)
             .where('tag', 'coaching')
+            .orderBy('created_at', 'desc');
 
         // If the student has no attendances, redirect to url without the pdf extension
         if (comments.length === 0) {
             return res.redirect(`/student-dashboard/${studentId}/coaching-reports?type=coaching`);
         }
-
 
         // Prepare the data for the PDF
         const data = {

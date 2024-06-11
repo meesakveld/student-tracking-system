@@ -13,6 +13,10 @@ export const renderStatusPdf = async (req, res, next) => {
             return res.redirect(`/student-dashboard/${studentId}/status`);
         }
 
+        student.status_registrations.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        });
+
         // Prepare the data for the PDF
         const data = {
             title: `Status van ${student.user.firstname} ${student.user.lastname}`,

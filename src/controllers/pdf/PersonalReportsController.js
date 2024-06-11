@@ -11,6 +11,7 @@ export const renderPersonalReportsPdf = async (req, res, next) => {
             .withGraphFetched('[employee.[user], course, student.[user]]')
             .where('student_id', studentId)
             .where('tag', 'personal')
+            .orderBy('created_at', 'desc');
 
         // If the student has no attendances, redirect to url without the pdf extension
         if (comments.length === 0) {
