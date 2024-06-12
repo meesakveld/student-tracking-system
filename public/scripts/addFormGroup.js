@@ -245,7 +245,6 @@ function addClass() {
 const activateFunctions = () => {
     document.getElementById('addProgrammeLine').addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('clicked')
         addProgrammeLine();
     });
 

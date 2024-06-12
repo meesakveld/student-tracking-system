@@ -31,7 +31,6 @@ const addEducationProgramme = () => {
 
         // Create the education programme HTML
         const indexId = document.querySelectorAll('#education-programme-container').length
-        console.log(indexId)
 
         const education_programme = data.map(programme => {
             return `

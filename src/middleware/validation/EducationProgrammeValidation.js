@@ -5,7 +5,6 @@ export const EducationProgrammeValidation = (req, res, next) => {
         // ** ——— Education Programme ——— **
         // Title
         if (!data?.educationProgramme?.title) {
-            console.log(data?.educationProgramme?.title)
             throw {
                 message: "Opleidingstitel is verplicht",
                 type: "educationProgramme",

@@ -25,8 +25,6 @@ export const renderCoachReportsPdf = async (req, res, next) => {
             columnSize: [80, 320, 100]
         };
 
-        console.log(data.rows[0])
-
         // Generate the PDF
         const filePath = await generatePdf(data.title, data.headers, data.rows, data.columnSize);
 
