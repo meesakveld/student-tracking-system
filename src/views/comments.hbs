@@ -4,11 +4,11 @@
         {{> titleSection title=title blueBg=true }}
         {{#if canAddComment}}
             {{> button label="Voeg verslag toe" link=addUrl paddingBottom=true }}
-            {{#isnt (length dataComments) 0}}
-                {{> button id="pdfGeneratorBtn" label="Genereer PDF" }}
-                <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
-            {{/isnt}}
         {{/if}}
+        {{#isnt (length dataComments) 0}}
+            {{> button id="pdfGeneratorBtn" label="Genereer PDF" paddingBottom=true }}
+            <script src="/scripts/setGeneratePdfBtnToUrl.js"></script>
+        {{/isnt}}
         {{#if dataComments}}
         {{> commentSection comments=dataComments }}
         {{else}}

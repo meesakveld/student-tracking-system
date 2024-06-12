@@ -19,7 +19,7 @@ export const renderCoachReportsPdf = async (req, res, next) => {
 
         // Prepare the data for the PDF
         const data = {
-            title: `Verslagen van ${comments[0].student.user.firstname} ${comments[0].student.user.lastname}`,
+            title: `Coaching verslagen van ${comments[0].student.user.firstname} ${comments[0].student.user.lastname}`,
             headers: ['Date', 'Verslag', 'Auteur'],
             rows: comments.map(com => [formatDate(com.created_at), com.comment, (com.employee.user.firstname + ' ' + com.employee.user.lastname)]),
             columnSize: [80, 320, 100]
