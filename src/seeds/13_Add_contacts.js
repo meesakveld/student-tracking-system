@@ -6,9 +6,9 @@ const seed = async function (knex) {
     await knex(tableName).insert([
         {
             user_id: 1,
-            website: "www.test.com",
-            linkedin: "www.linkedin.com",
-            facebook: "www.facebook.com",
+            website: "https://www.test.com",
+            linkedin: "https://www.linkedin.com",
+            facebook: "https://www.facebook.com",
         }
     ]);
 };
