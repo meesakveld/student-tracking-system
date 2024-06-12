@@ -133,6 +133,7 @@ export const commentPage = async (req, res) => {
                 }
             })
 
+
         const title = `${convertedType} verslag van ${student.user.firstname} ${student.user.lastname}`
         const section = {
             title: `${formatDate(comment.created_at)} — ${comment.employee.user.firstname} ${comment.employee.user.lastname}`,
@@ -240,7 +241,7 @@ export const addCommentPage = async (req, res) => {
         if (type === "course") {
             const courses = await Course.query()
                 .joinRelated('students')
-                .where('student_id', parseInt(studentId))
+                .where('students.id', parseInt(studentId))
                 .joinRelated(!hasFullAccess && 'employees')
                 .where(builder => {
                     if (!hasFullAccess) {
