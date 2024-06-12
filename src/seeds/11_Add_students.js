@@ -11,6 +11,18 @@ const seed = async function (knex) {
         {
             user_id: 3,
             class_id: 1
+        },
+        {
+            user_id: 10,
+            class_id: 1
+        },
+        {
+            user_id: 11,
+            class_id: 1
+        },
+        {
+            user_id: 12,
+            class_id: 1
         }
     ]);
 };

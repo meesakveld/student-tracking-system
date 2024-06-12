@@ -1,70 +1,126 @@
 ## Project README
 
 ### Table of Contents
-- [Algemene informatie](#algemene-informatie)
-- [Omschrijving](#omschrijving)
-- [Architectuur](#architectuur)
+- [General Information](#general-information)
+- [Description](#description)
+- [Architecture](#architecture)
 - [Features](#features)
-- [Nice to haves](#nice-to-haves)
+- [Installation](#installation)
+- [Contributors](#contributors)
 
 ---
 
-### Algemene informatie
-Deze webapplicatie is ontworpen om studenten te volgen tijdens hun opleiding, inclusief hoor- en werkcolleges, gesprekken (coaching- en trajectgesprekken), en werkplekleren. Het doel is om docenten, leercoaches, trajectcoaches, diversiteitscoaches en teamleiders in staat te stellen deze opvolging uit te voeren.
+### General Information
+This web application is designed to monitor students throughout their education, including lectures, practical sessions, coaching, and workplace learning. The goal is to enable teachers, learning coaches, program coaches, diversity coaches, and team leaders to carry out this monitoring effectively.
 
-### Omschrijving
-De opvolging van studenten omvat onder andere:
-- Registratie van aanwezigheid tijdens hoor- en werkcolleges
-- Evaluatie van participatie tijdens colleges
-- Beoordeling van prestaties op oefeningen/opdrachten
-- Documentatie van informatie uit wisselgesprekken door coaches
-- Vastleggen van informatie ingevoerd door docenten
-- Bijhouden van de status van studenten in de opleiding, zoals ziekte, inactief, etc.
+### Description
+Student monitoring includes, among other things:
+- Recording attendance during lectures and practical sessions
+- Evaluating participation during classes
+- Assessing performance on exercises/assignments
+- Documenting information from coaching conversations
+- Recording information entered by teachers
+- Tracking the status of students in the program, such as illness, inactivity, etc.
 
-Studenten kunnen ook werkplekleren tijdens de opleiding en dit in verschillende vakken van @Work 1 t.e.m. @Work 5.
+Students can also engage in workplace learning during their education across various subjects from @Work 1 to @Work 5.
 
-### Architectuur
+### Architecture
 - **Back-end:**
   - Express.js
   - Templating: Handlebars
-  - Database: PostgreSQL
+  - Database: Production: PostgreSQL | Development: sqlite3
   - Database management: Knex + Objection
+  - PDF Generation: PDFKit + PDFKit-Table
 
 - **Front-end:**
-  - HTML
-  - CSS (+tailwindcss)
-  - JavaScript (modulair)
-
-Front-end kan eventueel met het React-framework worden ontwikkeld. 
+  - HTML → Handlebars
+  - CSS
+  - JavaScript (modular)
 
 ### Features
-- Courante modellen voor onderwijsprogramma, programmaonderdeel, en vak.
-- Verschillende gebruikersrollen zoals Administrator, Docent, Student, Trajectcoach, etc.
-- Functionaliteiten voor coaching, labelling van studenten, en statusbeheer.
-- Mogelijkheid tot het invoeren en bekijken van aanwezigheden/afwezigheden.
-- Opvolging tijdens hoor- en werkcolleges met opmerkingen per student.
+- Common models for the educational program, program components, and courses.
+- Different user roles such as Administrator, Teacher, Student, Program Coach, etc.
+- Functionalities for coaching, labeling students, and status management.
+- Capability to enter and view attendances/absences.
+- Monitoring during lectures and practical sessions with comments per student.
+- PDF generation for attendances/statuses/reports per student.
 
 ---
 
-### Nice to haves
-- Ontvangen van meldingen bij wijzigingen gelinkt aan specifieke personen.
-- PDF-generatie voor aanwezigheden per vak en per week (globaal).
-- Beheren van externe contacten:
-  - Organisaties met details zoals naam, omschrijving, contactgegevens, etc.
-  - Mogelijkheid tot screening en plaatsen op zwarte lijst.
-  - Werkplekmentoren met persoonlijke informatie en functie.
-- Toevoegen van vormen van werkplekleren:
-  - Verschillende typen werkplekleren zoals realistische case, gastcollege, etc.
-  - Details zoals titel, omschrijving, takenpakket, etc.
-- Opvolging tijdens werkplekleren:
-  - Toevoegen van leerdoelen per opleiding met bijbehorend gewicht.
-  - Evaluatie van leerdoelen door werkplekmentor.
-  - Wekelijkse reflecties en actiepunten door studenten.
-  - Beheer van projecten en evaluaties door werkplekmentor.
-- Extra functies:
-  - Meldingen bij aanpassingen gelinkt aan specifieke personen.
-  - PDF-generatie van opvolgrooster, reflecties, en projectoverzicht.
+### Installation
+
+1. Clone the repository
+    ```bash
+    git clone {{repository_url}}
+    ```
+
+2. Install the dependencies
+    ```bash
+    npm install
+    ```
+
+3. Create a `.env` file in the root directory and add the following environment variables:
+    ```bash
+    PORT=3000
+    NODE_ENV=development # or production if you're deploying.
+    
+    # Database configuration for production
+    DB_HOST=your_db_host
+    DB_PORT=your_db_port
+    DB_USER=your_db_user
+    DB_NAME=your_db_name
+    DB_PASSWORD=your_db_password
+    DB_SSL=your_db_ssl
+
+    # Database configuration for development
+    DB_DEV_NAME=your_dev_db_name.sqlite3
+
+    # TOKEN_SALT for JWT
+    TOKEN_SALT=your_token_salt
+
+    # NODEMAILER configuration
+    MAIL_USER=your_email
+    MAIL_PASS=your_email_password
+
+    ```
+
+4. Run the migrations
+    ```bash
+    npx knex migrate:latest
+    ```
+
+5. Run the seeders
+    ```bash
+    npx knex seed:run
+    ```
+
+6. Start the server
+    ```bash
+    npm start
+    ```
+
+7. Open your browser and navigate to `http://localhost:3000`
+
+8. Login with the following credentials:
+    - **admin / teamleader / teacher / trajectorycoach / learningcoach / diversitycoach / workplacecoach:** 
+        - Email: {{function}}@svs.be
+        - Password: secret123
+
+    - **student**
+        - Email: student@student.svs.be
+        - Password: secret123
+
 
 ---
 
-*© 2024 - Dit project is ontwikkeld door Arteveldehogeschool.*
+### Contributors
+
+- [Mees Akveld](https://github.com/pgm-meesakveld)
+- [Bénoît Biraguma Ihimbazwe](https://github.com/pgm-benobira)
+- [Tristan De Ridder](https://github.com/pgm-tristanderidder)
+- [Ella Jakale](https://github.com/pgm-ella)
+
+---
+
+
+*© 2024 - This project is developed by Artevelde University of Applied Sciences.*
