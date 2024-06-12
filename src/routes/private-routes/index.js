@@ -37,8 +37,8 @@ router.get('/users', auth.roleAuth(["employee"], ["admin"]), ctr.usersPage);
 router.get('/users/add-student', auth.roleAuth(["employee"], ["admin"]), ctr.userStudentAddPage);
 router.get('/users/add-employee', auth.roleAuth(["employee"], ["admin"]), ctr.userEmployeeAddPage);
 router.get('/users/:id', auth.roleAuth(["employee", "student"]), auth.studentIdAuth, ctr.userPage);
-router.get('/users/:id/edit-student', auth.roleAuth(["employee"], ["admin"]), ctr.userStudentEditPage);
-router.get('/users/:id/edit-employee', auth.roleAuth(["employee"], ["admin"]), ctr.userEmployeeEditPage);
+router.get('/users/:id/edit-student', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.userStudentEditPage);
+router.get('/users/:id/edit-employee', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.userEmployeeEditPage);
 
 router.get('/education-programmes', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.educationProgrammesPage);
 router.get('/education-programmes/add', auth.roleAuth(["employee"], ["admin", "teamleader"]), ctr.addEducationProgrammePage);
